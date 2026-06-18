@@ -1,9 +1,4 @@
 "use client";
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export interface ParallaxItem {
   label: string;
@@ -13,46 +8,18 @@ export interface ParallaxItem {
 
 const offsets: React.CSSProperties[] = [
   {},
-  { top: "-28vh", left: "5vw",   height: "28vh", width: "30vw" },
-  { top: "-8vh",  left: "-22vw", height: "38vh", width: "18vw" },
-  { left: "24vw",               height: "22vh", width: "22vw" },
-  { top: "24vh",  left: "5vw",  height: "22vh", width: "18vw" },
-  { top: "24vh",  left: "-20vw",height: "22vh", width: "26vw" },
-  { top: "20vh",  left: "22vw", height: "13vh", width: "13vw" },
+  { top: "10%", left: "12%", height: "34%", width: "34%" },
+  { top: "22%", left: "34%", height: "44%", width: "24%" },
+  { top: "13%", left: "62%", height: "32%", width: "28%" },
+  { top: "54%", left: "16%", height: "28%", width: "28%" },
+  { top: "56%", left: "48%", height: "30%", width: "32%" },
+  { top: "44%", left: "76%", height: "22%", width: "18%" },
 ];
 
-const endScales = [4, 5, 6, 5, 6, 8, 9];
-
 export function ZoomParallax({ items }: { items: ParallaxItem[] }) {
-  const wrapRef  = useRef<HTMLDivElement>(null);
-  const stageRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const cards = stageRef.current?.querySelectorAll<HTMLElement>(".zp-card");
-      if (!cards?.length) return;
-      cards.forEach((card, i) => {
-        gsap.fromTo(card,
-          { scale: 1 },
-          {
-            scale: endScales[i] ?? 4,
-            ease: "none",
-            scrollTrigger: {
-              trigger: wrapRef.current,
-              start: "top top",
-              end: "bottom bottom",
-              scrub: 0.8,
-            },
-          }
-        );
-      });
-    });
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <div className="zp-outer" ref={wrapRef} aria-hidden="true">
-      <div className="zp-stage" ref={stageRef}>
+    <section className="zp-outer" aria-label="Project capability preview">
+      <div className="zp-stage">
         <div className="zp-label-wrap">
           <p className="zp-label">50+ projects delivered</p>
         </div>
@@ -68,6 +35,6 @@ export function ZoomParallax({ items }: { items: ParallaxItem[] }) {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }
