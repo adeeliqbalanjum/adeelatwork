@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./showroom-fixes.css";
 
 export const metadata: Metadata = {
   title: "Muhammad Adeel Iqbal — Live WordPress Capability Showroom",
