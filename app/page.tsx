@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
@@ -168,7 +169,7 @@ export default function Home() {
       {/* NAV */}
       <nav className="nav" aria-label="Primary navigation">
         <a className="nav-logo" href="#home" aria-label="Muhammad Adeel home">AI</a>
-        <a href="/portfolio">Portfolio</a>
+        <Link href="/portfolio">Portfolio</Link>
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
         <a href="#contact" className="nav-cta">Hire Me</a>
@@ -285,12 +286,12 @@ export default function Home() {
                   { num:"06",cat:"Finance",          title:"Seva Wealth",               slug:"seva-wealth",                  desc:"Wealth management site with Calendly integration, philosophy-driven design, and trust-heavy credentials." },
                 ].map(({ num, cat, title, slug, desc }) =>
                   slug ? (
-                    <a key={num} href={`/portfolio/${slug}`} className="project project--linked">
+                    <Link key={num} href={`/portfolio/${slug}`} className="project project--linked">
                       <small>{num} — {cat}</small>
                       <h3>{title}</h3>
                       <p>{desc}</p>
                       <span className="project-arrow">View case study →</span>
-                    </a>
+                    </Link>
                   ) : (
                     <article key={num} className="project">
                       <small>{num} — {cat}</small>
@@ -303,9 +304,9 @@ export default function Home() {
             </div>
             {/* View all projects */}
             <div style={{ textAlign:"center", marginTop: 36 }}>
-              <a href="/portfolio" className="btn btn-dark" style={{ display:"inline-flex" }}>
+              <Link href="/portfolio" className="btn btn-dark" style={{ display:"inline-flex" }}>
                 View all 19 projects →
-              </a>
+              </Link>
             </div>
           </div>
         </div>
