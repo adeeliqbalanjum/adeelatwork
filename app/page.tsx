@@ -25,10 +25,10 @@ const cards = [
 ];
 
 const stats = [
-  ["3+",      "years",    "Hands-on WordPress, WooCommerce & Elementor Pro for international clients."],
-  ["50+",     "projects", "Business, e-commerce, education & custom WordPress builds delivered."],
-  ["20+",     "builds",   "Figma & PSD designs converted into responsive, pixel-perfect WordPress sites."],
-  ["6s→1.8s", "speed",    "Load-time cuts via cache, image optimisation, plugin auditing & Core Web Vitals."],
+  ["3+",      "Years WordPress",    "Hands-on WordPress, WooCommerce & Elementor Pro for international clients."],
+  ["50+",     "Projects Delivered", "Business, e-commerce, education & custom WordPress builds delivered."],
+  ["20+",     "Figma Builds",       "Figma & PSD designs converted into responsive, pixel-perfect WordPress sites."],
+  ["6s→1.8s", "Speed Result",       "Load-time cuts via cache, image optimisation, plugin auditing & Core Web Vitals."],
 ];
 
 const parallaxItems: ParallaxItem[] = [
@@ -83,7 +83,7 @@ export default function Home() {
         .from(".ha-showcase", { y: 36,  opacity: 0, duration: 0.80, scale: 0.98 }, "-=0.48");
 
       /* 2 ▸ FlowArt — each non-hero section rotates from slight angle on scroll */
-      document.querySelectorAll<HTMLElement>(".flow-section:not(.hero) .flow-inner")
+      document.querySelectorAll<HTMLElement>(".flow-section:not(.hero):not(.stats-showcase-section) .flow-inner")
         .forEach((inner) => {
           gsap.fromTo(inner,
             { rotationZ: 4, rotationX: 1.5, opacity: 0.55, transformOrigin: "bottom left" },
@@ -106,11 +106,34 @@ export default function Home() {
         scrollTrigger: { trigger: ".about-card", start: "top 82%" },
       });
 
-      /* 4 ▸ Stats stagger up */
-      gsap.from(".stat", {
-        y: 36, opacity: 0, duration: 0.65, stagger: 0.10, ease: "power3.out",
-        scrollTrigger: { trigger: ".stats-grid", start: "top 80%" },
-      });
+      /* 4 ▸ Stats scroll stack/fan reveal */
+      const statCards = gsap.utils.toArray<HTMLElement>(".stats-showcase-section .stat");
+      if (statCards.length) {
+        const stackX = [300, 100, -100, -300];
+        const stackRotation = [16, 6, -6, -16];
+
+        gsap.from(statCards, {
+          x: (index) => window.innerWidth > 900 ? stackX[index] ?? 0 : 0,
+          y: (index) => window.innerWidth > 900 ? 82 + index * 8 : 42,
+          z: (index) => index * 18,
+          rotateZ: (index) => stackRotation[index] ?? 0,
+          rotateX: 7,
+          scale: 0.92,
+          opacity: 0.62,
+          filter: "blur(1.2px)",
+          transformPerspective: 1000,
+          force3D: true,
+          ease: "none",
+          stagger: 0.035,
+          scrollTrigger: {
+            trigger: ".stats-showcase-section .stats-grid",
+            start: "top 88%",
+            end: "bottom 58%",
+            scrub: 0.9,
+            invalidateOnRefresh: true,
+          },
+        });
+      }
 
       /* 5 ▸ Project cards stagger up */
       gsap.from(".project", {
@@ -228,7 +251,7 @@ export default function Home() {
       </section>
 
       {/* ── ABOUT ── */}
-      <section className="section grey flow-section" id="about">
+      <section className="section grey flow-section stats-showcase-section" id="about">
         <div className="container stats-layout flow-inner">
           <aside className="about-card">
             <div>
