@@ -1,3 +1,27 @@
+/* Root scrollbar fix: keep only one browser/page scrollbar. No new file. */
+html {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+main {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
 /* Header avatar polish + stats card layout/motion polish. */
 
 .nav-logo {
