@@ -168,6 +168,7 @@ export default function Home() {
       {/* NAV */}
       <nav className="nav" aria-label="Primary navigation">
         <a className="nav-logo" href="#home" aria-label="Muhammad Adeel home">AI</a>
+        <a href="/portfolio">Portfolio</a>
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
         <a href="#contact" className="nav-cta">Hire Me</a>
@@ -275,37 +276,36 @@ export default function Home() {
           <div className="container projects-head" style={{ paddingTop: 0 }}>
             <div className="project-board">
               <div className="project-cards">
-                <article className="project">
-                  <small>01 — Dubai Tourism</small>
-                  <h3>Desert Safari Dubai</h3>
-                  <p>Custom booking plugin with Private/Sharing tour tabs, tiered AED pricing, WhatsApp fields, admin approval workflow, and Telr payment integration.</p>
-                </article>
-                <article className="project">
-                  <small>02 — Government</small>
-                  <h3>Embassy of Pakistan</h3>
-                  <p>Official government website for the Embassy in Muscat, Oman — Elementor + ACF, plus a custom PHP passport application tracking system.</p>
-                </article>
-                <article className="project">
-                  <small>03 — E-commerce</small>
-                  <h3>ESNCO Lighting Dubai</h3>
-                  <p>WooCommerce store management for a Dubai lighting company — products, orders, content, migration, and consistent uptime.</p>
-                </article>
-                <article className="project">
-                  <small>04 — Performance</small>
-                  <h3>6s to 1.8s load time</h3>
-                  <p>Speed-focused optimisation achieving 95+ PageSpeed — LiteSpeed Cache, image compression, plugin auditing, and Core Web Vitals fixes.</p>
-                </article>
-                <article className="project">
-                  <small>05 — Agency Builds</small>
-                  <h3>20+ Figma to WordPress</h3>
-                  <p>Pixel-perfect Figma and PSD to WordPress conversions — Elementor Pro, mobile-responsive, on time, every time.</p>
-                </article>
-                <article className="project">
-                  <small>06 — Partnership Page</small>
-                  <h3>US Supply Chain Corp</h3>
-                  <p>Self-contained partnership page with dark/light theming, scroll animations, and zero dependencies — Elementor HTML widget.</p>
-                </article>
+                {[
+                  { num:"01",cat:"Dubai Tourism",   title:"Desert Safari Dubai",      slug:"desert-safari-dubai",         desc:"Custom booking plugin with tiered AED pricing, admin approval workflow, and Telr payment integration." },
+                  { num:"02",cat:"Government",       title:"Embassy of Pakistan",       slug:"",                             desc:"Official government website — Elementor + ACF, plus a custom PHP passport application tracking system." },
+                  { num:"03",cat:"Healthcare",       title:"GetCareMD",                 slug:"getcaremd",                    desc:"24/7 telehealth platform with service pages, provider credentials, and conversion-focused booking flow." },
+                  { num:"04",cat:"Legal",            title:"Pacific Valor Law",         slug:"pacific-valor-law",            desc:"VA disability attorney site for overseas veterans — free case review CTA and VA-accredited credentials." },
+                  { num:"05",cat:"Education",        title:"7 Sky Consultant",          slug:"7sky-consultant",              desc:"Study abroad consultancy showcasing a 98% visa success rate and 94% scholarship placement record." },
+                  { num:"06",cat:"Finance",          title:"Seva Wealth",               slug:"seva-wealth",                  desc:"Wealth management site with Calendly integration, philosophy-driven design, and trust-heavy credentials." },
+                ].map(({ num, cat, title, slug, desc }) =>
+                  slug ? (
+                    <a key={num} href={`/portfolio/${slug}`} className="project project--linked">
+                      <small>{num} — {cat}</small>
+                      <h3>{title}</h3>
+                      <p>{desc}</p>
+                      <span className="project-arrow">View case study →</span>
+                    </a>
+                  ) : (
+                    <article key={num} className="project">
+                      <small>{num} — {cat}</small>
+                      <h3>{title}</h3>
+                      <p>{desc}</p>
+                    </article>
+                  )
+                )}
               </div>
+            </div>
+            {/* View all projects */}
+            <div style={{ textAlign:"center", marginTop: 36 }}>
+              <a href="/portfolio" className="btn btn-dark" style={{ display:"inline-flex" }}>
+                View all 19 projects →
+              </a>
             </div>
           </div>
         </div>
