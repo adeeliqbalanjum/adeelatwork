@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "./showroom-fixes.css";
 import "./mobile-fixes.css";
+import "./portfolio-v4-hero.css";
 
 export const metadata: Metadata = {
-  title: "Muhammad Adeel Iqbal — Live WordPress Capability Showroom",
-  description: "A live WordPress capability showroom by Muhammad Adeel Iqbal — Elementor, WooCommerce, custom plugins, booking systems, translation, speed optimization, and responsive WordPress builds.",
+  title: "Muhammad Adeel Iqbal — WordPress Developer",
+  description: "Portfolio homepage for a WordPress, Elementor, WooCommerce and performance-focused developer.",
   openGraph: {
-    title: "Muhammad Adeel Iqbal — Live WordPress Capability Showroom",
-    description: "Not just a portfolio — a working demo of WordPress, Elementor, WooCommerce, and custom plugin capabilities.",
+    title: "Muhammad Adeel Iqbal — WordPress Developer",
+    description: "Building fast, high-impact WordPress and WooCommerce websites for business clients.",
     type: "website",
   },
 };
