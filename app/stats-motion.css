@@ -1,10 +1,13 @@
-/* Root scrollbar fix: keep only one browser/page scrollbar. No new file. */
+/* Root scrollbar + native smooth scroll. Keep only one browser/page scrollbar. No new file. */
 html {
   width: 100%;
   max-width: 100%;
   min-height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
+  scroll-behavior: smooth;
+  scroll-padding-top: 92px;
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -285,6 +288,7 @@ main {
   .stats-showcase-section .stats-grid { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   .stats-showcase-section .stat::before,
   .stats-showcase-section .stat::after,
   .stats-showcase-section .stat strong { animation: none !important; }
