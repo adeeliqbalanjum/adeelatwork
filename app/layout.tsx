@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "./stats-motion.css";
 import "./button-fill.css";
+import { ButtonFillController } from "./components/ButtonFillController";
 
 export const metadata: Metadata = {
   title: "Muhammad Adeel Iqbal — WordPress Developer & WooCommerce Specialist",
@@ -16,7 +17,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ButtonFillController />
+        {children}
+      </body>
     </html>
   );
 }
