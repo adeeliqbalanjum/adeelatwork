@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lenis from "@studio-freight/lenis";
 import { TextRevealByWord } from "./components/TextReveal";
 import { ZoomParallax, ParallaxItem } from "./components/ZoomParallax";
 import { TextRotate } from "./components/TextRotate";
@@ -38,7 +37,7 @@ const parallaxItems: ParallaxItem[] = [
   { label: "WooCommerce Store",    sub: "E-commerce Dubai",       gradient: "linear-gradient(135deg,rgba(255,122,24,.88),rgba(168,85,247,.60))"  },
   { label: "Custom Plugins",       sub: "Plugin Development",     gradient: "linear-gradient(135deg,rgba(11,11,11,.88),rgba(255,122,24,.48))"    },
   { label: "Landing Pages",        sub: "UAE · UK · USA Clients", gradient: "linear-gradient(135deg,rgba(247,214,74,.92),rgba(255,122,24,.72))"  },
-  { label: "6s → 1.8s Speed",     sub: "Core Web Vitals",        gradient: "linear-gradient(135deg,rgba(34,197,94,.86),rgba(11,11,11,.75))"     },
+  { label: "6s → 1.8s Speed",      sub: "Core Web Vitals",        gradient: "linear-gradient(135deg,rgba(34,197,94,.86),rgba(11,11,11,.75))"     },
 ];
 
 const contactServices = ["website", "WooCommerce store", "redesign", "custom plugin"];
@@ -48,26 +47,6 @@ export default function Home() {
   const gradientRef = useRef<HTMLDivElement>(null);
   const portraitRef = useRef<HTMLDivElement>(null);
   const mainRef     = useRef<HTMLElement>(null);
-
-  /* ── Lenis smooth scroll ─────────────────────────────────── */
-  useEffect(() => {
-    const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
-
-    /* Keep ScrollTrigger in sync — correct reference kept for cleanup */
-    const onScroll = () => ScrollTrigger.update();
-    lenis.on("scroll", onScroll);
-
-    /* Drive Lenis from GSAP ticker for consistent timing */
-    const rafCb = (time: number) => lenis.raf(time * 1000);
-    gsap.ticker.add(rafCb);
-    gsap.ticker.lagSmoothing(0);
-
-    return () => {
-      lenis.off("scroll", onScroll);
-      gsap.ticker.remove(rafCb);
-      lenis.destroy();
-    };
-  }, []);
 
   /* ── All GSAP animations in ONE context ─────────────────── */
   useEffect(() => {
@@ -161,6 +140,7 @@ export default function Home() {
         scrollTrigger: { trigger: "#contact", start: "top 78%" },
       });
 
+      ScrollTrigger.refresh();
     }, mainRef);
 
     return () => ctx.revert();
@@ -277,7 +257,7 @@ export default function Home() {
               </p>
             </div>
             <a href="mailto:adeeliqbalajum@gmail.com" className="about-button">
-              Work with me{" "}
+              <span className="about-button-text">Work with me</span>
               <span className="mini-avatar">
                 <img src={portraitDataUrl} alt="Adeel" />
               </span>
@@ -298,7 +278,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── ZOOM PARALLAX (desktop only — hidden on mobile via CSS) ── */}
       <ZoomParallax items={parallaxItems} />
 
       {/* ── PROJECTS ── */}
@@ -308,7 +287,6 @@ export default function Home() {
             <div className="eyebrow scroll-reveal">Real work, real clients</div>
           </div>
 
-          {/* Word-by-word heading reveal */}
           <TextRevealByWord text="Projects I've built and delivered" />
 
           <div className="container projects-head" style={{ paddingTop: 0 }}>
@@ -339,7 +317,6 @@ export default function Home() {
                 )}
               </div>
             </div>
-            {/* View all projects */}
             <div style={{ textAlign:"center", marginTop: 36 }}>
               <Link href="/portfolio" className="btn btn-dark" style={{ display:"inline-flex" }}>
                 View all 19 projects →
