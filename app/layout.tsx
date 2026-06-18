@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "./stats-motion.css";
 import "./button-fill.css";
+import "./site-responsive.css";
 import { ButtonFillController } from "./components/ButtonFillController";
 
 export const metadata: Metadata = {
