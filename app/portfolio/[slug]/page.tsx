@@ -3,12 +3,17 @@ import Link from "next/link";
 import { projects, industryColour } from "../data";
 import { ProjectMockup } from "../../components/ProjectMockup";
 
+type CaseStudyPageProps = {
+  params: Promise<{ slug: string }>;
+};
+
 export function generateStaticParams() {
   return projects.map(p => ({ slug: p.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const p = projects.find(x => x.slug === params.slug);
+export async function generateMetadata({ params }: CaseStudyPageProps) {
+  const { slug } = await params;
+  const p = projects.find(x => x.slug === slug);
   if (!p) return {};
   return {
     title: `${p.name} — Case Study | Muhammad Adeel Iqbal`,
@@ -16,8 +21,9 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   };
 }
 
-export default function CaseStudyPage({ params }: { params: { slug: string } }) {
-  const p = projects.find(x => x.slug === params.slug);
+export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
+  const { slug } = await params;
+  const p = projects.find(x => x.slug === slug);
   if (!p) notFound();
 
   const accent = industryColour[p.industry];
