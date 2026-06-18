@@ -1,29 +1,30 @@
 /* Stats card layout + scroll-motion polish
-   This file only changes the visual treatment and scroll reveal of the existing stats cards. */
+   Keeps the existing second-section layout and reveals stat cards one by one. */
 
 .stats-showcase-section {
   overflow: hidden;
 }
 
 .stats-showcase-section .stats-layout {
-  width: min(1140px, 100%);
+  width: min(1040px, 100%);
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 26px;
+  grid-template-columns: .92fr 1.58fr;
+  gap: 24px;
+  align-items: stretch;
 }
 
 .stats-showcase-section .about-card {
-  max-width: 720px;
-  min-height: 250px;
-  margin: 0 auto;
+  max-width: none;
+  min-height: 330px;
+  margin: 0;
 }
 
 .stats-showcase-section .stats-grid {
   position: relative;
   perspective: 1100px;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
   align-items: stretch;
   transform-style: preserve-3d;
 }
@@ -31,15 +32,15 @@
 .stats-showcase-section .stat {
   position: relative;
   isolation: isolate;
-  min-height: 146px;
+  min-height: 158px;
   overflow: hidden;
-  border-radius: 28px;
+  border-radius: 24px;
   padding: 24px;
   background:
-    linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.68)),
+    linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.70)),
     radial-gradient(circle at 20% 10%, rgba(255,122,24,.11), transparent 42%);
   border: 1px solid rgba(7,7,7,.075);
-  box-shadow: 0 22px 64px rgba(0,0,0,.07);
+  box-shadow: 0 22px 64px rgba(0,0,0,.065);
   backdrop-filter: blur(18px);
   transform-origin: 50% 120%;
   will-change: transform, opacity, filter;
@@ -114,13 +115,18 @@
 }
 
 @media (max-width: 900px) {
-  .stats-showcase-section .stats-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
+  .stats-showcase-section .stats-layout {
+    grid-template-columns: 1fr;
   }
 
   .stats-showcase-section .about-card {
     max-width: 100%;
+    min-height: auto;
+  }
+
+  .stats-showcase-section .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
   }
 }
 
@@ -152,7 +158,7 @@
   }
 
   .stats-showcase-section .stat strong {
-    font-size: clamp(2.15rem, 11vw, 3rem);
+    font-size: clamp(2.05rem, 10vw, 2.8rem);
   }
 
   .stats-showcase-section .stat span {
@@ -160,7 +166,7 @@
   }
 }
 
-@media (max-width: 390px) {
+@media (max-width: 360px) {
   .stats-showcase-section .stats-grid {
     grid-template-columns: 1fr;
   }
