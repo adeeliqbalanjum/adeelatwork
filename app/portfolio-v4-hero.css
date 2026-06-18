@@ -1,0 +1,76 @@
+.hero .hero-proof,
+.hero .showroom-panel,
+.hero .orbit-badge {
+  display: none !important;
+}
+
+.hero-tags {
+  width: min(760px, 100%);
+  margin: 22px auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  z-index: 4;
+}
+
+.hero-tags span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 13px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.66);
+  border: 1px solid rgba(7,7,7,.07);
+  box-shadow: 0 10px 30px rgba(0,0,0,.045);
+  color: rgba(7,7,7,.58);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: -.025em;
+  backdrop-filter: blur(16px);
+}
+
+html[data-theme="dark"] .hero-tags span {
+  background: rgba(18,18,18,.74);
+  border-color: rgba(255,255,255,.11);
+  color: rgba(255,255,255,.68);
+}
+
+.hero .showcase {
+  margin-top: 40px;
+}
+
+.hero .strip {
+  animation: portfolioV4Strip 9s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes portfolioV4Strip {
+  from { transform: translate(calc(-50% - 80px), -36%); }
+  to   { transform: translate(calc(-50% + 80px), -36%); }
+}
+
+@media (max-width: 700px) {
+  .hero-tags {
+    width: min(335px, 100%);
+    margin-top: 18px;
+    gap: 6px;
+  }
+
+  .hero-tags span {
+    min-height: 29px;
+    padding: 0 10px;
+    font-size: 10px;
+  }
+
+  .hero .showcase {
+    margin-top: 30px;
+    min-height: 360px;
+  }
+
+  .hero .portrait-card {
+    margin-top: 48px;
+  }
+}
