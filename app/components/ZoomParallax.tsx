@@ -42,7 +42,7 @@ const featureSections = [
   },
 ];
 
-export function ZoomParallax() {
+export function ZoomParallax({ items: _items }: { items?: ParallaxItem[] }) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
