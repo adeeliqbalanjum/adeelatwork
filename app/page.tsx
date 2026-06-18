@@ -184,7 +184,7 @@ export default function Home() {
 
         <div className="hero-inner flow-inner">
           <div className="status-pill ha-pill">
-            <strong>Available</strong> for new projects — UAE · UK · USA
+            <strong>Available</strong> for new projects
           </div>
 
           <h1 className="ha-h1">
