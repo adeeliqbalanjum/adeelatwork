@@ -2,13 +2,20 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { projects, industryColour } from "../data";
 
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
+
 export function generateStaticParams() {
   return projects.map(p => ({ slug: p.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const p = projects.find(x => x.slug === params.slug);
+export async function generateMetadata({ params }: PageProps) {
+  const { slug } = await params;
+  const p = projects.find(x => x.slug === slug);
+
   if (!p) return {};
+
   return {
     title: `${p.name} — Case Study | Muhammad Adeel Iqbal`,
     description: p.tagline,
@@ -29,8 +36,7 @@ function HeroMockup({ bg, accent }: { bg: string; accent: string }) {
         <div style={{ height:32,background:accent,display:"flex",alignItems:"center",padding:"0 16px",gap:8 }}>
           <div style={{ height:8,width:48,borderRadius:4,background:"rgba(255,255,255,.55)" }}/>
           <div style={{ marginLeft:"auto",display:"flex",gap:6 }}>
-            {[32,24,28,24].map((w,i)=><div key={i} style={{ height:6,width:w,borderRadius:3,background:"rgba(255,255,255,.30)" }}/>)}
-          </div>
+            {[32,24,28,24].map((w,i)=><div key={i} style={{ height:6,width:w,borderRadius:3,background:"rgba(255,255,255,.30)" }}/>)}</div>
         </div>
         <div style={{ padding:"20px 20px 10px" }}>
           <div style={{ height:14,width:"62%",borderRadius:6,background:"rgba(255,255,255,.80)",marginBottom:8 }}/>
@@ -51,8 +57,10 @@ function HeroMockup({ bg, accent }: { bg: string; accent: string }) {
   );
 }
 
-export default function CaseStudyPage({ params }: { params: { slug: string } }) {
-  const p = projects.find(x => x.slug === params.slug);
+export default async function CaseStudyPage({ params }: PageProps) {
+  const { slug } = await params;
+  const p = projects.find(x => x.slug === slug);
+
   if (!p) notFound();
 
   const accent  = industryColour[p.industry];
