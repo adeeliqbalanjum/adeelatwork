@@ -1,0 +1,212 @@
+/* Showroom UI fixes and polish
+   Keeps the original Adeel At Work design language while improving hero proof cards. */
+
+.theme-toggle {
+  height: 34px;
+  padding: 0 13px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(7, 7, 7, .06);
+  color: rgba(7, 7, 7, .58);
+  font-family: "Satoshi", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: -.025em;
+  cursor: pointer;
+  transition: transform .22s ease, background .22s ease, color .22s ease;
+}
+.theme-toggle:hover {
+  transform: translateY(-1px);
+  background: rgba(7, 7, 7, .095);
+  color: #070707;
+}
+
+/* Hero proof cards */
+.hero-proof {
+  width: min(860px, 100%);
+  margin: 30px auto 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  position: relative;
+  z-index: 4;
+}
+
+.proof-card {
+  position: relative;
+  isolation: isolate;
+  min-height: 114px;
+  overflow: hidden;
+  border-radius: 24px;
+  padding: 18px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.90), rgba(255,255,255,.64)),
+    radial-gradient(circle at 22% 18%, rgba(255,122,24,.16), transparent 38%);
+  border: 1px solid rgba(7, 7, 7, .07);
+  box-shadow: 0 18px 48px rgba(0,0,0,.065);
+  backdrop-filter: blur(18px);
+  transform: translateZ(0);
+  transition: transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s cubic-bezier(.2,.8,.2,1), border-color .28s ease;
+}
+
+.proof-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(7, 7, 7, .12);
+  box-shadow: 0 28px 74px rgba(0,0,0,.12);
+}
+
+.proof-card::before {
+  content: "";
+  position: absolute;
+  inset: 12px 12px auto auto;
+  width: 38px;
+  height: 38px;
+  border-radius: 14px;
+  background: rgba(7, 7, 7, .055);
+  box-shadow: inset 0 0 0 1px rgba(7, 7, 7, .05);
+  z-index: -1;
+}
+
+.proof-card::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  top: 14px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--orange), rgba(255,122,24,0));
+  opacity: .82;
+}
+
+.proof-card:nth-child(2)::after { background: linear-gradient(90deg, var(--purple), rgba(168,85,247,0)); }
+.proof-card:nth-child(3)::after { background: linear-gradient(90deg, var(--green), rgba(34,197,94,0)); }
+.proof-card:nth-child(4)::after { background: linear-gradient(90deg, #070707, rgba(7,7,7,0)); }
+
+.proof-card:nth-child(2) {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.90), rgba(255,255,255,.64)),
+    radial-gradient(circle at 22% 18%, rgba(168,85,247,.16), transparent 38%);
+}
+.proof-card:nth-child(3) {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.90), rgba(255,255,255,.64)),
+    radial-gradient(circle at 22% 18%, rgba(34,197,94,.16), transparent 38%);
+}
+.proof-card:nth-child(4) {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.90), rgba(255,255,255,.64)),
+    radial-gradient(circle at 22% 18%, rgba(7,7,7,.10), transparent 42%);
+}
+
+.proof-card strong {
+  display: block;
+  margin: 0 0 7px;
+  color: #070707;
+  font-size: clamp(2rem, 3.1vw, 3.45rem);
+  line-height: .82;
+  font-weight: 900;
+  letter-spacing: -.08em;
+  white-space: nowrap;
+}
+
+.proof-card span {
+  display: block;
+  color: rgba(7, 7, 7, .50);
+  font-size: 12px;
+  line-height: 1.15;
+  font-weight: 900;
+  letter-spacing: -.025em;
+}
+
+/* Light/Dark mode base polish */
+html[data-theme="dark"] {
+  --bg: #080808;
+  --soft: #111111;
+  --ink: #f7f7f2;
+  --muted: rgba(255,255,255,.60);
+  --line: rgba(255,255,255,.12);
+  --card: rgba(18,18,18,.78);
+}
+
+html[data-theme="dark"] body { background: #080808; color: #f7f7f2; }
+html[data-theme="dark"] .hero {
+  background:
+    radial-gradient(circle at 50% -12%, rgba(255,122,24,.18) 0%, rgba(255,255,255,0) 40%),
+    linear-gradient(180deg, #090909 0%, #0c0c0c 54%, #111 100%);
+}
+html[data-theme="dark"] .hero::after { background: linear-gradient(180deg, rgba(8,8,8,0), #111 72%); }
+html[data-theme="dark"] .nav,
+html[data-theme="dark"] .status-pill,
+html[data-theme="dark"] .proof-card,
+html[data-theme="dark"] .site-card,
+html[data-theme="dark"] .showroom-panel,
+html[data-theme="dark"] .stat,
+html[data-theme="dark"] .project,
+html[data-theme="dark"] .project-board,
+html[data-theme="dark"] .eyebrow,
+html[data-theme="dark"] .zp-label {
+  background: rgba(18,18,18,.76);
+  border-color: rgba(255,255,255,.11);
+  color: #f7f7f2;
+}
+html[data-theme="dark"] .nav a:not(.nav-logo),
+html[data-theme="dark"] .theme-toggle,
+html[data-theme="dark"] .subline,
+html[data-theme="dark"] .proof-card span,
+html[data-theme="dark"] .site-body p,
+html[data-theme="dark"] .stat span,
+html[data-theme="dark"] .stat p,
+html[data-theme="dark"] .project p,
+html[data-theme="dark"] .project small {
+  color: rgba(255,255,255,.62);
+}
+html[data-theme="dark"] h1 .soft { color: rgba(255,255,255,.58); }
+html[data-theme="dark"] .proof-card strong { color: #fff; }
+html[data-theme="dark"] .theme-toggle { background: rgba(255,255,255,.10); }
+html[data-theme="dark"] .theme-toggle:hover { background: rgba(255,255,255,.16); color: #fff; }
+html[data-theme="dark"] .section.grey { background: #111; }
+html[data-theme="dark"] .showcase-haze {
+  background: linear-gradient(90deg, rgba(8,8,8,0) 0%, rgba(18,18,18,.82) 17%, rgba(18,18,18,.78) 83%, rgba(8,8,8,0) 100%);
+}
+html[data-theme="dark"] .showcase-haze::before { background: linear-gradient(90deg, #090909, rgba(9,9,9,0)); }
+html[data-theme="dark"] .showcase-haze::after { background: linear-gradient(270deg, #090909, rgba(9,9,9,0)); }
+
+@media (max-width: 900px) {
+  .hero-proof {
+    width: min(620px, 100%);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .proof-card { min-height: 106px; border-radius: 22px; }
+}
+
+@media (max-width: 560px) {
+  .hero-proof {
+    margin-top: 24px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+  .proof-card {
+    min-height: 96px;
+    padding: 16px 14px;
+    border-radius: 19px;
+  }
+  .proof-card::before {
+    width: 30px;
+    height: 30px;
+    border-radius: 11px;
+  }
+  .proof-card::after {
+    left: 14px;
+    right: 14px;
+    top: 12px;
+    height: 3px;
+  }
+  .proof-card strong { font-size: clamp(1.65rem, 10vw, 2.35rem); }
+  .proof-card span { font-size: 11px; }
+}
