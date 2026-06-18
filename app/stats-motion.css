@@ -1,0 +1,167 @@
+/* Stats card layout + scroll-motion polish
+   This file only changes the visual treatment and scroll reveal of the existing stats cards. */
+
+.stats-showcase-section {
+  overflow: hidden;
+}
+
+.stats-showcase-section .stats-layout {
+  width: min(1140px, 100%);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 26px;
+}
+
+.stats-showcase-section .about-card {
+  max-width: 720px;
+  min-height: 250px;
+  margin: 0 auto;
+}
+
+.stats-showcase-section .stats-grid {
+  position: relative;
+  perspective: 1100px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+  transform-style: preserve-3d;
+}
+
+.stats-showcase-section .stat {
+  position: relative;
+  isolation: isolate;
+  min-height: 146px;
+  overflow: hidden;
+  border-radius: 28px;
+  padding: 24px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.68)),
+    radial-gradient(circle at 20% 10%, rgba(255,122,24,.11), transparent 42%);
+  border: 1px solid rgba(7,7,7,.075);
+  box-shadow: 0 22px 64px rgba(0,0,0,.07);
+  backdrop-filter: blur(18px);
+  transform-origin: 50% 120%;
+  will-change: transform, opacity, filter;
+}
+
+.stats-showcase-section .stat::before {
+  content: "";
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  top: 18px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--orange), rgba(255,122,24,0));
+  z-index: 2;
+}
+
+.stats-showcase-section .stat:nth-child(2)::before {
+  background: linear-gradient(90deg, var(--purple), rgba(168,85,247,0));
+}
+.stats-showcase-section .stat:nth-child(3)::before {
+  background: linear-gradient(90deg, var(--green), rgba(34,197,94,0));
+}
+.stats-showcase-section .stat:nth-child(4)::before {
+  background: linear-gradient(90deg, #070707, rgba(7,7,7,0));
+}
+
+.stats-showcase-section .stat::after {
+  content: "";
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  border-radius: 18px;
+  background: rgba(7,7,7,.045);
+  border: 1px solid rgba(7,7,7,.06);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.55), 0 12px 32px rgba(0,0,0,.055);
+  z-index: -1;
+}
+
+.stats-showcase-section .stat-top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 9px;
+}
+
+.stats-showcase-section .stat strong {
+  font-size: clamp(3rem, 4.35vw, 4.45rem);
+  line-height: .82;
+  letter-spacing: -.09em;
+  color: #050505;
+}
+
+.stats-showcase-section .stat span {
+  color: rgba(7,7,7,.50);
+  font-size: 13px;
+  line-height: 1.1;
+  font-weight: 900;
+  letter-spacing: -.035em;
+}
+
+.stats-showcase-section .stat p {
+  display: none;
+}
+
+.stats-showcase-section .stat:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 78px rgba(0,0,0,.12);
+}
+
+@media (max-width: 900px) {
+  .stats-showcase-section .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .stats-showcase-section .about-card {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .stats-showcase-section .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .stats-showcase-section .stat {
+    min-height: 112px;
+    border-radius: 20px;
+    padding: 18px 16px;
+  }
+
+  .stats-showcase-section .stat::before {
+    left: 16px;
+    right: 16px;
+    top: 14px;
+    height: 3px;
+  }
+
+  .stats-showcase-section .stat::after {
+    width: 34px;
+    height: 34px;
+    border-radius: 13px;
+    top: 10px;
+    right: 12px;
+  }
+
+  .stats-showcase-section .stat strong {
+    font-size: clamp(2.15rem, 11vw, 3rem);
+  }
+
+  .stats-showcase-section .stat span {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 390px) {
+  .stats-showcase-section .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
