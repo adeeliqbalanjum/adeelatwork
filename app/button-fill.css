@@ -2,8 +2,13 @@
 .about-button {
   --btn-x: 50%;
   --btn-y: 50%;
+  background: transparent !important;
   color: #050505;
   transition: color .35s ease, transform .25s ease, box-shadow .25s ease;
+}
+
+.about-button::before {
+  z-index: -2 !important;
 }
 
 .about-button::after {
@@ -17,7 +22,7 @@
   background: #050505;
   transform: translate(-50%, -50%);
   transition: width .55s cubic-bezier(.2,.8,.2,1), height .55s cubic-bezier(.2,.8,.2,1);
-  z-index: 0;
+  z-index: -1;
   pointer-events: none;
 }
 
@@ -31,13 +36,9 @@
   height: 460%;
 }
 
-.about-button-text,
 .about-button .mini-avatar {
   position: relative;
   z-index: 2;
-}
-
-.about-button .mini-avatar {
   transition: transform .32s cubic-bezier(.2,.8,.2,1), border-color .32s ease;
 }
 
