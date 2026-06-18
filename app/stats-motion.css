@@ -17,19 +17,13 @@
   border: 2px solid rgba(255,255,255,.96);
   box-shadow: 0 10px 26px rgba(0,0,0,.16), inset 0 0 0 1px rgba(0,0,0,.06);
 }
-
-.nav-logo::before {
-  content: none !important;
-}
-
+.nav-logo::before { content: none !important; }
 .nav-logo:hover {
   transform: none;
   box-shadow: 0 12px 30px rgba(0,0,0,.20), inset 0 0 0 1px rgba(0,0,0,.08);
 }
 
-.stats-showcase-section {
-  overflow: hidden;
-}
+.stats-showcase-section { overflow: hidden; }
 
 .stats-showcase-section .stats-layout {
   width: min(1040px, 100%);
@@ -38,13 +32,11 @@
   gap: 24px;
   align-items: stretch;
 }
-
 .stats-showcase-section .about-card {
   max-width: none;
   min-height: 330px;
   margin: 0;
 }
-
 .stats-showcase-section .stats-grid {
   position: relative;
   perspective: 1100px;
@@ -54,7 +46,6 @@
   align-items: stretch;
   transform-style: preserve-3d;
 }
-
 .stats-showcase-section .stat {
   position: relative;
   isolation: isolate;
@@ -71,7 +62,6 @@
   transform-origin: 50% 120%;
   will-change: transform, opacity, filter;
 }
-
 .stats-showcase-section .stat::before {
   content: "";
   position: absolute;
@@ -80,66 +70,83 @@
   top: 18px;
   height: 4px;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--orange), rgba(255,122,24,.12), rgba(255,122,24,0));
+  background: linear-gradient(90deg, var(--orange), rgba(255,122,24,.16), rgba(255,122,24,0));
   background-size: 180% 100%;
   animation: statLineSweep 3.8s ease-in-out infinite;
   z-index: 2;
 }
-
 .stats-showcase-section .stat:nth-child(2)::before {
-  background: linear-gradient(90deg, var(--purple), rgba(168,85,247,.14), rgba(168,85,247,0));
+  background: linear-gradient(90deg, var(--purple), rgba(168,85,247,.16), rgba(168,85,247,0));
   background-size: 180% 100%;
 }
 .stats-showcase-section .stat:nth-child(3)::before {
-  background: linear-gradient(90deg, var(--green), rgba(34,197,94,.14), rgba(34,197,94,0));
+  background: linear-gradient(90deg, var(--green), rgba(34,197,94,.16), rgba(34,197,94,0));
   background-size: 180% 100%;
 }
 .stats-showcase-section .stat:nth-child(4)::before {
-  background: linear-gradient(90deg, #070707, rgba(7,7,7,.14), rgba(7,7,7,0));
+  background: linear-gradient(90deg, #070707, rgba(7,7,7,.16), rgba(7,7,7,0));
   background-size: 180% 100%;
 }
 
 .stats-showcase-section .stat::after {
-  content: "";
+  content: "WP";
   position: absolute;
   top: 14px;
   right: 16px;
   width: 48px;
   height: 48px;
   border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Satoshi", ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -.04em;
+  color: rgba(255,122,24,.95);
+  text-shadow: 0 8px 18px rgba(255,122,24,.22);
   background:
-    linear-gradient(135deg, rgba(255,255,255,.78), rgba(255,255,255,.20) 42%, rgba(7,7,7,.045)),
-    radial-gradient(circle at 32% 28%, rgba(255,122,24,.22), transparent 36%),
+    linear-gradient(135deg, rgba(255,255,255,.86), rgba(255,255,255,.30) 42%, rgba(7,7,7,.045)),
+    radial-gradient(circle at 32% 28%, rgba(255,122,24,.26), transparent 42%),
     rgba(7,7,7,.035);
   background-size: 180% 180%, 100% 100%, 100% 100%;
   border: 1px solid rgba(7,7,7,.06);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.68), 0 12px 32px rgba(0,0,0,.055);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.72), 0 12px 32px rgba(0,0,0,.055);
   transform: translate3d(0,0,0) rotate(0deg);
-  animation: statCornerFloat 4.8s ease-in-out infinite, statCornerShimmer 3.6s ease-in-out infinite;
+  animation: statCornerFloat 4.8s ease-in-out infinite, statCornerShimmer 3.6s ease-in-out infinite, statIconPulse 3.2s ease-in-out infinite;
   z-index: -1;
 }
-
 .stats-showcase-section .stat:nth-child(2)::after {
-  animation-delay: .25s, .45s;
+  content: "PR";
+  animation-delay: .25s, .45s, .15s;
+  color: rgba(168,85,247,.95);
+  text-shadow: 0 8px 18px rgba(168,85,247,.22);
   background:
-    linear-gradient(135deg, rgba(255,255,255,.78), rgba(255,255,255,.20) 42%, rgba(7,7,7,.045)),
-    radial-gradient(circle at 32% 28%, rgba(168,85,247,.22), transparent 36%),
+    linear-gradient(135deg, rgba(255,255,255,.86), rgba(255,255,255,.30) 42%, rgba(7,7,7,.045)),
+    radial-gradient(circle at 32% 28%, rgba(168,85,247,.26), transparent 42%),
     rgba(7,7,7,.035);
   background-size: 180% 180%, 100% 100%, 100% 100%;
 }
 .stats-showcase-section .stat:nth-child(3)::after {
-  animation-delay: .5s, .7s;
+  content: "FG";
+  animation-delay: .5s, .7s, .3s;
+  color: rgba(34,197,94,.95);
+  text-shadow: 0 8px 18px rgba(34,197,94,.22);
   background:
-    linear-gradient(135deg, rgba(255,255,255,.78), rgba(255,255,255,.20) 42%, rgba(7,7,7,.045)),
-    radial-gradient(circle at 32% 28%, rgba(34,197,94,.22), transparent 36%),
+    linear-gradient(135deg, rgba(255,255,255,.86), rgba(255,255,255,.30) 42%, rgba(7,7,7,.045)),
+    radial-gradient(circle at 32% 28%, rgba(34,197,94,.26), transparent 42%),
     rgba(7,7,7,.035);
   background-size: 180% 180%, 100% 100%, 100% 100%;
 }
 .stats-showcase-section .stat:nth-child(4)::after {
-  animation-delay: .75s, .95s;
+  content: "SP";
+  animation-delay: .75s, .95s, .45s;
+  color: rgba(7,7,7,.92);
+  text-shadow: 0 8px 18px rgba(7,7,7,.18);
   background:
-    linear-gradient(135deg, rgba(255,255,255,.78), rgba(255,255,255,.20) 42%, rgba(7,7,7,.055)),
-    radial-gradient(circle at 32% 28%, rgba(7,7,7,.14), transparent 38%),
+    linear-gradient(135deg, rgba(255,255,255,.86), rgba(255,255,255,.30) 42%, rgba(7,7,7,.055)),
+    radial-gradient(circle at 32% 28%, rgba(7,7,7,.16), transparent 42%),
     rgba(7,7,7,.035);
   background-size: 180% 180%, 100% 100%, 100% 100%;
 }
@@ -151,7 +158,6 @@
   justify-content: flex-start;
   gap: 9px;
 }
-
 .stats-showcase-section .stat strong {
   display: inline-block;
   font-size: clamp(3rem, 4.35vw, 4.45rem);
@@ -162,11 +168,9 @@
   animation: statNumberMotion 4.4s cubic-bezier(.2,.8,.2,1) infinite;
   will-change: transform, letter-spacing, text-shadow;
 }
-
 .stats-showcase-section .stat:nth-child(2) strong { animation-delay: .2s; }
 .stats-showcase-section .stat:nth-child(3) strong { animation-delay: .4s; }
 .stats-showcase-section .stat:nth-child(4) strong { animation-delay: .6s; }
-
 .stats-showcase-section .stat span {
   color: rgba(7,7,7,.50);
   font-size: 13px;
@@ -174,45 +178,36 @@
   font-weight: 900;
   letter-spacing: -.035em;
 }
-
-.stats-showcase-section .stat p {
-  display: none;
-}
-
+.stats-showcase-section .stat p { display: none; }
 .stats-showcase-section .stat:hover {
   transform: translateY(-6px);
   box-shadow: 0 30px 78px rgba(0,0,0,.12);
 }
-
 .stats-showcase-section .stat:hover::after {
-  animation-duration: 2.1s, 1.8s;
+  animation-duration: 2.1s, 1.8s, 1.7s;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.78), 0 18px 42px rgba(0,0,0,.10);
 }
-
 .stats-showcase-section .stat:hover strong {
   animation-duration: 1.9s;
   text-shadow: 0 16px 28px rgba(0,0,0,.10);
 }
 
 @keyframes statCornerFloat {
-  0%, 100% {
-    transform: translate3d(0,0,0) rotate(0deg) scale(1);
-  }
-  50% {
-    transform: translate3d(-4px,5px,0) rotate(-4deg) scale(1.04);
-  }
+  0%, 100% { transform: translate3d(0,0,0) rotate(0deg) scale(1); }
+  50% { transform: translate3d(-4px,5px,0) rotate(-4deg) scale(1.04); }
 }
-
 @keyframes statCornerShimmer {
   0%, 100% { background-position: 0% 0%, center, center; }
   50% { background-position: 100% 100%, center, center; }
 }
-
+@keyframes statIconPulse {
+  0%, 100% { filter: saturate(1); }
+  50% { filter: saturate(1.22) brightness(1.04); }
+}
 @keyframes statLineSweep {
   0%, 100% { background-position: 0% 50%; opacity: .92; }
   50% { background-position: 100% 50%; opacity: 1; }
 }
-
 @keyframes statNumberMotion {
   0%, 100% {
     transform: translate3d(0,0,0) scale(1);
@@ -227,73 +222,46 @@
 }
 
 @media (max-width: 900px) {
-  .stats-showcase-section .stats-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .stats-showcase-section .about-card {
-    max-width: 100%;
-    min-height: auto;
-  }
-
+  .stats-showcase-section .stats-layout { grid-template-columns: 1fr; }
+  .stats-showcase-section .about-card { max-width: 100%; min-height: auto; }
   .stats-showcase-section .stats-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
   }
 }
-
 @media (max-width: 560px) {
-  .nav-logo {
-    width: 38px;
-    height: 38px;
-    flex-basis: 38px;
-  }
-
+  .nav-logo { width: 38px; height: 38px; flex-basis: 38px; }
   .stats-showcase-section .stats-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
   }
-
   .stats-showcase-section .stat {
     min-height: 112px;
     border-radius: 20px;
     padding: 18px 16px;
   }
-
   .stats-showcase-section .stat::before {
     left: 16px;
     right: 16px;
     top: 14px;
     height: 3px;
   }
-
   .stats-showcase-section .stat::after {
     width: 34px;
     height: 34px;
     border-radius: 13px;
     top: 10px;
     right: 12px;
+    font-size: 10px;
   }
-
-  .stats-showcase-section .stat strong {
-    font-size: clamp(2.05rem, 10vw, 2.8rem);
-  }
-
-  .stats-showcase-section .stat span {
-    font-size: 11px;
-  }
+  .stats-showcase-section .stat strong { font-size: clamp(2.05rem, 10vw, 2.8rem); }
+  .stats-showcase-section .stat span { font-size: 11px; }
 }
-
 @media (max-width: 360px) {
-  .stats-showcase-section .stats-grid {
-    grid-template-columns: 1fr;
-  }
+  .stats-showcase-section .stats-grid { grid-template-columns: 1fr; }
 }
-
 @media (prefers-reduced-motion: reduce) {
   .stats-showcase-section .stat::before,
   .stats-showcase-section .stat::after,
-  .stats-showcase-section .stat strong {
-    animation: none !important;
-  }
+  .stats-showcase-section .stat strong { animation: none !important; }
 }
