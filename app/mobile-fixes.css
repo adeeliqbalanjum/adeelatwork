@@ -1,0 +1,276 @@
+/* Mobile responsive corrections for the showroom hero.
+   This file intentionally loads after the main styles so mobile overrides win. */
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+main {
+  max-width: 100vw;
+  overflow-x: clip;
+}
+
+.hero,
+.section,
+.showcase,
+.container {
+  max-width: 100vw;
+}
+
+@media (max-width: 700px) {
+  .flow-section {
+    overflow: hidden;
+  }
+
+  .flow-inner {
+    transform: none !important;
+    opacity: 1 !important;
+    will-change: auto !important;
+  }
+
+  .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .nav {
+    top: 12px;
+    width: auto;
+    max-width: calc(100vw - 24px);
+    padding: 6px;
+    gap: 6px;
+  }
+
+  .nav-logo {
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
+  }
+
+  .nav .nav-cta,
+  .nav a:not(.nav-logo):not(.nav-cta) {
+    display: none !important;
+  }
+
+  .theme-toggle {
+    height: 32px;
+    padding: 0 11px;
+    font-size: 11px;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 86px 14px 58px;
+    display: block;
+  }
+
+  .hero-inner {
+    width: 100%;
+    max-width: 390px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .status-pill {
+    max-width: 100%;
+    margin-bottom: 20px;
+    padding: 4px 9px 4px 5px;
+    gap: 6px;
+    font-size: 9.5px;
+    white-space: nowrap;
+  }
+
+  .status-pill strong {
+    min-height: 19px;
+    padding: 0 7px;
+    font-size: 10px;
+  }
+
+  .ha-h1,
+  .hero h1 {
+    max-width: 345px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: clamp(2.42rem, 12.4vw, 3.22rem) !important;
+    line-height: .91;
+    letter-spacing: -.073em;
+    text-wrap: balance;
+  }
+
+  .subline {
+    max-width: 335px;
+    margin-top: 17px;
+    font-size: 13px;
+    line-height: 1.56;
+  }
+
+  .actions {
+    width: min(335px, 100%);
+    margin: 22px auto 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .actions .btn {
+    width: 100%;
+    min-height: 42px;
+    padding: 0 12px;
+    font-size: 12.5px;
+  }
+
+  .actions .btn-link {
+    grid-column: 1 / -1;
+    min-height: 28px;
+  }
+
+  .hero-proof {
+    width: min(335px, 100%);
+    margin-top: 22px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .proof-card {
+    min-width: 0;
+    min-height: 91px;
+    padding: 15px 13px;
+    border-radius: 18px;
+  }
+
+  .proof-card::before {
+    width: 29px;
+    height: 29px;
+    border-radius: 11px;
+    inset: 12px 12px auto auto;
+  }
+
+  .proof-card::after {
+    top: 11px;
+    left: 13px;
+    right: 13px;
+    height: 3px;
+  }
+
+  .proof-card strong {
+    font-size: clamp(1.75rem, 9vw, 2.24rem);
+  }
+
+  .proof-card span {
+    font-size: 10.5px;
+  }
+
+  .showcase {
+    width: min(335px, 100%);
+    height: auto !important;
+    min-height: 424px;
+    margin: 34px auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    perspective: none;
+    overflow: visible;
+  }
+
+  .showcase-haze,
+  .strip {
+    display: none !important;
+  }
+
+  .portrait-card {
+    position: relative;
+    z-index: 3;
+    width: min(210px, 58vw) !important;
+    height: auto !important;
+    aspect-ratio: .82;
+    margin: 0 auto;
+    border-width: 5px !important;
+    border-radius: 22px !important;
+    transform: none !important;
+  }
+
+  .showroom-panel {
+    position: relative !important;
+    inset: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+    z-index: 6;
+    width: min(318px, 100%) !important;
+    margin: -70px auto 0;
+    padding: 13px;
+    border-radius: 22px;
+  }
+
+  .showroom-row {
+    padding: 8px 9px;
+  }
+
+  .showroom-row span {
+    font-size: 11.5px;
+  }
+
+  .showroom-row small {
+    font-size: 9.5px;
+  }
+
+  .showroom-metric {
+    grid-template-columns: 1fr 88px;
+  }
+
+  .orbit-badge {
+    display: none !important;
+  }
+
+  .stats-layout,
+  .project-cards,
+  .port-grid,
+  .cs-hero,
+  .cs-metrics,
+  .cs-grid,
+  .cs-related-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .about-card {
+    transform: none !important;
+    rotate: none !important;
+    margin: 0 auto;
+  }
+
+  .project-board {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 390px) {
+  .hero {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .ha-h1,
+  .hero h1 {
+    font-size: clamp(2.26rem, 12vw, 3rem) !important;
+  }
+
+  .status-pill {
+    font-size: 8.8px;
+  }
+
+  .actions,
+  .hero-proof,
+  .showcase {
+    width: 100%;
+  }
+
+  .proof-card {
+    min-height: 88px;
+    padding: 14px 12px;
+  }
+}
