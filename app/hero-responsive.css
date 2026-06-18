@@ -1,0 +1,163 @@
+/* Hero responsive sizing only. No about/stat/button layout changes. */
+.hero {
+  min-height: 100svh;
+  padding-top: clamp(86px, 8vh, 104px);
+  padding-bottom: clamp(58px, 7vh, 82px);
+}
+
+.hero-inner {
+  width: min(1040px, 100%);
+}
+
+.hero .ha-h1,
+.hero h1 {
+  max-width: min(840px, 100%);
+  font-size: clamp(3.05rem, 5.05vw, 5.05rem);
+  line-height: .92;
+  letter-spacing: -.078em;
+}
+
+.hero .ha-sub,
+.hero .subline {
+  max-width: 600px;
+  font-size: clamp(.95rem, 1.05vw, 1.08rem);
+  line-height: 1.55;
+}
+
+.hero .showcase {
+  height: clamp(340px, 38vh, 420px);
+  margin-top: clamp(34px, 5vh, 56px);
+}
+
+.hero .portrait-card {
+  width: clamp(245px, 18vw, 315px);
+  height: clamp(300px, 22vw, 382px);
+}
+
+@media (min-width: 1440px) {
+  .hero .ha-h1,
+  .hero h1 {
+    max-width: 900px;
+    font-size: clamp(4.4rem, 4.65vw, 5.45rem);
+  }
+}
+
+@media (max-width: 1100px) {
+  .hero .ha-h1,
+  .hero h1 {
+    max-width: 760px;
+    font-size: clamp(3rem, 7vw, 4.75rem);
+  }
+
+  .hero .ha-sub,
+  .hero .subline {
+    max-width: 560px;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    min-height: auto;
+    padding: 92px 18px 64px;
+  }
+
+  .hero .status-pill {
+    margin-bottom: 18px;
+  }
+
+  .hero .ha-h1,
+  .hero h1 {
+    max-width: 650px;
+    font-size: clamp(2.65rem, 9.6vw, 4.45rem);
+    line-height: .94;
+  }
+
+  .hero .ha-sub,
+  .hero .subline {
+    max-width: 520px;
+    font-size: .98rem;
+    line-height: 1.55;
+  }
+
+  .hero .showcase {
+    height: 340px;
+    margin-top: 40px;
+  }
+
+  .hero .portrait-card {
+    width: 250px;
+    height: 306px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero {
+    padding: 86px 16px 54px;
+  }
+
+  .hero .status-pill {
+    max-width: 100%;
+    font-size: 10.5px;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .hero .status-pill strong {
+    min-height: 20px;
+    padding-inline: 9px;
+  }
+
+  .hero .ha-h1,
+  .hero h1 {
+    max-width: 360px;
+    font-size: clamp(2.28rem, 13.5vw, 3.4rem);
+    line-height: .94;
+    letter-spacing: -.073em;
+  }
+
+  .hero .ha-sub,
+  .hero .subline {
+    max-width: 335px;
+    margin-top: 15px;
+    font-size: .9rem;
+    line-height: 1.54;
+  }
+
+  .hero .actions {
+    margin-top: 20px;
+    gap: 10px;
+  }
+
+  .hero .btn {
+    min-height: 42px;
+    padding-inline: 17px;
+    font-size: 13px;
+  }
+
+  .hero .showcase {
+    height: 285px;
+    margin-top: 34px;
+  }
+
+  .hero .portrait-card {
+    width: 205px;
+    height: 255px;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero .ha-h1,
+  .hero h1 {
+    max-width: 315px;
+    font-size: clamp(2.05rem, 13vw, 2.75rem);
+  }
+
+  .hero .ha-sub,
+  .hero .subline {
+    max-width: 300px;
+  }
+
+  .hero .actions {
+    flex-direction: column;
+  }
+}
