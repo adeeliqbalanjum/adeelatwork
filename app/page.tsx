@@ -40,6 +40,73 @@ const parallaxItems: ParallaxItem[] = [
   { label: "6s → 1.8s Speed",      sub: "Core Web Vitals",        gradient: "linear-gradient(135deg,rgba(34,197,94,.86),rgba(11,11,11,.75))"     },
 ];
 
+const pluginLabs = [
+  {
+    title: "Booking Price Engine",
+    tag: "Booking plugin demo",
+    copy: "A live-style booking flow that can calculate private/shared tours, adults, children, add-ons, and payment method logic.",
+    demo: "Dynamic price calculator",
+    proves: "You can build real business logic, not only Elementor pages.",
+  },
+  {
+    title: "WooCommerce Logic Lab",
+    tag: "Store functionality demo",
+    copy: "Show custom product rules, add-on pricing, cart notices, conditional fees, checkout fields, and order-management improvements.",
+    demo: "Cart/checkout logic preview",
+    proves: "You understand e-commerce workflows and client revenue flows.",
+  },
+  {
+    title: "Search & Filter Lab",
+    tag: "Directory/search demo",
+    copy: "A demo for CPT filters, service directories, practitioner maps, AJAX search, and custom field-based results.",
+    demo: "Filterable results UI",
+    proves: "You can build content-heavy WordPress systems clients can manage.",
+  },
+];
+
+const services = [
+  {
+    title: "Elementor Pro Websites",
+    copy: "Pixel-perfect, responsive, editable pages built from Figma, screenshots, or brand direction.",
+    deliverable: "Landing pages, corporate websites, service pages, blogs, templates.",
+  },
+  {
+    title: "WooCommerce Stores",
+    copy: "Online stores with clean product structure, checkout improvements, speed fixes, and conversion-focused layouts.",
+    deliverable: "Product pages, cart, checkout, payment setup, custom fields.",
+  },
+  {
+    title: "Custom WordPress Plugins",
+    copy: "Business-specific tools when normal plugins cannot handle the workflow properly.",
+    deliverable: "Booking systems, dashboards, forms, pricing logic, admin tools.",
+  },
+  {
+    title: "Speed & UX Optimization",
+    copy: "Performance cleanup for slow WordPress sites without destroying design or functionality.",
+    deliverable: "Cache setup, image optimization, plugin audit, Core Web Vitals fixes.",
+  },
+];
+
+const experience = [
+  ["Current", "WordPress Developer", "Full-time WordPress development work with international client projects, QA, Elementor, CPTs, plugin fixes, and speed work."],
+  ["50+", "Delivered Builds", "Business websites, healthcare sites, booking platforms, WooCommerce stores, legal websites, and consultancy pages."],
+  ["Stack", "WordPress System Builder", "Elementor Pro, WooCommerce, ACF, CPT UI, PHP snippets, CSS, JS, GSAP, forms, search/filter, and custom workflows."],
+];
+
+const processSteps = [
+  ["01", "Understand", "I clarify the client goal, business model, page structure, features, references, and conversion path."],
+  ["02", "Plan", "I map the sections, WordPress stack, required plugins, custom logic, responsiveness, and editing needs."],
+  ["03", "Build", "I create the UI, responsive layouts, WordPress templates, forms, animations, and functionality."],
+  ["04", "Polish", "I test mobile, speed, forms, links, edge cases, browser behavior, and final handover details."],
+];
+
+const trustSignals = [
+  ["International clients", "Experience with UAE, UK, and USA-focused websites and business requirements."],
+  ["Editable WordPress builds", "The final website remains manageable for the client instead of being locked into hard-coded sections."],
+  ["Functionality-first", "Booking systems, WooCommerce logic, filters, forms, and dashboards prove real technical capability."],
+  ["Performance aware", "Speed, responsiveness, and clean UX are treated as part of the build, not an afterthought."],
+];
+
 const contactServices = ["website", "WooCommerce store", "redesign", "custom plugin"];
 
 /* ─── component ─────────────────────────────────────────────── */
@@ -187,7 +254,7 @@ export default function Home() {
       <nav className="nav" aria-label="Primary navigation">
         <a className="nav-logo" href="#home" aria-label="Muhammad Adeel home">AI</a>
         <Link href="/portfolio">Portfolio</Link>
-        <a href="#about">About</a>
+        <a href="#features">Features</a>
         <a href="#projects">Projects</a>
         <a href="#contact" className="nav-cta">Hire Me</a>
       </nav>
@@ -278,7 +345,9 @@ export default function Home() {
         </div>
       </section>
 
-      <ZoomParallax items={parallaxItems} />
+      <div id="features">
+        <ZoomParallax items={parallaxItems} />
+      </div>
 
       {/* ── PROJECTS ── */}
       <section className="section flow-section" id="projects">
@@ -322,6 +391,116 @@ export default function Home() {
                 View all 19 projects →
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── PLUGIN LAB ── */}
+      <section className="section grey flow-section portfolio-section" id="plugin-lab">
+        <div className="container flow-inner">
+          <div className="section-head scroll-reveal">
+            <div className="eyebrow">Plugin Lab</div>
+            <h2>Live-style demos that prove functionality</h2>
+            <p>These modules show the kind of real WordPress systems I can build for clients, not only visual sections.</p>
+          </div>
+
+          <div className="lab-grid">
+            {pluginLabs.map((item, index) => (
+              <article className="lab-card scroll-reveal" key={item.title}>
+                <small>0{index + 1} — {item.tag}</small>
+                <h3>{item.title}</h3>
+                <p>{item.copy}</p>
+                <div className="lab-demo">
+                  <span>{item.demo}</span>
+                  <strong>{item.proves}</strong>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SERVICES ── */}
+      <section className="section flow-section portfolio-section" id="services">
+        <div className="container flow-inner">
+          <div className="section-head scroll-reveal">
+            <div className="eyebrow">Services</div>
+            <h2>Clear offers for business clients</h2>
+            <p>Every service is packaged around what clients actually need: clean UI, responsive pages, working features, and measurable quality.</p>
+          </div>
+
+          <div className="services-grid">
+            {services.map((service) => (
+              <article className="service-card scroll-reveal" key={service.title}>
+                <h3>{service.title}</h3>
+                <p>{service.copy}</p>
+                <span>{service.deliverable}</span>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── ABOUT / EXPERIENCE ── */}
+      <section className="section grey flow-section portfolio-section" id="experience">
+        <div className="container flow-inner experience-wrap">
+          <div className="section-head section-head--left scroll-reveal">
+            <div className="eyebrow">About / Experience</div>
+            <h2>WordPress work with client delivery in mind</h2>
+            <p>I focus on editable builds, custom business logic, performance, and clear handover so the final site is useful after launch.</p>
+          </div>
+
+          <div className="experience-list">
+            {experience.map(([label, title, copy]) => (
+              <article className="experience-row scroll-reveal" key={title}>
+                <strong>{label}</strong>
+                <div>
+                  <h3>{title}</h3>
+                  <p>{copy}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PROCESS ── */}
+      <section className="section flow-section portfolio-section" id="process">
+        <div className="container flow-inner">
+          <div className="section-head scroll-reveal">
+            <div className="eyebrow">Process</div>
+            <h2>How I move from idea to polished launch</h2>
+            <p>A simple build process helps clients understand what is happening and keeps the project controlled from start to finish.</p>
+          </div>
+
+          <div className="process-grid">
+            {processSteps.map(([num, title, copy]) => (
+              <article className="process-card scroll-reveal" key={num}>
+                <span>{num}</span>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── TESTIMONIALS / TRUST ── */}
+      <section className="section grey flow-section portfolio-section" id="trust">
+        <div className="container flow-inner">
+          <div className="section-head scroll-reveal">
+            <div className="eyebrow">Trust</div>
+            <h2>Why a client should feel safe hiring me</h2>
+            <p>Until real client quotes are added, this section uses honest trust signals based on project delivery and technical capability.</p>
+          </div>
+
+          <div className="trust-grid">
+            {trustSignals.map(([title, copy]) => (
+              <article className="trust-card scroll-reveal" key={title}>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
