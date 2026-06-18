@@ -106,31 +106,45 @@ export default function Home() {
         scrollTrigger: { trigger: ".about-card", start: "top 82%" },
       });
 
-      /* 4 ▸ Stats scroll stack/fan reveal */
+      /* 4 ▸ Stats cards reveal one by one on scroll without changing layout */
       const statCards = gsap.utils.toArray<HTMLElement>(".stats-showcase-section .stat");
       if (statCards.length) {
-        const stackX = [300, 100, -100, -300];
-        const stackRotation = [16, 6, -6, -16];
-
-        gsap.from(statCards, {
-          x: (index) => window.innerWidth > 900 ? stackX[index] ?? 0 : 0,
-          y: (index) => window.innerWidth > 900 ? 82 + index * 8 : 42,
-          z: (index) => index * 18,
-          rotateZ: (index) => stackRotation[index] ?? 0,
-          rotateX: 7,
-          scale: 0.92,
-          opacity: 0.62,
-          filter: "blur(1.2px)",
-          transformPerspective: 1000,
+        gsap.set(statCards, {
+          y: 58,
+          scale: 0.96,
+          opacity: 0,
+          filter: "blur(2px)",
+          transformOrigin: "center bottom",
           force3D: true,
-          ease: "none",
-          stagger: 0.035,
-          scrollTrigger: {
-            trigger: ".stats-showcase-section .stats-grid",
-            start: "top 88%",
-            end: "bottom 58%",
-            scrub: 0.9,
-            invalidateOnRefresh: true,
+        });
+
+        ScrollTrigger.batch(statCards, {
+          start: "top 86%",
+          once: false,
+          onEnter: (batch) => {
+            gsap.to(batch, {
+              y: 0,
+              scale: 1,
+              opacity: 1,
+              filter: "blur(0px)",
+              duration: 0.72,
+              ease: "power3.out",
+              stagger: 0.16,
+              overwrite: true,
+              clearProps: "transform,filter",
+            });
+          },
+          onLeaveBack: (batch) => {
+            gsap.to(batch, {
+              y: 46,
+              scale: 0.97,
+              opacity: 0,
+              filter: "blur(2px)",
+              duration: 0.38,
+              ease: "power2.out",
+              stagger: 0.08,
+              overwrite: true,
+            });
           },
         });
       }
