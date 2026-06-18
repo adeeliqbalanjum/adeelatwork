@@ -12,29 +12,25 @@ gsap.registerPlugin(ScrollTrigger);
 
 /* ─── data ──────────────────────────────────────────────────── */
 const portraitDataUrl = "https://avatars.githubusercontent.com/u/178131381?v=4";
+const upworkUrl = "https://www.upwork.com/freelancers/~015c368d6586ba4860?mp_source=share";
 
 const cards = [
-  ["Booking Plugin",       "Dynamic pricing, add-ons, admin approvals, emails & payment flow.",            "shape-a"],
-  ["WooCommerce Logic",    "Custom product rules, checkout changes, pricing systems & store fixes.",       "shape-b"],
-  ["Elementor Pro Builds", "Pixel-perfect Figma to WordPress sections that clients can edit.",             "thumbs"],
-  ["Live Translation",     "Multilingual-ready websites with language switcher and clean UX.",             "shape-c"],
-  ["Dark / Light Mode",    "Theme switcher demo to show polished front-end functionality.",                "shape-d"],
-  ["Speed Optimization",   "Cache, image, CSS/JS, Core Web Vitals and performance cleanup.",               "shape-a"],
-  ["Project Case Studies", "Recent WordPress, healthcare, travel, tech and business builds.",              "shape-b"],
+  ["Desert Safari Dubai", "Custom booking plugin — tiered pricing, admin approvals and payment integration.", "shape-a"],
+  ["Embassy of Pakistan", "Official government website with real-time passport tracking system.", "shape-b"],
+  ["Figma to WordPress", "Pixel-perfect Elementor builds from designer files for agency clients.", "thumbs"],
+  ["WooCommerce Store", "Full e-commerce setup for Dubai lighting company — products, orders, payments.", "shape-c"],
+  ["Booking Plugin", "Tiered pricing, admin approvals, automated emails and WhatsApp fields.", "shape-d"],
+  ["Landing Pages", "High-converting Elementor pages for UAE, UK and USA businesses.", "shape-a"],
+  ["Website Rebuilds", "Full redesigns turning outdated sites into fast, modern platforms.", "shape-b"],
 ];
 
-const heroProof = [
-  ["3+", "Years WordPress"],
-  ["50+", "Projects Delivered"],
-  ["20+", "Figma Builds"],
-  ["6s→1.8s", "Speed Result"],
-];
-
-const showroomFeatures = [
-  ["Dark / Light Mode", "Live UI toggle"],
-  ["Booking Plugin", "Dynamic pricing"],
-  ["WooCommerce", "Custom logic"],
-  ["Translator", "Multilingual UX"],
+const heroTags = [
+  "WordPress Development",
+  "Elementor Pro",
+  "WooCommerce",
+  "Bug Fixing",
+  "Speed Optimization",
+  "Maintenance",
 ];
 
 const stats = [
@@ -98,8 +94,19 @@ export default function Home() {
         .from(".ha-pill",     { y: -20, opacity: 0, duration: 0.55 })
         .from(".ha-h1",       { y: 48,  opacity: 0, duration: 0.80 }, "-=0.30")
         .from(".ha-sub",      { y: 28,  opacity: 0, duration: 0.70 }, "-=0.52")
+        .from(".hero-tags",   { y: 20,  opacity: 0, duration: 0.55 }, "-=0.42")
         .from(".ha-actions",  { y: 20,  opacity: 0, duration: 0.60 }, "-=0.44")
         .from(".ha-showcase", { y: 36,  opacity: 0, duration: 0.80, scale: 0.98 }, "-=0.48");
+
+      gsap.from(".site-card", {
+        y: 36,
+        opacity: 0,
+        rotate: (index) => index % 2 === 0 ? -2 : 2,
+        duration: 0.65,
+        stagger: 0.04,
+        ease: "power3.out",
+        delay: 0.25,
+      });
 
       /* 2 ▸ FlowArt — each non-hero section rotates from slight angle on scroll */
       document.querySelectorAll<HTMLElement>(".flow-section:not(.hero) .flow-inner")
@@ -188,9 +195,8 @@ export default function Home() {
       {/* NAV */}
       <nav className="nav" aria-label="Primary navigation">
         <a className="nav-logo" href="#home" aria-label="Muhammad Adeel home">AI</a>
-        <a href="#projects">Work</a>
-        <a href="#projects">Live Demos</a>
-        <a href="#about">Plugins</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
         <button
           className="theme-toggle"
@@ -214,34 +220,28 @@ export default function Home() {
 
         <div className="hero-inner flow-inner">
           <div className="status-pill ha-pill">
-            <strong>Available</strong> WordPress · WooCommerce · Custom Plugins
+            <strong>Available</strong> for new projects
           </div>
 
           <h1 className="ha-h1">
-            <span className="soft">Not just a portfolio.</span>{" "}
-            A live WordPress capability showroom
+            <span className="soft">WordPress developer</span>{" "}
+            building fast, high-impact websites
           </h1>
 
           <p className="subline ha-sub">
-            Everything you see here is something I can build for your business — premium Elementor layouts, custom booking systems, WooCommerce logic, dark/light mode, translation, animations, speed optimization, and responsive WordPress experiences.
+            I build and redesign WordPress & WooCommerce websites for businesses — from Figma designs to pixel-perfect, conversion-ready sites.
           </p>
 
+          <div className="hero-tags" aria-label="Core services">
+            {heroTags.map((tag) => <span key={tag}>{tag}</span>)}
+          </div>
+
           <div className="actions ha-actions">
-            <a className="btn btn-dark" href="#projects">✦ Explore live demos</a>
-            <a className="btn btn-ghost" href="#projects">View projects</a>
-            <a className="btn btn-link" href="mailto:adeeliqbalajum@gmail.com">Hire me</a>
+            <a className="btn btn-dark" href={upworkUrl} target="_blank" rel="noopener noreferrer">✦ Hire me on Upwork</a>
+            <a className="btn btn-ghost" href="#projects">Browse work</a>
           </div>
 
-          <div className="hero-proof ha-actions" aria-label="Portfolio proof points">
-            {heroProof.map(([value, label]) => (
-              <div className="proof-card" key={value}>
-                <strong>{value}</strong>
-                <span>{label}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className="showcase ha-showcase" aria-label="Portfolio preview">
+          <div className="showcase ha-showcase" aria-label="Portfolio preview carousel">
             <div className="showcase-haze" />
             <div className="strip" aria-hidden="true">
               {cards.map(([title, desc, shape]) => (
@@ -260,30 +260,6 @@ export default function Home() {
             <div className="portrait-card" ref={portraitRef}>
               <img src={portraitDataUrl} alt="Muhammad Adeel Iqbal" className="portrait-img" />
             </div>
-
-            <div className="showroom-panel" aria-label="Live capability showroom preview">
-              <div className="showroom-top">
-                <span className="showroom-dot" />
-                <strong>Capability Showroom</strong>
-                <em>Live</em>
-              </div>
-              <div className="showroom-lines">
-                {showroomFeatures.map(([title, text]) => (
-                  <div className="showroom-row" key={title}>
-                    <span>{title}</span>
-                    <small>{text}</small>
-                  </div>
-                ))}
-              </div>
-              <div className="showroom-metric">
-                <span>Client-ready features</span>
-                <div className="mini-progress"><i /></div>
-              </div>
-            </div>
-
-            <div className="orbit-badge orbit-a">Elementor Editable</div>
-            <div className="orbit-badge orbit-b">Booking Logic</div>
-            <div className="orbit-badge orbit-c">Speed Optimized</div>
           </div>
         </div>
       </section>
@@ -296,8 +272,8 @@ export default function Home() {
               <h2>I&apos;m Muhammad Adeel Iqbal</h2>
               <p>
                 A WordPress Developer specialising in building, redesigning, and improving
-                websites for international clients in UAE, UK, and USA — Elementor Pro,
-                WooCommerce stores, custom plugins, and Figma-to-WordPress builds.
+                websites for international clients. From Figma to pixel-perfect Elementor builds,
+                WooCommerce stores to custom plugins — I deliver on time, every time.
               </p>
             </div>
             <a href="mailto:adeeliqbalajum@gmail.com" className="about-button">
