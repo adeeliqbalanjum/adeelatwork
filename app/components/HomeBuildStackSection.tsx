@@ -198,7 +198,7 @@ export function HomeBuildStackSection() {
           </p>
         </div>
 
-        <div className="build-stack-card" aria-live="polite">
+        <div className={`build-stack-card build-stack-card-${activeTool.id}`} aria-live="polite">
           <div className="build-stack-card-top">
             <span>{activeTool.category}</span>
             <strong className={`build-stack-card-icon build-stack-icon-${activeTool.id}`}>
