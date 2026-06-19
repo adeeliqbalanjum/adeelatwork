@@ -1,0 +1,28 @@
+@media (max-width: 560px) {
+  .status-pill {
+    width: fit-content !important;
+    max-width: calc(100vw - 28px) !important;
+    margin-inline: auto !important;
+    overflow: hidden !important;
+  }
+
+  .status-pill::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  .eyebrow {
+    width: fit-content !important;
+    max-width: calc(100vw - 28px) !important;
+    margin-inline: auto !important;
+    overflow: hidden !important;
+  }
+
+  .eyebrow > .eyebrow-label,
+  .status-pill strong {
+    max-width: calc(100vw - 90px) !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+}
