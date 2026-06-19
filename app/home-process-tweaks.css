@@ -1,14 +1,19 @@
 .home-process-copy h2 {
-  max-width: 500px !important;
-  font-size: clamp(2.45rem, 4.25vw, 5.05rem) !important;
-  line-height: .9 !important;
-  letter-spacing: -.082em !important;
+  max-width: 440px !important;
+  font-size: clamp(2.1rem, 3.25vw, 3.9rem) !important;
+  line-height: .96 !important;
+  letter-spacing: -.065em !important;
+}
+
+.home-process-copy p {
+  max-width: 460px !important;
 }
 
 @media (max-width: 680px) {
   .home-process-copy h2 {
     max-width: 100% !important;
-    font-size: clamp(2.35rem, 13vw, 4.4rem) !important;
-    line-height: .9 !important;
+    font-size: clamp(2.05rem, 10vw, 3.25rem) !important;
+    line-height: .96 !important;
+    letter-spacing: -.06em !important;
   }
 }
