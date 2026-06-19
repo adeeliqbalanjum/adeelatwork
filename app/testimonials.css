@@ -261,13 +261,25 @@
   flex: 0 0 50px;
   border-radius: 18px;
   background:
-    radial-gradient(circle at 30% 18%, rgba(255,255,255,.50), transparent 28%),
-    linear-gradient(135deg, var(--orange), var(--purple) 58%, var(--green));
+    radial-gradient(circle at 32% 18%, rgba(255,255,255,.18), transparent 24%),
+    linear-gradient(145deg, #1b1b1d 0%, #09090a 56%, #000 100%);
   color: #fff;
   font-size: 14px;
-  font-weight: 900;
-  border: 2px solid rgba(255,255,255,.76);
-  box-shadow: 0 15px 32px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.50);
+  font-weight: 950;
+  letter-spacing: -.04em;
+  border: 2px solid rgba(255,255,255,.92);
+  box-shadow:
+    0 15px 32px rgba(0,0,0,.24),
+    inset 0 1px 0 rgba(255,255,255,.20),
+    inset 0 -10px 24px rgba(255,255,255,.045);
+}
+.testimonial-avatar::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.16);
+  pointer-events: none;
 }
 .testimonial-name {
   display: block;
