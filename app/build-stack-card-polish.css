@@ -1,194 +1,63 @@
-.build-stack-card {
-  transition: background .35s ease, box-shadow .35s ease, border-color .35s ease !important;
-}
-
 .build-stack-card-icon {
-  width: 64px !important;
-  height: 64px !important;
   border-radius: 18px !important;
-  border: 2px solid rgba(255,255,255,.94) !important;
-  display: grid !important;
-  place-items: center !important;
-  overflow: hidden !important;
-  transform: none !important;
-  box-shadow: 0 20px 42px rgba(7,7,7,.14), inset 0 1px 0 rgba(255,255,255,.22) !important;
+  box-shadow: 0 18px 38px rgba(0,0,0,.15), inset 0 1px 0 rgba(255,255,255,.22) !important;
 }
 
-.build-stack-card-icon .build-stack-svg {
-  width: 31px !important;
-  height: 31px !important;
+.build-stack-card-icon.build-stack-icon-wordpress {
+  background: #21759b !important;
+  color: #fff !important;
+  border-color: rgba(255,255,255,.94) !important;
 }
 
-.build-stack-card-icon span {
-  width: 100% !important;
-  height: 100% !important;
-  display: grid !important;
-  place-items: center !important;
-  color: inherit !important;
-  font-size: 14px !important;
-  font-weight: 950 !important;
+.build-stack-card-icon.build-stack-icon-wordpress .build-stack-wordmark {
+  font-size: 23px !important;
   line-height: 1 !important;
+  color: #fff !important;
+  text-shadow: 0 1px 1px rgba(0,0,0,.16) !important;
 }
 
 .build-stack-card h3 {
-  transition: color .35s ease, background .35s ease, text-shadow .35s ease !important;
+  transition: color .35s ease, text-shadow .35s ease !important;
 }
 
-.build-stack-card p {
-  position: relative !important;
-  z-index: 1 !important;
-}
-
-.build-stack-card-wordpress {
-  --stack-accent: #21759b;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,255,255,.40)),
-    radial-gradient(circle at 84% 14%, rgba(33,117,155,.16), transparent 32%),
-    radial-gradient(circle at 24% 84%, rgba(33,117,155,.09), transparent 36%) !important;
-}
 .build-stack-card-wordpress h3 { color: #21759b !important; }
-.build-stack-card-icon.build-stack-icon-wordpress { background: #21759b !important; color: #fff !important; box-shadow: 0 18px 42px rgba(33,117,155,.28), inset 0 1px 0 rgba(255,255,255,.24) !important; }
-.build-stack-card-icon.build-stack-icon-wordpress .build-stack-wordmark { font-size: 25px !important; color: #fff !important; text-shadow: 0 1px 1px rgba(0,0,0,.16) !important; }
-
-.build-stack-card-elementor {
-  --stack-accent: #92003b;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,255,255,.40)),
-    radial-gradient(circle at 84% 14%, rgba(146,0,59,.16), transparent 32%),
-    radial-gradient(circle at 26% 84%, rgba(146,0,59,.08), transparent 38%) !important;
-}
 .build-stack-card-elementor h3 { color: #92003b !important; }
-.build-stack-card-icon.build-stack-icon-elementor { background: #92003b !important; color: #fff !important; box-shadow: 0 18px 42px rgba(146,0,59,.30), inset 0 1px 0 rgba(255,255,255,.24) !important; }
-
-.build-stack-card-woocommerce {
-  --stack-accent: #7f54b3;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,255,255,.40)),
-    radial-gradient(circle at 84% 14%, rgba(127,84,179,.16), transparent 32%),
-    radial-gradient(circle at 26% 84%, rgba(127,84,179,.08), transparent 38%) !important;
-}
 .build-stack-card-woocommerce h3 { color: #7f54b3 !important; }
-.build-stack-card-icon.build-stack-icon-woocommerce { background: #7f54b3 !important; color: #fff !important; box-shadow: 0 18px 42px rgba(127,84,179,.30), inset 0 1px 0 rgba(255,255,255,.24) !important; }
-
-.build-stack-card-acf {
-  --stack-accent: #00d084;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,255,255,.40)),
-    radial-gradient(circle at 84% 14%, rgba(0,208,132,.18), transparent 32%),
-    radial-gradient(circle at 26% 84%, rgba(0,208,132,.10), transparent 38%) !important;
-}
 .build-stack-card-acf h3 { color: #008d5b !important; }
-.build-stack-card-icon.build-stack-icon-acf { background: #00d084 !important; color: #06140c !important; box-shadow: 0 18px 42px rgba(0,208,132,.28), inset 0 1px 0 rgba(255,255,255,.30) !important; }
-
-.build-stack-card-cpt {
-  --stack-accent: #111827;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,255,255,.40)),
-    radial-gradient(circle at 84% 14%, rgba(17,24,39,.12), transparent 32%),
-    radial-gradient(circle at 26% 84%, rgba(17,24,39,.08), transparent 38%) !important;
-}
 .build-stack-card-cpt h3 { color: #111827 !important; }
-.build-stack-card-icon.build-stack-icon-cpt { background: #111827 !important; color: #fff !important; box-shadow: 0 18px 42px rgba(17,24,39,.26), inset 0 1px 0 rgba(255,255,255,.22) !important; }
-
-.build-stack-card-php {
-  --stack-accent: #777bb4;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,255,255,.40)),
-    radial-gradient(circle at 84% 14%, rgba(119,123,180,.16), transparent 32%),
-    radial-gradient(circle at 26% 84%, rgba(119,123,180,.08), transparent 38%) !important;
-}
-.build-stack-card-php h3 { color: #676dad !important; }
-.build-stack-card-icon.build-stack-icon-php { background: #777bb4 !important; color: #fff !important; box-shadow: 0 18px 42px rgba(119,123,180,.30), inset 0 1px 0 rgba(255,255,255,.24) !important; }
-
-.build-stack-card-javascript {
-  --stack-accent: #f7df1e;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,255,255,.40)),
-    radial-gradient(circle at 84% 14%, rgba(247,223,30,.18), transparent 32%),
-    radial-gradient(circle at 26% 84%, rgba(247,223,30,.10), transparent 38%) !important;
-}
+.build-stack-card-php h3 { color: #777bb4 !important; }
 .build-stack-card-javascript h3 { color: #a97800 !important; }
-.build-stack-card-icon.build-stack-icon-javascript { background: #f7df1e !important; color: #111 !important; box-shadow: 0 18px 42px rgba(247,223,30,.28), inset 0 1px 0 rgba(255,255,255,.32) !important; }
-
-.build-stack-card-gsap {
-  --stack-accent: #88ce02;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,255,255,.40)),
-    radial-gradient(circle at 84% 14%, rgba(136,206,2,.17), transparent 32%),
-    radial-gradient(circle at 26% 84%, rgba(136,206,2,.10), transparent 38%) !important;
-}
 .build-stack-card-gsap h3 { color: #4f8100 !important; }
-.build-stack-card-icon.build-stack-icon-gsap { background: #88ce02 !important; color: #101 !important; box-shadow: 0 18px 42px rgba(136,206,2,.28), inset 0 1px 0 rgba(255,255,255,.32) !important; }
-
-.build-stack-card-react {
-  --stack-accent: #61dafb;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,255,255,.40)),
-    radial-gradient(circle at 84% 14%, rgba(97,218,251,.20), transparent 32%),
-    radial-gradient(circle at 26% 84%, rgba(97,218,251,.09), transparent 38%) !important;
-}
 .build-stack-card-react h3 { color: #087ea4 !important; }
-.build-stack-card-icon.build-stack-icon-react { background: #111827 !important; color: #61dafb !important; box-shadow: 0 18px 42px rgba(97,218,251,.22), inset 0 1px 0 rgba(255,255,255,.22) !important; }
-
-.build-stack-card-next {
-  --stack-accent: #070707;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,255,255,.40)),
-    radial-gradient(circle at 84% 14%, rgba(7,7,7,.10), transparent 32%),
-    radial-gradient(circle at 26% 84%, rgba(7,7,7,.06), transparent 38%) !important;
-}
 .build-stack-card-next h3 { color: #070707 !important; }
-.build-stack-card-icon.build-stack-icon-next { background: #070707 !important; color: #fff !important; box-shadow: 0 18px 42px rgba(7,7,7,.24), inset 0 1px 0 rgba(255,255,255,.22) !important; }
-
-.build-stack-card-tailwind {
-  --stack-accent: #06b6d4;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,255,255,.40)),
-    radial-gradient(circle at 84% 14%, rgba(6,182,212,.18), transparent 32%),
-    radial-gradient(circle at 26% 84%, rgba(6,182,212,.09), transparent 38%) !important;
-}
 .build-stack-card-tailwind h3 { color: #0284c7 !important; }
-.build-stack-card-icon.build-stack-icon-tailwind { background: #ecfeff !important; color: #06b6d4 !important; box-shadow: 0 18px 42px rgba(6,182,212,.20), inset 0 1px 0 rgba(255,255,255,.36) !important; }
 
-.build-stack-card-figma {
-  --stack-accent: #a259ff;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,255,255,.40)),
-    radial-gradient(circle at 84% 14%, rgba(162,89,255,.16), transparent 32%),
-    radial-gradient(circle at 26% 84%, rgba(242,78,30,.09), transparent 38%) !important;
-}
 .build-stack-card-figma h3 {
   color: transparent !important;
   background: linear-gradient(105deg, #f24e1e 0%, #a259ff 48%, #0acf83 100%) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
 }
-.build-stack-card-icon.build-stack-icon-figma { background: #fff !important; color: #111 !important; box-shadow: 0 18px 42px rgba(162,89,255,.22), inset 0 1px 0 rgba(255,255,255,.36) !important; }
 
 .build-stack-card::after {
-  background: radial-gradient(circle, rgba(255,255,255,.55), transparent 68%) !important;
-  opacity: .72 !important;
+  background: radial-gradient(circle, color-mix(in srgb, var(--stack-accent, #22c55e) 20%, transparent), transparent 68%) !important;
 }
 
-.build-stack-card-icon.build-stack-icon-wordpress,
-.build-stack-card-icon.build-stack-icon-elementor,
-.build-stack-card-icon.build-stack-icon-woocommerce,
-.build-stack-card-icon.build-stack-icon-acf,
-.build-stack-card-icon.build-stack-icon-cpt,
-.build-stack-card-icon.build-stack-icon-php,
-.build-stack-card-icon.build-stack-icon-javascript,
-.build-stack-card-icon.build-stack-icon-gsap,
-.build-stack-card-icon.build-stack-icon-react,
-.build-stack-card-icon.build-stack-icon-next,
-.build-stack-card-icon.build-stack-icon-tailwind,
-.build-stack-card-icon.build-stack-icon-figma {
-  border-color: rgba(255,255,255,.92) !important;
-}
+.build-stack-card-wordpress { --stack-accent: #21759b; }
+.build-stack-card-elementor { --stack-accent: #92003b; }
+.build-stack-card-woocommerce { --stack-accent: #7f54b3; }
+.build-stack-card-acf { --stack-accent: #00d084; }
+.build-stack-card-cpt { --stack-accent: #111827; }
+.build-stack-card-php { --stack-accent: #777bb4; }
+.build-stack-card-javascript { --stack-accent: #f7df1e; }
+.build-stack-card-gsap { --stack-accent: #88ce02; }
+.build-stack-card-react { --stack-accent: #61dafb; }
+.build-stack-card-next { --stack-accent: #070707; }
+.build-stack-card-tailwind { --stack-accent: #06b6d4; }
+.build-stack-card-figma { --stack-accent: #a259ff; }
 
-@media (max-width: 560px) {
-  .build-stack-card-icon {
-    width: 56px !important;
-    height: 56px !important;
-    border-radius: 16px !important;
+@supports not (background: color-mix(in srgb, #000 10%, transparent)) {
+  .build-stack-card::after {
+    background: radial-gradient(circle, rgba(34,197,94,.14), transparent 68%) !important;
   }
 }
