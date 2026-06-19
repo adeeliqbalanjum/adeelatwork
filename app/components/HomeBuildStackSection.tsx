@@ -2,11 +2,22 @@
 
 import { useState } from "react";
 
-const tools = [
+type Tool = {
+  id: string;
+  name: string;
+  short: string;
+  icon?: string;
+  category: string;
+  title: string;
+  description: string;
+};
+
+const tools: Tool[] = [
   {
     id: "wordpress",
     name: "WordPress",
     short: "WP",
+    icon: "https://cdn.simpleicons.org/wordpress/21759B",
     category: "CMS foundation",
     title: "WordPress as the editable business foundation",
     description:
@@ -16,6 +27,7 @@ const tools = [
     id: "elementor",
     name: "Elementor Pro",
     short: "E",
+    icon: "https://cdn.simpleicons.org/elementor/92003B",
     category: "Visual builder",
     title: "Elementor Pro for pixel-perfect editable layouts",
     description:
@@ -25,6 +37,7 @@ const tools = [
     id: "woocommerce",
     name: "WooCommerce",
     short: "Woo",
+    icon: "https://cdn.simpleicons.org/woocommerce/96588A",
     category: "E-commerce",
     title: "WooCommerce for stores and revenue workflows",
     description:
@@ -34,6 +47,7 @@ const tools = [
     id: "acf",
     name: "ACF Pro",
     short: "ACF",
+    icon: "https://cdn.simpleicons.org/advancedcustomfields/00D084",
     category: "Custom fields",
     title: "ACF Pro for structured, client-editable content",
     description:
@@ -52,6 +66,7 @@ const tools = [
     id: "php",
     name: "PHP",
     short: "PHP",
+    icon: "https://cdn.simpleicons.org/php/777BB4",
     category: "Custom logic",
     title: "PHP for WordPress business logic and plugin fixes",
     description:
@@ -61,6 +76,7 @@ const tools = [
     id: "javascript",
     name: "JavaScript",
     short: "JS",
+    icon: "https://cdn.simpleicons.org/javascript/F7DF1E",
     category: "Frontend logic",
     title: "JavaScript for interactive UI and dynamic behavior",
     description:
@@ -70,6 +86,7 @@ const tools = [
     id: "gsap",
     name: "GSAP",
     short: "Gs",
+    icon: "https://cdn.simpleicons.org/greensock/88CE02",
     category: "Motion",
     title: "GSAP for premium scroll and motion experiences",
     description:
@@ -78,7 +95,8 @@ const tools = [
   {
     id: "react",
     name: "React",
-    short: "⚛",
+    short: "React",
+    icon: "https://cdn.simpleicons.org/react/61DAFB",
     category: "UI systems",
     title: "React for modern interactive components",
     description:
@@ -88,6 +106,7 @@ const tools = [
     id: "next",
     name: "Next.js",
     short: "N",
+    icon: "https://cdn.simpleicons.org/nextdotjs/000000",
     category: "Modern web",
     title: "Next.js for fast portfolio and modern frontend work",
     description:
@@ -97,6 +116,7 @@ const tools = [
     id: "tailwind",
     name: "Tailwind CSS",
     short: "Tw",
+    icon: "https://cdn.simpleicons.org/tailwindcss/06B6D4",
     category: "Styling",
     title: "Tailwind and custom CSS for clean responsive systems",
     description:
@@ -106,12 +126,21 @@ const tools = [
     id: "figma",
     name: "Figma",
     short: "Fi",
+    icon: "https://cdn.simpleicons.org/figma/F24E1E",
     category: "Design handoff",
     title: "Figma to WordPress with attention to spacing and detail",
     description:
       "Figma helps me translate approved designs into responsive WordPress pages with correct typography, spacing, layout structure, and visual hierarchy.",
   },
 ];
+
+function ToolIcon({ tool }: { tool: Tool }) {
+  if (tool.icon) {
+    return <img src={tool.icon} alt="" aria-hidden="true" loading="lazy" />;
+  }
+
+  return <span>{tool.short}</span>;
+}
 
 export function HomeBuildStackSection() {
   const [activeIndex, setActiveIndex] = useState(1);
@@ -138,7 +167,9 @@ export function HomeBuildStackSection() {
         <div className="build-stack-card" aria-live="polite">
           <div className="build-stack-card-top">
             <span>{activeTool.category}</span>
-            <strong>{activeTool.short}</strong>
+            <strong className="build-stack-card-icon">
+              <ToolIcon tool={activeTool} />
+            </strong>
           </div>
           <h3>{activeTool.title}</h3>
           <p>{activeTool.description}</p>
@@ -159,8 +190,11 @@ export function HomeBuildStackSection() {
                 onMouseLeave={() => setHoveredIndex(null)}
                 className={`build-stack-tool ${isActive ? "is-active" : ""} ${showName ? "show-name" : ""}`}
                 aria-pressed={isActive}
+                aria-label={tool.name}
               >
-                <span className={`build-stack-icon build-stack-icon-${tool.id}`}>{tool.short}</span>
+                <span className={`build-stack-icon build-stack-icon-${tool.id}`}>
+                  <ToolIcon tool={tool} />
+                </span>
                 <span className="build-stack-name">{tool.name}</span>
               </button>
             );
