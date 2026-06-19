@@ -1,0 +1,14 @@
+.home-process-copy h2 {
+  max-width: 500px !important;
+  font-size: clamp(2.45rem, 4.25vw, 5.05rem) !important;
+  line-height: .9 !important;
+  letter-spacing: -.082em !important;
+}
+
+@media (max-width: 680px) {
+  .home-process-copy h2 {
+    max-width: 100% !important;
+    font-size: clamp(2.35rem, 13vw, 4.4rem) !important;
+    line-height: .9 !important;
+  }
+}
