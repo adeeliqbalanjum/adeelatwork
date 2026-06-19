@@ -97,23 +97,23 @@ export function HomeTestimonials() {
         <div className="pointer-glow" />
       </div>
 
-      <div className="testimonial-intro">
-        <div className="eyebrow">Client Feedback</div>
-        <h2>Testimonials that show the value behind the build</h2>
-        <p>
-          Draft review cards for the portfolio. Replace these with verified client names and quotes when you publish real testimonials.
-        </p>
-      </div>
-
       <ContainerScroll className="testimonial-scroll">
         <div className="testimonial-sticky">
+          <div className="testimonial-intro">
+            <div className="eyebrow">Client Feedback</div>
+            <h2>Testimonials that show the value behind the build</h2>
+            <p>
+              Draft review cards for the portfolio. Replace these with verified client names and quotes when you publish real testimonials.
+            </p>
+          </div>
+
           <CardsContainer className="testimonial-motion-stage">
             {TESTIMONIALS.map((testimonial, index) => (
               <CardTransformed
                 arrayLength={TESTIMONIALS.length}
                 key={testimonial.id}
                 variant="light"
-                index={index + 2}
+                index={index}
                 role="article"
                 className="testimonial-motion-card"
                 onPointerMove={moveCardGlow}
