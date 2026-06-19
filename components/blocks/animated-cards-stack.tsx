@@ -20,9 +20,7 @@ const cardVariants = cva("absolute will-change-transform", {
       light: "flex size-full flex-col items-center justify-center gap-6 rounded-2xl border bg-accent bg-background/80 p-6 backdrop-blur-md",
     },
   },
-  defaultVariants: {
-    variant: "light",
-  },
+  defaultVariants: { variant: "light" },
 });
 
 interface ReviewProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -61,12 +59,7 @@ export const ContainerScroll: React.FC<React.HTMLAttributes<HTMLDivElement>> = (
 
   return (
     <ContainerScrollContext.Provider value={{ scrollYProgress }}>
-      <div
-        ref={scrollRef}
-        className={cn("relative min-h-svh w-full", className)}
-        style={{ perspective: "1000px", ...style }}
-        {...props}
-      >
+      <div ref={scrollRef} className={cn("relative min-h-svh w-full", className)} style={{ perspective: "1000px", ...style }} {...props}>
         {children}
       </div>
     </ContainerScrollContext.Provider>
@@ -78,12 +71,7 @@ export const CardsContainer: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   return (
-    <div
-      ref={containerRef}
-      className={cn("relative", className)}
-      style={{ perspective: "1000px", ...props.style }}
-      {...props}
-    >
+    <div ref={containerRef} className={cn("relative", className)} style={{ perspective: "1000px", ...props.style }} {...props}>
       {children}
     </div>
   );
@@ -106,17 +94,16 @@ export const CardTransformed = React.forwardRef<HTMLDivElement, CardStickyProps>
     ref,
   ) => {
     const { scrollYProgress } = useContainerScrollContext();
-    const [activeIndex, setActiveIndex] = React.useState(index);
+    const [activeIndex, setActiveIndex] = React.useState(0);
+    const divisor = Math.max(arrayLength, 1);
 
     useMotionValueEvent(scrollYProgress, "change", (latest) => {
-      const firstCardIndex = 2;
-      const lastCardIndex = arrayLength + 1;
-      const nextActiveIndex = Math.floor(latest * (arrayLength + 1));
-      setActiveIndex(Math.max(firstCardIndex, Math.min(lastCardIndex, nextActiveIndex)));
+      const nextActiveIndex = Math.floor(latest * arrayLength);
+      setActiveIndex(Math.max(0, Math.min(arrayLength - 1, nextActiveIndex)));
     });
 
-    const start = index / (arrayLength + 1);
-    const end = (index + 1) / (arrayLength + 1);
+    const start = index / divisor;
+    const end = (index + 1) / divisor;
     const range = React.useMemo(() => [start, end], [start, end]);
     const rotateRange = [range[0] - 1.5, range[1] / 1.5];
 
@@ -137,20 +124,12 @@ export const CardTransformed = React.forwardRef<HTMLDivElement, CardStickyProps>
       top: index * incrementY,
       transform,
       backfaceVisibility: "hidden" as const,
-      zIndex: index <= activeIndex ? 1000 + index * incrementZ : (arrayLength + 2 - index) * incrementZ,
+      zIndex: index <= activeIndex ? 1000 + index * incrementZ : (arrayLength - index) * incrementZ,
       filter,
       ...style,
     };
 
-    return (
-      <motion.div
-        layout="position"
-        ref={ref}
-        style={cardStyle}
-        className={cn(cardVariants({ variant, className }))}
-        {...props}
-      />
-    );
+    return <motion.div layout="position" ref={ref} style={cardStyle} className={cn(cardVariants({ variant, className }))} {...props} />;
   },
 );
 CardTransformed.displayName = "CardTransformed";
@@ -158,9 +137,7 @@ CardTransformed.displayName = "CardTransformed";
 export const ReviewStars = React.forwardRef<HTMLDivElement, ReviewProps>(
   ({ rating, maxRating = 5, className, ...props }, ref) => {
     const filledStars = Math.floor(rating);
-    const fractionalPart = rating - filledStars;
-    const emptyStars = maxRating - filledStars - (fractionalPart > 0 ? 1 : 0);
-    const gradientId = React.useId();
+    const emptyStars = maxRating - filledStars;
 
     return (
       <div className={cn("flex items-center gap-2", className)} ref={ref} {...props}>
@@ -170,20 +147,9 @@ export const ReviewStars = React.forwardRef<HTMLDivElement, ReviewProps>(
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.197-1.54-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.957z" />
             </svg>
           ))}
-          {fractionalPart > 0 && (
-            <svg className="size-4 text-inherit" fill="currentColor" viewBox="0 0 20 20">
-              <defs>
-                <linearGradient id={gradientId}>
-                  <stop offset={`${fractionalPart * 100}%`} stopColor="currentColor" />
-                  <stop offset={`${fractionalPart * 100}%`} stopColor="rgb(209 213 219)" />
-                </linearGradient>
-              </defs>
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.197-1.54-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.957z" fill={`url(#${gradientId})`} />
-            </svg>
-          )}
           {[...Array(emptyStars)].map((_, index) => (
             <svg key={`empty-${index}`} className="size-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.950.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.197-1.54-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.950-.69l1.286-3.957z" />
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.197-1.54-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.957z" />
             </svg>
           ))}
         </div>
