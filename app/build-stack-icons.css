@@ -1,0 +1,52 @@
+.build-stack-icon {
+  overflow: hidden !important;
+  background: rgba(255,255,255,.96) !important;
+}
+
+.build-stack-icon img,
+.build-stack-card-icon img {
+  display: block !important;
+  width: 21px !important;
+  height: 21px !important;
+  object-fit: contain !important;
+}
+
+.build-stack-icon span,
+.build-stack-card-icon span {
+  display: grid !important;
+  place-items: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  color: inherit !important;
+}
+
+.build-stack-tool.is-active .build-stack-icon {
+  background: rgba(255,255,255,.96) !important;
+  color: #070707 !important;
+  transform: rotate(-8deg) scale(1.04);
+}
+
+.build-stack-card-icon {
+  background: rgba(255,255,255,.96) !important;
+  color: #070707 !important;
+}
+
+.build-stack-card-icon img {
+  width: 28px !important;
+  height: 28px !important;
+}
+
+.build-stack-icon-cpt,
+.build-stack-card-icon:has(span) {
+  background: #111827 !important;
+  color: #fff !important;
+}
+
+.build-stack-icon-javascript {
+  background: #f7df1e !important;
+}
+
+.build-stack-icon-next img,
+.build-stack-icon-cpt img {
+  filter: none !important;
+}
