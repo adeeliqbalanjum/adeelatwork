@@ -3,6 +3,7 @@ import './globals.css';
 import './stats-motion.css';
 import './testimonials.css';
 import './testimonials-mount.css';
+import './scrollbar-fix.css';
 import { ButtonFillController } from './components/ButtonFillController';
 import { HomeTestimonialsMount } from './components/HomeTestimonialsMount';
 import { ScrollProgressBar } from './components/ScrollProgressBar';
