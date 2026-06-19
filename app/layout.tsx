@@ -10,6 +10,7 @@ import './build-stack.css';
 import './build-stack-fix.css';
 import './build-stack-icons.css';
 import './build-stack-card-polish.css';
+import './build-stack-card-logo-fix.css';
 import './scrollbar-fix.css';
 import { ButtonFillController } from './components/ButtonFillController';
 import { HomeBuildStackMount } from './components/HomeBuildStackMount';
