@@ -32,6 +32,7 @@
   font-size: 15px !important;
 }
 
+.build-stack-tool.show-name .build-stack-icon,
 .build-stack-tool.is-active .build-stack-icon {
   transform: rotate(-8deg) scale(1.04);
 }
@@ -49,38 +50,38 @@
 .build-stack-icon-tailwind { background: #ecfeff !important; color: #06b6d4 !important; }
 .build-stack-icon-figma { background: #fff !important; color: #111 !important; }
 
-.build-stack-tool-wordpress.is-active { background: #21759b !important; box-shadow: 0 18px 46px rgba(33,117,155,.30) !important; }
-.build-stack-tool-elementor.is-active { background: #92003b !important; box-shadow: 0 18px 46px rgba(146,0,59,.30) !important; }
-.build-stack-tool-woocommerce.is-active { background: #7f54b3 !important; box-shadow: 0 18px 46px rgba(127,84,179,.30) !important; }
-.build-stack-tool-acf.is-active { background: #00d084 !important; box-shadow: 0 18px 46px rgba(0,208,132,.25) !important; }
-.build-stack-tool-cpt.is-active { background: #111827 !important; box-shadow: 0 18px 46px rgba(17,24,39,.25) !important; }
-.build-stack-tool-php.is-active { background: #777bb4 !important; box-shadow: 0 18px 46px rgba(119,123,180,.30) !important; }
-.build-stack-tool-javascript.is-active { background: #f7df1e !important; box-shadow: 0 18px 46px rgba(247,223,30,.28) !important; }
-.build-stack-tool-gsap.is-active { background: #88ce02 !important; box-shadow: 0 18px 46px rgba(136,206,2,.28) !important; }
-.build-stack-tool-react.is-active { background: #111827 !important; box-shadow: 0 18px 46px rgba(97,218,251,.22) !important; }
-.build-stack-tool-next.is-active { background: #070707 !important; box-shadow: 0 18px 46px rgba(7,7,7,.25) !important; }
-.build-stack-tool-tailwind.is-active { background: #06b6d4 !important; box-shadow: 0 18px 46px rgba(6,182,212,.28) !important; }
-.build-stack-tool-figma.is-active { background: linear-gradient(135deg, #f24e1e, #a259ff 48%, #0acf83) !important; box-shadow: 0 18px 46px rgba(162,89,255,.26) !important; }
+.build-stack-tool-wordpress.show-name { background: #21759b !important; box-shadow: 0 18px 46px rgba(33,117,155,.30) !important; }
+.build-stack-tool-elementor.show-name { background: #92003b !important; box-shadow: 0 18px 46px rgba(146,0,59,.30) !important; }
+.build-stack-tool-woocommerce.show-name { background: #7f54b3 !important; box-shadow: 0 18px 46px rgba(127,84,179,.30) !important; }
+.build-stack-tool-acf.show-name { background: #00d084 !important; box-shadow: 0 18px 46px rgba(0,208,132,.25) !important; }
+.build-stack-tool-cpt.show-name { background: #111827 !important; box-shadow: 0 18px 46px rgba(17,24,39,.25) !important; }
+.build-stack-tool-php.show-name { background: #777bb4 !important; box-shadow: 0 18px 46px rgba(119,123,180,.30) !important; }
+.build-stack-tool-javascript.show-name { background: #f7df1e !important; box-shadow: 0 18px 46px rgba(247,223,30,.28) !important; }
+.build-stack-tool-gsap.show-name { background: #88ce02 !important; box-shadow: 0 18px 46px rgba(136,206,2,.28) !important; }
+.build-stack-tool-react.show-name { background: #111827 !important; box-shadow: 0 18px 46px rgba(97,218,251,.22) !important; }
+.build-stack-tool-next.show-name { background: #070707 !important; box-shadow: 0 18px 46px rgba(7,7,7,.25) !important; }
+.build-stack-tool-tailwind.show-name { background: #06b6d4 !important; box-shadow: 0 18px 46px rgba(6,182,212,.28) !important; }
+.build-stack-tool-figma.show-name { background: linear-gradient(135deg, #f24e1e, #a259ff 48%, #0acf83) !important; box-shadow: 0 18px 46px rgba(162,89,255,.26) !important; }
 
-.build-stack-tool.is-active .build-stack-name { color: #fff !important; }
-.build-stack-tool-acf.is-active .build-stack-name,
-.build-stack-tool-javascript.is-active .build-stack-name,
-.build-stack-tool-gsap.is-active .build-stack-name,
-.build-stack-tool-tailwind.is-active .build-stack-name { color: #07110a !important; }
+.build-stack-tool.show-name .build-stack-name { color: #fff !important; }
+.build-stack-tool-acf.show-name .build-stack-name,
+.build-stack-tool-javascript.show-name .build-stack-name,
+.build-stack-tool-gsap.show-name .build-stack-name,
+.build-stack-tool-tailwind.show-name .build-stack-name { color: #07110a !important; }
 
-.build-stack-tool.is-active .build-stack-icon { background: #fff !important; }
-.build-stack-tool-wordpress.is-active .build-stack-icon-wordpress { color: #21759b !important; }
-.build-stack-tool-elementor.is-active .build-stack-icon-elementor { color: #92003b !important; }
-.build-stack-tool-woocommerce.is-active .build-stack-icon-woocommerce { color: #7f54b3 !important; }
-.build-stack-tool-acf.is-active .build-stack-icon-acf { color: #008d5b !important; }
-.build-stack-tool-cpt.is-active .build-stack-icon-cpt { color: #111827 !important; }
-.build-stack-tool-php.is-active .build-stack-icon-php { color: #777bb4 !important; }
-.build-stack-tool-javascript.is-active .build-stack-icon-javascript { background: #111 !important; color: #f7df1e !important; }
-.build-stack-tool-gsap.is-active .build-stack-icon-gsap { background: #111 !important; color: #88ce02 !important; }
-.build-stack-tool-react.is-active .build-stack-icon-react { background: #0f172a !important; color: #61dafb !important; }
-.build-stack-tool-next.is-active .build-stack-icon-next { background: #fff !important; color: #070707 !important; }
-.build-stack-tool-tailwind.is-active .build-stack-icon-tailwind { background: #fff !important; color: #06b6d4 !important; }
-.build-stack-tool-figma.is-active .build-stack-icon-figma { background: #fff !important; color: #111 !important; }
+.build-stack-tool.show-name .build-stack-icon { background: #fff !important; }
+.build-stack-tool-wordpress.show-name .build-stack-icon-wordpress { color: #21759b !important; }
+.build-stack-tool-elementor.show-name .build-stack-icon-elementor { color: #92003b !important; }
+.build-stack-tool-woocommerce.show-name .build-stack-icon-woocommerce { color: #7f54b3 !important; }
+.build-stack-tool-acf.show-name .build-stack-icon-acf { color: #008d5b !important; }
+.build-stack-tool-cpt.show-name .build-stack-icon-cpt { color: #111827 !important; }
+.build-stack-tool-php.show-name .build-stack-icon-php { color: #777bb4 !important; }
+.build-stack-tool-javascript.show-name .build-stack-icon-javascript { background: #111 !important; color: #f7df1e !important; }
+.build-stack-tool-gsap.show-name .build-stack-icon-gsap { background: #111 !important; color: #88ce02 !important; }
+.build-stack-tool-react.show-name .build-stack-icon-react { background: #0f172a !important; color: #61dafb !important; }
+.build-stack-tool-next.show-name .build-stack-icon-next { background: #fff !important; color: #070707 !important; }
+.build-stack-tool-tailwind.show-name .build-stack-icon-tailwind { background: #fff !important; color: #06b6d4 !important; }
+.build-stack-tool-figma.show-name .build-stack-icon-figma { background: #fff !important; color: #111 !important; }
 
 .build-stack-card-icon.build-stack-icon-wordpress { background: #21759b !important; color: #fff !important; }
 .build-stack-card-icon.build-stack-icon-elementor { background: #92003b !important; color: #fff !important; border-radius: 18px !important; }
