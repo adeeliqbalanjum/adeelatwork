@@ -98,19 +98,21 @@ export function HomeTestimonials() {
     if (!section || !pin || !cards.length) return;
 
     const ctx = gsap.context(() => {
+      const segment = 1.25;
+
       gsap.set(cards, {
         yPercent: 0,
         opacity: 1,
-        transformOrigin: "center top",
+        transformOrigin: "center center",
         force3D: true,
       });
 
       cards.forEach((card, index) => {
         gsap.set(card, {
           zIndex: cards.length - index,
-          x: index * 16,
-          y: index * 12,
-          rotate: index === 0 ? 0 : index * 6,
+          x: index * 18,
+          y: index * 14,
+          rotate: index === 0 ? 0 : index * 8,
           scale: 1 - index * 0.035,
         });
       });
@@ -119,7 +121,7 @@ export function HomeTestimonials() {
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: () => `+=${window.innerHeight * (cards.length + 0.65)}`,
+          end: () => `+=${window.innerHeight * (cards.length * 1.28)}`,
           pin,
           pinSpacing: true,
           scrub: 0.85,
@@ -129,21 +131,40 @@ export function HomeTestimonials() {
       });
 
       cards.slice(0, -1).forEach((card, index) => {
+        const nextCard = cards[index + 1];
+        const stepStart = index * segment;
+
+        timeline.to(
+          nextCard,
+          {
+            x: 0,
+            y: 0,
+            rotate: 0,
+            scale: 1,
+            duration: 0.72,
+            ease: "none",
+          },
+          stepStart + 0.05,
+        );
+
         timeline.to(
           card,
           {
             yPercent: -190,
-            x: -32,
-            rotate: -3,
+            x: -34,
+            rotate: -4,
             scale: 0.96,
-            opacity: 0.28,
-            duration: 1,
+            opacity: 0,
+            duration: 0.82,
             ease: "none",
           },
-          index,
+          stepStart + 0.28,
         );
+
+        timeline.to({}, { duration: 0.16 }, stepStart + 1.05);
       });
 
+      timeline.to({}, { duration: 0.6 });
       ScrollTrigger.refresh();
     }, section);
 
