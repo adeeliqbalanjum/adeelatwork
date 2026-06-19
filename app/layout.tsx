@@ -4,8 +4,10 @@ import './stats-motion.css';
 import './testimonials.css';
 import './testimonials-mount.css';
 import './process-options.css';
+import './home-process-orbit.css';
 import './scrollbar-fix.css';
 import { ButtonFillController } from './components/ButtonFillController';
+import { HomeProcessOrbitMount } from './components/HomeProcessOrbitMount';
 import { HomeTestimonialsMount } from './components/HomeTestimonialsMount';
 import { ScrollProgressBar } from './components/ScrollProgressBar';
 
@@ -27,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ScrollProgressBar type='bar' color='#070707' strokeSize={2} showPercentage={false} />
         <ScrollProgressBar position='bottom-right' color='#070707' strokeSize={3} showPercentage />
         {children}
+        <HomeProcessOrbitMount />
         <HomeTestimonialsMount />
       </body>
     </html>
