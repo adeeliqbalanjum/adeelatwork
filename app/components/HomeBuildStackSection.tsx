@@ -6,7 +6,6 @@ type Tool = {
   id: string;
   name: string;
   short: string;
-  icon?: string;
   category: string;
   title: string;
   description: string;
@@ -17,7 +16,6 @@ const tools: Tool[] = [
     id: "wordpress",
     name: "WordPress",
     short: "WP",
-    icon: "https://cdn.simpleicons.org/wordpress/21759B",
     category: "CMS foundation",
     title: "WordPress as the editable business foundation",
     description:
@@ -27,7 +25,6 @@ const tools: Tool[] = [
     id: "elementor",
     name: "Elementor Pro",
     short: "E",
-    icon: "https://cdn.simpleicons.org/elementor/92003B",
     category: "Visual builder",
     title: "Elementor Pro for pixel-perfect editable layouts",
     description:
@@ -37,7 +34,6 @@ const tools: Tool[] = [
     id: "woocommerce",
     name: "WooCommerce",
     short: "Woo",
-    icon: "https://cdn.simpleicons.org/woocommerce/96588A",
     category: "E-commerce",
     title: "WooCommerce for stores and revenue workflows",
     description:
@@ -47,7 +43,6 @@ const tools: Tool[] = [
     id: "acf",
     name: "ACF Pro",
     short: "ACF",
-    icon: "https://cdn.simpleicons.org/advancedcustomfields/00D084",
     category: "Custom fields",
     title: "ACF Pro for structured, client-editable content",
     description:
@@ -66,7 +61,6 @@ const tools: Tool[] = [
     id: "php",
     name: "PHP",
     short: "PHP",
-    icon: "https://cdn.simpleicons.org/php/777BB4",
     category: "Custom logic",
     title: "PHP for WordPress business logic and plugin fixes",
     description:
@@ -76,7 +70,6 @@ const tools: Tool[] = [
     id: "javascript",
     name: "JavaScript",
     short: "JS",
-    icon: "https://cdn.simpleicons.org/javascript/F7DF1E",
     category: "Frontend logic",
     title: "JavaScript for interactive UI and dynamic behavior",
     description:
@@ -86,7 +79,6 @@ const tools: Tool[] = [
     id: "gsap",
     name: "GSAP",
     short: "Gs",
-    icon: "https://cdn.simpleicons.org/greensock/88CE02",
     category: "Motion",
     title: "GSAP for premium scroll and motion experiences",
     description:
@@ -96,7 +88,6 @@ const tools: Tool[] = [
     id: "react",
     name: "React",
     short: "React",
-    icon: "https://cdn.simpleicons.org/react/61DAFB",
     category: "UI systems",
     title: "React for modern interactive components",
     description:
@@ -106,7 +97,6 @@ const tools: Tool[] = [
     id: "next",
     name: "Next.js",
     short: "N",
-    icon: "https://cdn.simpleicons.org/nextdotjs/000000",
     category: "Modern web",
     title: "Next.js for fast portfolio and modern frontend work",
     description:
@@ -116,7 +106,6 @@ const tools: Tool[] = [
     id: "tailwind",
     name: "Tailwind CSS",
     short: "Tw",
-    icon: "https://cdn.simpleicons.org/tailwindcss/06B6D4",
     category: "Styling",
     title: "Tailwind and custom CSS for clean responsive systems",
     description:
@@ -126,7 +115,6 @@ const tools: Tool[] = [
     id: "figma",
     name: "Figma",
     short: "Fi",
-    icon: "https://cdn.simpleicons.org/figma/F24E1E",
     category: "Design handoff",
     title: "Figma to WordPress with attention to spacing and detail",
     description:
@@ -135,8 +123,55 @@ const tools: Tool[] = [
 ];
 
 function ToolIcon({ tool }: { tool: Tool }) {
-  if (tool.icon) {
-    return <img src={tool.icon} alt="" aria-hidden="true" loading="lazy" />;
+  if (tool.id === "react") {
+    return (
+      <svg className="build-stack-svg" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="2.8" fill="currentColor" />
+        <ellipse cx="16" cy="16" rx="12" ry="4.7" fill="none" stroke="currentColor" strokeWidth="2" />
+        <ellipse cx="16" cy="16" rx="12" ry="4.7" fill="none" stroke="currentColor" strokeWidth="2" transform="rotate(60 16 16)" />
+        <ellipse cx="16" cy="16" rx="12" ry="4.7" fill="none" stroke="currentColor" strokeWidth="2" transform="rotate(120 16 16)" />
+      </svg>
+    );
+  }
+
+  if (tool.id === "tailwind") {
+    return (
+      <svg className="build-stack-svg" viewBox="0 0 32 32" aria-hidden="true">
+        <path fill="currentColor" d="M16 9.5c-3.8 0-6.2 1.9-7.2 5.6 1.4-1.9 3-2.6 4.9-2.1 1.1.3 1.9 1.1 2.8 1.9 1.5 1.4 3.2 3 6.8 3 3.8 0 6.2-1.9 7.2-5.6-1.4 1.9-3 2.6-4.9 2.1-1.1-.3-1.9-1.1-2.8-1.9-1.5-1.4-3.2-3-6.8-3Zm-7.3 4.6c-3.8 0-6.2 1.9-7.2 5.6 1.4-1.9 3-2.6 4.9-2.1 1.1.3 1.9 1.1 2.8 1.9 1.5 1.4 3.2 3 6.8 3 3.8 0 6.2-1.9 7.2-5.6-1.4 1.9-3 2.6-4.9 2.1-1.1-.3-1.9-1.1-2.8-1.9-1.5-1.4-3.2-3-6.8-3Z" />
+      </svg>
+    );
+  }
+
+  if (tool.id === "figma") {
+    return (
+      <svg className="build-stack-svg" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="12" cy="8" r="5" fill="#f24e1e" />
+        <circle cx="20" cy="8" r="5" fill="#ff7262" />
+        <circle cx="12" cy="16" r="5" fill="#a259ff" />
+        <circle cx="20" cy="16" r="5" fill="#1abcfe" />
+        <circle cx="12" cy="24" r="5" fill="#0acf83" />
+      </svg>
+    );
+  }
+
+  if (tool.id === "elementor") {
+    return (
+      <svg className="build-stack-svg" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="13" fill="currentColor" />
+        <rect x="10" y="9" width="4" height="14" rx="1" fill="#fff" />
+        <rect x="17" y="9" width="6" height="3.5" rx="1" fill="#fff" />
+        <rect x="17" y="14.25" width="6" height="3.5" rx="1" fill="#fff" />
+        <rect x="17" y="19.5" width="6" height="3.5" rx="1" fill="#fff" />
+      </svg>
+    );
+  }
+
+  if (tool.id === "wordpress") {
+    return <span className="build-stack-wordmark">W</span>;
+  }
+
+  if (tool.id === "next") {
+    return <span className="build-stack-wordmark">N</span>;
   }
 
   return <span>{tool.short}</span>;
@@ -167,7 +202,7 @@ export function HomeBuildStackSection() {
         <div className="build-stack-card" aria-live="polite">
           <div className="build-stack-card-top">
             <span>{activeTool.category}</span>
-            <strong className="build-stack-card-icon">
+            <strong className={`build-stack-card-icon build-stack-icon-${activeTool.id}`}>
               <ToolIcon tool={activeTool} />
             </strong>
           </div>
