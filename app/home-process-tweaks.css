@@ -69,53 +69,64 @@
 }
 
 .eyebrow {
-  min-height: 42px !important;
+  min-height: 40px !important;
   display: inline-flex !important;
   align-items: center !important;
-  gap: 9px !important;
+  gap: 10px !important;
   border-radius: 999px !important;
   border: 1px solid rgba(7, 7, 7, .08) !important;
-  padding: 6px 14px 6px 9px !important;
-  color: #070707 !important;
+  padding: 6px 12px 6px 10px !important;
+  color: #fff !important;
   font-size: 14px !important;
+  line-height: 1 !important;
   font-weight: 950 !important;
-  letter-spacing: -.045em !important;
+  letter-spacing: -.035em !important;
   background:
-    radial-gradient(circle 15px at 45px 50%, #f7d64a 0 15px, transparent 15.5px),
-    radial-gradient(circle 15px at calc(100% - 15px) 50%, #f7d64a 0 15px, transparent 15.5px),
-    linear-gradient(#f7d64a, #f7d64a) 45px center / calc(100% - 60px) 30px no-repeat,
-    rgba(255,255,255,.78) !important;
-  box-shadow: 0 14px 34px rgba(7, 7, 7, .06), inset 0 1px 0 rgba(255,255,255,.94) !important;
+    radial-gradient(circle 14px at 48px 50%, #f7d64a 0 14px, transparent 14.5px),
+    radial-gradient(circle 14px at calc(100% - 14px) 50%, #f7d64a 0 14px, transparent 14.5px),
+    linear-gradient(#f7d64a, #f7d64a) 48px center / calc(100% - 62px) 28px no-repeat,
+    rgba(255,255,255,.82) !important;
+  box-shadow: 0 14px 34px rgba(7, 7, 7, .06), inset 0 1px 0 rgba(255,255,255,.96) !important;
   backdrop-filter: blur(18px) saturate(1.1) !important;
+  text-shadow: 0 1px 1px rgba(0,0,0,.16) !important;
 }
 
 .eyebrow::before {
   width: 11px !important;
   height: 11px !important;
   flex: 0 0 11px !important;
-  margin-left: 6px !important;
+  margin-left: 4px !important;
   background: #22c55e !important;
   box-shadow: 0 0 0 0 rgba(34,197,94,.42), 0 0 18px rgba(34,197,94,.42) !important;
 }
 
 .status-pill {
-  min-height: 42px !important;
-  padding: 6px 9px !important;
-  background: rgba(255,255,255,.78) !important;
+  min-height: 40px !important;
+  gap: 10px !important;
+  padding: 6px 8px 6px 10px !important;
+  background: rgba(255,255,255,.82) !important;
+  border-color: rgba(7,7,7,.08) !important;
 }
 
 .status-pill::before {
   width: 11px !important;
   height: 11px !important;
   flex: 0 0 11px !important;
+  margin-left: 4px !important;
 }
 
 .status-pill strong {
-  min-height: 30px !important;
+  min-height: 28px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   border-radius: 999px !important;
   background: #f7d64a !important;
+  color: #fff !important;
   padding: 0 14px !important;
   font-size: 14px !important;
+  line-height: 1 !important;
+  text-shadow: 0 1px 1px rgba(0,0,0,.16) !important;
 }
 
 @media (max-width: 680px) {
@@ -133,5 +144,13 @@
     min-height: 38px !important;
     padding-top: 5px !important;
     padding-bottom: 5px !important;
+  }
+
+  .eyebrow {
+    background:
+      radial-gradient(circle 13px at 44px 50%, #f7d64a 0 13px, transparent 13.5px),
+      radial-gradient(circle 13px at calc(100% - 13px) 50%, #f7d64a 0 13px, transparent 13.5px),
+      linear-gradient(#f7d64a, #f7d64a) 44px center / calc(100% - 57px) 26px no-repeat,
+      rgba(255,255,255,.82) !important;
   }
 }
