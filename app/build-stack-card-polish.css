@@ -1,0 +1,63 @@
+.build-stack-card-icon {
+  border-radius: 18px !important;
+  box-shadow: 0 18px 38px rgba(0,0,0,.15), inset 0 1px 0 rgba(255,255,255,.22) !important;
+}
+
+.build-stack-card-icon.build-stack-icon-wordpress {
+  background: #21759b !important;
+  color: #fff !important;
+  border-color: rgba(255,255,255,.94) !important;
+}
+
+.build-stack-card-icon.build-stack-icon-wordpress .build-stack-wordmark {
+  font-size: 23px !important;
+  line-height: 1 !important;
+  color: #fff !important;
+  text-shadow: 0 1px 1px rgba(0,0,0,.16) !important;
+}
+
+.build-stack-card h3 {
+  transition: color .35s ease, text-shadow .35s ease !important;
+}
+
+.build-stack-card-wordpress h3 { color: #21759b !important; }
+.build-stack-card-elementor h3 { color: #92003b !important; }
+.build-stack-card-woocommerce h3 { color: #7f54b3 !important; }
+.build-stack-card-acf h3 { color: #008d5b !important; }
+.build-stack-card-cpt h3 { color: #111827 !important; }
+.build-stack-card-php h3 { color: #777bb4 !important; }
+.build-stack-card-javascript h3 { color: #a97800 !important; }
+.build-stack-card-gsap h3 { color: #4f8100 !important; }
+.build-stack-card-react h3 { color: #087ea4 !important; }
+.build-stack-card-next h3 { color: #070707 !important; }
+.build-stack-card-tailwind h3 { color: #0284c7 !important; }
+
+.build-stack-card-figma h3 {
+  color: transparent !important;
+  background: linear-gradient(105deg, #f24e1e 0%, #a259ff 48%, #0acf83 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+
+.build-stack-card::after {
+  background: radial-gradient(circle, color-mix(in srgb, var(--stack-accent, #22c55e) 20%, transparent), transparent 68%) !important;
+}
+
+.build-stack-card-wordpress { --stack-accent: #21759b; }
+.build-stack-card-elementor { --stack-accent: #92003b; }
+.build-stack-card-woocommerce { --stack-accent: #7f54b3; }
+.build-stack-card-acf { --stack-accent: #00d084; }
+.build-stack-card-cpt { --stack-accent: #111827; }
+.build-stack-card-php { --stack-accent: #777bb4; }
+.build-stack-card-javascript { --stack-accent: #f7df1e; }
+.build-stack-card-gsap { --stack-accent: #88ce02; }
+.build-stack-card-react { --stack-accent: #61dafb; }
+.build-stack-card-next { --stack-accent: #070707; }
+.build-stack-card-tailwind { --stack-accent: #06b6d4; }
+.build-stack-card-figma { --stack-accent: #a259ff; }
+
+@supports not (background: color-mix(in srgb, #000 10%, transparent)) {
+  .build-stack-card::after {
+    background: radial-gradient(circle, rgba(34,197,94,.14), transparent 68%) !important;
+  }
+}
