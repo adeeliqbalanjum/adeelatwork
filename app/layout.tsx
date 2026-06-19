@@ -6,8 +6,10 @@ import './testimonials-mount.css';
 import './process-options.css';
 import './home-process-orbit.css';
 import './home-process-tweaks.css';
+import './build-stack.css';
 import './scrollbar-fix.css';
 import { ButtonFillController } from './components/ButtonFillController';
+import { HomeBuildStackMount } from './components/HomeBuildStackMount';
 import { HomeProcessOrbitMount } from './components/HomeProcessOrbitMount';
 import { HomeTestimonialsMount } from './components/HomeTestimonialsMount';
 import { ScrollProgressBar } from './components/ScrollProgressBar';
@@ -30,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ScrollProgressBar type='bar' color='#070707' strokeSize={2} showPercentage={false} />
         <ScrollProgressBar position='bottom-right' color='#070707' strokeSize={3} showPercentage />
         {children}
+        <HomeBuildStackMount />
         <HomeProcessOrbitMount />
         <HomeTestimonialsMount />
       </body>
