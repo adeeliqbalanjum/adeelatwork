@@ -9,12 +9,15 @@ const processSteps = [
   ["04", "Polish", "Test mobile, speed, forms, links, browser behavior, and handover details."],
 ];
 
-const galleryCards = [
+const galleryLeft = [
   "Discovery notes",
   "Sitemap plan",
   "Wireframe system",
   "Elementor build",
   "Responsive QA",
+];
+
+const galleryRight = [
   "Plugin logic",
   "Speed pass",
   "Final launch",
@@ -79,35 +82,41 @@ export function ExtraProcessOptions() {
       </section>
 
       <section className="process-preview process-f" id="option-f">
-        <div className="process-label-row">
+        <div className="process-label-row process-f-label">
           <span>Option F</span>
-          <strong>Sticky Gallery Process</strong>
+          <strong>Sticky Gallery Process — closer to your shared code</strong>
         </div>
-        <div className="process-f-hero">
-          <div className="process-f-grid-bg" aria-hidden="true" />
-          <h2>Create the launch flow in a better way</h2>
-          <p>Side columns move while the center column stays fixed, inspired by sticky gallery layouts.</p>
+
+        <div className="process-f-wrapper">
+          <section className="process-f-hero">
+            <div className="process-f-grid-bg" aria-hidden="true" />
+            <h2>Create the launch flow in a better way</h2>
+            <p>Scroll down. The intro stays sticky first, then the gallery begins.</p>
+          </section>
         </div>
-        <div className="process-f-gallery">
-          <div className="process-f-col">
-            {galleryCards.slice(0, 5).map((item, index) => (
-              <figure key={item} className="process-f-tile" style={stepStyle(index)}>{item}</figure>
-            ))}
+
+        <section className="process-f-gallery-section">
+          <div className="process-f-gallery">
+            <div className="process-f-col">
+              {galleryLeft.map((item, index) => (
+                <figure key={item} className="process-f-tile" style={stepStyle(index)}>{item}</figure>
+              ))}
+            </div>
+            <div className="process-f-center">
+              {processSteps.slice(0, 3).map(([num, title], index) => (
+                <figure key={num} className="process-f-tile process-f-tile-main" style={stepStyle(index)}>
+                  <span>{num}</span>
+                  <strong>{title}</strong>
+                </figure>
+              ))}
+            </div>
+            <div className="process-f-col">
+              {galleryRight.map((item, index) => (
+                <figure key={item} className="process-f-tile" style={stepStyle(index + 5)}>{item}</figure>
+              ))}
+            </div>
           </div>
-          <div className="process-f-center">
-            {processSteps.slice(0, 3).map(([num, title], index) => (
-              <figure key={num} className="process-f-tile process-f-tile-main" style={stepStyle(index)}>
-                <span>{num}</span>
-                <strong>{title}</strong>
-              </figure>
-            ))}
-          </div>
-          <div className="process-f-col">
-            {galleryCards.slice(5).map((item, index) => (
-              <figure key={item} className="process-f-tile" style={stepStyle(index + 5)}>{item}</figure>
-            ))}
-          </div>
-        </div>
+        </section>
       </section>
     </>
   );
