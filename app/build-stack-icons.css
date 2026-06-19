@@ -1,14 +1,19 @@
-.build-stack-icon {
+.build-stack-icon,
+.build-stack-card-icon {
   overflow: hidden !important;
   background: rgba(255,255,255,.96) !important;
+  color: #070707 !important;
 }
 
-.build-stack-icon img,
-.build-stack-card-icon img {
+.build-stack-svg {
   display: block !important;
-  width: 21px !important;
-  height: 21px !important;
-  object-fit: contain !important;
+  width: 22px !important;
+  height: 22px !important;
+}
+
+.build-stack-card-icon .build-stack-svg {
+  width: 30px !important;
+  height: 30px !important;
 }
 
 .build-stack-icon span,
@@ -18,35 +23,60 @@
   width: 100% !important;
   height: 100% !important;
   color: inherit !important;
+  font-size: 11px !important;
+  font-weight: 950 !important;
+  letter-spacing: -.05em !important;
+}
+
+.build-stack-card-icon span {
+  font-size: 15px !important;
 }
 
 .build-stack-tool.is-active .build-stack-icon {
-  background: rgba(255,255,255,.96) !important;
-  color: #070707 !important;
   transform: rotate(-8deg) scale(1.04);
 }
 
-.build-stack-card-icon {
-  background: rgba(255,255,255,.96) !important;
-  color: #070707 !important;
+.build-stack-icon-wordpress { background: #21759b !important; color: #fff !important; }
+.build-stack-icon-elementor { background: #92003b !important; color: #fff !important; }
+.build-stack-icon-woocommerce { background: #7f54b3 !important; color: #fff !important; }
+.build-stack-icon-acf { background: #00d084 !important; color: #06140c !important; }
+.build-stack-icon-cpt { background: #111827 !important; color: #fff !important; }
+.build-stack-icon-php { background: #777bb4 !important; color: #fff !important; }
+.build-stack-icon-javascript { background: #f7df1e !important; color: #111 !important; }
+.build-stack-icon-gsap { background: #88ce02 !important; color: #101 !important; }
+.build-stack-icon-react { background: #111827 !important; color: #61dafb !important; }
+.build-stack-icon-next { background: #070707 !important; color: #fff !important; }
+.build-stack-icon-tailwind { background: #ecfeff !important; color: #06b6d4 !important; }
+.build-stack-icon-figma { background: #fff !important; color: #111 !important; }
+
+.build-stack-wordmark {
+  font-family: Georgia, serif !important;
+  font-size: 19px !important;
+  font-weight: 900 !important;
 }
 
-.build-stack-card-icon img {
-  width: 28px !important;
-  height: 28px !important;
+.build-stack-icon-woocommerce span {
+  font-size: 10px !important;
 }
 
-.build-stack-icon-cpt,
-.build-stack-card-icon:has(span) {
-  background: #111827 !important;
-  color: #fff !important;
+.build-stack-icon-acf span,
+.build-stack-icon-cpt span,
+.build-stack-icon-php span,
+.build-stack-icon-gsap span {
+  font-size: 10px !important;
 }
 
-.build-stack-icon-javascript {
-  background: #f7df1e !important;
-}
-
-.build-stack-icon-next img,
-.build-stack-icon-cpt img {
-  filter: none !important;
+.build-stack-card-icon.build-stack-icon-wordpress,
+.build-stack-card-icon.build-stack-icon-elementor,
+.build-stack-card-icon.build-stack-icon-woocommerce,
+.build-stack-card-icon.build-stack-icon-acf,
+.build-stack-card-icon.build-stack-icon-cpt,
+.build-stack-card-icon.build-stack-icon-php,
+.build-stack-card-icon.build-stack-icon-javascript,
+.build-stack-card-icon.build-stack-icon-gsap,
+.build-stack-card-icon.build-stack-icon-react,
+.build-stack-card-icon.build-stack-icon-next,
+.build-stack-card-icon.build-stack-icon-tailwind,
+.build-stack-card-icon.build-stack-icon-figma {
+  border-color: rgba(255,255,255,.92) !important;
 }
