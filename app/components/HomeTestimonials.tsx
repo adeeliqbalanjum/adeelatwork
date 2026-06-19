@@ -1,12 +1,9 @@
 "use client";
 
 import * as React from "react";
-import {
-  CardTransformed,
-  CardsContainer,
-  ContainerScroll,
-  ReviewStars,
-} from "@/components/blocks/animated-cards-stack";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ReviewStars } from "@/components/blocks/animated-cards-stack";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 const TESTIMONIALS = [
@@ -70,10 +67,13 @@ function moveCardGlow(event: React.PointerEvent<HTMLElement>) {
 }
 
 export function HomeTestimonials() {
+  const sectionRef = React.useRef<HTMLElement>(null);
+  const pinRef = React.useRef<HTMLDivElement>(null);
   const glowRef = React.useRef<HTMLDivElement>(null);
+  const cardsRef = React.useRef<HTMLElement[]>([]);
 
   React.useEffect(() => {
-    const section = glowRef.current?.closest(".home-testimonials");
+    const section = sectionRef.current;
     if (!section) return;
 
     const move = (event: PointerEvent) => {
@@ -84,12 +84,74 @@ export function HomeTestimonials() {
       glowRef.current?.style.setProperty("--my", `${y}%`);
     };
 
-    section.addEventListener("pointermove", move as EventListener);
-    return () => section.removeEventListener("pointermove", move as EventListener);
+    section.addEventListener("pointermove", move);
+    return () => section.removeEventListener("pointermove", move);
+  }, []);
+
+  React.useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const section = sectionRef.current;
+    const pin = pinRef.current;
+    const cards = cardsRef.current.filter(Boolean);
+
+    if (!section || !pin || !cards.length) return;
+
+    const ctx = gsap.context(() => {
+      gsap.set(cards, {
+        yPercent: 0,
+        opacity: 1,
+        transformOrigin: "center top",
+        force3D: true,
+      });
+
+      cards.forEach((card, index) => {
+        gsap.set(card, {
+          zIndex: cards.length - index,
+          x: index * 16,
+          y: index * 12,
+          rotate: index === 0 ? 0 : index * 6,
+          scale: 1 - index * 0.035,
+        });
+      });
+
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: () => `+=${window.innerHeight * (cards.length + 0.65)}`,
+          pin,
+          pinSpacing: true,
+          scrub: 0.85,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      cards.slice(0, -1).forEach((card, index) => {
+        timeline.to(
+          card,
+          {
+            yPercent: -190,
+            x: -32,
+            rotate: -3,
+            scale: 0.96,
+            opacity: 0.28,
+            duration: 1,
+            ease: "none",
+          },
+          index,
+        );
+      });
+
+      ScrollTrigger.refresh();
+    }, section);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section className="home-testimonials" id="testimonials">
+    <section ref={sectionRef} className="home-testimonials" id="testimonials">
       <div className="gradient-stage testimonial-glow" ref={glowRef} aria-hidden="true">
         <div className="gblob orange" />
         <div className="gblob purple" />
@@ -97,58 +159,56 @@ export function HomeTestimonials() {
         <div className="pointer-glow" />
       </div>
 
-      <ContainerScroll className="testimonial-scroll">
-        <div className="testimonial-sticky">
-          <div className="testimonial-intro">
-            <div className="eyebrow">Client Feedback</div>
-            <h2>Testimonials that show the value behind the build</h2>
-            <p>
-              Draft review cards for the portfolio. Replace these with verified client names and quotes when you publish real testimonials.
-            </p>
-          </div>
-
-          <CardsContainer className="testimonial-motion-stage">
-            {TESTIMONIALS.map((testimonial, index) => (
-              <CardTransformed
-                arrayLength={TESTIMONIALS.length}
-                key={testimonial.id}
-                variant="light"
-                index={index}
-                role="article"
-                className="testimonial-motion-card"
-                onPointerMove={moveCardGlow}
-                aria-labelledby={`card-${testimonial.id}-title`}
-                aria-describedby={`card-${testimonial.id}-content`}
-              >
-                <div className="testimonial-card-balls" aria-hidden="true">
-                  <span />
-                  <span />
-                  <span />
-                </div>
-
-                <div className="testimonial-card-content">
-                  <ReviewStars className="testimonial-stars" rating={testimonial.rating} />
-                  <div id={`card-${testimonial.id}-content`} className="testimonial-quote-wrap">
-                    <blockquote cite="#">{testimonial.description}</blockquote>
-                  </div>
-                </div>
-
-                <div className="testimonial-author">
-                  <Avatar className="testimonial-avatar">
-                    <AvatarFallback>{initials(testimonial.name)}</AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <span id={`card-${testimonial.id}-title`} className="testimonial-name">
-                      {testimonial.name}
-                    </span>
-                    <span className="testimonial-role">{testimonial.profession}</span>
-                  </div>
-                </div>
-              </CardTransformed>
-            ))}
-          </CardsContainer>
+      <div className="testimonial-pin" ref={pinRef}>
+        <div className="testimonial-intro">
+          <div className="eyebrow">Client Feedback</div>
+          <h2>Testimonials that show the value behind the build</h2>
+          <p>
+            Draft review cards for the portfolio. Replace these with verified client names and quotes when you publish real testimonials.
+          </p>
         </div>
-      </ContainerScroll>
+
+        <div className="testimonial-motion-stage" aria-label="Client testimonial stack">
+          {TESTIMONIALS.map((testimonial, index) => (
+            <article
+              ref={(node) => {
+                if (node) cardsRef.current[index] = node;
+              }}
+              className="testimonial-motion-card"
+              key={testimonial.id}
+              onPointerMove={moveCardGlow}
+              role="article"
+              aria-labelledby={`card-${testimonial.id}-title`}
+              aria-describedby={`card-${testimonial.id}-content`}
+            >
+              <div className="testimonial-card-balls" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </div>
+
+              <div className="testimonial-card-content">
+                <ReviewStars className="testimonial-stars" rating={testimonial.rating} />
+                <div id={`card-${testimonial.id}-content`} className="testimonial-quote-wrap">
+                  <blockquote cite="#">{testimonial.description}</blockquote>
+                </div>
+              </div>
+
+              <div className="testimonial-author">
+                <Avatar className="testimonial-avatar">
+                  <AvatarFallback>{initials(testimonial.name)}</AvatarFallback>
+                </Avatar>
+                <div>
+                  <span id={`card-${testimonial.id}-title`} className="testimonial-name">
+                    {testimonial.name}
+                  </span>
+                  <span className="testimonial-role">{testimonial.profession}</span>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
