@@ -82,9 +82,9 @@
   font-weight: 950 !important;
   letter-spacing: -.035em !important;
   background:
-    radial-gradient(circle 14px at 48px 50%, #f7d64a 0 14px, transparent 14.5px),
-    radial-gradient(circle 14px at calc(100% - 14px) 50%, #f7d64a 0 14px, transparent 14.5px),
-    linear-gradient(#f7d64a, #f7d64a) 48px center / calc(100% - 62px) 28px no-repeat,
+    radial-gradient(circle 14px at 48px 50%, #22c55e 0 14px, transparent 14.5px),
+    radial-gradient(circle 14px at calc(100% - 14px) 50%, #22c55e 0 14px, transparent 14.5px),
+    linear-gradient(#22c55e, #22c55e) 48px center / calc(100% - 62px) 28px no-repeat,
     rgba(255,255,255,.82) !important;
   box-shadow: 0 14px 34px rgba(7, 7, 7, .06), inset 0 1px 0 rgba(255,255,255,.96) !important;
   backdrop-filter: blur(18px) saturate(1.1) !important;
@@ -121,7 +121,7 @@
   align-items: center !important;
   justify-content: center !important;
   border-radius: 999px !important;
-  background: #f7d64a !important;
+  background: #22c55e !important;
   color: #fff !important;
   padding: 0 14px !important;
   font-size: 14px !important;
@@ -148,9 +148,9 @@
 
   .eyebrow {
     background:
-      radial-gradient(circle 13px at 44px 50%, #f7d64a 0 13px, transparent 13.5px),
-      radial-gradient(circle 13px at calc(100% - 13px) 50%, #f7d64a 0 13px, transparent 13.5px),
-      linear-gradient(#f7d64a, #f7d64a) 44px center / calc(100% - 57px) 26px no-repeat,
+      radial-gradient(circle 13px at 44px 50%, #22c55e 0 13px, transparent 13.5px),
+      radial-gradient(circle 13px at calc(100% - 13px) 50%, #22c55e 0 13px, transparent 13.5px),
+      linear-gradient(#22c55e, #22c55e) 44px center / calc(100% - 57px) 26px no-repeat,
       rgba(255,255,255,.82) !important;
   }
 }
