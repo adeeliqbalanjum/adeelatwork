@@ -171,6 +171,80 @@ export function HomeTestimonials() {
     return () => ctx.revert();
   }, []);
 
+  React.useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (prefersReducedMotion.matches) return;
+
+    const cards = cardsRef.current.filter(Boolean);
+    if (!cards.length) return;
+
+    type BlobState = {
+      el: HTMLElement;
+      card: HTMLElement;
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      size: number;
+    };
+
+    const states: BlobState[] = [];
+
+    cards.forEach((card, cardIndex) => {
+      const blobs = Array.from(card.querySelectorAll<HTMLElement>(".testimonial-card-balls span"));
+      const width = card.clientWidth || 350;
+      const height = card.clientHeight || 450;
+
+      blobs.forEach((blob, blobIndex) => {
+        const size = blob.offsetWidth || 140;
+        const safeWidth = Math.max(width - size, 1);
+        const safeHeight = Math.max(height - size, 1);
+        const direction = blobIndex % 2 === 0 ? 1 : -1;
+
+        states.push({
+          el: blob,
+          card,
+          x: safeWidth * (0.16 + blobIndex * 0.27),
+          y: safeHeight * (0.16 + ((blobIndex + cardIndex) % 3) * 0.24),
+          vx: direction * (0.12 + blobIndex * 0.035 + cardIndex * 0.006),
+          vy: -direction * (0.10 + blobIndex * 0.028 + cardIndex * 0.005),
+          size,
+        });
+      });
+    });
+
+    let frame = 0;
+
+    const tick = () => {
+      states.forEach((blob) => {
+        const width = blob.card.clientWidth || 350;
+        const height = blob.card.clientHeight || 450;
+        const maxX = Math.max(width - blob.size, 1);
+        const maxY = Math.max(height - blob.size, 1);
+
+        blob.x += blob.vx;
+        blob.y += blob.vy;
+
+        if (blob.x <= 0 || blob.x >= maxX) {
+          blob.vx *= -1;
+          blob.x = Math.max(0, Math.min(blob.x, maxX));
+        }
+
+        if (blob.y <= 0 || blob.y >= maxY) {
+          blob.vy *= -1;
+          blob.y = Math.max(0, Math.min(blob.y, maxY));
+        }
+
+        blob.el.style.transform = `translate3d(${blob.x}px, ${blob.y}px, 0)`;
+      });
+
+      frame = requestAnimationFrame(tick);
+    };
+
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
   return (
     <section ref={sectionRef} className="home-testimonials" id="testimonials">
       <div className="gradient-stage testimonial-glow" ref={glowRef} aria-hidden="true">
