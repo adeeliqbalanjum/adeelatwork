@@ -157,11 +157,10 @@ function ToolIcon({ tool }: { tool: Tool }) {
   if (tool.id === "elementor") {
     return (
       <svg className="build-stack-svg" viewBox="0 0 32 32" aria-hidden="true">
-        <circle cx="16" cy="16" r="13" fill="currentColor" />
-        <rect x="10" y="9" width="4" height="14" rx="1" fill="#fff" />
-        <rect x="17" y="9" width="6" height="3.5" rx="1" fill="#fff" />
-        <rect x="17" y="14.25" width="6" height="3.5" rx="1" fill="#fff" />
-        <rect x="17" y="19.5" width="6" height="3.5" rx="1" fill="#fff" />
+        <rect x="9" y="8" width="5" height="16" rx="1.3" fill="currentColor" />
+        <rect x="17" y="8" width="7" height="4" rx="1.3" fill="currentColor" />
+        <rect x="17" y="14" width="7" height="4" rx="1.3" fill="currentColor" />
+        <rect x="17" y="20" width="7" height="4" rx="1.3" fill="currentColor" />
       </svg>
     );
   }
@@ -223,7 +222,7 @@ export function HomeBuildStackSection() {
                 onClick={() => setActiveIndex(index)}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
-                className={`build-stack-tool ${isActive ? "is-active" : ""} ${showName ? "show-name" : ""}`}
+                className={`build-stack-tool build-stack-tool-${tool.id} ${isActive ? "is-active" : ""} ${showName ? "show-name" : ""}`}
                 aria-pressed={isActive}
                 aria-label={tool.name}
               >
