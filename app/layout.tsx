@@ -22,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang='en'>
       <body>
         <ButtonFillController />
+        <ScrollProgressBar type='bar' color='#070707' strokeSize={2} showPercentage={false} />
         <ScrollProgressBar position='bottom-right' color='#070707' strokeSize={3} showPercentage />
         {children}
         <HomeTestimonialsMount />
