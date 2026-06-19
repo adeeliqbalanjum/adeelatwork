@@ -35,13 +35,16 @@ export function ScrollProgressBar({
   if (type === "bar") {
     return (
       <div
-        className="pointer-events-none fixed inset-x-0 top-0 z-[100]"
+        className="pointer-events-none fixed inset-x-0 top-0 z-[120] bg-black/[.045]"
         style={{ height: `${strokeSize + 2}px` }}
         aria-hidden="true"
       >
         <motion.span
-          className="block h-full origin-left"
-          style={{ backgroundColor: color, scaleX: scrollYProgress }}
+          className="block h-full origin-left shadow-[0_0_18px_rgba(7,7,7,.22)]"
+          style={{
+            background: `linear-gradient(90deg, ${color}, rgba(7,7,7,.72), ${color})`,
+            scaleX: scrollYProgress,
+          }}
         />
       </div>
     );
