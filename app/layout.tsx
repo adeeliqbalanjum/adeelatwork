@@ -5,6 +5,7 @@ import './testimonials.css';
 import './testimonials-mount.css';
 import { ButtonFillController } from './components/ButtonFillController';
 import { HomeTestimonialsMount } from './components/HomeTestimonialsMount';
+import { ScrollProgressBar } from './components/ScrollProgressBar';
 
 export const metadata: Metadata = {
   title: 'Muhammad Adeel Iqbal — WordPress Developer & WooCommerce Specialist',
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang='en'>
       <body>
         <ButtonFillController />
+        <ScrollProgressBar position='bottom-right' color='#070707' strokeSize={3} showPercentage />
         {children}
         <HomeTestimonialsMount />
       </body>
