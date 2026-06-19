@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import './stats-motion.css';
 import './testimonials.css';
+import './testimonials-mount.css';
 import { ButtonFillController } from './components/ButtonFillController';
 import { HomeTestimonialsMount } from './components/HomeTestimonialsMount';
 
