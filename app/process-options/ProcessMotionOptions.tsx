@@ -4,6 +4,7 @@ import * as React from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { PolishedOrbitOption } from "./PolishedOrbitOption";
 
 const steps = [
   ["01", "Understand", "Clarify the client goal, business model, page structure, features, references, and conversion path."],
@@ -30,7 +31,7 @@ export function ProcessMotionOptions() {
       <ExpandMediaOption />
       <StickyGalleryOption />
       <HorizontalGsapOption />
-      <OrbitOption />
+      <PolishedOrbitOption />
     </div>
   );
 }
@@ -85,7 +86,7 @@ function RevealOption() {
       <div className="real-c-layout">
         <div className="real-c-sticky"><div className="eyebrow">Process</div><h2>One controlled step at a time</h2><p>Each card animates into place as the user scrolls. This is clean and client-friendly.</p></div>
         <div className="real-c-stack">
-          {steps.map(([num, title, copy], index) => (
+          {steps.map(([num, title, copy]) => (
             <motion.article key={num} className="real-glass-card real-c-card" initial={{ x: 72, opacity: 0, scale: .96 }} whileInView={{ x: 0, opacity: 1, scale: 1 }} viewport={{ once: false, amount: .55 }} transition={{ duration: .62, ease: [0.2, 0.8, 0.2, 1] }}>
               <StepBadge num={num} /><div><h3>{title}</h3><p>{copy}</p></div>
             </motion.article>
@@ -176,14 +177,5 @@ function HorizontalGsapOption() {
   }, []);
   return (
     <section ref={stageRef} className="process-preview process-real process-real-g" id="option-g"><OptionLabel id="G" title="GSAP Pinned Horizontal Process" /><div ref={railRef} className="real-g-rail">{steps.concat(steps).map(([num, title, copy], index) => <article className="real-g-card" key={`${num}-${index}`}><StepBadge num={num} /><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
-  );
-}
-
-function OrbitOption() {
-  const ref = React.useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 80%", "end 20%"] });
-  const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
-  return (
-    <section ref={ref} className="process-preview process-real process-real-h" id="option-h"><OptionLabel id="H" title="Framer/Motion Orbit Process" /><div className="real-h-layout"><div><div className="eyebrow">Process</div><h2>Orbit-style launch system</h2><p>The process cards orbit around the core build promise as the user scrolls.</p></div><motion.div className="real-h-orbit" style={{ rotate }}>{steps.map(([num, title], index) => <motion.article key={num} className={`real-h-card real-h-card-${index}`} style={{ rotate: useTransform(rotate, (value) => -value) }}><StepBadge num={num} /><h3>{title}</h3></motion.article>)}</motion.div></div></section>
   );
 }
