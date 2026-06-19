@@ -13,7 +13,6 @@ import './build-stack-card-polish.css';
 import './build-stack-card-logo-fix.css';
 import './mobile-pill-fix.css';
 import './hero-content-sync.css';
-import './hero-motion-preview.css';
 import './scrollbar-fix.css';
 import { ButtonFillController } from './components/ButtonFillController';
 import { HomeBuildStackMount } from './components/HomeBuildStackMount';
