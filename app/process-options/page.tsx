@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
+import { ExtraProcessOptions } from "./ExtraProcessOptions";
 
 type StepStyle = CSSProperties & { "--step-index": number };
 
@@ -44,7 +45,7 @@ export default function ProcessOptionsPage() {
         <div className="eyebrow">Process Design Options</div>
         <h1>Choose the final process section style</h1>
         <p>
-          I created three different directions below. The live homepage process section is untouched for now.
+          I created six different directions below. The live homepage process section is untouched for now.
         </p>
       </header>
 
@@ -118,6 +119,8 @@ export default function ProcessOptionsPage() {
           </div>
         </div>
       </section>
+
+      <ExtraProcessOptions />
     </main>
   );
 }
