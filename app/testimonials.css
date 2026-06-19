@@ -1,0 +1,225 @@
+.home-testimonials {
+  position: relative;
+  min-height: 300vh;
+  overflow: clip;
+  padding: 0 22px;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 50% -12%, #ffffff 0%, rgba(255,255,255,0) 42%),
+    linear-gradient(180deg, #ffffff 0%, #fbfbf8 52%, #f2f2ef 100%);
+}
+.home-testimonials::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(255,122,24,.13), transparent 30%),
+    radial-gradient(circle at 78% 22%, rgba(168,85,247,.12), transparent 30%),
+    radial-gradient(circle at 62% 72%, rgba(34,197,94,.10), transparent 30%);
+  pointer-events: none;
+}
+.testimonial-glow {
+  inset: 0 -12% 12%;
+  opacity: .46;
+  filter: blur(42px);
+}
+.testimonial-pin {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  width: min(1120px, 100%);
+  min-height: 100vh;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(320px, 1fr);
+  align-items: center;
+  gap: 64px;
+  perspective: 1100px;
+}
+.testimonial-copy h2 {
+  margin: 0;
+  max-width: 620px;
+  font-size: clamp(2.6rem, 5vw, 5.4rem);
+  line-height: .88;
+  letter-spacing: -.085em;
+  font-weight: 900;
+  text-wrap: balance;
+}
+.testimonial-copy p {
+  max-width: 500px;
+  margin: 18px 0 0;
+  color: rgba(7,7,7,.52);
+  line-height: 1.62;
+  font-weight: 650;
+  letter-spacing: -.026em;
+}
+.testimonial-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 24px;
+}
+.testimonial-badges span {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.07);
+  background: rgba(255,255,255,.58);
+  padding: 0 13px;
+  color: rgba(7,7,7,.55);
+  font-size: 12px;
+  font-weight: 900;
+  backdrop-filter: blur(18px);
+}
+.testimonial-stage {
+  position: relative;
+  width: min(350px, 90vw);
+  height: 450px;
+  margin: 0 auto;
+  perspective: 1000px;
+}
+.testimonial-card {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 22px;
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,.48);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.76), rgba(255,255,255,.42)),
+    radial-gradient(circle at 25% 10%, rgba(255,122,24,.20), transparent 34%),
+    radial-gradient(circle at 78% 18%, rgba(168,85,247,.18), transparent 36%),
+    radial-gradient(circle at 50% 88%, rgba(34,197,94,.15), transparent 34%);
+  box-shadow: 0 32px 100px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.82);
+  padding: 30px;
+  text-align: center;
+  backdrop-filter: blur(22px) saturate(1.25);
+  backface-visibility: hidden;
+  will-change: transform;
+  cursor: pointer;
+  transition: box-shadow .28s cubic-bezier(.2,.8,.2,1), border-color .28s cubic-bezier(.2,.8,.2,1);
+}
+.testimonial-card::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: 0;
+  border-radius: 27px;
+  background: linear-gradient(150deg, rgba(255,255,255,.48), rgba(255,255,255,0) 46%);
+  pointer-events: none;
+}
+.testimonial-card::after {
+  content: "";
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  left: var(--card-x, 50%);
+  top: var(--card-y, 30%);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,122,24,.30), rgba(168,85,247,.16) 36%, rgba(34,197,94,0) 72%);
+  opacity: .72;
+  filter: blur(10px);
+  pointer-events: none;
+  transition: left .45s cubic-bezier(.2,.8,.2,1), top .45s cubic-bezier(.2,.8,.2,1);
+}
+.testimonial-card:hover {
+  border-color: rgba(255,255,255,.72);
+  box-shadow: 0 42px 130px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.92);
+}
+.testimonial-card > *:not(.testimonial-card-balls) {
+  position: relative;
+  z-index: 2;
+}
+.testimonial-card-balls {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.testimonial-card-balls span {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  opacity: .42;
+  filter: blur(12px);
+  animation: drift 18s ease-in-out infinite;
+}
+.testimonial-card-balls span:nth-child(1) { left: -28px; top: 18px; background: rgba(255,122,24,.70); }
+.testimonial-card-balls span:nth-child(2) { right: -36px; top: 92px; background: rgba(168,85,247,.62); animation-delay: -7s; animation-duration: 22s; }
+.testimonial-card-balls span:nth-child(3) { left: 32%; bottom: -48px; background: rgba(34,197,94,.55); animation-delay: -12s; animation-duration: 25s; }
+.testimonial-stars {
+  color: var(--yellow);
+  font-size: 20px;
+  letter-spacing: .05em;
+  margin-bottom: 20px;
+  text-shadow: 0 8px 20px rgba(247,214,74,.24);
+}
+.testimonial-card blockquote {
+  margin: 0;
+  color: rgba(7,7,7,.82);
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  line-height: 1.22;
+  letter-spacing: -.045em;
+  font-weight: 850;
+}
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border-top: 1px solid rgba(7,7,7,.07);
+  padding-top: 18px;
+  text-align: left;
+}
+.testimonial-avatar {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--orange), var(--purple));
+  color: #fff;
+  font-size: 14px;
+  font-weight: 900;
+  border: 2px solid rgba(255,255,255,.72);
+  box-shadow: 0 12px 30px rgba(0,0,0,.18);
+}
+.testimonial-author strong {
+  display: block;
+  color: #070707;
+  font-size: 17px;
+  line-height: 1;
+  letter-spacing: -.045em;
+  font-weight: 900;
+}
+.testimonial-author span {
+  display: block;
+  margin-top: 5px;
+  color: rgba(7,7,7,.48);
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 750;
+}
+@media (max-width: 900px) {
+  .home-testimonials { min-height: auto; padding: 72px 16px; }
+  .testimonial-pin { position: relative; top: auto; min-height: auto; grid-template-columns: 1fr; gap: 38px; }
+  .testimonial-copy { text-align: center; }
+  .testimonial-copy h2, .testimonial-copy p { margin-left: auto; margin-right: auto; }
+  .testimonial-badges { justify-content: center; }
+  .testimonial-stage { height: auto; display: grid; gap: 16px; }
+  .testimonial-card { position: relative; top: auto !important; min-height: 360px; transform: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-card, .testimonial-card-balls span { animation: none !important; transition: none !important; transform: none !important; }
+}
