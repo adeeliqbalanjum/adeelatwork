@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { type PointerEvent, useEffect, useRef, useState } from "react";
 
 const testimonials = [
   {
@@ -42,6 +42,15 @@ function initials(name: string) {
   return name.split(" ").map((part) => part[0]).join("").slice(0, 2);
 }
 
+function moveCardGlow(event: PointerEvent<HTMLElement>) {
+  const card = event.currentTarget;
+  const rect = card.getBoundingClientRect();
+  const x = ((event.clientX - rect.left) / rect.width) * 100;
+  const y = ((event.clientY - rect.top) / rect.height) * 100;
+  card.style.setProperty("--card-x", `${x}%`);
+  card.style.setProperty("--card-y", `${y}%`);
+}
+
 export function HomeTestimonials() {
   const sectionRef = useRef<HTMLElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
@@ -72,7 +81,7 @@ export function HomeTestimonials() {
     const section = sectionRef.current;
     if (!section) return;
 
-    const move = (event: PointerEvent) => {
+    const move = (event: globalThis.PointerEvent) => {
       const rect = section.getBoundingClientRect();
       const x = ((event.clientX - rect.left) / rect.width) * 100;
       const y = ((event.clientY - rect.top) / rect.height) * 100;
@@ -122,6 +131,7 @@ export function HomeTestimonials() {
               <article
                 className="testimonial-card"
                 key={testimonial.name}
+                onPointerMove={moveCardGlow}
                 style={{
                   top: index * 10,
                   zIndex,
