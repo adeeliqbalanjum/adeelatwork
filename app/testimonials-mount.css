@@ -1,0 +1,10 @@
+#trust.testimonials-mounted {
+  padding: 0 !important;
+  background: transparent !important;
+}
+#trust.testimonials-mounted > .container {
+  display: none !important;
+}
+#trust.testimonials-mounted .home-testimonials {
+  margin: 0;
+}
