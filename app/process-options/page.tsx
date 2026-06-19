@@ -1,4 +1,7 @@
+import type { CSSProperties } from "react";
 import Link from "next/link";
+
+type StepStyle = CSSProperties & { "--step-index": number };
 
 const processSteps = [
   {
@@ -22,6 +25,10 @@ const processSteps = [
     copy: "I test mobile, speed, forms, links, edge cases, browser behavior, and final handover details.",
   },
 ];
+
+function stepStyle(index: number): StepStyle {
+  return { "--step-index": index };
+}
 
 export default function ProcessOptionsPage() {
   return (
@@ -56,7 +63,7 @@ export default function ProcessOptionsPage() {
         </div>
         <div className="process-a-grid">
           {processSteps.map((step, index) => (
-            <article className="process-a-card" key={step.num} style={{ "--step-index": index } as React.CSSProperties}>
+            <article className="process-a-card" key={step.num} style={stepStyle(index)}>
               <span className="process-num">{step.num}</span>
               <h3>{step.title}</h3>
               <p>{step.copy}</p>
@@ -77,7 +84,7 @@ export default function ProcessOptionsPage() {
         </div>
         <div className="process-b-stage">
           {processSteps.map((step, index) => (
-            <article className="process-b-card" key={step.num} style={{ "--step-index": index } as React.CSSProperties}>
+            <article className="process-b-card" key={step.num} style={stepStyle(index)}>
               <div className="process-b-orb" aria-hidden="true" />
               <span className="process-num">{step.num}</span>
               <h3>{step.title}</h3>
@@ -100,7 +107,7 @@ export default function ProcessOptionsPage() {
           </div>
           <div className="process-c-steps">
             {processSteps.map((step, index) => (
-              <article className="process-c-card" key={step.num} style={{ "--step-index": index } as React.CSSProperties}>
+              <article className="process-c-card" key={step.num} style={stepStyle(index)}>
                 <span className="process-num">{step.num}</span>
                 <div>
                   <h3>{step.title}</h3>
