@@ -6,6 +6,7 @@ import './testimonials-mount.css';
 import './process-options.css';
 import './home-process-orbit.css';
 import './scrollbar-fix.css';
+import './sf-pro-font.css';
 import { ButtonFillController } from './components/ButtonFillController';
 import { HomeProcessOrbitMount } from './components/HomeProcessOrbitMount';
 import { HomeTestimonialsMount } from './components/HomeTestimonialsMount';
