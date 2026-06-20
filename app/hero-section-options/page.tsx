@@ -14,6 +14,7 @@ type HeroCard = {
   type: "image" | "booking" | "stack";
   image?: string;
   accent?: string;
+  badge?: string;
 };
 
 const cards: HeroCard[] = [
@@ -22,6 +23,7 @@ const cards: HeroCard[] = [
     desc: "Private/shared tour pricing, add-ons, AED totals and booking emails.",
     type: "booking",
     accent: "#ff7a18",
+    badge: "AED",
   },
   {
     title: "Griffin IT",
@@ -29,6 +31,7 @@ const cards: HeroCard[] = [
     type: "image",
     image: `${basePath}/work-images/griffin-it.webp`,
     accent: "#0ea5e9",
+    badge: "GI",
   },
   {
     title: "Kay Kay Travels",
@@ -36,6 +39,7 @@ const cards: HeroCard[] = [
     type: "image",
     image: `${basePath}/work-images/kay-kay.webp`,
     accent: "#22c55e",
+    badge: "KKT",
   },
   {
     title: "Book My Holidays",
@@ -43,6 +47,7 @@ const cards: HeroCard[] = [
     type: "image",
     image: `${basePath}/work-images/book-my-holidays.webp`,
     accent: "#38bdf8",
+    badge: "BMH",
   },
   {
     title: "FastDocNow",
@@ -50,6 +55,7 @@ const cards: HeroCard[] = [
     type: "image",
     image: `${basePath}/work-images/fastdocnow.webp`,
     accent: "#2563eb",
+    badge: "FDN",
   },
   {
     title: "Griffin Resources",
@@ -57,12 +63,14 @@ const cards: HeroCard[] = [
     type: "image",
     image: `${basePath}/work-images/griffin-resources.webp`,
     accent: "#a855f7",
+    badge: "GR",
   },
   {
     title: "Build Stack",
     desc: "WordPress, Elementor Pro, WooCommerce, ACF, PHP, GSAP.",
     type: "stack",
     accent: "#070707",
+    badge: "WP",
   },
 ];
 
@@ -174,7 +182,7 @@ function StackPreview({ accent }: { accent: string }) {
           <span key={tool} style={{ borderRadius: 999, background: index === 1 ? "#fff" : "rgba(255,255,255,.12)", color: index === 1 ? "#070707" : "#fff", padding: "7px 9px", fontSize: 10, fontWeight: 900, letterSpacing: "-.025em" }}>{tool}</span>
         ))}
       </div>
-      <span style={{ position: "absolute", left: 14, bottom: 14, width: 76, height: 30, borderRadius: 10, background: accent }} />
+      <span style={{ position: "absolute", left: 14, bottom: 14, minWidth: 48, height: 30, borderRadius: 10, background: accent, color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", paddingInline: 10, fontSize: 11, fontWeight: 950, letterSpacing: "-.035em" }}>WP</span>
     </div>
   );
 }
@@ -207,7 +215,7 @@ function HeroCardItem({ card }: { card: HeroCard }) {
         <h3 style={{ color: card.type === "image" ? "#fff" : undefined }}>{card.title}</h3>
         <p style={{ color: card.type === "image" ? "rgba(255,255,255,.72)" : undefined }}>{card.desc}</p>
         {card.type === "image" ? (
-          <span style={{ position: "absolute", right: 13, bottom: 14, width: 34, height: 18, borderRadius: 999, background: card.accent || "#22c55e", boxShadow: "0 8px 22px rgba(0,0,0,.20)" }} />
+          <span style={{ position: "absolute", right: 13, bottom: 13, minWidth: 40, height: 22, borderRadius: 999, background: card.accent || "#22c55e", color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", paddingInline: 9, fontSize: 10, lineHeight: 1, fontWeight: 950, letterSpacing: "-.035em", boxShadow: "0 8px 22px rgba(0,0,0,.20)" }}>{card.badge}</span>
         ) : null}
       </div>
     </article>
