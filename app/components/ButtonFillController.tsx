@@ -23,7 +23,7 @@ export function ButtonFillController() {
   useEffect(() => {
     const updateButtonOrigin = (event: PointerEvent) => {
       const target = event.target as HTMLElement | null;
-      const button = target?.closest?.(".about-button") as HTMLElement | null;
+      const button = target?.closest?.(".about-button, [data-cursor-fill='true']") as HTMLElement | null;
 
       if (!button) return;
 
