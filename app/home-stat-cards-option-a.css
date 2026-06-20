@@ -1,180 +1,208 @@
 /* Homepage stats cards — Option A card treatment only. Left black profile card stays unchanged. */
 .stats-showcase-section .stats-grid {
-  gap: 18px;
+  gap: 18px !important;
 }
 
 .stats-showcase-section .stat {
-  position: relative;
-  min-height: 203px;
-  border-radius: 26px;
-  overflow: hidden;
-  padding: 30px;
-  background: rgba(255,255,255,.76);
-  border: 1px solid rgba(7,7,7,.07);
-  box-shadow: 0 24px 70px rgba(7,7,7,.07), inset 0 1px 0 rgba(255,255,255,.82);
-  backdrop-filter: blur(18px);
-  text-align: left;
+  position: relative !important;
+  isolation: isolate !important;
+  min-height: 203px !important;
+  border-radius: 26px !important;
+  overflow: hidden !important;
+  padding: 30px !important;
+  background: rgba(255,255,255,.76) !important;
+  border: 1px solid rgba(7,7,7,.07) !important;
+  box-shadow: 0 24px 70px rgba(7,7,7,.07), inset 0 1px 0 rgba(255,255,255,.82) !important;
+  backdrop-filter: blur(18px) !important;
+  text-align: left !important;
 }
 
 .stats-showcase-section .stat::before {
-  content: "";
-  position: absolute;
-  left: 28px;
-  right: 28px;
-  top: 24px;
-  height: 4px;
-  border-radius: 999px;
-  background: rgba(7,7,7,.14);
+  content: "" !important;
+  position: absolute !important;
+  left: 28px !important;
+  right: 28px !important;
+  top: 24px !important;
+  height: 4px !important;
+  border-radius: 999px !important;
+  background: rgba(7,7,7,.14) !important;
+  animation: none !important;
+  z-index: 2 !important;
 }
 
 .stats-showcase-section .stat:nth-child(1)::before {
-  background: linear-gradient(90deg, #ff7a18, rgba(255,122,24,0));
+  background: linear-gradient(90deg, #ff7a18, rgba(255,122,24,0)) !important;
 }
 
 .stats-showcase-section .stat:nth-child(2)::before {
-  background: linear-gradient(90deg, #a855f7, rgba(168,85,247,0));
+  background: linear-gradient(90deg, #a855f7, rgba(168,85,247,0)) !important;
 }
 
 .stats-showcase-section .stat:nth-child(3)::before {
-  background: linear-gradient(90deg, #22c55e, rgba(34,197,94,0));
+  background: linear-gradient(90deg, #22c55e, rgba(34,197,94,0)) !important;
 }
 
 .stats-showcase-section .stat:nth-child(4)::before {
-  background: linear-gradient(90deg, #070707, rgba(7,7,7,0));
+  background: linear-gradient(90deg, #070707, rgba(7,7,7,0)) !important;
 }
 
+/* Bottom-right index number. Reset the old animated corner badge styles first. */
 .stats-showcase-section .stat::after {
-  position: absolute;
-  right: 24px;
-  bottom: 20px;
-  color: rgba(7,7,7,.22);
-  font-size: 12px;
-  font-weight: 950;
-  letter-spacing: -.03em;
+  position: absolute !important;
+  inset: auto 24px 20px auto !important;
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  display: block !important;
+  place-items: initial !important;
+  border-radius: 0 !important;
+  border: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  transform: none !important;
+  animation: none !important;
+  filter: none !important;
+  z-index: 4 !important;
+  color: rgba(7,7,7,.22) !important;
+  font-size: 12px !important;
+  line-height: 1 !important;
+  font-weight: 950 !important;
+  letter-spacing: -.03em !important;
 }
 
-.stats-showcase-section .stat:nth-child(1)::after { content: "01"; }
-.stats-showcase-section .stat:nth-child(2)::after { content: "02"; }
-.stats-showcase-section .stat:nth-child(3)::after { content: "03"; }
-.stats-showcase-section .stat:nth-child(4)::after { content: "04"; }
+.stats-showcase-section .stat:nth-child(1)::after { content: "01" !important; }
+.stats-showcase-section .stat:nth-child(2)::after { content: "02" !important; }
+.stats-showcase-section .stat:nth-child(3)::after { content: "03" !important; }
+.stats-showcase-section .stat:nth-child(4)::after { content: "04" !important; }
 
 .stats-showcase-section .stat-top {
-  display: block;
-  position: static;
+  display: block !important;
+  position: static !important;
 }
 
 .stats-showcase-section .stat-top::after {
-  position: absolute;
-  top: 20px;
-  right: 22px;
-  min-width: 48px;
-  height: 48px;
-  display: grid;
-  place-items: center;
-  border-radius: 17px;
-  border: 1px solid rgba(7,7,7,.07);
-  background: rgba(255,255,255,.42);
-  color: rgba(7,7,7,.62);
-  font-size: 12px;
-  font-weight: 950;
-  letter-spacing: -.04em;
-  box-shadow: inset 0 0 24px rgba(255,255,255,.8);
+  position: absolute !important;
+  top: 20px !important;
+  right: 22px !important;
+  z-index: 4 !important;
+  min-width: 48px !important;
+  height: 48px !important;
+  display: grid !important;
+  place-items: center !important;
+  border-radius: 17px !important;
+  border: 1px solid rgba(7,7,7,.07) !important;
+  background: rgba(255,255,255,.42) !important;
+  color: rgba(7,7,7,.62) !important;
+  font-size: 12px !important;
+  line-height: 1 !important;
+  font-weight: 950 !important;
+  letter-spacing: -.04em !important;
+  box-shadow: inset 0 0 24px rgba(255,255,255,.8), 0 12px 30px rgba(7,7,7,.045) !important;
 }
 
 .stats-showcase-section .stat:nth-child(1) .stat-top::after {
-  content: "WP";
-  color: #ff7a18;
+  content: "WP" !important;
+  color: #ff7a18 !important;
 }
 
 .stats-showcase-section .stat:nth-child(2) .stat-top::after {
-  content: "PR";
-  color: #a855f7;
+  content: "PR" !important;
+  color: #a855f7 !important;
 }
 
 .stats-showcase-section .stat:nth-child(3) .stat-top::after {
-  content: "FG";
-  color: #22c55e;
+  content: "FG" !important;
+  color: #22c55e !important;
 }
 
 .stats-showcase-section .stat:nth-child(4) .stat-top::after {
-  content: "SP";
-  color: #070707;
+  content: "SP" !important;
+  color: #070707 !important;
 }
 
 .stats-showcase-section .stat strong {
-  display: block;
-  margin-top: 16px;
-  color: #070707;
-  font-size: clamp(3.1rem, 5.4vw, 5.25rem);
-  line-height: .82;
-  letter-spacing: -.095em;
-  font-weight: 950;
+  display: block !important;
+  margin-top: 16px !important;
+  color: #070707 !important;
+  font-size: clamp(3.1rem, 5.4vw, 5.25rem) !important;
+  line-height: .82 !important;
+  letter-spacing: -.095em !important;
+  font-weight: 950 !important;
+  animation: none !important;
+  transform: none !important;
+  text-shadow: none !important;
 }
 
 .stats-showcase-section .stat:nth-child(4) strong {
-  font-size: clamp(2.95rem, 4.9vw, 5.1rem);
-  letter-spacing: -.105em;
+  font-size: clamp(2.95rem, 4.9vw, 5.1rem) !important;
+  letter-spacing: -.105em !important;
 }
 
 .stats-showcase-section .stat span {
-  display: block;
-  margin-top: 12px;
-  color: rgba(7,7,7,.55);
-  font-size: 15px;
-  font-weight: 900;
-  letter-spacing: -.035em;
+  display: block !important;
+  margin-top: 12px !important;
+  color: rgba(7,7,7,.55) !important;
+  font-size: 15px !important;
+  line-height: 1.15 !important;
+  font-weight: 900 !important;
+  letter-spacing: -.035em !important;
 }
 
+/* Restore the description text hidden by the previous stats-motion CSS. */
 .stats-showcase-section .stat p {
-  margin: 12px 0 0;
-  max-width: 290px;
-  color: transparent;
-  font-size: 0;
-  line-height: 1.45;
+  display: block !important;
+  margin: 12px 0 0 !important;
+  max-width: 290px !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 1.45 !important;
+  font-weight: 700 !important;
+  letter-spacing: -.02em !important;
 }
 
 .stats-showcase-section .stat p::after {
-  display: block;
-  color: rgba(7,7,7,.45);
-  font-size: 12px;
-  line-height: 1.45;
-  font-weight: 700;
-  letter-spacing: -.02em;
+  display: block !important;
+  color: rgba(7,7,7,.45) !important;
+  font-size: 12px !important;
+  line-height: 1.45 !important;
+  font-weight: 700 !important;
+  letter-spacing: -.02em !important;
 }
 
 .stats-showcase-section .stat:nth-child(1) p::after {
-  content: "Hands-on WordPress, WooCommerce & Elementor Pro for international clients.";
+  content: "Hands-on WordPress, WooCommerce & Elementor Pro for international clients." !important;
 }
 
 .stats-showcase-section .stat:nth-child(2) p::after {
-  content: "Business, e-commerce, healthcare, booking and consultancy websites delivered.";
+  content: "Business, e-commerce, healthcare, booking and consultancy websites delivered." !important;
 }
 
 .stats-showcase-section .stat:nth-child(3) p::after {
-  content: "Figma and PSD designs converted into responsive, pixel-perfect WordPress sites.";
+  content: "Figma and PSD designs converted into responsive, pixel-perfect WordPress sites." !important;
 }
 
 .stats-showcase-section .stat:nth-child(4) p::after {
-  content: "Load-time improvements through cache, image optimisation and plugin cleanup.";
+  content: "Load-time improvements through cache, image optimisation and plugin cleanup." !important;
 }
 
 .stats-showcase-section .stat:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 30px 76px rgba(7,7,7,.10), inset 0 1px 0 rgba(255,255,255,.86);
+  transform: translateY(-4px) !important;
+  box-shadow: 0 30px 76px rgba(7,7,7,.10), inset 0 1px 0 rgba(255,255,255,.86) !important;
 }
 
 @media (max-width: 560px) {
   .stats-showcase-section .stats-grid {
-    gap: 14px;
+    gap: 14px !important;
   }
 
   .stats-showcase-section .stat {
-    min-height: 190px;
-    padding: 24px;
+    min-height: 190px !important;
+    padding: 24px !important;
   }
 
   .stats-showcase-section .stat::before {
-    left: 24px;
-    right: 24px;
+    left: 24px !important;
+    right: 24px !important;
   }
 }
