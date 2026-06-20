@@ -75,8 +75,8 @@ function CasePreview({ activeCase }: { activeCase: typeof cases[number] }) {
       exit={{ opacity: 0, y: -18, scale: 0.96 }}
       transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
     >
-      <img src={activeCase.image} alt={`${activeCase.client} project thumbnail`} className={styles.realPreviewImage} />
-      <div className={styles.previewOverlay} />
+      <img src={activeCase.image} alt={`${activeCase.client} project thumbnail`} className="work-real-preview-image" />
+      <div className="work-real-preview-overlay" />
       <div className={styles.browserTop}>
         <i />
         <i />
