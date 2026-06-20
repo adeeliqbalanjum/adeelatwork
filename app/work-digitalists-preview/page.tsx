@@ -7,6 +7,7 @@ import { ArrowUpRight } from "lucide-react";
 import styles from "./WorkDigitalistsPreview.module.css";
 import "./WorkDigitalistsSuggestions.css";
 import "./WorkDigitalistsNeonPolish.css";
+import "./WorkDigitalistsFormatOptions.css";
 
 const basePath = process.env.NODE_ENV === "production" ? "/adeelatwork" : "";
 
@@ -152,6 +153,91 @@ function SuggestionSection({
   );
 }
 
+function FormatPreview({ activeCase, variant }: { activeCase: typeof cases[number]; variant: "fresh" | "lime" | "midnight" }) {
+  return (
+    <AnimatePresence mode="wait">
+      <motion.figure
+        key={`${variant}-${activeCase.client}`}
+        className={`format-preview-card format-preview-card--${variant}`}
+        initial={{ opacity: 0, y: 22, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: -18, scale: 0.97 }}
+        transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <img src={activeCase.image} alt={`${activeCase.client} preview`} />
+        <figcaption>
+          <span>{activeCase.code}</span>
+          <strong>{activeCase.client}</strong>
+        </figcaption>
+      </motion.figure>
+    </AnimatePresence>
+  );
+}
+
+function FormatDesignSection({
+  variant,
+  label,
+  title,
+  description,
+}: {
+  variant: "fresh" | "lime" | "midnight";
+  label: string;
+  title: string;
+  description: string;
+}) {
+  const [activeIndex, setActiveIndex] = React.useState(1);
+  const activeCase = cases[activeIndex];
+
+  return (
+    <section className={`format-option format-option--${variant}`}>
+      <motion.div
+        className="format-option-head"
+        initial={{ opacity: 0, y: 26 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.28 }}
+        transition={{ duration: 0.62, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <span>{label}</span>
+        <h2>{title}</h2>
+        <p>{description}</p>
+      </motion.div>
+
+      <div className="format-option-grid">
+        <div className="format-option-media">
+          <FormatPreview activeCase={activeCase} variant={variant} />
+        </div>
+
+        <div className="format-option-rows">
+          {cases.map((item, index) => {
+            const active = index === activeIndex;
+            return (
+              <motion.article
+                key={item.client}
+                className={`format-row ${active ? "is-active" : ""}`}
+                onMouseEnter={() => setActiveIndex(index)}
+                onFocus={() => setActiveIndex(index)}
+                tabIndex={0}
+                initial={{ opacity: 0, x: 28 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: false, amount: 0.18 }}
+                transition={{ duration: 0.46, delay: index * 0.035, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <span className="format-code">{item.code}</span>
+                <div className="format-title-block">
+                  <h3>{item.title}</h3>
+                  <small>{item.client}</small>
+                </div>
+                <p>{item.services}</p>
+                <ArrowUpRight size={23} />
+              </motion.article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function WorkDigitalistsPreviewPage() {
   const [activeIndex, setActiveIndex] = React.useState(0);
 
@@ -202,6 +288,10 @@ export default function WorkDigitalistsPreviewPage() {
                   <span className={styles.gridIcon}><ArrowUpRight size={24} /></span>
                   <span className="digitalists-row-preview" aria-hidden="true">
                     <img src={item.image} alt="" />
+                    <span className="digitalists-row-caption">
+                      <em>{item.code}</em>
+                      <b>{item.client}</b>
+                    </span>
                   </span>
                 </>
               );
@@ -229,6 +319,27 @@ export default function WorkDigitalistsPreviewPage() {
           </div>
         </div>
       </section>
+
+      <FormatDesignSection
+        variant="fresh"
+        label="Updated design 01"
+        title="Fresh glass portfolio board"
+        description="Large preview card on the left, premium white rows on the right, and the same active black row behavior you liked."
+      />
+
+      <FormatDesignSection
+        variant="lime"
+        label="Updated design 02"
+        title="Lime editorial case board"
+        description="Closer to the Digitalists neon mood, but cleaner, with stronger row contrast and a more polished project image card."
+      />
+
+      <FormatDesignSection
+        variant="midnight"
+        label="Updated design 03"
+        title="Midnight neon portfolio board"
+        description="A darker agency-style version with glowing green accents, strong typography, and the same left-preview/right-row format."
+      />
 
       <SuggestionSection
         variant="soft"
