@@ -136,37 +136,82 @@
   isolation: isolate;
   overflow: hidden;
   min-height: 58px;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 18px;
   width: 100%;
+  margin-top: 32px;
+  padding: 8px 10px 8px 24px;
   border-radius: 999px;
-  background: #070707;
-  color: #fff;
+  background: #fff;
+  color: #090909;
   font-size: 18px;
   font-weight: 950;
-  letter-spacing: -.045em;
-  box-shadow: 0 20px 54px rgba(7,7,7,.18);
-  transition: transform .28s ease, box-shadow .28s ease;
+  line-height: 1;
+  letter-spacing: -.055em;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.08), 0 18px 44px rgba(0,0,0,.16);
+  transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s cubic-bezier(.2,.8,.2,1);
 }
 
 .lightCta::before {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: 1px;
   z-index: -1;
-  background: linear-gradient(105deg, #070707 0%, #0ea5e9 42%, #22c55e 72%, #070707 100%);
-  transform: translateX(-102%);
-  transition: transform .42s cubic-bezier(.22, 1, .36, 1);
+  border-radius: 999px;
+  background: linear-gradient(110deg, rgba(255,255,255,.95), rgba(255,255,255,.66));
+}
+
+.lightCta::after {
+  content: "";
+  position: absolute;
+  left: var(--btn-x, 50%);
+  top: var(--btn-y, 50%);
+  z-index: -1;
+  width: 0;
+  height: 0;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(125,211,252,.72) 0%, rgba(134,239,172,.62) 40%, rgba(255,255,255,0) 72%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: width .38s cubic-bezier(.22,1,.36,1), height .38s cubic-bezier(.22,1,.36,1), opacity .22s ease;
 }
 
 .lightCta:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 24px 64px rgba(14,165,233,.22), 0 14px 42px rgba(7,7,7,.20);
+  transform: translateY(-2px);
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.08), 0 22px 54px rgba(0,0,0,.18);
 }
 
-.lightCta:hover::before {
-  transform: translateX(0);
+.lightCta:hover::after {
+  width: 240px;
+  height: 240px;
+  opacity: 1;
+}
+
+.lightCtaText {
+  position: relative;
+  z-index: 2;
+}
+
+.lightAvatar {
+  position: relative;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex: 0 0 44px;
+  margin-left: auto;
+  border: 2px solid rgba(255,255,255,.88);
+  box-shadow: 0 10px 25px rgba(0,0,0,.18);
+}
+
+.lightAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .lightMetrics {
