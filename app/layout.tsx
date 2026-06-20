@@ -13,12 +13,14 @@ import './build-stack-card-polish.css';
 import './build-stack-card-logo-fix.css';
 import './mobile-pill-fix.css';
 import './hero-content-sync.css';
+import './home-hero-option-b.css';
 import './work-digitalists-images.css';
 import './home-digitalists-work.css';
 import './scrollbar-fix.css';
 import { ButtonFillController } from './components/ButtonFillController';
 import { HomeBuildStackMount } from './components/HomeBuildStackMount';
 import { HomeDigitalistsWorkMount } from './components/HomeDigitalistsWorkMount';
+import { HomeHeroOptionBMount } from './components/HomeHeroOptionBMount';
 import { HomeProcessOrbitMount } from './components/HomeProcessOrbitMount';
 import { HomeTestimonialsMount } from './components/HomeTestimonialsMount';
 import { ScrollProgressBar } from './components/ScrollProgressBar';
@@ -41,6 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ScrollProgressBar type='bar' color='#070707' strokeSize={2} showPercentage={false} />
         <ScrollProgressBar position='bottom-right' color='#070707' strokeSize={3} showPercentage />
         {children}
+        <HomeHeroOptionBMount />
         <HomeBuildStackMount />
         <HomeDigitalistsWorkMount />
         <HomeProcessOrbitMount />
