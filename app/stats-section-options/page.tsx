@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from "./StatsSectionOptions.module.css";
 import tweaks from "./StatsSectionOptionTweaks.module.css";
+import light from "./StatsLightOption.module.css";
 
 const stats = [
   { value: "3+", label: "Years WordPress", code: "WP", tone: "orange", copy: "Hands-on WordPress, WooCommerce & Elementor Pro for international clients." },
@@ -36,6 +37,19 @@ function MetricCard({ stat, index }: { stat: (typeof stats)[number]; index: numb
     <article className={`${styles.metricCard} ${styles[stat.tone]}`}>
       <div className={styles.cardLine} />
       <div className={styles.code}>{stat.code}</div>
+      <strong>{stat.value}</strong>
+      <span>{stat.label}</span>
+      <p>{stat.copy}</p>
+      <small>0{index + 1}</small>
+    </article>
+  );
+}
+
+function LightMetricCard({ stat, index }: { stat: (typeof stats)[number]; index: number }) {
+  return (
+    <article className={`${light.lightMetric} ${light[stat.tone]}`}>
+      <div className={light.lightLine} />
+      <div className={light.lightCode}>{stat.code}</div>
       <strong>{stat.value}</strong>
       <span>{stat.label}</span>
       <p>{stat.copy}</p>
@@ -135,6 +149,28 @@ function OptionE() {
   );
 }
 
+function OptionF() {
+  return (
+    <section className={`${styles.option} ${light.optionF}`}>
+      <div className={styles.optionLabel}>Option F · Light glass authority</div>
+      <div className={light.lightShell}>
+        <aside className={light.lightIntro}>
+          <div>
+            <span className={light.lightEyebrow}>Profile snapshot</span>
+            <h2>I&apos;m <span>Muhammad Adeel Iqbal</span></h2>
+            <span className={light.nameLine} aria-hidden="true" />
+            <p>
+              A WordPress Developer specialising in building, redesigning, and improving websites for international clients in UAE, UK, and USA — Elementor Pro, WooCommerce stores, custom plugins, and Figma-to-WordPress builds.
+            </p>
+          </div>
+          <a href="mailto:adeeliqbalajum@gmail.com" className={light.lightCta}>Work with me</a>
+        </aside>
+        <div className={light.lightMetrics}>{stats.map((stat, index) => <LightMetricCard stat={stat} index={index} key={stat.label} />)}</div>
+      </div>
+    </section>
+  );
+}
+
 export default function StatsSectionOptionsPage() {
   return (
     <main className={styles.page}>
@@ -152,6 +188,7 @@ export default function StatsSectionOptionsPage() {
       <OptionC />
       <OptionD />
       <OptionE />
+      <OptionF />
     </main>
   );
 }
