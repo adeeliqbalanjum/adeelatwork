@@ -37,6 +37,20 @@ main,
   display: none !important;
 }
 
+/* Remove the hard white rectangle behind the moving project cards. */
+.home-hero-b-haze {
+  background: radial-gradient(ellipse at center, rgba(255,255,255,.42) 0%, rgba(255,255,255,.20) 38%, rgba(255,255,255,0) 72%) !important;
+  border-block: 0 !important;
+  filter: blur(18px) !important;
+  opacity: .72 !important;
+}
+
+.home-hero-b-haze::before,
+.home-hero-b-haze::after {
+  content: none !important;
+  display: none !important;
+}
+
 @supports not (overflow: clip) {
   body {
     overflow-y: hidden !important;
