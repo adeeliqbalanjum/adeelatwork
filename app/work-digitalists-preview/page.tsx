@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import styles from "./WorkDigitalistsPreview.module.css";
 import "./WorkDigitalistsSuggestions.css";
+import "./WorkDigitalistsNeonPolish.css";
 
 const basePath = process.env.NODE_ENV === "production" ? "/adeelatwork" : "";
 
@@ -65,41 +66,6 @@ const cases = [
     href: "",
   },
 ];
-
-function CasePreview({ activeCase }: { activeCase: typeof cases[number] }) {
-  return (
-    <motion.div
-      key={activeCase.title}
-      className={`${styles.casePreview} ${styles[activeCase.tone]}`}
-      initial={{ opacity: 0, y: 22, scale: 0.96, rotate: -2 }}
-      animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
-      exit={{ opacity: 0, y: -18, scale: 0.96 }}
-      transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
-    >
-      <img src={activeCase.image} alt={`${activeCase.client} project thumbnail`} className="work-real-preview-image" />
-      <div className="work-real-preview-overlay" />
-      <div className={styles.browserTop}>
-        <i />
-        <i />
-        <i />
-        <span>{activeCase.client}</span>
-      </div>
-      <div className={styles.previewBody}>
-        <div className={styles.previewHero} />
-        <div className={styles.previewLines}>
-          <span />
-          <span />
-          <span />
-        </div>
-        <div className={styles.previewCards}>
-          <span />
-          <span />
-          <span />
-        </div>
-      </div>
-    </motion.div>
-  );
-}
 
 function SuggestionPreview({ activeCase, variant }: { activeCase: typeof cases[number]; variant: "soft" | "dark" | "compact" }) {
   return (
@@ -188,14 +154,13 @@ function SuggestionSection({
 
 export default function WorkDigitalistsPreviewPage() {
   const [activeIndex, setActiveIndex] = React.useState(0);
-  const activeCase = cases[activeIndex];
 
   return (
-    <main className={styles.page}>
+    <main className={`${styles.page} digitalists-neon-page`}>
       <Link href="/work-section-options" className={styles.back}>← Back to options</Link>
 
-      <section className={styles.workSection}>
-        <div className={styles.topBar}>
+      <section className={`${styles.workSection} digitalists-neon-section`}>
+        <div className={`${styles.topBar} digitalists-top-bar`}>
           <motion.div
             className={styles.handLabel}
             initial={{ opacity: 0, y: 18 }}
@@ -224,12 +189,8 @@ export default function WorkDigitalistsPreviewPage() {
           </motion.div>
         </div>
 
-        <div className={styles.caseListWrap}>
-          <AnimatePresence mode="wait">
-            <CasePreview activeCase={activeCase} />
-          </AnimatePresence>
-
-          <div className={styles.caseList}>
+        <div className={`${styles.caseListWrap} digitalists-case-list-wrap`}>
+          <div className={`${styles.caseList} digitalists-case-list`}>
             {cases.map((item, index) => {
               const active = index === activeIndex;
               const rowContent = (
@@ -239,6 +200,9 @@ export default function WorkDigitalistsPreviewPage() {
                   <strong>{item.client}</strong>
                   <p>· {item.services}</p>
                   <span className={styles.gridIcon}><ArrowUpRight size={24} /></span>
+                  <span className="digitalists-row-preview" aria-hidden="true">
+                    <img src={item.image} alt="" />
+                  </span>
                 </>
               );
 
@@ -246,7 +210,7 @@ export default function WorkDigitalistsPreviewPage() {
                 <Link
                   key={item.title}
                   href={item.href}
-                  className={`${styles.caseRow} ${active ? styles.active : ""}`}
+                  className={`${styles.caseRow} digitalists-case-row ${active ? `${styles.active} is-active` : ""}`}
                   onMouseEnter={() => setActiveIndex(index)}
                   onFocus={() => setActiveIndex(index)}
                 >
@@ -255,7 +219,7 @@ export default function WorkDigitalistsPreviewPage() {
               ) : (
                 <article
                   key={item.title}
-                  className={`${styles.caseRow} ${active ? styles.active : ""}`}
+                  className={`${styles.caseRow} digitalists-case-row ${active ? `${styles.active} is-active` : ""}`}
                   onMouseEnter={() => setActiveIndex(index)}
                 >
                   {rowContent}
