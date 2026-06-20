@@ -1,25 +1,13 @@
-/* Keep only one real browser/page scrollbar visible. */
+/* Keep only the browser/page scrollbar visible. */
 html {
-  width: 100% !important;
-  max-width: 100% !important;
   overflow-x: hidden !important;
   overflow-y: scroll !important;
   scrollbar-gutter: auto !important;
 }
 
 body {
-  width: 100% !important;
-  max-width: 100% !important;
   overflow-x: hidden !important;
   overflow-y: clip !important;
-  -ms-overflow-style: none !important;
-  scrollbar-width: none !important;
-}
-
-body::-webkit-scrollbar {
-  width: 0 !important;
-  height: 0 !important;
-  display: none !important;
 }
 
 main,
@@ -31,43 +19,26 @@ main,
   overflow-y: visible !important;
 }
 
-/* The hero should never show its own nested scrollbar. */
+/* Hide any inner scrollbar without changing hero layout/height. */
 #home,
 #home *,
-#home.home-hero-option-b-mounted,
-#home.home-hero-option-b-mounted * {
+.home-hero-option-b-mounted,
+.home-hero-option-b-mounted * {
   scrollbar-width: none !important;
   -ms-overflow-style: none !important;
 }
 
 #home::-webkit-scrollbar,
 #home *::-webkit-scrollbar,
-#home.home-hero-option-b-mounted::-webkit-scrollbar,
-#home.home-hero-option-b-mounted *::-webkit-scrollbar {
+.home-hero-option-b-mounted::-webkit-scrollbar,
+.home-hero-option-b-mounted *::-webkit-scrollbar {
   width: 0 !important;
   height: 0 !important;
   display: none !important;
 }
 
-#home.home-hero-option-b-mounted {
-  max-width: 100vw !important;
-  overflow-x: clip !important;
-  overflow-y: hidden !important;
-}
-
-#home.home-hero-option-b-mounted .home-hero-b,
-#home.home-hero-option-b-mounted .home-hero-b-showcase {
-  max-width: 100vw !important;
-  overflow-x: hidden !important;
-  overflow-y: hidden !important;
-}
-
 @supports not (overflow: clip) {
   body {
     overflow-y: hidden !important;
-  }
-
-  #home.home-hero-option-b-mounted {
-    overflow-x: hidden !important;
   }
 }
