@@ -82,10 +82,11 @@ function DigitalistsCaseSection({
 }) {
   const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
   const isNeon = variant === "neon";
+  const activeTone = hoveredIndex === null ? "default" : cases[hoveredIndex].tone;
 
   return (
     <section
-      className={`${styles.workSection} ${isNeon ? "digitalists-neon-section" : "digitalists-section-shell"} digitalists-section--${variant}`}
+      className={`${styles.workSection} ${isNeon ? "digitalists-neon-section" : "digitalists-section-shell"} digitalists-section--${variant} digitalists-active-tone-${activeTone}`}
     >
       <div className={`${styles.topBar} digitalists-top-bar`}>
         <motion.div
