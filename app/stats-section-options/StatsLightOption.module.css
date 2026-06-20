@@ -1,0 +1,309 @@
+.optionF {
+  border: 1px solid rgba(255,255,255,.56);
+  background:
+    radial-gradient(circle at 10% 4%, rgba(14,165,233,.22), transparent 34%),
+    radial-gradient(circle at 92% 8%, rgba(34,197,94,.22), transparent 36%),
+    linear-gradient(135deg, rgba(255,255,255,.68), rgba(232,250,248,.46));
+  box-shadow: 0 38px 120px rgba(7,7,7,.10), inset 0 1px 0 rgba(255,255,255,.72);
+}
+
+.lightShell {
+  position: relative;
+  display: grid;
+  grid-template-columns: .92fr 1.58fr;
+  gap: 18px;
+  border-radius: 34px;
+  padding: 16px;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.62), rgba(255,255,255,.28)),
+    radial-gradient(circle at 0% 0%, rgba(14,165,233,.18), transparent 38%),
+    radial-gradient(circle at 100% 0%, rgba(34,197,94,.16), transparent 38%);
+  border: 1px solid rgba(255,255,255,.58);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.22), 0 30px 90px rgba(7,7,7,.08);
+}
+
+.lightShell::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border-radius: 28px;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.22), rgba(255,255,255,.04), rgba(255,255,255,.18));
+  pointer-events: none;
+  opacity: .72;
+}
+
+.lightIntro,
+.lightMetric {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  border-radius: 28px;
+  border: 1px solid rgba(7,7,7,.065);
+  backdrop-filter: blur(24px);
+}
+
+.lightIntro {
+  min-height: 392px;
+  padding: 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(125,211,252,.40), transparent 34%),
+    radial-gradient(circle at 90% 8%, rgba(134,239,172,.34), transparent 34%),
+    linear-gradient(135deg, rgba(255,255,255,.78), rgba(255,255,255,.48));
+  box-shadow: 0 28px 82px rgba(7,7,7,.09), inset 0 1px 0 rgba(255,255,255,.84);
+  color: #070707;
+}
+
+.lightIntro::after {
+  content: "";
+  position: absolute;
+  inset: auto -20% -38% -20%;
+  height: 56%;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,.68), transparent 70%);
+  pointer-events: none;
+}
+
+.lightEyebrow {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  border-radius: 999px;
+  padding: 0 12px;
+  background: rgba(255,255,255,.58);
+  border: 1px solid rgba(7,7,7,.08);
+  color: rgba(7,7,7,.55);
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
+}
+
+.lightIntro h2 {
+  margin: 24px 0 0;
+  max-width: 470px;
+  font-size: clamp(2.25rem, 4vw, 4.15rem);
+  line-height: .94;
+  letter-spacing: -.085em;
+  font-weight: 950;
+  color: #070707;
+}
+
+.lightIntro h2 span {
+  display: block;
+  background: linear-gradient(110deg, #070707 0%, #475569 24%, #0ea5e9 48%, #22c55e 74%, #070707 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: lightNameShift 7s ease-in-out infinite;
+}
+
+@keyframes lightNameShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.nameLine {
+  display: block;
+  width: min(230px, 74%);
+  height: 6px;
+  margin-top: 18px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #7dd3fc, #86efac, rgba(7,7,7,.18));
+  box-shadow: 0 0 28px rgba(125,211,252,.28), 0 0 22px rgba(134,239,172,.18);
+}
+
+.lightIntro p {
+  position: relative;
+  z-index: 2;
+  margin: 24px 0 0;
+  max-width: 480px;
+  color: rgba(7,7,7,.56);
+  font-size: 17px;
+  line-height: 1.47;
+  letter-spacing: -.035em;
+  font-weight: 750;
+}
+
+.lightCta {
+  position: relative;
+  z-index: 2;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 58px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: 999px;
+  background: #070707;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 950;
+  letter-spacing: -.045em;
+  box-shadow: 0 20px 54px rgba(7,7,7,.18);
+  transition: transform .28s ease, box-shadow .28s ease;
+}
+
+.lightCta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(105deg, #070707 0%, #0ea5e9 42%, #22c55e 72%, #070707 100%);
+  transform: translateX(-102%);
+  transition: transform .42s cubic-bezier(.22, 1, .36, 1);
+}
+
+.lightCta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 64px rgba(14,165,233,.22), 0 14px 42px rgba(7,7,7,.20);
+}
+
+.lightCta:hover::before {
+  transform: translateX(0);
+}
+
+.lightMetrics {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.lightMetric {
+  min-height: 203px;
+  padding: 30px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.52));
+  box-shadow: 0 24px 70px rgba(7,7,7,.075), inset 0 1px 0 rgba(255,255,255,.88);
+}
+
+.lightMetric::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 4%, rgba(255,255,255,.80), transparent 34%);
+  pointer-events: none;
+}
+
+.lightLine {
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  top: 24px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(7,7,7,.14);
+}
+
+.orange .lightLine { background: linear-gradient(90deg, #ff7a18, rgba(255,122,24,0)); }
+.purple .lightLine { background: linear-gradient(90deg, #a855f7, rgba(168,85,247,0)); }
+.green .lightLine { background: linear-gradient(90deg, #22c55e, rgba(34,197,94,0)); }
+.dark .lightLine { background: linear-gradient(90deg, #070707, rgba(7,7,7,0)); }
+
+.lightCode {
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  z-index: 2;
+  min-width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 17px;
+  border: 1px solid rgba(7,7,7,.07);
+  background: rgba(255,255,255,.46);
+  color: rgba(7,7,7,.62);
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: -.04em;
+  box-shadow: inset 0 0 24px rgba(255,255,255,.78), 0 12px 30px rgba(7,7,7,.055);
+}
+
+.orange .lightCode { color: #ff7a18; }
+.purple .lightCode { color: #a855f7; }
+.green .lightCode { color: #22c55e; }
+.dark .lightCode { color: #070707; }
+
+.lightMetric strong,
+.lightMetric span,
+.lightMetric p,
+.lightMetric small {
+  position: relative;
+  z-index: 2;
+}
+
+.lightMetric strong {
+  display: block;
+  margin-top: 16px;
+  color: #070707;
+  font-size: clamp(3.1rem, 5.4vw, 5.25rem);
+  line-height: .82;
+  letter-spacing: -.095em;
+  font-weight: 950;
+}
+
+.lightMetric span {
+  display: block;
+  margin-top: 12px;
+  color: rgba(7,7,7,.55);
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: -.035em;
+}
+
+.lightMetric p {
+  margin: 12px 0 0;
+  max-width: 290px;
+  color: rgba(7,7,7,.46);
+  font-size: 12px;
+  line-height: 1.45;
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+
+.lightMetric small {
+  position: absolute;
+  right: 24px;
+  bottom: 20px;
+  color: rgba(7,7,7,.25);
+  font-size: 12px;
+  font-weight: 950;
+}
+
+@media (max-width: 980px) {
+  .lightShell {
+    grid-template-columns: 1fr;
+  }
+
+  .lightMetrics {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .lightShell {
+    border-radius: 28px;
+    padding: 12px;
+  }
+
+  .lightIntro {
+    min-height: auto;
+    padding: 26px;
+  }
+
+  .lightMetrics {
+    grid-template-columns: 1fr;
+  }
+
+  .lightMetric {
+    padding: 24px;
+  }
+}
