@@ -5,16 +5,65 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import styles from "./HeroSectionOptions.module.css";
 
+const basePath = process.env.NODE_ENV === "production" ? "/adeelatwork" : "";
 const portraitDataUrl = "https://avatars.githubusercontent.com/u/178131381?v=4";
 
-const cards = [
-  ["Desert Safari Dubai", "Custom booking plugin — tiered pricing, admin approvals & payment gateway.", "shapeA"],
-  ["Embassy of Pakistan", "Official government website with real-time passport tracking system.", "shapeB"],
-  ["Figma to WordPress", "Pixel-perfect Elementor builds from designer files for agency clients.", "thumbs"],
-  ["WooCommerce Store", "Full e-commerce setup for a Dubai lighting company.", "shapeC"],
-  ["Custom Booking Plugin", "Tiered pricing, admin approvals, automated emails & WhatsApp fields.", "shapeD"],
-  ["Landing Pages", "High-converting Elementor pages for UAE, UK & USA clients.", "shapeA"],
-  ["Website Rebuilds", "Full redesigns turning outdated sites into fast modern platforms.", "shapeB"],
+type HeroCard = {
+  title: string;
+  desc: string;
+  type: "image" | "booking" | "stack";
+  image?: string;
+  accent?: string;
+};
+
+const cards: HeroCard[] = [
+  {
+    title: "Desert Safari Booking Form",
+    desc: "Private/shared tour pricing, add-ons, AED totals and booking emails.",
+    type: "booking",
+    accent: "#ff7a18",
+  },
+  {
+    title: "Griffin IT",
+    desc: "Hardware solutions website for MSP & IT providers.",
+    type: "image",
+    image: `${basePath}/work-images/griffin-it.webp`,
+    accent: "#0ea5e9",
+  },
+  {
+    title: "Kay Kay Travels",
+    desc: "International travels and tours website rebuild.",
+    type: "image",
+    image: `${basePath}/work-images/kay-kay.webp`,
+    accent: "#22c55e",
+  },
+  {
+    title: "Book My Holidays",
+    desc: "Holiday booking website for travel enquiries.",
+    type: "image",
+    image: `${basePath}/work-images/book-my-holidays.webp`,
+    accent: "#38bdf8",
+  },
+  {
+    title: "FastDocNow",
+    desc: "Healthcare WordPress website with mobile-first user flow.",
+    type: "image",
+    image: `${basePath}/work-images/fastdocnow.webp`,
+    accent: "#2563eb",
+  },
+  {
+    title: "Griffin Resources",
+    desc: "Business website with a premium brand feel.",
+    type: "image",
+    image: `${basePath}/work-images/griffin-resources.webp`,
+    accent: "#a855f7",
+  },
+  {
+    title: "Build Stack",
+    desc: "WordPress, Elementor Pro, WooCommerce, ACF, PHP, GSAP.",
+    type: "stack",
+    accent: "#070707",
+  },
 ];
 
 const options = [
@@ -85,6 +134,86 @@ function ShaderBackground() {
   );
 }
 
+function BookingPreview({ accent }: { accent: string }) {
+  return (
+    <div
+      aria-hidden="true"
+      style={{
+        position: "absolute",
+        inset: 0,
+        padding: 14,
+        background: "linear-gradient(135deg, rgba(255,255,255,.96), rgba(255,246,238,.84))",
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
+        <strong style={{ color: "#070707", fontSize: 14, letterSpacing: "-.055em", lineHeight: 1 }}>Safari Booking</strong>
+        <span style={{ borderRadius: 999, background: accent, color: "#fff", padding: "5px 8px", fontSize: 9, fontWeight: 900 }}>AED</span>
+      </div>
+      <div style={{ display: "grid", gap: 7, marginTop: 12 }}>
+        {["Tour date", "Adults · Children", "Hotel pickup"].map((item, index) => (
+          <div key={item} style={{ height: 20, borderRadius: 8, background: index === 1 ? "rgba(255,122,24,.16)" : "rgba(7,7,7,.07)", display: "flex", alignItems: "center", paddingInline: 9 }}>
+            <span style={{ width: index === 1 ? "72%" : "54%", height: 6, borderRadius: 999, background: index === 1 ? accent : "rgba(7,7,7,.18)" }} />
+          </div>
+        ))}
+      </div>
+      <div style={{ position: "absolute", left: 14, right: 14, bottom: 14, height: 34, borderRadius: 12, background: "#070707", color: "#fff", display: "flex", alignItems: "center", justifyContent: "space-between", paddingInline: 12 }}>
+        <b style={{ fontSize: 11, letterSpacing: "-.035em" }}>Total</b>
+        <b style={{ fontSize: 14, letterSpacing: "-.055em" }}>AED 550</b>
+      </div>
+    </div>
+  );
+}
+
+function StackPreview({ accent }: { accent: string }) {
+  const tools = ["WP", "Elementor", "Woo", "ACF", "PHP", "GSAP"];
+  return (
+    <div aria-hidden="true" style={{ position: "absolute", inset: 0, padding: 14, background: "linear-gradient(135deg, rgba(7,7,7,.96), rgba(7,7,7,.74))" }}>
+      <strong style={{ color: "#fff", fontSize: 14, lineHeight: 1, letterSpacing: "-.055em" }}>Production Stack</strong>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 7, marginTop: 13 }}>
+        {tools.map((tool, index) => (
+          <span key={tool} style={{ borderRadius: 999, background: index === 1 ? "#fff" : "rgba(255,255,255,.12)", color: index === 1 ? "#070707" : "#fff", padding: "7px 9px", fontSize: 10, fontWeight: 900, letterSpacing: "-.025em" }}>{tool}</span>
+        ))}
+      </div>
+      <span style={{ position: "absolute", left: 14, bottom: 14, width: 76, height: 30, borderRadius: 10, background: accent }} />
+    </div>
+  );
+}
+
+function HeroCardItem({ card }: { card: HeroCard }) {
+  return (
+    <article className={styles.siteCard}>
+      <div className={styles.browser}><i /><i /><i /></div>
+      {card.type === "image" && card.image ? (
+        <img
+          src={card.image}
+          alt=""
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }}
+        />
+      ) : null}
+      {card.type === "booking" ? <BookingPreview accent={card.accent || "#ff7a18"} /> : null}
+      {card.type === "stack" ? <StackPreview accent={card.accent || "#070707"} /> : null}
+      <div
+        className={styles.siteBody}
+        style={{
+          position: "absolute",
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: 3,
+          padding: "34px 13px 13px",
+          background: card.type === "image" ? "linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.78))" : "transparent",
+        }}
+      >
+        <h3 style={{ color: card.type === "image" ? "#fff" : undefined }}>{card.title}</h3>
+        <p style={{ color: card.type === "image" ? "rgba(255,255,255,.72)" : undefined }}>{card.desc}</p>
+        {card.type === "image" ? (
+          <span style={{ position: "absolute", right: 13, bottom: 14, width: 34, height: 18, borderRadius: 999, background: card.accent || "#22c55e", boxShadow: "0 8px 22px rgba(0,0,0,.20)" }} />
+        ) : null}
+      </div>
+    </article>
+  );
+}
+
 function HeroShowcase() {
   return (
     <motion.div
@@ -97,20 +226,7 @@ function HeroShowcase() {
     >
       <div className={styles.showcaseHaze} />
       <div className={styles.strip} aria-hidden="true">
-        {cards.map(([title, desc, shape]) => (
-          <article className={styles.siteCard} key={title}>
-            <div className={styles.browser}><i /><i /><i /></div>
-            <div className={styles.siteBody}>
-              <h3>{title}</h3>
-              <p>{desc}</p>
-              {shape === "thumbs" ? (
-                <div className={styles.thumbRow}><span /><span /><span /></div>
-              ) : (
-                <div className={`${styles.siteShape} ${styles[shape]}`} />
-              )}
-            </div>
-          </article>
-        ))}
+        {cards.map((card) => <HeroCardItem card={card} key={card.title} />)}
       </div>
       <motion.div
         className={styles.portraitCard}
