@@ -14,6 +14,7 @@ import './build-stack-card-logo-fix.css';
 import './mobile-pill-fix.css';
 import './hero-content-sync.css';
 import './home-hero-option-b.css';
+import './home-hero-gap-fix.css';
 import './work-digitalists-images.css';
 import './home-digitalists-work.css';
 import './scrollbar-fix.css';
