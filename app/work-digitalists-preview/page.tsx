@@ -6,54 +6,62 @@ import { motion, AnimatePresence } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import styles from "./WorkDigitalistsPreview.module.css";
 
+const basePath = process.env.NODE_ENV === "production" ? "/adeelatwork" : "";
+
 const cases = [
   {
     code: "CS 695",
-    title: "Custom booking plugin for Desert Safari Dubai",
-    client: "Desert Safari Dubai",
-    services: "WordPress, PHP, booking logic, AED pricing",
-    tone: "orange",
-    href: "/portfolio/desert-safari-dubai",
+    title: "Hardware solutions website for MSP & IT providers",
+    client: "Griffin IT",
+    services: "Screen design, WordPress programming, responsive build",
+    tone: "blue",
+    image: `${basePath}/work-images/griffin-it.webp`,
+    href: "",
   },
   {
     code: "CS 682",
-    title: "Government website with passport tracking",
-    client: "Embassy of Pakistan",
-    services: "Elementor, ACF, custom PHP tracking system",
-    tone: "purple",
+    title: "International travels and tours website rebuild",
+    client: "Kay Kay Travels",
+    services: "Travel website, responsive UI, service-led structure",
+    tone: "green",
+    image: `${basePath}/work-images/kay-kay.webp`,
     href: "",
   },
   {
     code: "CS 566",
-    title: "Healthcare website for online consultations",
-    client: "GetCareMD",
-    services: "Healthcare UX, responsive pages, booking CTA",
-    tone: "green",
-    href: "/portfolio/getcaremd",
+    title: "Holiday booking website for travel enquiries",
+    client: "Book My Holidays",
+    services: "Travel landing page, form UI, responsive design",
+    tone: "blue",
+    image: `${basePath}/work-images/book-my-holidays.webp`,
+    href: "",
   },
   {
     code: "CS 704",
-    title: "Legal website for overseas veterans",
-    client: "Pacific Valor Law",
-    services: "Screen design, Elementor, lead-generation flow",
-    tone: "blue",
-    href: "/portfolio/pacific-valor-law",
+    title: "Business solutions website with premium brand feel",
+    client: "Griffin Resources",
+    services: "Business website, brand UI, mobile layout",
+    tone: "purple",
+    image: `${basePath}/work-images/griffin-resources.webp`,
+    href: "",
   },
   {
     code: "CS 738",
-    title: "Education consultancy website rebuild",
-    client: "7 Sky Consultant",
-    services: "Landing pages, trust sections, responsive design",
+    title: "Smart technology and entertainment solutions website",
+    client: "ATDI",
+    services: "Smart tech website, modern UI, conversion sections",
     tone: "gold",
-    href: "/portfolio/7sky-consultant",
+    image: `${basePath}/work-images/atdi.webp`,
+    href: "",
   },
   {
     code: "CS 741",
-    title: "Premium finance website with Calendly flow",
-    client: "Seva Wealth",
-    services: "Finance UX, brand positioning, Calendly integration",
-    tone: "purple",
-    href: "/portfolio/seva-wealth",
+    title: "Healthcare website for online doctor convenience",
+    client: "FastDocNow",
+    services: "Healthcare WordPress, search UX, mobile responsive",
+    tone: "blue",
+    image: `${basePath}/work-images/fastdocnow.webp`,
+    href: "",
   },
 ];
 
@@ -67,6 +75,8 @@ function CasePreview({ activeCase }: { activeCase: typeof cases[number] }) {
       exit={{ opacity: 0, y: -18, scale: 0.96 }}
       transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
     >
+      <img src={activeCase.image} alt={`${activeCase.client} project thumbnail`} className={styles.realPreviewImage} />
+      <div className={styles.previewOverlay} />
       <div className={styles.browserTop}>
         <i />
         <i />
