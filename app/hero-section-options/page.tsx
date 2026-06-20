@@ -228,13 +228,9 @@ function HeroShowcase() {
       <div className={styles.strip} aria-hidden="true">
         {cards.map((card) => <HeroCardItem card={card} key={card.title} />)}
       </div>
-      <motion.div
-        className={styles.portraitCard}
-        animate={{ y: [0, -8, 0], rotate: [-1.8, 1.2, -1.8] }}
-        transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
-      >
+      <div className={styles.portraitCard}>
         <img src={portraitDataUrl} alt="Muhammad Adeel Iqbal" className={styles.portraitImg} />
-      </motion.div>
+      </div>
     </motion.div>
   );
 }
