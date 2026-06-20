@@ -17,6 +17,7 @@ import './home-hero-option-b.css';
 import './work-digitalists-images.css';
 import './home-digitalists-work.css';
 import './scrollbar-fix.css';
+import './home-stat-cards-option-a.css';
 import { ButtonFillController } from './components/ButtonFillController';
 import { HomeBuildStackMount } from './components/HomeBuildStackMount';
 import { HomeDigitalistsWorkMount } from './components/HomeDigitalistsWorkMount';
