@@ -1,0 +1,214 @@
+.digitalists-neon-page {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255,255,255,.20), transparent 28%),
+    radial-gradient(circle at 88% 8%, rgba(0,0,0,.10), transparent 28%),
+    linear-gradient(180deg, #00ff1a 0%, #00f50a 42%, #00e80c 100%) !important;
+}
+
+.digitalists-neon-section {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 8% 2%, rgba(255,255,255,.30), transparent 26%),
+    radial-gradient(circle at 74% 18%, rgba(7,7,7,.13), transparent 28%),
+    radial-gradient(circle at 36% 115%, rgba(255,255,255,.20), transparent 34%),
+    linear-gradient(180deg, #00ff1a 0%, #00f50a 58%, #00e90e 100%) !important;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+
+.digitalists-neon-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(to right, rgba(0,0,0,.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,.26), transparent 62%);
+  pointer-events: none;
+}
+
+.digitalists-neon-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: .35;
+  background:
+    radial-gradient(circle at 22% 42%, rgba(255,255,255,.18), transparent 16%),
+    radial-gradient(circle at 84% 34%, rgba(7,7,7,.10), transparent 18%);
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+.digitalists-top-bar {
+  position: relative;
+  z-index: 5;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.08), transparent 76%);
+}
+
+.digitalists-neon-section [class*="handLabel"] {
+  font-family: "Trebuchet MS", Inter, ui-sans-serif, system-ui, sans-serif !important;
+  text-transform: uppercase;
+  font-size: clamp(.92rem, 1vw, 1.12rem) !important;
+  letter-spacing: .035em !important;
+  font-weight: 950 !important;
+  transform: rotate(-1deg) !important;
+}
+
+.digitalists-neon-section [class*="centerLabel"] span {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-weight: 800 !important;
+  letter-spacing: .06em !important;
+}
+
+.digitalists-neon-section [class*="allCases"] {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif !important;
+  border-radius: 14px !important;
+  box-shadow: 0 18px 48px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.08) !important;
+}
+
+.digitalists-case-list-wrap {
+  position: relative;
+  z-index: 4;
+}
+
+.digitalists-case-list {
+  position: relative;
+}
+
+.digitalists-case-row {
+  isolation: isolate;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  overflow: visible !important;
+}
+
+.digitalists-case-row h3,
+.digitalists-case-row strong,
+.digitalists-case-row p {
+  position: relative;
+  z-index: 8;
+}
+
+.digitalists-case-row [class*="caseCode"] {
+  position: relative;
+  z-index: 8;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-size: clamp(.9rem, 1vw, 1.08rem) !important;
+  letter-spacing: -.015em !important;
+  font-weight: 900 !important;
+  transform: none !important;
+}
+
+.digitalists-case-row h3 {
+  font-size: clamp(1.35rem, 1.9vw, 2.35rem) !important;
+  line-height: .95 !important;
+  letter-spacing: -.075em !important;
+  font-weight: 930 !important;
+}
+
+.digitalists-case-row strong {
+  font-size: clamp(1.15rem, 1.6vw, 1.85rem) !important;
+  font-weight: 850 !important;
+  letter-spacing: -.065em !important;
+}
+
+.digitalists-case-row p {
+  font-size: clamp(.86rem, .96vw, 1.02rem) !important;
+  font-weight: 720 !important;
+  letter-spacing: -.035em !important;
+}
+
+.digitalists-case-row [class*="gridIcon"] {
+  position: relative;
+  z-index: 9;
+}
+
+.digitalists-row-preview {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 7;
+  width: min(520px, 34vw);
+  height: 292px;
+  display: block;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.22);
+  background: #111;
+  box-shadow: 0 34px 95px rgba(0,0,0,.36), 0 0 0 1px rgba(0,0,0,.12);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(.92) rotate(-2deg);
+  transform-origin: center;
+  transition:
+    opacity .34s cubic-bezier(.2,.8,.2,1),
+    transform .42s cubic-bezier(.2,.8,.2,1),
+    filter .42s cubic-bezier(.2,.8,.2,1);
+  pointer-events: none;
+  filter: saturate(.9) contrast(.94);
+}
+
+.digitalists-row-preview::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.18)),
+    radial-gradient(circle at 50% 6%, rgba(255,255,255,.16), transparent 44%);
+  pointer-events: none;
+}
+
+.digitalists-row-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.digitalists-case-row.is-active .digitalists-row-preview,
+.digitalists-case-row:hover .digitalists-row-preview,
+.digitalists-case-row:focus-visible .digitalists-row-preview {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  filter: saturate(1.04) contrast(1.02);
+}
+
+@media (max-width: 1100px) {
+  .digitalists-row-preview {
+    width: min(390px, 38vw);
+    height: 220px;
+  }
+}
+
+@media (max-width: 780px) {
+  .digitalists-neon-section [class*="handLabel"] {
+    font-size: .82rem !important;
+  }
+
+  .digitalists-row-preview {
+    position: relative;
+    left: auto;
+    top: auto;
+    grid-column: 1 / -1;
+    width: 100%;
+    height: 210px;
+    margin-top: 6px;
+    opacity: 1;
+    transform: none;
+    border-radius: 18px;
+  }
+
+  .digitalists-case-row.is-active .digitalists-row-preview,
+  .digitalists-case-row:hover .digitalists-row-preview,
+  .digitalists-case-row:focus-visible .digitalists-row-preview {
+    transform: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .digitalists-row-preview {
+    height: 180px;
+  }
+}
