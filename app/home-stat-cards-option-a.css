@@ -3,6 +3,26 @@
   gap: 18px !important;
 }
 
+/* Larger homepage black profile card name + underline only. */
+.stats-showcase-section .about-card h2 {
+  max-width: 470px !important;
+  font-size: clamp(2.65rem, 4.8vw, 4.7rem) !important;
+  line-height: .94 !important;
+  letter-spacing: -.085em !important;
+  font-weight: 950 !important;
+}
+
+.stats-showcase-section .about-card h2::after {
+  content: "";
+  display: block;
+  width: min(260px, 76%) !important;
+  height: 6px !important;
+  margin-top: 18px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(90deg, #7dd3fc, #86efac, rgba(255,255,255,.70)) !important;
+  box-shadow: 0 0 28px rgba(125,211,252,.28), 0 0 22px rgba(134,239,172,.18) !important;
+}
+
 .stats-showcase-section .stat {
   position: relative !important;
   isolation: isolate !important;
@@ -194,6 +214,10 @@
 @media (max-width: 560px) {
   .stats-showcase-section .stats-grid {
     gap: 14px !important;
+  }
+
+  .stats-showcase-section .about-card h2 {
+    font-size: clamp(2.25rem, 11vw, 3.15rem) !important;
   }
 
   .stats-showcase-section .stat {
