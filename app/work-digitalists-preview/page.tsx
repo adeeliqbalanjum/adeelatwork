@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import styles from "./WorkDigitalistsPreview.module.css";
+import "./WorkDigitalistsSuggestions.css";
 
 const basePath = process.env.NODE_ENV === "production" ? "/adeelatwork" : "";
 
@@ -100,6 +101,91 @@ function CasePreview({ activeCase }: { activeCase: typeof cases[number] }) {
   );
 }
 
+function SuggestionPreview({ activeCase, variant }: { activeCase: typeof cases[number]; variant: "soft" | "dark" | "compact" }) {
+  return (
+    <AnimatePresence mode="wait">
+      <motion.figure
+        key={`${variant}-${activeCase.client}`}
+        className={`suggestion-preview suggestion-preview--${variant}`}
+        initial={{ opacity: 0, y: 24, scale: 0.96 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: -18, scale: 0.96 }}
+        transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <img src={activeCase.image} alt={`${activeCase.client} preview`} />
+        <figcaption>
+          <span>{activeCase.code}</span>
+          <strong>{activeCase.client}</strong>
+        </figcaption>
+      </motion.figure>
+    </AnimatePresence>
+  );
+}
+
+function SuggestionSection({
+  variant,
+  label,
+  title,
+  description,
+}: {
+  variant: "soft" | "dark" | "compact";
+  label: string;
+  title: string;
+  description: string;
+}) {
+  const [activeIndex, setActiveIndex] = React.useState(0);
+  const activeCase = cases[activeIndex];
+
+  return (
+    <section className={`work-suggestion work-suggestion--${variant}`}>
+      <motion.div
+        className="suggestion-head"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.32 }}
+        transition={{ duration: 0.66, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <span>{label}</span>
+        <h2>{title}</h2>
+        <p>{description}</p>
+      </motion.div>
+
+      <div className="suggestion-layout">
+        <div className="suggestion-media-col">
+          <SuggestionPreview activeCase={activeCase} variant={variant} />
+        </div>
+
+        <div className="suggestion-list">
+          {cases.map((item, index) => {
+            const active = index === activeIndex;
+            return (
+              <motion.article
+                key={item.client}
+                className={`suggestion-row ${active ? "is-active" : ""}`}
+                onMouseEnter={() => setActiveIndex(index)}
+                onFocus={() => setActiveIndex(index)}
+                tabIndex={0}
+                initial={{ opacity: 0, x: 34 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: false, amount: 0.18 }}
+                transition={{ duration: 0.48, delay: index * 0.035, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <span className="suggestion-code">{item.code}</span>
+                <div>
+                  <h3>{item.title}</h3>
+                  <small>{item.client}</small>
+                </div>
+                <p>{item.services}</p>
+                <ArrowUpRight size={22} />
+              </motion.article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function WorkDigitalistsPreviewPage() {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const activeCase = cases[activeIndex];
@@ -179,6 +265,27 @@ export default function WorkDigitalistsPreviewPage() {
           </div>
         </div>
       </section>
+
+      <SuggestionSection
+        variant="soft"
+        label="Suggestion 01"
+        title="Soft premium case rows"
+        description="This keeps the Digitalists structure, but changes the color system to match your current clean Apple/SaaS portfolio style. Best choice for homepage."
+      />
+
+      <SuggestionSection
+        variant="dark"
+        label="Suggestion 02"
+        title="Dark high-contrast portfolio list"
+        description="This version feels more agency-level and dramatic. The images become the hero while the rows stay minimal and sharp."
+      />
+
+      <SuggestionSection
+        variant="compact"
+        label="Suggestion 03"
+        title="Compact client proof board"
+        description="This is the safest conversion-focused option. It keeps the row interaction but uses tighter spacing, clearer content, and less visual noise."
+      />
     </main>
   );
 }
