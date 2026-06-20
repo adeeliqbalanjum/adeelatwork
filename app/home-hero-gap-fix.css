@@ -1,14 +1,38 @@
 /* Tighten the empty space below the mounted homepage hero only. */
+.home-hero-option-b-mounted {
+  position: relative !important;
+  overflow: visible !important;
+  z-index: 5 !important;
+}
+
 .home-hero-option-b-mounted::after {
   height: 46px !important;
 }
 
 .home-hero-option-b-mounted .home-hero-b {
+  overflow: visible !important;
   padding-bottom: 10px !important;
 }
 
+.home-hero-option-b-mounted .home-hero-b-inner,
 .home-hero-option-b-mounted .home-hero-b-showcase {
+  overflow: visible !important;
+}
+
+.home-hero-option-b-mounted .home-hero-b-showcase {
+  position: relative !important;
+  z-index: 8 !important;
   margin-bottom: -26px !important;
+}
+
+.home-hero-option-b-mounted .home-hero-b-portrait {
+  position: relative !important;
+  z-index: 12 !important;
+}
+
+.stats-showcase-section {
+  position: relative !important;
+  z-index: 1 !important;
 }
 
 @media (max-width: 780px) {
