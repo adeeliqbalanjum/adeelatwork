@@ -3,6 +3,8 @@ import styles from "./StatsSectionOptions.module.css";
 import tweaks from "./StatsSectionOptionTweaks.module.css";
 import light from "./StatsLightOption.module.css";
 
+const portraitDataUrl = "https://avatars.githubusercontent.com/u/178131381?v=4";
+
 const stats = [
   { value: "3+", label: "Years WordPress", code: "WP", tone: "orange", copy: "Hands-on WordPress, WooCommerce & Elementor Pro for international clients." },
   { value: "50+", label: "Projects Delivered", code: "PR", tone: "purple", copy: "Business, e-commerce, healthcare, booking and consultancy websites delivered." },
@@ -163,7 +165,12 @@ function OptionF() {
               A WordPress Developer specialising in building, redesigning, and improving websites for international clients in UAE, UK, and USA — Elementor Pro, WooCommerce stores, custom plugins, and Figma-to-WordPress builds.
             </p>
           </div>
-          <a href="mailto:adeeliqbalajum@gmail.com" className={light.lightCta}>Work with me</a>
+          <a href="mailto:adeeliqbalajum@gmail.com" className={light.lightCta}>
+            <span className={light.lightCtaText}>Work with me</span>
+            <span className={light.lightAvatar} aria-hidden="true">
+              <img src={portraitDataUrl} alt="" />
+            </span>
+          </a>
         </aside>
         <div className={light.lightMetrics}>{stats.map((stat, index) => <LightMetricCard stat={stat} index={index} key={stat.label} />)}</div>
       </div>
