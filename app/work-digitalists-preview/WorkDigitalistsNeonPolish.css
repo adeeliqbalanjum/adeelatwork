@@ -89,12 +89,12 @@
 .digitalists-case-row strong,
 .digitalists-case-row p {
   position: relative;
-  z-index: 8;
+  z-index: 5;
 }
 
 .digitalists-case-row [class*="caseCode"] {
   position: relative;
-  z-index: 8;
+  z-index: 5;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
   font-size: clamp(.9rem, 1vw, 1.08rem) !important;
   letter-spacing: -.015em !important;
@@ -123,22 +123,23 @@
 
 .digitalists-case-row [class*="gridIcon"] {
   position: relative;
-  z-index: 9;
+  z-index: 5;
 }
 
 .digitalists-row-preview {
   position: absolute;
   left: 50%;
   top: 50%;
-  z-index: 7;
-  width: min(520px, 34vw);
-  height: 292px;
+  z-index: 40;
+  width: min(420px, 30vw);
+  height: min(420px, 30vw);
+  aspect-ratio: 1 / 1;
   display: block;
   overflow: hidden;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.22);
-  background: #111;
-  box-shadow: 0 34px 95px rgba(0,0,0,.36), 0 0 0 1px rgba(0,0,0,.12);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.30);
+  background: #070707;
+  box-shadow: 0 38px 110px rgba(0,0,0,.42), 0 0 0 1px rgba(0,0,0,.16);
   opacity: 0;
   transform: translate(-50%, -50%) scale(.92) rotate(-2deg);
   transform-origin: center;
@@ -155,16 +156,18 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.18)),
-    radial-gradient(circle at 50% 6%, rgba(255,255,255,.16), transparent 44%);
+    linear-gradient(180deg, rgba(0,0,0,.00), rgba(0,0,0,.10)),
+    radial-gradient(circle at 50% 6%, rgba(255,255,255,.12), transparent 44%);
   pointer-events: none;
 }
 
 .digitalists-row-preview img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   display: block;
+  background: #070707;
 }
 
 .digitalists-case-row.is-active .digitalists-row-preview,
@@ -177,8 +180,8 @@
 
 @media (max-width: 1100px) {
   .digitalists-row-preview {
-    width: min(390px, 38vw);
-    height: 220px;
+    width: min(340px, 38vw);
+    height: min(340px, 38vw);
   }
 }
 
@@ -192,8 +195,9 @@
     left: auto;
     top: auto;
     grid-column: 1 / -1;
-    width: 100%;
-    height: 210px;
+    width: min(100%, 360px);
+    height: auto;
+    aspect-ratio: 1 / 1;
     margin-top: 6px;
     opacity: 1;
     transform: none;
@@ -209,6 +213,7 @@
 
 @media (max-width: 520px) {
   .digitalists-row-preview {
-    height: 180px;
+    width: 100%;
+    max-width: 320px;
   }
 }
