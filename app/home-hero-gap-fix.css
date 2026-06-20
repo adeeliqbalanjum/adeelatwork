@@ -1,33 +1,48 @@
 /* Tighten the empty space below the mounted homepage hero only. */
+#home.home-hero-option-b-mounted,
 .home-hero-option-b-mounted {
   position: relative !important;
   overflow: visible !important;
-  z-index: 5 !important;
+  z-index: 999 !important;
+  isolation: isolate !important;
 }
 
+/* Keep the old hero fade behind the actual hero card, not over it. */
+#home.home-hero-option-b-mounted::after,
 .home-hero-option-b-mounted::after {
   height: 46px !important;
+  z-index: 0 !important;
 }
 
+#home.home-hero-option-b-mounted .home-hero-b,
 .home-hero-option-b-mounted .home-hero-b {
+  position: relative !important;
   overflow: visible !important;
+  z-index: 20 !important;
   padding-bottom: 10px !important;
+  isolation: isolate !important;
 }
 
+#home.home-hero-option-b-mounted .home-hero-b-inner,
+#home.home-hero-option-b-mounted .home-hero-b-showcase,
 .home-hero-option-b-mounted .home-hero-b-inner,
 .home-hero-option-b-mounted .home-hero-b-showcase {
+  position: relative !important;
   overflow: visible !important;
+  z-index: 40 !important;
 }
 
+#home.home-hero-option-b-mounted .home-hero-b-showcase,
 .home-hero-option-b-mounted .home-hero-b-showcase {
-  position: relative !important;
-  z-index: 8 !important;
   margin-bottom: -26px !important;
 }
 
-.home-hero-option-b-mounted .home-hero-b-portrait {
+#home.home-hero-option-b-mounted .home-hero-b-portrait,
+.home-hero-option-b-mounted .home-hero-b-portrait,
+#home.home-hero-option-b-mounted .home-hero-b-portrait img,
+.home-hero-option-b-mounted .home-hero-b-portrait img {
   position: relative !important;
-  z-index: 12 !important;
+  z-index: 9999 !important;
 }
 
 .stats-showcase-section {
@@ -36,10 +51,12 @@
 }
 
 @media (max-width: 780px) {
+  #home.home-hero-option-b-mounted .home-hero-b,
   .home-hero-option-b-mounted .home-hero-b {
     padding-bottom: 8px !important;
   }
 
+  #home.home-hero-option-b-mounted .home-hero-b-showcase,
   .home-hero-option-b-mounted .home-hero-b-showcase {
     margin-bottom: -18px !important;
   }
