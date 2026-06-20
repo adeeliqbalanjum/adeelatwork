@@ -1,0 +1,22 @@
+/* Tighten the empty space below the mounted homepage hero only. */
+.home-hero-option-b-mounted::after {
+  height: 46px !important;
+}
+
+.home-hero-option-b-mounted .home-hero-b {
+  padding-bottom: 10px !important;
+}
+
+.home-hero-option-b-mounted .home-hero-b-showcase {
+  margin-bottom: -26px !important;
+}
+
+@media (max-width: 780px) {
+  .home-hero-option-b-mounted .home-hero-b {
+    padding-bottom: 8px !important;
+  }
+
+  .home-hero-option-b-mounted .home-hero-b-showcase {
+    margin-bottom: -18px !important;
+  }
+}
