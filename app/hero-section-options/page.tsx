@@ -182,7 +182,7 @@ function StackPreview({ accent }: { accent: string }) {
           <span key={tool} style={{ borderRadius: 999, background: index === 1 ? "#fff" : "rgba(255,255,255,.12)", color: index === 1 ? "#070707" : "#fff", padding: "7px 9px", fontSize: 10, fontWeight: 900, letterSpacing: "-.025em" }}>{tool}</span>
         ))}
       </div>
-      <span style={{ position: "absolute", left: 14, bottom: 14, minWidth: 48, height: 30, borderRadius: 10, background: accent, color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", paddingInline: 10, fontSize: 11, fontWeight: 950, letterSpacing: "-.035em" }}>WP</span>
+      <span style={{ position: "absolute", right: 14, top: 14, minWidth: 48, height: 30, borderRadius: 999, background: "#fff", color: "#070707", display: "inline-flex", alignItems: "center", justifyContent: "center", paddingInline: 10, fontSize: 11, fontWeight: 950, letterSpacing: "-.035em", boxShadow: "0 10px 24px rgba(0,0,0,.20)" }}>WP</span>
     </div>
   );
 }
@@ -200,6 +200,9 @@ function HeroCardItem({ card }: { card: HeroCard }) {
       ) : null}
       {card.type === "booking" ? <BookingPreview accent={card.accent || "#ff7a18"} /> : null}
       {card.type === "stack" ? <StackPreview accent={card.accent || "#070707"} /> : null}
+      {card.type === "image" ? (
+        <span style={{ position: "absolute", right: 13, top: 13, zIndex: 6, minWidth: 40, height: 22, borderRadius: 999, background: card.accent || "#22c55e", color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", paddingInline: 9, fontSize: 10, lineHeight: 1, fontWeight: 950, letterSpacing: "-.035em", boxShadow: "0 8px 22px rgba(0,0,0,.20)" }}>{card.badge}</span>
+      ) : null}
       <div
         className={styles.siteBody}
         style={{
@@ -214,9 +217,6 @@ function HeroCardItem({ card }: { card: HeroCard }) {
       >
         <h3 style={{ color: card.type === "image" ? "#fff" : undefined }}>{card.title}</h3>
         <p style={{ color: card.type === "image" ? "rgba(255,255,255,.72)" : undefined }}>{card.desc}</p>
-        {card.type === "image" ? (
-          <span style={{ position: "absolute", right: 13, bottom: 13, minWidth: 40, height: 22, borderRadius: 999, background: card.accent || "#22c55e", color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", paddingInline: 9, fontSize: 10, lineHeight: 1, fontWeight: 950, letterSpacing: "-.035em", boxShadow: "0 8px 22px rgba(0,0,0,.20)" }}>{card.badge}</span>
-        ) : null}
       </div>
     </article>
   );
