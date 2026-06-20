@@ -1,8 +1,9 @@
 .digitalists-section-shell {
   position: relative;
   min-height: 100vh;
-  overflow: hidden;
+  overflow: visible !important;
   padding-top: 86px;
+  padding-bottom: 86px;
   isolation: isolate;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
 }
@@ -27,8 +28,9 @@
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  opacity: .55;
+  opacity: .58;
   filter: blur(22px);
+  transition: background .42s cubic-bezier(.2,.8,.2,1), opacity .42s cubic-bezier(.2,.8,.2,1);
 }
 
 .digitalists-section--cream {
@@ -72,8 +74,44 @@
 
 .digitalists-section--ice::after {
   background:
+    radial-gradient(circle at 88% 12%, rgba(14,165,233,.26), transparent 24%),
     radial-gradient(circle at 24% 34%, rgba(255,255,255,.70), transparent 18%),
     radial-gradient(circle at 86% 30%, rgba(14,165,233,.12), transparent 18%);
+}
+
+.digitalists-section--ice.digitalists-active-tone-blue::after {
+  background:
+    radial-gradient(circle at 88% 12%, rgba(14,165,233,.34), transparent 24%),
+    radial-gradient(circle at 24% 34%, rgba(255,255,255,.72), transparent 18%),
+    radial-gradient(circle at 86% 30%, rgba(59,130,246,.16), transparent 18%);
+}
+
+.digitalists-section--ice.digitalists-active-tone-green::after {
+  background:
+    radial-gradient(circle at 88% 12%, rgba(34,197,94,.34), transparent 24%),
+    radial-gradient(circle at 24% 34%, rgba(255,255,255,.72), transparent 18%),
+    radial-gradient(circle at 86% 30%, rgba(22,163,74,.16), transparent 18%);
+}
+
+.digitalists-section--ice.digitalists-active-tone-purple::after {
+  background:
+    radial-gradient(circle at 88% 12%, rgba(168,85,247,.32), transparent 24%),
+    radial-gradient(circle at 24% 34%, rgba(255,255,255,.72), transparent 18%),
+    radial-gradient(circle at 86% 30%, rgba(147,51,234,.16), transparent 18%);
+}
+
+.digitalists-section--ice.digitalists-active-tone-gold::after {
+  background:
+    radial-gradient(circle at 88% 12%, rgba(245,158,11,.34), transparent 24%),
+    radial-gradient(circle at 24% 34%, rgba(255,255,255,.72), transparent 18%),
+    radial-gradient(circle at 86% 30%, rgba(251,191,36,.18), transparent 18%);
+}
+
+.digitalists-section--ice.digitalists-active-tone-orange::after {
+  background:
+    radial-gradient(circle at 88% 12%, rgba(249,115,22,.34), transparent 24%),
+    radial-gradient(circle at 24% 34%, rgba(255,255,255,.72), transparent 18%),
+    radial-gradient(circle at 86% 30%, rgba(234,88,12,.18), transparent 18%);
 }
 
 .digitalists-section-shell [class*="topBar"] {
@@ -222,8 +260,8 @@
   left: 50%;
   top: 50%;
   z-index: 300 !important;
-  width: min(500px, 31vw) !important;
-  height: min(470px, 30vw) !important;
+  width: min(530px, 31vw) !important;
+  height: min(396px, 23.2vw) !important;
   display: block;
   overflow: hidden;
   border-radius: 28px;
@@ -296,25 +334,38 @@
   filter: saturate(1.04) contrast(1.02);
 }
 
+.digitalists-section-shell .digitalists-case-row:nth-last-child(-n+3) .digitalists-row-preview {
+  top: 42%;
+  transform: translate(-50%, -82%) scale(.92) rotate(-2deg);
+}
+
+.digitalists-section-shell .digitalists-case-row:nth-last-child(-n+3).is-active .digitalists-row-preview,
+.digitalists-section-shell .digitalists-case-row:nth-last-child(-n+3):hover .digitalists-row-preview,
+.digitalists-section-shell .digitalists-case-row:nth-last-child(-n+3):focus-visible .digitalists-row-preview {
+  transform: translate(-50%, -82%) scale(1) rotate(0deg);
+}
+
 @media (max-width: 1100px) {
   .digitalists-section-shell .digitalists-row-preview {
-    width: min(390px, 38vw) !important;
-    height: min(370px, 38vw) !important;
+    width: min(410px, 38vw) !important;
+    height: min(306px, 28.4vw) !important;
   }
 }
 
 @media (max-width: 780px) {
   .digitalists-section-shell {
     padding-top: 70px;
+    overflow: visible !important;
   }
 
-  .digitalists-section-shell .digitalists-row-preview {
+  .digitalists-section-shell .digitalists-row-preview,
+  .digitalists-section-shell .digitalists-case-row:nth-last-child(-n+3) .digitalists-row-preview {
     position: relative;
     left: auto;
     top: auto;
     grid-column: 1 / -1;
     width: min(100%, 360px) !important;
-    height: 330px !important;
+    height: 270px !important;
     margin-top: 6px;
     opacity: 0;
     transform: none;
@@ -323,16 +374,20 @@
 
   .digitalists-section-shell .digitalists-case-row.is-active .digitalists-row-preview,
   .digitalists-section-shell .digitalists-case-row:hover .digitalists-row-preview,
-  .digitalists-section-shell .digitalists-case-row:focus-visible .digitalists-row-preview {
+  .digitalists-section-shell .digitalists-case-row:focus-visible .digitalists-row-preview,
+  .digitalists-section-shell .digitalists-case-row:nth-last-child(-n+3).is-active .digitalists-row-preview,
+  .digitalists-section-shell .digitalists-case-row:nth-last-child(-n+3):hover .digitalists-row-preview,
+  .digitalists-section-shell .digitalists-case-row:nth-last-child(-n+3):focus-visible .digitalists-row-preview {
     opacity: 1;
     transform: none;
   }
 }
 
 @media (max-width: 520px) {
-  .digitalists-section-shell .digitalists-row-preview {
+  .digitalists-section-shell .digitalists-row-preview,
+  .digitalists-section-shell .digitalists-case-row:nth-last-child(-n+3) .digitalists-row-preview {
     width: 100% !important;
-    height: 290px !important;
+    height: 240px !important;
   }
 
   .digitalists-section-shell .digitalists-row-caption {
