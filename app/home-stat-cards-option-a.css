@@ -1,0 +1,180 @@
+/* Homepage stats cards — Option A card treatment only. Left black profile card stays unchanged. */
+.stats-showcase-section .stats-grid {
+  gap: 18px;
+}
+
+.stats-showcase-section .stat {
+  position: relative;
+  min-height: 203px;
+  border-radius: 26px;
+  overflow: hidden;
+  padding: 30px;
+  background: rgba(255,255,255,.76);
+  border: 1px solid rgba(7,7,7,.07);
+  box-shadow: 0 24px 70px rgba(7,7,7,.07), inset 0 1px 0 rgba(255,255,255,.82);
+  backdrop-filter: blur(18px);
+  text-align: left;
+}
+
+.stats-showcase-section .stat::before {
+  content: "";
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  top: 24px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(7,7,7,.14);
+}
+
+.stats-showcase-section .stat:nth-child(1)::before {
+  background: linear-gradient(90deg, #ff7a18, rgba(255,122,24,0));
+}
+
+.stats-showcase-section .stat:nth-child(2)::before {
+  background: linear-gradient(90deg, #a855f7, rgba(168,85,247,0));
+}
+
+.stats-showcase-section .stat:nth-child(3)::before {
+  background: linear-gradient(90deg, #22c55e, rgba(34,197,94,0));
+}
+
+.stats-showcase-section .stat:nth-child(4)::before {
+  background: linear-gradient(90deg, #070707, rgba(7,7,7,0));
+}
+
+.stats-showcase-section .stat::after {
+  position: absolute;
+  right: 24px;
+  bottom: 20px;
+  color: rgba(7,7,7,.22);
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: -.03em;
+}
+
+.stats-showcase-section .stat:nth-child(1)::after { content: "01"; }
+.stats-showcase-section .stat:nth-child(2)::after { content: "02"; }
+.stats-showcase-section .stat:nth-child(3)::after { content: "03"; }
+.stats-showcase-section .stat:nth-child(4)::after { content: "04"; }
+
+.stats-showcase-section .stat-top {
+  display: block;
+  position: static;
+}
+
+.stats-showcase-section .stat-top::after {
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  min-width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 17px;
+  border: 1px solid rgba(7,7,7,.07);
+  background: rgba(255,255,255,.42);
+  color: rgba(7,7,7,.62);
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: -.04em;
+  box-shadow: inset 0 0 24px rgba(255,255,255,.8);
+}
+
+.stats-showcase-section .stat:nth-child(1) .stat-top::after {
+  content: "WP";
+  color: #ff7a18;
+}
+
+.stats-showcase-section .stat:nth-child(2) .stat-top::after {
+  content: "PR";
+  color: #a855f7;
+}
+
+.stats-showcase-section .stat:nth-child(3) .stat-top::after {
+  content: "FG";
+  color: #22c55e;
+}
+
+.stats-showcase-section .stat:nth-child(4) .stat-top::after {
+  content: "SP";
+  color: #070707;
+}
+
+.stats-showcase-section .stat strong {
+  display: block;
+  margin-top: 16px;
+  color: #070707;
+  font-size: clamp(3.1rem, 5.4vw, 5.25rem);
+  line-height: .82;
+  letter-spacing: -.095em;
+  font-weight: 950;
+}
+
+.stats-showcase-section .stat:nth-child(4) strong {
+  font-size: clamp(2.95rem, 4.9vw, 5.1rem);
+  letter-spacing: -.105em;
+}
+
+.stats-showcase-section .stat span {
+  display: block;
+  margin-top: 12px;
+  color: rgba(7,7,7,.55);
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: -.035em;
+}
+
+.stats-showcase-section .stat p {
+  margin: 12px 0 0;
+  max-width: 290px;
+  color: transparent;
+  font-size: 0;
+  line-height: 1.45;
+}
+
+.stats-showcase-section .stat p::after {
+  display: block;
+  color: rgba(7,7,7,.45);
+  font-size: 12px;
+  line-height: 1.45;
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+
+.stats-showcase-section .stat:nth-child(1) p::after {
+  content: "Hands-on WordPress, WooCommerce & Elementor Pro for international clients.";
+}
+
+.stats-showcase-section .stat:nth-child(2) p::after {
+  content: "Business, e-commerce, healthcare, booking and consultancy websites delivered.";
+}
+
+.stats-showcase-section .stat:nth-child(3) p::after {
+  content: "Figma and PSD designs converted into responsive, pixel-perfect WordPress sites.";
+}
+
+.stats-showcase-section .stat:nth-child(4) p::after {
+  content: "Load-time improvements through cache, image optimisation and plugin cleanup.";
+}
+
+.stats-showcase-section .stat:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 30px 76px rgba(7,7,7,.10), inset 0 1px 0 rgba(255,255,255,.86);
+}
+
+@media (max-width: 560px) {
+  .stats-showcase-section .stats-grid {
+    gap: 14px;
+  }
+
+  .stats-showcase-section .stat {
+    min-height: 190px;
+    padding: 24px;
+  }
+
+  .stats-showcase-section .stat::before {
+    left: 24px;
+    right: 24px;
+  }
+}
