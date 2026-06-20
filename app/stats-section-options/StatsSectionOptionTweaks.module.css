@@ -1,0 +1,88 @@
+.darkIntro {
+  position: relative;
+  overflow: hidden;
+}
+
+.darkIntro::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 8%, rgba(14,165,233,.28), rgba(14,165,233,0) 36%),
+    radial-gradient(circle at 84% 0%, rgba(34,197,94,.22), rgba(34,197,94,0) 32%);
+  opacity: .95;
+}
+
+.luxeName {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  background: linear-gradient(110deg, #ffffff 0%, #ffffff 24%, #7dd3fc 48%, #86efac 72%, #ffffff 100%);
+  background-size: 260% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 34px rgba(125,211,252,.22);
+  animation: nameGlowShift 5.5s ease-in-out infinite;
+}
+
+.nameUnderline {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: min(210px, 70%);
+  height: 6px;
+  margin-top: 18px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #7dd3fc, #86efac, rgba(255,255,255,.92));
+  box-shadow: 0 0 28px rgba(125,211,252,.34), 0 0 22px rgba(134,239,172,.20);
+}
+
+@keyframes nameGlowShift {
+  0%, 100% { background-position: 0% 50%; filter: drop-shadow(0 0 0 rgba(255,255,255,0)); }
+  50% { background-position: 100% 50%; filter: drop-shadow(0 0 22px rgba(147,223,255,.24)); }
+}
+
+.luxeCta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition: color .28s ease, transform .28s ease, box-shadow .28s ease;
+}
+
+.luxeCta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(105deg, #070707 0%, #0ea5e9 38%, #22c55e 68%, #ffffff 100%);
+  transform: translateX(-102%);
+  transition: transform .42s cubic-bezier(.22, 1, .36, 1);
+}
+
+.luxeCta::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: rgba(255,255,255,.96);
+  transition: opacity .28s ease;
+}
+
+.luxeCta:hover {
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 24px 64px rgba(14,165,233,.24), 0 14px 42px rgba(7,7,7,.26);
+}
+
+.luxeCta:hover::before {
+  transform: translateX(0);
+}
+
+.luxeCta:hover::after {
+  opacity: 0;
+}

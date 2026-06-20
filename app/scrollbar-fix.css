@@ -1,13 +1,17 @@
-/* Keep only the browser/page scrollbar visible. */
+/* Keep one real page scrollbar only. */
 html {
+  width: 100% !important;
+  max-width: 100% !important;
   overflow-x: hidden !important;
-  overflow-y: scroll !important;
+  overflow-y: auto !important;
   scrollbar-gutter: auto !important;
 }
 
 body {
+  width: 100% !important;
+  max-width: 100% !important;
   overflow-x: hidden !important;
-  overflow-y: clip !important;
+  overflow-y: visible !important;
 }
 
 main,
@@ -19,8 +23,38 @@ main,
   overflow-y: visible !important;
 }
 
+/* Hero must never create its own internal scrollbar. */
+#home,
+#home.home-hero-option-b-mounted,
+#home .home-hero-b,
+#home .home-hero-b-showcase,
+#home .showcase,
+#home .hero-inner,
+#home .flow-inner {
+  overflow-y: hidden !important;
+  scrollbar-width: none !important;
+}
+
+#home::-webkit-scrollbar,
+#home *::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+}
+
+#home.home-hero-option-b-mounted {
+  max-width: 100vw !important;
+  overflow-x: clip !important;
+}
+
+#home.home-hero-option-b-mounted .home-hero-b,
+#home.home-hero-option-b-mounted .home-hero-b-showcase {
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+}
+
 @supports not (overflow: clip) {
-  body {
-    overflow-y: hidden !important;
+  #home.home-hero-option-b-mounted {
+    overflow-x: hidden !important;
   }
 }
