@@ -11,6 +11,15 @@ const stats = [
 
 const chips = ["Elementor Pro", "WooCommerce", "ACF", "Custom Plugins", "Speed Fixes", "Figma to WordPress"];
 
+const compactNameStyle = {
+  background: "linear-gradient(110deg, #ffffff 0%, #ffffff 24%, #7dd3fc 48%, #86efac 72%, #ffffff 100%)",
+  backgroundSize: "260% 100%",
+  WebkitBackgroundClip: "text",
+  backgroundClip: "text",
+  WebkitTextFillColor: "transparent",
+  textShadow: "0 0 34px rgba(125,211,252,.22)",
+};
+
 function Backdrop() {
   return (
     <div className={styles.backdrop} aria-hidden="true">
@@ -40,7 +49,8 @@ function IntroCard({ compact = false }: { compact?: boolean }) {
     <aside className={`${styles.introCard} ${compact ? styles.introCompact : ""} ${compact ? tweaks.darkIntro : ""}`}>
       <div>
         <span className={styles.eyebrow}>Profile snapshot</span>
-        <h2 className={compact ? tweaks.luxeName : undefined}>I&apos;m Muhammad Adeel Iqbal</h2>
+        <h2 className={compact ? tweaks.luxeName : undefined} style={compact ? compactNameStyle : undefined}>I&apos;m Muhammad Adeel Iqbal</h2>
+        {compact ? <span className={tweaks.nameUnderline} aria-hidden="true" /> : null}
         <p>
           A WordPress Developer specialising in building, redesigning, and improving websites for international clients in UAE, UK, and USA — Elementor Pro, WooCommerce stores, custom plugins, and Figma-to-WordPress builds.
         </p>
