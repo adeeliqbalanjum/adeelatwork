@@ -165,7 +165,7 @@ function OptionF() {
               A WordPress Developer specialising in building, redesigning, and improving websites for international clients in UAE, UK, and USA — Elementor Pro, WooCommerce stores, custom plugins, and Figma-to-WordPress builds.
             </p>
           </div>
-          <a href="mailto:adeeliqbalajum@gmail.com" className={light.lightCta}>
+          <a href="mailto:adeeliqbalajum@gmail.com" className={light.lightCta} data-cursor-fill="true">
             <span className={light.lightCtaText}>Work with me</span>
             <span className={light.lightAvatar} aria-hidden="true">
               <img src={portraitDataUrl} alt="" />
