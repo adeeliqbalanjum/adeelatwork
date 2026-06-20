@@ -73,16 +73,26 @@
 .digitalists-case-list-wrap {
   position: relative;
   z-index: 4;
+  overflow: visible !important;
 }
 
 .digitalists-case-list {
   position: relative;
+  overflow: visible !important;
 }
 
 .digitalists-case-row {
   isolation: isolate;
+  position: relative !important;
+  z-index: 1;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
   overflow: visible !important;
+}
+
+.digitalists-case-row.is-active,
+.digitalists-case-row:hover,
+.digitalists-case-row:focus-visible {
+  z-index: 120 !important;
 }
 
 .digitalists-case-row h3,
@@ -130,10 +140,10 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  z-index: 40;
-  width: min(420px, 30vw);
-  height: min(420px, 30vw);
-  aspect-ratio: 1 / 1;
+  z-index: 300 !important;
+  width: min(430px, 30vw) !important;
+  height: min(430px, 30vw) !important;
+  aspect-ratio: 1 / 1 !important;
   display: block;
   overflow: hidden;
   border-radius: 18px;
@@ -162,10 +172,10 @@
 }
 
 .digitalists-row-preview img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center !important;
   display: block;
   background: #070707;
 }
@@ -180,8 +190,8 @@
 
 @media (max-width: 1100px) {
   .digitalists-row-preview {
-    width: min(340px, 38vw);
-    height: min(340px, 38vw);
+    width: min(350px, 38vw) !important;
+    height: min(350px, 38vw) !important;
   }
 }
 
@@ -195,9 +205,9 @@
     left: auto;
     top: auto;
     grid-column: 1 / -1;
-    width: min(100%, 360px);
-    height: auto;
-    aspect-ratio: 1 / 1;
+    width: min(100%, 360px) !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
     margin-top: 6px;
     opacity: 1;
     transform: none;
@@ -213,7 +223,7 @@
 
 @media (max-width: 520px) {
   .digitalists-row-preview {
-    width: 100%;
+    width: 100% !important;
     max-width: 320px;
   }
 }
