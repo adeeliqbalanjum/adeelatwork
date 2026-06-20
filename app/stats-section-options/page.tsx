@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./StatsSectionOptions.module.css";
+import tweaks from "./StatsSectionOptionTweaks.module.css";
 
 const stats = [
   { value: "3+", label: "Years WordPress", code: "WP", tone: "orange", copy: "Hands-on WordPress, WooCommerce & Elementor Pro for international clients." },
@@ -36,15 +37,15 @@ function MetricCard({ stat, index }: { stat: (typeof stats)[number]; index: numb
 
 function IntroCard({ compact = false }: { compact?: boolean }) {
   return (
-    <aside className={`${styles.introCard} ${compact ? styles.introCompact : ""}`}>
+    <aside className={`${styles.introCard} ${compact ? styles.introCompact : ""} ${compact ? tweaks.darkIntro : ""}`}>
       <div>
         <span className={styles.eyebrow}>Profile snapshot</span>
-        <h2>I&apos;m Muhammad Adeel Iqbal</h2>
+        <h2 className={compact ? tweaks.luxeName : undefined}>I&apos;m Muhammad Adeel Iqbal</h2>
         <p>
           A WordPress Developer specialising in building, redesigning, and improving websites for international clients in UAE, UK, and USA — Elementor Pro, WooCommerce stores, custom plugins, and Figma-to-WordPress builds.
         </p>
       </div>
-      <a href="mailto:adeeliqbalajum@gmail.com" className={styles.cta}>Work with me</a>
+      <a href="mailto:adeeliqbalajum@gmail.com" className={`${styles.cta} ${compact ? tweaks.luxeCta : ""}`}>Work with me</a>
     </aside>
   );
 }
