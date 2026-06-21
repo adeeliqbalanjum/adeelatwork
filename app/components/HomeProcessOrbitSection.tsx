@@ -2,28 +2,53 @@
 
 import * as React from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
+import { Code2, Lightbulb, Map, Rocket } from "lucide-react";
 
 const processSteps = [
-  ["01", "Understand", "Clarify the goal, business model, page structure, features, references, and conversion path."],
-  ["02", "Plan", "Map the WordPress stack, plugins, custom logic, responsiveness, and editing needs."],
-  ["03", "Build", "Create the UI, templates, forms, animations, and functionality."],
-  ["04", "Polish", "Test mobile, speed, forms, links, browser behavior, and final handover details."],
+  {
+    num: "01",
+    title: "Understand",
+    copy: "Clarify the goal, business model, page structure, features, references, and conversion path.",
+    Icon: Lightbulb,
+  },
+  {
+    num: "02",
+    title: "Plan",
+    copy: "Map the WordPress stack, plugins, custom logic, responsiveness, and editing needs.",
+    Icon: Map,
+  },
+  {
+    num: "03",
+    title: "Build",
+    copy: "Create the UI, templates, forms, animations, and functionality.",
+    Icon: Code2,
+  },
+  {
+    num: "04",
+    title: "Polish",
+    copy: "Test mobile, speed, forms, links, browser behavior, and final handover details.",
+    Icon: Rocket,
+  },
 ];
 
-function ProcessBadge({ num }: { num: string }) {
-  return <span className="home-process-badge">{num}</span>;
+function ProcessBadge({ Icon, label }: { Icon: React.ElementType; label: string }) {
+  return (
+    <span className="home-process-badge" aria-label={label}>
+      <Icon aria-hidden="true" />
+    </span>
+  );
 }
 
 function OrbitCard({
-  num,
   title,
   copy,
+  Icon,
   index,
   rotate,
 }: {
-  num: string;
   title: string;
   copy: string;
+  Icon: React.ElementType;
   index: number;
   rotate: MotionValue<number>;
 }) {
@@ -37,7 +62,7 @@ function OrbitCard({
         whileHover={{ y: -8, scale: 1.04 }}
         transition={{ duration: 0.28, ease: "easeOut" }}
       >
-        <ProcessBadge num={num} />
+        <ProcessBadge Icon={Icon} label={`${title} step`} />
         <div>
           <h3>{title}</h3>
           <p>{copy}</p>
@@ -94,12 +119,12 @@ export function HomeProcessOrbitSection() {
           <motion.div className="home-process-orbit-wheel" style={{ rotate }}>
             <div className="home-process-ring home-process-ring-one" />
             <div className="home-process-ring home-process-ring-two" />
-            {processSteps.map(([num, title, copy], index) => (
+            {processSteps.map(({ num, title, copy, Icon }, index) => (
               <OrbitCard
                 key={num}
-                num={num}
                 title={title}
                 copy={copy}
+                Icon={Icon}
                 index={index}
                 rotate={rotate}
               />
