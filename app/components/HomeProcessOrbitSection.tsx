@@ -2,31 +2,42 @@
 
 import * as React from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
-import { Code2, Lightbulb, Map, Rocket } from "lucide-react";
+import { Code2, Map, Rocket, Search, ShieldCheck, Wrench } from "lucide-react";
 
 const processSteps = [
   {
     num: "01",
+    label: "Client brief",
     title: "Understand",
-    copy: "Clarify the goal, business model, page structure, features, references, and conversion path.",
-    Icon: Lightbulb,
+    copy: "Goals, pages, features, references, budget, and conversion path are clarified first.",
+    Icon: Search,
   },
   {
     num: "02",
+    label: "Build map",
     title: "Plan",
-    copy: "Map the WordPress stack, plugins, custom logic, responsiveness, and editing needs.",
+    copy: "WordPress stack, plugins, sections, custom logic, and responsive rules are mapped before build.",
     Icon: Map,
   },
   {
     num: "03",
+    label: "Development",
     title: "Build",
-    copy: "Create the UI, templates, forms, animations, and functionality.",
-    Icon: Code2,
+    copy: "UI, templates, forms, WooCommerce flows, custom code, and interactions are built cleanly.",
+    Icon: Wrench,
   },
   {
     num: "04",
+    label: "QA check",
     title: "Polish",
-    copy: "Test mobile, speed, forms, links, browser behavior, and final handover details.",
+    copy: "Mobile, speed, forms, links, checkout, browser behavior, and edge cases are tested.",
+    Icon: ShieldCheck,
+  },
+  {
+    num: "05",
+    label: "Go live",
+    title: "Launch",
+    copy: "The site is deployed, verified live, and handed over as an editable WordPress system.",
     Icon: Rocket,
   },
 ];
@@ -40,6 +51,8 @@ function ProcessBadge({ Icon, label }: { Icon: React.ElementType; label: string 
 }
 
 function OrbitCard({
+  num,
+  label,
   title,
   copy,
   Icon,
@@ -48,6 +61,8 @@ function OrbitCard({
   isActive,
   onSelect,
 }: {
+  num: string;
+  label: string;
   title: string;
   copy: string;
   Icon: React.ElementType;
@@ -62,7 +77,7 @@ function OrbitCard({
     <div className={`home-process-slot home-process-slot-${index}`}>
       <motion.button
         type="button"
-        className={`home-process-orbit-card ${isActive ? "is-active" : ""}`}
+        className={`home-process-orbit-card home-process-card-${index} ${isActive ? "is-active" : ""}`}
         style={{ rotate: counterRotate }}
         onClick={onSelect}
         whileHover={{ y: -8, scale: 1.04 }}
@@ -70,8 +85,12 @@ function OrbitCard({
         transition={{ duration: 0.28, ease: "easeOut" }}
         aria-pressed={isActive}
       >
-        <ProcessBadge Icon={Icon} label={`${title} step`} />
+        <div className="home-process-card-top">
+          <ProcessBadge Icon={Icon} label={`${title} step`} />
+          <span className="home-process-step-num">{num}</span>
+        </div>
         <div>
+          <small className="home-process-card-label">{label}</small>
           <h3>{title}</h3>
           <p>{copy}</p>
         </div>
@@ -114,9 +133,9 @@ export function HomeProcessOrbitSection() {
             Every website build moves around one core goal: a fast, editable, responsive WordPress system that clients can actually use after launch.
           </p>
           <div className="home-process-mini-list">
-            <span>Scroll linked</span>
             <span>Clear workflow</span>
             <span>Client-ready handover</span>
+            <span>Click each step</span>
           </div>
         </motion.div>
 
@@ -146,9 +165,11 @@ export function HomeProcessOrbitSection() {
           <motion.div className="home-process-orbit-wheel" style={{ rotate }}>
             <div className="home-process-ring home-process-ring-one" />
             <div className="home-process-ring home-process-ring-two" />
-            {processSteps.map(({ num, title, copy, Icon }, index) => (
+            {processSteps.map(({ num, label, title, copy, Icon }, index) => (
               <OrbitCard
                 key={num}
+                num={num}
+                label={label}
                 title={title}
                 copy={copy}
                 Icon={Icon}
