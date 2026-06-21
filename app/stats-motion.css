@@ -342,3 +342,102 @@ main {
   .stats-showcase-section .stat::after,
   .stats-showcase-section .stat strong { animation: none !important; }
 }
+
+/* ── Contact Form ──────────────────────────────────────────── */
+.contact-form {
+  width: 100%;
+  max-width: 600px;
+  margin: 36px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.contact-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.contact-field label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: rgba(7,7,7,.45);
+}
+.contact-input,
+.contact-textarea {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1.5px solid rgba(7,7,7,.13);
+  border-radius: 14px;
+  background: rgba(255,255,255,.88);
+  backdrop-filter: blur(8px);
+  font-size: 15px;
+  color: #080808;
+  font-family: inherit;
+  transition: border-color .22s ease, box-shadow .22s ease;
+  box-sizing: border-box;
+  outline: none;
+  appearance: none;
+}
+.contact-input::placeholder,
+.contact-textarea::placeholder {
+  color: rgba(7,7,7,.32);
+}
+.contact-input:focus,
+.contact-textarea:focus {
+  border-color: #080808;
+  box-shadow: 0 0 0 3px rgba(8,8,8,.07);
+}
+.contact-textarea {
+  min-height: 136px;
+  resize: vertical;
+  line-height: 1.6;
+}
+.contact-form-status {
+  font-size: 14px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 500;
+}
+.contact-form-status.success {
+  background: rgba(34,197,94,.1);
+  color: #15803d;
+  border: 1px solid rgba(34,197,94,.22);
+}
+.contact-form-status.error {
+  background: rgba(239,68,68,.07);
+  color: #b91c1c;
+  border: 1px solid rgba(239,68,68,.18);
+}
+.contact-form-status.error a {
+  color: #b91c1c;
+  font-weight: 700;
+}
+.contact-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.contact-actions .btn {
+  flex: 1;
+  min-width: 150px;
+  text-align: center;
+  justify-content: center;
+}
+.contact-actions button.btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+  transform: none;
+}
+@media (max-width: 600px) {
+  .contact-row { grid-template-columns: 1fr; gap: 14px; }
+  .contact-form { max-width: 100%; }
+  .contact-actions .btn { min-width: 0; }
+}

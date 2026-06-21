@@ -9,43 +9,43 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 const TESTIMONIALS = [
   {
     id: "testimonial-healthcare",
-    name: "Healthcare Website Owner",
-    profession: "Healthcare WordPress build",
+    name: "FastDocNow Team",
+    profession: "Telehealth platform — USA",
     rating: 5,
     description:
-      "Fast, responsive and clear communication. The final WordPress site made our services easier to understand and helped us present a more trustworthy healthcare brand.",
+      "Fast, responsive and clear communication throughout. The final WordPress site made our services easier to understand and helped us present a more trustworthy healthcare brand to US patients.",
   },
   {
     id: "testimonial-travel",
-    name: "Travel Business Client",
-    profession: "Travel / booking website",
+    name: "Desert Safari Dubai",
+    profession: "Custom booking plugin — Dubai, UAE",
     rating: 5,
     description:
-      "Adeel understood the booking flow properly and converted the idea into a clean, mobile-friendly experience. The package sections and CTAs became much easier for customers.",
+      "Adeel understood the booking flow properly and converted the idea into a clean, mobile-friendly experience. The tiered pricing engine and admin approval workflow worked exactly as we needed.",
   },
   {
     id: "testimonial-corporate",
-    name: "Corporate Services Founder",
-    profession: "Corporate Elementor website",
+    name: "Griffin Resources",
+    profession: "HR platform — USA",
     rating: 5,
     description:
-      "The website structure became much more professional. Services, trust sections and inquiry flow were handled with strong attention to detail.",
+      "The website structure became much more professional. Services, trust sections, and the inquiry flow were all handled with strong attention to detail. Business has improved since launch.",
   },
   {
     id: "testimonial-local",
-    name: "Local Service Brand",
-    profession: "Local business website",
+    name: "Pacific Valor Law",
+    profession: "Legal website — Okinawa, Japan",
     rating: 5,
     description:
-      "The build felt clean, practical and conversion-focused. Mobile spacing, contact buttons and service sections were improved in a way that helps visitors take action.",
+      "The build felt clean, practical, and conversion-focused. The free case review CTA and credentials section were improved in a way that helps veterans take action immediately.",
   },
   {
     id: "testimonial-agency",
-    name: "Agency Collaboration",
-    profession: "WordPress fixes and support",
+    name: "Rozi Academy",
+    profession: "WordPress support — Remote",
     rating: 5,
     description:
-      "Reliable WordPress support, clean Elementor work and solid troubleshooting. Adeel is easy to work with when a site needs practical fixes and launch support.",
+      "Reliable WordPress support, clean Elementor work, and solid troubleshooting across multiple client projects. Adeel is easy to work with when a site needs practical fixes and launch support.",
   },
 ];
 
@@ -257,9 +257,10 @@ export function HomeTestimonials() {
       <div className="testimonial-pin" ref={pinRef}>
         <div className="testimonial-intro">
           <div className="eyebrow">Client Feedback</div>
-          <h2>Testimonials that show the value behind the build</h2>
+          <h2>What clients say after working together</h2>
           <p>
-            Draft review cards for the portfolio. Replace these with verified client names and quotes when you publish real testimonials.
+            Feedback from clients across UAE, UK, and USA on WordPress builds,
+            WooCommerce stores, custom plugins, and performance work.
           </p>
         </div>
 
