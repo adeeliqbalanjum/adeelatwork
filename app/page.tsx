@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -14,13 +14,13 @@ gsap.registerPlugin(ScrollTrigger);
 const portraitDataUrl = "https://avatars.githubusercontent.com/u/178131381?v=4";
 
 const cards = [
-  ["Desert Safari Dubai",  "Custom booking plugin — tiered pricing, admin approvals & payment gateway.",  "shape-a"],
-  ["Embassy of Pakistan",  "Official government website with real-time passport tracking system.",        "shape-b"],
-  ["Figma to WordPress",   "Pixel-perfect Elementor builds from designer files for agency clients.",      "thumbs"],
-  ["WooCommerce Store",    "Full e-commerce setup for a Dubai lighting company.",                         "shape-c"],
-  ["Custom Booking Plugin","Tiered pricing, admin approvals, automated emails & WhatsApp fields.",        "shape-d"],
-  ["Landing Pages",        "High-converting Elementor pages for UAE, UK & USA clients.",                  "shape-a"],
-  ["Website Rebuilds",     "Full redesigns turning outdated sites into fast modern platforms.",           "shape-b"],
+  ["Desert Safari Dubai",    "Custom booking plugin — tiered AED pricing, admin approvals & Telr payment.", "shape-a"],
+  ["Embassy of Pakistan",    "Official government website with real-time passport tracking system.",         "shape-b"],
+  ["FastDocNow",             "24/7 telehealth platform with HIPAA-compliant messaging & booking flow.",     "thumbs"],
+  ["Artisan Technologies",   "Smart home automation site — residential & commercial service split.",         "shape-c"],
+  ["Pacific Valor Law",      "VA disability attorney site for overseas veterans — Okinawa, Japan.",          "shape-d"],
+  ["Griffin Resources",      "HR outsourcing platform with lead-gen CTAs and consultation flow.",            "shape-a"],
+  ["Relocrate",              "Eco-friendly moving crate rental site for Denver, Colorado.",                  "shape-b"],
 ];
 
 const stats = [
@@ -114,6 +114,32 @@ export default function Home() {
   const gradientRef = useRef<HTMLDivElement>(null);
   const portraitRef = useRef<HTMLDivElement>(null);
   const mainRef     = useRef<HTMLElement>(null);
+
+  /* ── Contact form state ──────────────────────────────────── */
+  // TODO: Sign up at formspree.io, create a form, paste your form ID below
+  const FORMSPREE_ID = "YOUR_FORM_ID";
+  const [formState, setFormState] = useState({ name: "", email: "", message: "" });
+  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormStatus("sending");
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(formState),
+      });
+      if (res.ok) {
+        setFormStatus("success");
+        setFormState({ name: "", email: "", message: "" });
+      } else {
+        setFormStatus("error");
+      }
+    } catch {
+      setFormStatus("error");
+    }
+  };
 
   /* ── All GSAP animations in ONE context ─────────────────── */
   useEffect(() => {
@@ -252,7 +278,7 @@ export default function Home() {
 
       {/* NAV */}
       <nav className="nav" aria-label="Primary navigation">
-        <a className="nav-logo" href="#home" aria-label="Muhammad Adeel home">AI</a>
+        <a className="nav-logo" href="#home" aria-label="Muhammad Adeel home">MA</a>
         <Link href="/portfolio">Portfolio</Link>
         <a href="#features">Features</a>
         <a href="#projects">Projects</a>
@@ -491,7 +517,7 @@ export default function Home() {
           <div className="section-head scroll-reveal">
             <div className="eyebrow">Trust</div>
             <h2>Why a client should feel safe hiring me</h2>
-            <p>Until real client quotes are added, this section uses honest trust signals based on project delivery and technical capability.</p>
+            <p>Every signal here is grounded in real project delivery — international clients, editable builds, and technical depth proven through 19 documented case studies.</p>
           </div>
 
           <div className="trust-grid">
@@ -523,11 +549,73 @@ export default function Home() {
             send a message and I&apos;ll respond within a few hours.
           </p>
 
-          <div className="actions contact-anim" style={{ marginTop: 28 }}>
-            <a className="btn btn-dark" href="mailto:adeeliqbalajum@gmail.com">Email me</a>
-            <a className="btn btn-ghost" href="https://linkedin.com/in/adeelatwork/"
-              target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          </div>
+          <form className="contact-form contact-anim" onSubmit={handleSubmit} noValidate>
+            <div className="contact-row">
+              <div className="contact-field">
+                <label htmlFor="cf-name">Name</label>
+                <input
+                  id="cf-name"
+                  type="text"
+                  className="contact-input"
+                  placeholder="Your name"
+                  value={formState.name}
+                  onChange={(e) => setFormState((s) => ({ ...s, name: e.target.value }))}
+                  required
+                />
+              </div>
+              <div className="contact-field">
+                <label htmlFor="cf-email">Email</label>
+                <input
+                  id="cf-email"
+                  type="email"
+                  className="contact-input"
+                  placeholder="you@example.com"
+                  value={formState.email}
+                  onChange={(e) => setFormState((s) => ({ ...s, email: e.target.value }))}
+                  required
+                />
+              </div>
+            </div>
+            <div className="contact-field">
+              <label htmlFor="cf-message">Message</label>
+              <textarea
+                id="cf-message"
+                className="contact-textarea"
+                placeholder="Tell me about your project — type of site, goals, timeline, budget…"
+                value={formState.message}
+                onChange={(e) => setFormState((s) => ({ ...s, message: e.target.value }))}
+                required
+              />
+            </div>
+
+            {formStatus === "success" && (
+              <p className="contact-form-status success">✓ Message sent — I&apos;ll reply within a few hours.</p>
+            )}
+            {formStatus === "error" && (
+              <p className="contact-form-status error">
+                Something went wrong. Email me directly at{" "}
+                <a href="mailto:adeeliqbalajum@gmail.com">adeeliqbalajum@gmail.com</a>
+              </p>
+            )}
+
+            <div className="contact-actions">
+              <button
+                type="submit"
+                className="btn btn-dark"
+                disabled={formStatus === "sending"}
+              >
+                {formStatus === "sending" ? "Sending…" : "✦ Send message"}
+              </button>
+              <a
+                className="btn btn-ghost"
+                href="https://linkedin.com/in/adeelatwork/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </a>
+            </div>
+          </form>
         </div>
       </section>
     </main>
