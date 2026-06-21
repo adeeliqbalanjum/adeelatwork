@@ -45,35 +45,46 @@ function OrbitCard({
   Icon,
   index,
   rotate,
+  isActive,
+  onSelect,
 }: {
   title: string;
   copy: string;
   Icon: React.ElementType;
   index: number;
   rotate: MotionValue<number>;
+  isActive: boolean;
+  onSelect: () => void;
 }) {
   const counterRotate = useTransform(rotate, (value) => -value);
 
   return (
     <div className={`home-process-slot home-process-slot-${index}`}>
-      <motion.article
-        className="home-process-orbit-card"
+      <motion.button
+        type="button"
+        className={`home-process-orbit-card ${isActive ? "is-active" : ""}`}
         style={{ rotate: counterRotate }}
+        onClick={onSelect}
         whileHover={{ y: -8, scale: 1.04 }}
+        whileTap={{ scale: 0.98 }}
         transition={{ duration: 0.28, ease: "easeOut" }}
+        aria-pressed={isActive}
       >
         <ProcessBadge Icon={Icon} label={`${title} step`} />
         <div>
           <h3>{title}</h3>
           <p>{copy}</p>
         </div>
-      </motion.article>
+      </motion.button>
     </div>
   );
 }
 
 export function HomeProcessOrbitSection() {
   const ref = React.useRef<HTMLElement>(null);
+  const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
+  const activeStep = activeIndex !== null ? processSteps[activeIndex] : null;
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 78%", "end 18%"],
@@ -110,11 +121,27 @@ export function HomeProcessOrbitSection() {
         </motion.div>
 
         <motion.div className="home-process-stage" style={{ scale }}>
-          <div className="home-process-core">
-            <span>Launch</span>
-            <strong>WordPress system</strong>
-            <small>Editable · Fast · Responsive</small>
-          </div>
+          <motion.div
+            className={`home-process-core ${activeStep ? "is-detail" : ""}`}
+            key={activeStep ? activeStep.num : "default"}
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {activeStep ? (
+              <>
+                <small>{activeStep.num}</small>
+                <span>{activeStep.title}</span>
+                <strong>{activeStep.copy}</strong>
+              </>
+            ) : (
+              <>
+                <span>Launch</span>
+                <strong>WordPress system</strong>
+                <small>Editable · Fast · Responsive</small>
+              </>
+            )}
+          </motion.div>
 
           <motion.div className="home-process-orbit-wheel" style={{ rotate }}>
             <div className="home-process-ring home-process-ring-one" />
@@ -127,6 +154,8 @@ export function HomeProcessOrbitSection() {
                 Icon={Icon}
                 index={index}
                 rotate={rotate}
+                isActive={activeIndex === index}
+                onSelect={() => setActiveIndex(activeIndex === index ? null : index)}
               />
             ))}
           </motion.div>
