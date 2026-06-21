@@ -1,0 +1,10 @@
+.home-process-badge svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2.35;
+  color: #fff;
+}
+
+.home-process-badge {
+  font-size: 0 !important;
+}
