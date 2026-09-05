@@ -106,8 +106,16 @@ export default function Home() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      const ease = "power3.out";
       document.querySelectorAll<HTMLElement>(".scroll-reveal").forEach((item) => {
-        gsap.fromTo(item, { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 0.72, ease: "power3.out", scrollTrigger: { trigger: item, start: "top 86%", once: true } });
+        gsap.fromTo(item, { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease, scrollTrigger: { trigger: item, start: "top 86%", once: true } });
+      });
+      document.querySelectorAll<HTMLElement>("[data-stagger]").forEach((grid) => {
+        const items = Array.from(grid.children) as HTMLElement[];
+        gsap.fromTo(items, { y: 30, opacity: 0 }, {
+          y: 0, opacity: 1, duration: 0.75, ease, stagger: 0.09,
+          scrollTrigger: { trigger: grid, start: "top 84%", once: true, onEnter: () => grid.classList.add("is-in") },
+        });
       });
       ScrollTrigger.refresh();
     }, mainRef);
@@ -142,14 +150,14 @@ export default function Home() {
         <div className="rd-container">
           <div className="rd-head scroll-reveal">
             <div>
-              <div className="rd-kicker">Services</div>
+              <div className="eyebrow">Services</div>
               <h2 className="rd-h2">WordPress services clients actually hire for.</h2>
             </div>
             <p className="rd-lead rd-lead-sm">Bring the design, the brief, or the broken site. You get a WordPress build your team can edit, your customers can use on a phone, and your agency can put its own name on.</p>
           </div>
-          <div className="rd-services-grid">
+          <div className="rd-services-grid" data-stagger="true">
             {services.map((s) => (
-              <article className={`rd-card rd-service${s.featured ? " rd-service-featured" : ""} scroll-reveal`} key={s.title}>
+              <article className={`rd-card rd-service${s.featured ? " rd-service-featured" : ""}`} key={s.title}>
                 <div className="rd-service-top">
                   <div className={`rd-service-icon${s.featured ? " rd-service-icon-dark" : ""}`}><Icon name={s.icon} /></div>
                   {s.featured && <span className="rd-chip rd-chip-yellow">Most requested</span>}
@@ -175,13 +183,13 @@ export default function Home() {
       <section className="rd-section rd-process flow-section" id="workflow">
         <div className="rd-container">
           <div className="rd-head rd-head-solo scroll-reveal">
-            <div className="rd-kicker">How a project runs</div>
+            <div className="eyebrow">How a project runs</div>
             <h2 className="rd-h2">From Figma file to a launched, editable site.</h2>
             <p className="rd-lead rd-lead-sm">A controlled process, so you know exactly what you're getting before development starts.</p>
           </div>
-          <div className="rd-process-grid">
+          <div className="rd-process-grid" data-stagger="true">
             {workflow.map(([number, title, text], i) => (
-              <article className={`rd-step${i === 0 ? " is-first" : ""} scroll-reveal`} key={number}>
+              <article className={`rd-step${i === 0 ? " is-first" : ""}`} key={number}>
                 <span className="rd-step-num">{number}</span>
                 <h3>{title}</h3>
                 <p>{text}</p>
@@ -199,7 +207,7 @@ export default function Home() {
         <div className="rd-container">
           <div className="rd-head scroll-reveal">
             <div>
-              <div className="rd-kicker">Client feedback</div>
+              <div className="eyebrow">Client feedback</div>
               <h2 className="rd-h2">What clients say after working together</h2>
             </div>
             <p className="rd-lead rd-lead-sm">Feedback from clients in the UAE, USA, Japan and Pakistan on WordPress builds, WooCommerce work, custom plugins and support.</p>
@@ -224,9 +232,9 @@ export default function Home() {
               </div>
             </div>
           ))}
-          <div className="rd-testimonial-grid">
+          <div className="rd-testimonial-grid" data-stagger="true">
             {testimonials.filter((t) => !t.featured).map((t) => (
-              <article className="rd-card rd-t-card scroll-reveal" key={t.name}>
+              <article className="rd-card rd-t-card" key={t.name}>
                 <div className="rd-stars rd-stars-sm" aria-label="5 out of 5 stars"><Star /><Star /><Star /><Star /><Star /></div>
                 <p>{t.quote}</p>
                 <div className="rd-author"><span className="rd-author-avatar">{initials(t.name)}</span><div><strong>{t.name}</strong><span>{t.role}</span></div></div>
@@ -246,7 +254,7 @@ export default function Home() {
               <div className="rd-availability"><span className="rd-dot" /><span className="rd-badge-yellow">Available</span><span className="rd-availability-text">Taking new projects</span></div>
               <h2 className="rd-h2 rd-h2-xl">Need a WordPress site your team can <span className="rd-muted">actually edit?</span></h2>
               <p className="rd-lead">Send the Figma file, the brief, or the URL of the site that&apos;s broken. You&apos;ll get a clear reply on scope and next steps — no long forms and no sales call required. The form opens a pre-filled email, or reach me directly.</p>
-              <div className="rd-contact-list">
+              <div className="rd-contact-list" data-stagger="true">
                 <a href={`mailto:${siteConfig.email}`} className="rd-contact-item"><span className="rd-contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" /><path d="M3 8l9 6 9-6" /></svg></span><span><small>Email</small>{siteConfig.email}</span></a>
                 <a href={`https://wa.me/${siteConfig.whatsapp}`} target="_blank" rel="noopener noreferrer" className="rd-contact-item"><span className="rd-contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 18.8L4 20z" /><path d="M9.5 9.5c0 3 2 5 5 5l1-1.5-2-1-.7.7c-.8-.4-1.4-1-1.8-1.8l.7-.7-1-2-1.2 1.3z" /></svg></span><span><small>WhatsApp</small>{siteConfig.phone}</span></a>
                 <a href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer" className="rd-contact-item"><span className="rd-contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" /><circle cx="4" cy="4" r="2" /></svg></span><span><small>LinkedIn</small>/in/adeelatwork</span></a>

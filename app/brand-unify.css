@@ -1,0 +1,161 @@
+/* =========================================================
+   BRAND UNIFY — one visual system, taken from the hero.
+   Loaded last so it wins over every section-specific sheet.
+
+   Palette
+     ink        #070707   text, primary buttons, dark surfaces
+     paper      #fafaf8   page background
+     soft       #f2f2ef   alternate bands, chips
+     warm       #f7f3ec   the single warm surface (testimonial quote)
+     aqua       #0ea5e9   hero orb 1 → gradients, one accent
+     mint       #22c55e   hero orb 2 → live dot, one accent
+     yellow     #f7d64a   ONLY for the "Available" / "Most requested" badge
+   Everything else (orange, purple, crimson, brand logo colours) is
+   neutralised so the page reads as one product, not five sections.
+   ========================================================= */
+
+:root {
+  --b-ink: #070707;
+  --b-paper: #fafaf8;
+  --b-soft: #f2f2ef;
+  --b-warm: #f7f3ec;
+  --b-aqua: #0ea5e9;
+  --b-mint: #22c55e;
+  --b-yellow: #f7d64a;
+  --b-line: rgba(7, 7, 7, .075);
+  --b-text-2: rgba(7, 7, 7, .58);
+  --b-text-3: rgba(7, 7, 7, .45);
+  --b-ease: cubic-bezier(.2, .8, .2, 1);
+  --b-gradient: linear-gradient(90deg, var(--b-aqua), var(--b-mint));
+  --b-mesh:
+    radial-gradient(circle at 50% -12%, #ffffff 0px, rgba(255, 255, 255, 0) 42%),
+    radial-gradient(circle at 8% 10%, rgba(14, 165, 233, .16), transparent 34%),
+    radial-gradient(circle at 92% 8%, rgba(34, 197, 94, .14), transparent 32%),
+    linear-gradient(#f9fdff, #eefaf8 54%, #e8f3f1);
+  --b-mesh-soft:
+    radial-gradient(circle at 10% 14%, rgba(14, 165, 233, .09), transparent 34%),
+    radial-gradient(circle at 90% 10%, rgba(34, 197, 94, .09), transparent 32%);
+}
+
+/* Typography: Satoshi everywhere — the case-study table was on Inter/Trebuchet/mono */
+body,
+.home-digitalists-work,
+.home-digitalists-hand,
+.home-digitalists-center,
+.home-digitalists-code,
+.home-digitalists-caption { font-family: "Satoshi", ui-sans-serif, system-ui, -apple-system, sans-serif !important; }
+
+/* ---------- ONE eyebrow style for every section ---------- */
+.eyebrow,
+.rd-eyebrow,
+.testimonial-intro .eyebrow,
+.build-stack-copy .eyebrow,
+.home-digitalists-hand {
+  justify-self: start; width: max-content; max-width: 100%;
+  display: inline-flex !important; align-items: center !important; gap: 8px !important;
+  margin: 0 0 16px !important; padding: 7px 13px 7px 11px !important;
+  border: 1px solid rgba(7, 7, 7, .07) !important; border-radius: 999px !important;
+  background: rgba(255, 255, 255, .78) !important;
+  color: rgba(7, 7, 7, .62) !important; font-size: 12px !important; font-weight: 800 !important;
+  letter-spacing: -.02em !important; text-transform: none !important; line-height: 1 !important;
+  box-shadow: 0 10px 30px rgba(7, 7, 7, .05), inset 0 1px 0 rgba(255, 255, 255, .95) !important;
+  backdrop-filter: blur(16px);
+  text-decoration: none !important;
+}
+.eyebrow::before,
+.rd-eyebrow::before,
+.home-digitalists-hand::before {
+  content: "" !important; width: 8px !important; height: 8px !important; flex: 0 0 8px !important; border-radius: 999px !important;
+  background: var(--b-mint) !important;
+  box-shadow: 0 0 0 0 rgba(34, 197, 94, .42), 0 0 18px rgba(34, 197, 94, .42) !important;
+  animation: livePulse 1.75s ease-out infinite !important;
+}
+/* the projects-stack / build-stack eyebrows had a green filled pill inside — flatten it */
+.testimonial-intro .eyebrow span,
+.build-stack-copy .eyebrow span { background: transparent !important; color: inherit !important; padding: 0 !important; box-shadow: none !important; }
+
+/* ---------- Headings: one metric set ---------- */
+.rd-h2,
+.testimonial-intro h2,
+.build-stack-copy h2 {
+  font-weight: 900 !important; letter-spacing: -.072em !important; line-height: .92 !important; color: var(--b-ink) !important;
+  text-shadow: none !important;
+}
+.about-card h2 { font-weight: 900 !important; letter-spacing: -.072em !important; line-height: .92 !important; color: #fff !important; }
+.rd-lead,
+.testimonial-intro p,
+.build-stack-copy p { color: var(--b-text-2) !important; font-weight: 650 !important; letter-spacing: -.022em !important; line-height: 1.62 !important; }
+
+/* ---------- Buttons: ink pill everywhere ---------- */
+.btn-dark, .rd-btn-dark, .nav .nav-cta, .home-digitalists-all {
+  background: var(--b-ink) !important; color: #fff !important; border-radius: 999px !important;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .22) !important;
+  transition: transform .3s var(--b-ease), box-shadow .3s var(--b-ease) !important;
+}
+.btn-dark:hover, .rd-btn-dark:hover, .home-digitalists-all:hover { transform: translateY(-3px) !important; box-shadow: 0 20px 44px rgba(0, 0, 0, .26) !important; }
+
+/* ---------- ABOUT / STATS: orange & purple bars → aqua / mint ---------- */
+.stats-showcase-section .stat:nth-child(1)::before { background: linear-gradient(90deg, var(--b-aqua), rgba(14, 165, 233, 0)) !important; }
+.stats-showcase-section .stat:nth-child(2)::before { background: linear-gradient(90deg, var(--b-mint), rgba(34, 197, 94, 0)) !important; }
+.stats-showcase-section .stat:nth-child(3)::before { background: var(--b-gradient) !important; }
+.stats-showcase-section .stat:nth-child(4)::before { background: linear-gradient(90deg, var(--b-ink), rgba(7, 7, 7, 0)) !important; }
+.stats-showcase-section .stat:nth-child(1) .stat-top::after { color: var(--b-aqua) !important; }
+.stats-showcase-section .stat:nth-child(2) .stat-top::after { color: var(--b-mint) !important; }
+.stats-showcase-section .stat:nth-child(3) .stat-top::after { color: var(--b-aqua) !important; }
+.stats-showcase-section .stat:nth-child(4) .stat-top::after { color: var(--b-ink) !important; }
+.stats-showcase-section .stat { border-radius: 28px !important; border: 1px solid var(--b-line) !important; }
+
+/* ---------- BUILD STACK: brand crimson/purple/etc → ink, aqua tint ---------- */
+.build-stack-card[class*="build-stack-card-"] { --stack-accent: var(--b-aqua) !important; }
+.build-stack-card[class*="build-stack-card-"] h3 { color: var(--b-ink) !important; text-shadow: none !important; }
+.build-stack-card {
+  background: rgba(255, 255, 255, .84) !important; border: 1px solid var(--b-line) !important; border-radius: 30px !important;
+  box-shadow: 0 20px 60px rgba(7, 7, 7, .06), inset 0 1px 0 rgba(255, 255, 255, .95) !important;
+}
+.build-stack-card::before, .build-stack-card::after { background: var(--b-mesh-soft) !important; opacity: 1 !important; }
+.build-stack-card-icon, .build-stack-card-icon[class*="build-stack-icon-"] { background: var(--b-ink) !important; color: #fff !important; box-shadow: 0 14px 30px rgba(7, 7, 7, .18) !important; border-radius: 18px !important; }
+.build-stack-card-icon * { color: #fff !important; fill: currentColor; }
+.build-stack-icon[class*="build-stack-icon-"] { background: var(--b-soft) !important; color: var(--b-ink) !important; }
+.build-stack-icon[class*="build-stack-icon-"] svg, .build-stack-icon[class*="build-stack-icon-"] img { filter: grayscale(1) contrast(1.15); opacity: .85; }
+.build-stack-tool.is-active .build-stack-icon { background: var(--b-mint) !important; color: #fff !important; }
+.build-stack-tool.is-active .build-stack-icon svg, .build-stack-tool.is-active .build-stack-icon img { filter: none; opacity: 1; }
+.build-stack-tool.is-active { background: var(--b-ink) !important; }
+.build-stack-tool.is-active .build-stack-name { color: #fff !important; }
+
+/* ---------- CASE-STUDY TABLE: purple/gold hover tones → aqua/mint ---------- */
+.home-digitalists-work { background: var(--b-mesh) !important; }
+.home-digitalists-work.digitalists-active-tone-purple::after,
+.home-digitalists-work.digitalists-active-tone-gold::after {
+  background:
+    radial-gradient(circle at 88% 12%, rgba(14, 165, 233, .30), transparent 24%),
+    radial-gradient(circle at 24% 34%, rgba(255, 255, 255, .72), transparent 18%),
+    radial-gradient(circle at 86% 30%, rgba(34, 197, 94, .14), transparent 18%) !important;
+}
+.home-digitalists-center span { font-family: "Satoshi", ui-sans-serif, system-ui, sans-serif !important; letter-spacing: .14em !important; text-transform: uppercase !important; font-size: 11px !important; font-weight: 800 !important; color: var(--b-text-3) !important; }
+.home-digitalists-center i { display: none !important; }
+.home-digitalists-code { font-size: 11px !important; font-weight: 800 !important; letter-spacing: .08em !important; color: var(--b-text-3) !important; }
+.home-digitalists-row { border-color: var(--b-line) !important; }
+
+/* ---------- PROJECTS STACK: orange/purple glow → yellow/aqua/mint (calm) ---------- */
+.projects-stack .testimonial-glow { opacity: .22 !important; }
+.projects-stack .gblob.orange { background: radial-gradient(circle, rgba(247, 214, 74, .55), transparent 60%) !important; }
+.projects-stack .gblob.purple { background: radial-gradient(circle, rgba(14, 165, 233, .5), transparent 60%) !important; }
+.projects-stack .gblob.green { background: radial-gradient(circle, rgba(34, 197, 94, .45), transparent 60%) !important; }
+.projects-stack .testimonial-card-balls span { background: radial-gradient(circle, rgba(14, 165, 233, .35), transparent 62%) !important; }
+.projects-stack .testimonial-card-balls span:nth-child(2) { background: radial-gradient(circle, rgba(34, 197, 94, .32), transparent 62%) !important; }
+.projects-stack .testimonial-card-balls span:nth-child(3) { background: radial-gradient(circle, rgba(247, 214, 74, .30), transparent 62%) !important; }
+.projects-stack .testimonial-motion-card { border-radius: 30px !important; border: 1px solid var(--b-line) !important; }
+.projects-stack-link { background: var(--b-soft); border: 1px solid var(--b-line); border-radius: 999px; padding: 10px 16px; transition: background .3s var(--b-ease), color .3s var(--b-ease), transform .3s var(--b-ease); }
+.projects-stack-link:hover { background: var(--b-ink); color: #fff; transform: translateY(-2px); }
+
+/* ---------- FOOTER: keep ink, align kicker/CTA ---------- */
+.site-footer .site-footer-kicker { color: var(--b-mint) !important; }
+
+/* ---------- Section rhythm (paper → soft → mesh, never a random tint) ---------- */
+.rd-services { background: var(--b-mesh-soft), var(--b-paper) !important; }
+.rd-process { background: var(--b-soft) !important; }
+.rd-testimonials { background: var(--b-mesh-soft), var(--b-paper) !important; }
+.rd-cta { background: var(--b-mesh) !important; }
+
+/* Hover lift is the same everywhere: 4px, softer shadow, 450ms */
+.rd-card, .stats-showcase-section .stat, .build-stack-card { transition: transform .45s var(--b-ease), box-shadow .45s var(--b-ease), border-color .45s var(--b-ease) !important; }
