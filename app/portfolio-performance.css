@@ -1,0 +1,59 @@
+/* Portfolio performance pass: keep the design, reduce scroll/script/paint cost. */
+.port-page-fast {
+  contain: layout paint;
+}
+
+.port-page-fast .ph-anim,
+.port-page-fast .filter-btn,
+.port-page-fast .proj-card {
+  animation: portfolioFastIn .46s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.port-page-fast .ph-anim:nth-child(1) { animation-delay: .02s; }
+.port-page-fast .ph-anim:nth-child(2) { animation-delay: .06s; }
+.port-page-fast .ph-anim:nth-child(3) { animation-delay: .10s; }
+.port-page-fast .ph-anim:nth-child(4) { animation-delay: .14s; }
+
+.port-page-fast .proj-card {
+  content-visibility: auto;
+  contain-intrinsic-size: 430px 360px;
+  contain: layout paint style;
+  animation-delay: .03s;
+  box-shadow: 0 18px 56px rgba(0,0,0,.07) !important;
+}
+
+.port-page-fast .proj-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 28px 76px rgba(0,0,0,.12) !important;
+}
+
+.port-page-fast .proj-mock,
+.port-page-fast .pm-wrap,
+.port-page-fast .pm-device {
+  transform: translateZ(0);
+  will-change: auto !important;
+}
+
+.port-page-fast .port-filters {
+  background: rgba(250,250,248,.82);
+  backdrop-filter: blur(10px) !important;
+}
+
+@keyframes portfolioFastIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .port-page-fast .ph-anim,
+  .port-page-fast .filter-btn,
+  .port-page-fast .proj-card {
+    animation: none !important;
+  }
+}

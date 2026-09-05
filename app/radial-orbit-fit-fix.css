@@ -1,0 +1,81 @@
+.radial-orbit-only .home-process-terminal {
+  width: min(470px, 66vw) !important;
+  overflow: visible !important;
+}
+
+.radial-orbit-only .home-process-orbit-ring {
+  width: 19rem !important;
+  height: 19rem !important;
+}
+
+.radial-orbit-only .home-process-node-wrap {
+  translate: -50% -50% !important;
+}
+
+.radial-orbit-only .home-process-node {
+  width: 2.35rem !important;
+  height: 2.35rem !important;
+  border-color: rgba(255, 255, 255, .52) !important;
+}
+
+.radial-orbit-only .home-process-node svg {
+  width: 17px !important;
+  height: 17px !important;
+  stroke-width: 2.45 !important;
+}
+
+.radial-orbit-only .home-process-node-label {
+  top: 2.85rem !important;
+  color: rgba(255, 255, 255, .94) !important;
+  font-size: .69rem !important;
+  font-weight: 950 !important;
+  letter-spacing: .075em !important;
+  text-shadow: 0 10px 24px rgba(0,0,0,.7), 0 0 18px rgba(255,255,255,.18) !important;
+}
+
+.radial-orbit-only .home-process-center-node {
+  width: 3.65rem !important;
+  height: 3.65rem !important;
+}
+
+.radial-orbit-only .home-process-center-ping-one {
+  width: 4.7rem !important;
+  height: 4.7rem !important;
+}
+
+.radial-orbit-only .home-process-center-ping-two {
+  width: 5.7rem !important;
+  height: 5.7rem !important;
+}
+
+.radial-orbit-only .home-process-center-core {
+  width: 1.8rem !important;
+  height: 1.8rem !important;
+}
+
+.radial-orbit-only .home-process-expanded-card {
+  top: 4.65rem !important;
+  width: 15rem !important;
+}
+
+@media (max-width: 1080px) {
+  .radial-orbit-only .home-process-terminal {
+    width: min(470px, 88vw) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .radial-orbit-only .home-process-terminal {
+    width: min(360px, 92vw) !important;
+  }
+
+  .radial-orbit-only .home-process-orbit-ring {
+    width: 15.6rem !important;
+    height: 15.6rem !important;
+  }
+
+  .radial-orbit-only .home-process-node-label {
+    font-size: .58rem !important;
+    top: 2.65rem !important;
+  }
+}

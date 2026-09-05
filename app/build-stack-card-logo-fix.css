@@ -1,0 +1,77 @@
+.build-stack-card-icon {
+  width: 62px !important;
+  height: 62px !important;
+  border-radius: 18px !important;
+  display: grid !important;
+  place-items: center !important;
+  overflow: hidden !important;
+  transform: none !important;
+}
+
+.build-stack-card-icon > * {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.build-stack-card-icon .build-stack-wordmark {
+  font-size: 24px !important;
+  line-height: 1 !important;
+  color: #fff !important;
+  text-shadow: none !important;
+}
+
+.build-stack-card-icon.build-stack-icon-wordpress {
+  background: #21759b !important;
+  color: #fff !important;
+}
+
+.build-stack-card-icon.build-stack-icon-elementor {
+  background: #92003b !important;
+  color: #fff !important;
+}
+
+.build-stack-card-icon.build-stack-icon-woocommerce {
+  background: #7f54b3 !important;
+  color: #fff !important;
+}
+
+.build-stack-card-icon.build-stack-icon-acf {
+  background: #00d084 !important;
+  color: #06140c !important;
+}
+
+.build-stack-card-icon.build-stack-icon-cpt,
+.build-stack-card-icon.build-stack-icon-next {
+  background: #070707 !important;
+  color: #fff !important;
+}
+
+.build-stack-card-icon.build-stack-icon-php {
+  background: #777bb4 !important;
+  color: #fff !important;
+}
+
+.build-stack-card-icon.build-stack-icon-javascript {
+  background: #f7df1e !important;
+  color: #111 !important;
+}
+
+.build-stack-card-icon.build-stack-icon-gsap {
+  background: #88ce02 !important;
+  color: #101 !important;
+}
+
+.build-stack-card-icon.build-stack-icon-react {
+  background: #111827 !important;
+  color: #61dafb !important;
+}
+
+.build-stack-card-icon.build-stack-icon-tailwind {
+  background: #ecfeff !important;
+  color: #06b6d4 !important;
+}
+
+.build-stack-card-icon.build-stack-icon-figma {
+  background: #fff !important;
+  color: #111 !important;
+}

@@ -1,0 +1,17 @@
+.build-stack-name {
+  display: inline-block !important;
+  max-width: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  transition: max-width .42s cubic-bezier(.2,.8,.2,1), opacity .32s ease, color .32s ease !important;
+}
+
+.build-stack-name::before {
+  content: none !important;
+}
+
+.build-stack-tool.show-name .build-stack-name {
+  max-width: 190px !important;
+  opacity: 1 !important;
+}
