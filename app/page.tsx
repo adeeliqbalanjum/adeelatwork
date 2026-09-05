@@ -23,69 +23,42 @@ const stats = [
 const services = [
   {
     title: "WordPress Website Development",
-    text: "Editable Elementor Pro websites built from Figma, PSD, or reference designs with responsive layouts and clean handoff.",
-    tags: ["Elementor Pro", "ACF", "Responsive UI"],
+    text: "Your Figma or PSD design, built as an Elementor Pro site your team can edit without calling a developer — responsive, structured with ACF, and handed over clean.",
+    tags: ["Figma → Elementor Pro", "ACF", "Responsive"],
     featured: true,
     icon: "layout",
   },
   {
     title: "WooCommerce Stores",
-    text: "Product, checkout, payment and order-flow improvements for stores that need fewer bugs and better conversions.",
+    text: "Checkout bugs, payment issues and clunky product flows cost you orders. I build and fix WooCommerce stores that work on mobile and are easier to run day to day.",
     tags: ["Checkout", "Payments", "Products"],
     icon: "cart",
   },
   {
     title: "Custom WordPress Features",
-    text: "Booking flows, CPT dashboards, admin approval workflows, automated emails and PHP-based business logic.",
-    tags: ["PHP", "CPT", "Custom Plugin"],
+    text: "When no plugin fits your workflow — tiered booking prices, admin approvals, automated emails — I build it in PHP so the site fits your business, not the other way round.",
+    tags: ["PHP", "Custom Plugin", "CPT"],
     icon: "code",
   },
   {
     title: "Speed, QA & Maintenance",
-    text: "Plugin audits, Core Web Vitals work, migrations, backups, bug fixes and live-site support for production WordPress websites.",
+    text: "Slow pages, plugin conflicts, layouts that break after an update. Audits, Core Web Vitals work, migrations, backups and ongoing support for live WordPress sites.",
     tags: ["WP Rocket", "LiteSpeed", "Cloudflare"],
     icon: "bolt",
   },
   {
     title: "Agency & White-Label Development",
-    text: "Figma handoff, Elementor/ACF implementation, WooCommerce and maintenance work delivered under your agency's name, NDA-friendly.",
-    tags: ["Subcontract", "Figma handoff", "NDA"],
+    text: "Overflow work for agencies: send the Figma file and brief, get back an editable Elementor/ACF build under your name. NDA-friendly, with clear communication across time zones.",
+    tags: ["Subcontract", "Figma handoff", "NDA-friendly"],
     icon: "layers",
   },
 ];
 
-const proof = [
-  {
-    title: "Custom booking system",
-    project: "Desert Safari Dubai",
-    text: "Private/shared pricing logic, add-ons, AED totals, admin workflow and booking emails.",
-    href: "/portfolio/desert-safari-dubai",
-    image: "",
-    tag: "AED pricing engine",
-  },
-  {
-    title: "Healthcare conversion UX",
-    project: "FastDocNow",
-    text: "Trust-led healthcare pages, mobile-first service flow, booking CTAs and speed-focused setup.",
-    href: "/portfolio/fastdocnow",
-    image: withBasePath("/work-images/fastdocnow.webp"),
-    tag: "Mobile-first flow",
-  },
-  {
-    title: "B2B service architecture",
-    project: "Griffin Resources",
-    text: "Clear service hierarchy, lead-generation structure and professional corporate presentation.",
-    href: "/portfolio/griffin-resources",
-    image: withBasePath("/work-images/griffin-resources.webp"),
-    tag: "Lead-gen structure",
-  },
-];
-
 const workflow = [
-  ["01", "Scope", "We define the goal, audience, pages, functionality, content needs and launch requirements."],
-  ["02", "Build", "I create editable WordPress-style sections, responsive layouts, forms, CTAs and project-specific features."],
-  ["03", "QA", "I test mobile, tablet, desktop, links, forms, content hierarchy, accessibility basics and loading behavior."],
-  ["04", "Launch", "I prepare deployment, SEO basics, sitemap, metadata, post-launch checks and maintenance notes."],
+  ["01", "Scope", "We agree the goal, audience, pages, functionality, content and launch requirements up front — so nothing surprises you mid-build."],
+  ["02", "Build", "Editable Elementor Pro sections, responsive layouts, forms, CTAs and any custom features, built so your team can update them after launch."],
+  ["03", "QA", "Every page checked on mobile, tablet and desktop: links, forms, content hierarchy, accessibility basics and loading behaviour."],
+  ["04", "Launch", "Deployment, SEO basics, sitemap and metadata, post-launch checks and maintenance notes — so you're never left guessing what happens next."],
 ];
 
 const testimonials = [
@@ -113,7 +86,6 @@ function Icon({ name }: { name: string }) {
 }
 
 const Star = () => <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.4 6.3 20.5l1.2-6.4L2.8 9.7l6.4-.8z" /></svg>;
-const Arrow = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>;
 
 export default function Home() {
   const mainRef = useRef<HTMLElement>(null);
@@ -173,7 +145,7 @@ export default function Home() {
               <div className="rd-kicker">Services</div>
               <h2 className="rd-h2">WordPress services clients actually hire for.</h2>
             </div>
-            <p className="rd-lead rd-lead-sm">Complete development work, not only performance optimization: builds, redesigns, WooCommerce, custom logic, fixes, launch and maintenance — for businesses directly, or as an implementation partner for agencies.</p>
+            <p className="rd-lead rd-lead-sm">Bring the design, the brief, or the broken site. You get a WordPress build your team can edit, your customers can use on a phone, and your agency can put its own name on.</p>
           </div>
           <div className="rd-services-grid">
             {services.map((s) => (
@@ -193,46 +165,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Redesign — Proof (dark) */}
-      <section className="rd-proof-wrap flow-section" id="proof">
-        <div className="rd-proof">
-          <div className="rd-orb rd-orb-proof-1" aria-hidden="true" />
-          <div className="rd-orb rd-orb-proof-2" aria-hidden="true" />
-          <div className="rd-head scroll-reveal">
-            <div>
-              <div className="rd-kicker rd-kicker-light">Project proof</div>
-              <h2 className="rd-h2 rd-h2-light">Case studies with WordPress logic, <span className="rd-muted-light">not just screenshots.</span></h2>
-            </div>
-            <Link href="/portfolio" className="rd-btn rd-btn-white">View all case studies</Link>
-          </div>
-          <div className="rd-proof-grid">
-            {proof.map((item) => (
-              <article className="rd-proof-card scroll-reveal" key={item.project}>
-                <div className={`rd-proof-media${item.image ? "" : " rd-proof-media-safari"}`}>
-                  {item.image ? (
-                    <img src={item.image} alt={`${item.project} website on laptop and phone`} loading="lazy" decoding="async" />
-                  ) : (
-                    <div className="rd-safari" aria-hidden="true">
-                      <div className="rd-safari-title">Safari Booking</div>
-                      <div className="rd-safari-tabs"><span className="is-on">Private</span><span>Shared</span><span>Add-ons</span></div>
-                      <div className="rd-safari-row"><span>4 guests · Private</span><strong>AED 1,180</strong></div>
-                      <div className="rd-safari-total"><span>Total incl. add-ons</span><strong>AED 1,320</strong></div>
-                    </div>
-                  )}
-                  <span className="rd-proof-tag">{item.tag}</span>
-                </div>
-                <div className="rd-proof-body">
-                  <div className="rd-kicker rd-kicker-light">{item.title}</div>
-                  <h3>{item.project}</h3>
-                  <p>{item.text}</p>
-                </div>
-                <Link href={item.href} className="rd-proof-link">Open case study <Arrow /></Link>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* v6 "Case studies that actually happened" table — mounted by HomeDigitalistsWorkMount */}
       <section className="section flow-section" id="projects" />
 
@@ -245,6 +177,7 @@ export default function Home() {
           <div className="rd-head rd-head-solo scroll-reveal">
             <div className="rd-kicker">How a project runs</div>
             <h2 className="rd-h2">From Figma file to a launched, editable site.</h2>
+            <p className="rd-lead rd-lead-sm">A controlled process, so you know exactly what you're getting before development starts.</p>
           </div>
           <div className="rd-process-grid">
             {workflow.map(([number, title, text], i) => (
@@ -264,6 +197,13 @@ export default function Home() {
       {/* Redesign — Testimonials */}
       <section className="rd-section rd-testimonials flow-section" id="testimonials">
         <div className="rd-container">
+          <div className="rd-head scroll-reveal">
+            <div>
+              <div className="rd-kicker">Client feedback</div>
+              <h2 className="rd-h2">What clients say after working together</h2>
+            </div>
+            <p className="rd-lead rd-lead-sm">Feedback from clients in the UAE, USA, Japan and Pakistan on WordPress builds, WooCommerce work, custom plugins and support.</p>
+          </div>
           {testimonials.filter((t) => t.featured).map((t) => (
             <div className="rd-testimonial-main scroll-reveal" key={t.name}>
               <div className="rd-testimonial-quote">
@@ -305,7 +245,7 @@ export default function Home() {
             <div className="rd-cta-copy scroll-reveal">
               <div className="rd-availability"><span className="rd-dot" /><span className="rd-badge-yellow">Available</span><span className="rd-availability-text">Taking new projects</span></div>
               <h2 className="rd-h2 rd-h2-xl">Need a WordPress site your team can <span className="rd-muted">actually edit?</span></h2>
-              <p className="rd-lead">Share your project type, goals, timeline and current website if you have one. The form opens a pre-filled email, or reach me directly.</p>
+              <p className="rd-lead">Send the Figma file, the brief, or the URL of the site that&apos;s broken. You&apos;ll get a clear reply on scope and next steps — no long forms and no sales call required. The form opens a pre-filled email, or reach me directly.</p>
               <div className="rd-contact-list">
                 <a href={`mailto:${siteConfig.email}`} className="rd-contact-item"><span className="rd-contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" /><path d="M3 8l9 6 9-6" /></svg></span><span><small>Email</small>{siteConfig.email}</span></a>
                 <a href={`https://wa.me/${siteConfig.whatsapp}`} target="_blank" rel="noopener noreferrer" className="rd-contact-item"><span className="rd-contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 18.8L4 20z" /><path d="M9.5 9.5c0 3 2 5 5 5l1-1.5-2-1-.7.7c-.8-.4-1.4-1-1.8-1.8l.7-.7-1-2-1.2 1.3z" /></svg></span><span><small>WhatsApp</small>{siteConfig.phone}</span></a>

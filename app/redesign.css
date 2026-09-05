@@ -97,40 +97,6 @@ main .scroll-reveal { transition: none; }
 .rd-service-featured p { font-size: 15px; max-width: 560px; }
 
 /* =========================================================
-   PROOF (dark)
-   ========================================================= */
-.rd-proof-wrap { padding: 0 32px 40px; }
-.rd-proof { position: relative; overflow: hidden; border-radius: 40px; background: var(--rd-ink); color: #fff; padding: 104px 64px; }
-.rd-orb-proof-1 { width: 640px; height: 640px; right: -160px; top: -200px; background: radial-gradient(circle, rgba(14, 165, 233, 0.35), rgba(14, 165, 233, 0) 68%); }
-.rd-orb-proof-2 { width: 640px; height: 640px; left: -200px; bottom: -260px; background: radial-gradient(circle, rgba(34, 197, 94, 0.28), rgba(34, 197, 94, 0) 68%); }
-.rd-proof .rd-head { position: relative; }
-.rd-proof-grid { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-.rd-proof-card {
-  display: flex; flex-direction: column; gap: 24px; padding: 28px; border-radius: var(--rd-radius);
-  background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1); transition: background .3s ease, transform .3s ease;
-}
-.rd-proof-card:hover { background: rgba(255, 255, 255, 0.09); transform: translateY(-4px); }
-.rd-proof-media { position: relative; height: 220px; border-radius: 20px; overflow: hidden; background: #111; }
-.rd-proof-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.rd-proof-tag { position: absolute; left: 18px; bottom: 18px; background: var(--rd-ink); color: #fff; font-size: 11px; font-weight: 700; padding: 8px 12px; border-radius: 999px; }
-.rd-proof-body { display: flex; flex-direction: column; gap: 10px; }
-.rd-proof-body h3 { font-size: 26px; font-weight: 900; letter-spacing: -0.035em; color: #fff; }
-.rd-proof-body p { font-size: 14px; line-height: 1.6; color: rgba(255, 255, 255, 0.6); }
-.rd-proof-link { display: inline-flex; align-items: center; gap: 8px; color: #fff; font-size: 14px; font-weight: 700; margin-top: auto; text-decoration: none; }
-.rd-proof-link svg { transition: transform .2s ease; }
-.rd-proof-link:hover svg { transform: translateX(4px); }
-
-.rd-proof-media-safari { background: linear-gradient(160deg, #fff3c4, #f7d64a); padding: 16px 16px 60px; }
-.rd-safari { background: #fff; border-radius: 14px; padding: 14px; color: var(--rd-ink); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12); font-size: 12px; display: flex; flex-direction: column; gap: 8px; max-width: 260px; }
-.rd-safari-title { font-weight: 900; font-size: 13px; letter-spacing: -0.02em; }
-.rd-safari-tabs { display: flex; gap: 6px; }
-.rd-safari-tabs span { white-space: nowrap; padding: 4px 10px; border-radius: 999px; background: var(--rd-soft); font-weight: 700; font-size: 11px; }
-.rd-safari-tabs .is-on { background: var(--rd-ink); color: #fff; }
-.rd-safari-row { display: flex; justify-content: space-between; color: rgba(7, 7, 7, 0.6); }
-.rd-safari-row strong, .rd-safari-total strong { color: var(--rd-ink); }
-.rd-safari-total { display: flex; justify-content: space-between; border-top: 1px solid var(--rd-line); padding-top: 8px; font-weight: 700; }
-
-/* =========================================================
    PROCESS
    ========================================================= */
 .rd-process-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
@@ -221,13 +187,12 @@ main .scroll-reveal { transition: none; }
    ========================================================= */
 @media (max-width: 1200px) {
   :root { --rd-gutter: 48px; }
-  .rd-proof, .rd-cta { padding-left: 40px; padding-right: 40px; }
+  .rd-cta { padding-left: 40px; padding-right: 40px; }
   .rd-testimonial-main { padding: 56px; }
   .rd-testimonial-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 1024px) {
   .rd-services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .rd-proof-grid { grid-template-columns: 1fr; }
   .rd-process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .rd-testimonial-main { grid-template-columns: 1fr; gap: 32px; }
   .rd-cta-inner { grid-template-columns: 1fr; gap: 40px; }
@@ -241,8 +206,8 @@ main .scroll-reveal { transition: none; }
   .rd-service-featured { grid-column: auto; min-height: 0; }
   .rd-service { padding: 28px; gap: 28px; }
   .rd-head { margin-bottom: 36px; }
-  .rd-proof-wrap, .rd-cta-wrap { padding-left: 12px; padding-right: 12px; }
-  .rd-proof, .rd-cta { border-radius: 28px; padding: 64px 22px; }
+  .rd-cta-wrap { padding-left: 12px; padding-right: 12px; }
+  .rd-cta { border-radius: 28px; padding: 64px 22px; }
   .rd-process-grid { grid-template-columns: 1fr; }
   .rd-testimonial-main { padding: 32px 24px; }
   .rd-testimonial-grid { grid-template-columns: 1fr; }
@@ -251,7 +216,7 @@ main .scroll-reveal { transition: none; }
   .projects-stack-title { font-size: 19px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .rd-btn, .rd-service, .rd-proof-card, .rd-contact-item { transition: none; }
+  .rd-btn, .rd-service, .rd-contact-item { transition: none; }
 }
 
 /* Projects stack: drop the testimonial-only "verified" badge and let the link sit naturally */
@@ -263,4 +228,78 @@ main .scroll-reveal { transition: none; }
 .stats-showcase-section .stat strong { font-size: clamp(2.4rem, 4.6vw, 4.8rem) !important; letter-spacing: -.09em !important; }
 @media (max-width: 640px) {
   .stats-showcase-section .stat strong { font-size: 2.1rem !important; }
+}
+
+/* =========================================================
+   Projects stack — desktop sizing for the richer card body
+   ========================================================= */
+.projects-stack .testimonial-motion-stage { height: 580px; }
+.projects-stack .testimonial-motion-card, .projects-stack .testimonial-card-content { text-align: left; align-items: stretch; }
+.projects-stack-desc strong { color: #070707; font-weight: 800; }
+.projects-stack-desc + .projects-stack-desc { margin-top: 6px; }
+.projects-stack .testimonial-intro p { max-width: 520px; }
+
+/* Mobile: no pin — a swipeable row of cards instead of a 6-screen scroll-jack */
+@media (max-width: 900px) {
+  .projects-stack .testimonial-pin { gap: 24px; }
+  .projects-stack .testimonial-motion-stage {
+    display: flex !important; gap: 14px; width: 100%; max-width: none; height: auto;
+    overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
+    padding: 6px 6px 18px; margin: 0 -6px; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .projects-stack .testimonial-motion-stage::-webkit-scrollbar { display: none; }
+  .projects-stack .testimonial-motion-card {
+    flex: 0 0 min(84vw, 340px); position: relative !important; inset: auto !important; min-height: 0; height: auto;
+    scroll-snap-align: center; transform: none !important; opacity: 1 !important; gap: 16px; text-align: left;
+  }
+  .projects-stack .testimonial-card-content { align-items: stretch; text-align: left; }
+  .projects-stack-media { aspect-ratio: 16 / 9; }
+  .projects-stack-title { font-size: 19px; }
+  .projects-stack-desc { font-size: 12.5px; }
+  .projects-stack .testimonial-author { justify-content: flex-start; }
+  .projects-stack-hint { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 4px; font-size: 12px; font-weight: 700; color: rgba(7,7,7,.5); }
+}
+.projects-stack-hint { display: none; }
+
+/* =========================================================
+   Header — mobile menu (v6 hides the links under 900px)
+   ========================================================= */
+.nav-toggle { display: none; }
+@media (max-width: 900px) {
+  .nav { gap: 6px; padding: 6px; }
+  .nav-toggle {
+    display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+    width: 40px; height: 40px; border: 0; border-radius: 50%; background: #f2f2ef; cursor: pointer; padding: 0;
+  }
+  .nav-toggle span { width: 16px; height: 2px; border-radius: 2px; background: #070707; transition: transform .25s ease, opacity .25s ease; }
+  .nav-toggle[aria-expanded="true"] span:first-child { transform: translateY(3.5px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+  .nav-menu {
+    position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); width: min(300px, calc(100vw - 32px));
+    display: none; flex-direction: column; gap: 2px;
+    padding: 10px; border-radius: 24px; background: rgba(255,255,255,.96); border: 1px solid rgba(7,7,7,.06);
+    box-shadow: 0 26px 80px rgba(0,0,0,.12); backdrop-filter: blur(20px);
+  }
+  .nav-menu.is-open { display: flex; }
+  .nav .nav-menu a { display: block !important; padding: 13px 16px !important; border-radius: 16px; font-size: 15px !important; color: #070707 !important; }
+  .nav .nav-menu a:hover { background: #f2f2ef; }
+}
+@media (min-width: 901px) {
+  .nav-menu { display: contents; }
+}
+
+/* =========================================================
+   Mobile polish for the kept v6 sections
+   ========================================================= */
+@media (max-width: 640px) {
+  .stats-showcase-section .about-card h2 { font-size: clamp(2.2rem, 11vw, 3rem) !important; }
+  .stats-showcase-section .stats-grid { grid-template-columns: 1fr !important; }
+  .stats-showcase-section .stat { min-height: 0 !important; }
+  .rd-h2 { font-size: clamp(32px, 9.5vw, 40px); }
+  .rd-h2-xl { font-size: clamp(34px, 10vw, 44px); }
+  .rd-lead { font-size: 15px; }
+  .rd-service h3, .rd-service-featured h3 { font-size: 22px; }
+  .rd-t-card { padding: 22px; }
+  .rd-testimonial-quote blockquote { font-size: 20px; }
+  .rd-contact-item > span:last-child { white-space: normal; }
 }

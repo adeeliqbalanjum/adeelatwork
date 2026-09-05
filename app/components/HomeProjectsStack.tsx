@@ -10,12 +10,12 @@ import { withBasePath } from "../site-config";
    (HomeTestimonials.tsx), with project content in the cards. */
 
 const PROJECTS = [
-  { id: "griffin-it", name: "Griffin IT", kicker: "Hardware solutions website", desc: "Hardware supply platform for MSPs and IT service providers with the stock-then-pay model front and centre.", image: withBasePath("/work-images/griffin-it.webp"), tags: ["WordPress", "Elementor Pro", "ACF"], href: "/portfolio/griffin-it" },
-  { id: "kay-kay", name: "Kay Kay International Travels", kicker: "Travel & tours rebuild", desc: "Modern, mobile-first travel website with tour and package listings, destination pages and enquiry forms.", image: withBasePath("/work-images/kay-kay.webp"), tags: ["WordPress", "Elementor Pro", "WPForms"], href: "/portfolio/kk-travels-and-tours" },
-  { id: "book-my-holidays", name: "Book My Holidays UK", kicker: "Holiday booking website", desc: "UK holiday booking site with destination pages, holiday-type services and an enquiry-to-booking flow.", image: withBasePath("/work-images/book-my-holidays.webp"), tags: ["WordPress", "Elementor Pro", "ACF"], href: "/portfolio/bookmyholidays-uk" },
-  { id: "griffin-resources", name: "Griffin Resources", kicker: "B2B service architecture", desc: "HR outsourcing platform with clear service hierarchy, lead-generation structure and CRM form integration.", image: withBasePath("/work-images/griffin-resources.webp"), tags: ["WordPress", "Elementor Pro", "WPForms"], href: "/portfolio/griffin-resources" },
-  { id: "artisan-technologies", name: "Artisan Technologies", kicker: "Smart-home automation site", desc: "Residential and commercial automation website with gallery, brands page and a tutorial resource hub.", image: withBasePath("/work-images/atdi.webp"), tags: ["WordPress", "Elementor Pro", "ACF"], href: "/portfolio/artisan-technologies" },
-  { id: "fastdocnow", name: "FastDocNow", kicker: "Healthcare conversion UX", desc: "Telehealth website with trust-led service pages, a mobile-first booking flow and performance tuning.", image: withBasePath("/work-images/fastdocnow.webp"), tags: ["WordPress", "Elementor Pro", "WP Rocket"], href: "/portfolio/fastdocnow" },
+  { id: "griffin-it", name: "Griffin IT", kicker: "B2B hardware supply · USA", problem: "Their stock-now, pay-after-you-sell offer was buried in a cluttered old site.", built: "Rebuilt with that offer above the fold, service and product pages for MSPs, lead-capture forms and a full plugin audit.", image: withBasePath("/work-images/griffin-it.webp"), tags: ["WordPress", "Elementor Pro", "ACF"], href: "/portfolio/griffin-it" },
+  { id: "kay-kay", name: "Kay Kay International Travels", kicker: "Travel & tours · International", problem: "An outdated site that wasn't mobile-friendly and hid the range of packages.", built: "Mobile-first rebuild with tour and package listings, destination pages and enquiry forms with automated follow-up.", image: withBasePath("/work-images/kay-kay.webp"), tags: ["WordPress", "Elementor Pro", "WPForms"], href: "/portfolio/kk-travels-and-tours" },
+  { id: "book-my-holidays", name: "Book My Holidays UK", kicker: "Holiday booking · United Kingdom", problem: "Needed to look credible to review-conscious UK travellers from the first visit.", built: "Destination and holiday-type pages, trust sections and a smooth enquiry-to-booking flow, responsive throughout.", image: withBasePath("/work-images/book-my-holidays.webp"), tags: ["WordPress", "Elementor Pro", "ACF"], href: "/portfolio/bookmyholidays-uk" },
+  { id: "griffin-resources", name: "Griffin Resources", kicker: "HR outsourcing · USA", problem: "Four service lines to explain to time-poor small-business owners.", built: "Clear service hierarchy, consultation CTAs on every page, trust section and CRM form integration for lead capture.", image: withBasePath("/work-images/griffin-resources.webp"), tags: ["WordPress", "Elementor Pro", "WPForms"], href: "/portfolio/griffin-resources" },
+  { id: "artisan-technologies", name: "Artisan Technologies", kicker: "Smart-home automation · USA", problem: "The old site didn't feel as premium as the installations it was selling.", built: "Rebuilt with a residential / commercial split, installation gallery, compatible-brands page and a tutorial hub.", image: withBasePath("/work-images/atdi.webp"), tags: ["WordPress", "Elementor Pro", "ACF"], href: "/portfolio/artisan-technologies" },
+  { id: "fastdocnow", name: "FastDocNow", kicker: "Telehealth · USA", problem: "Cautious healthcare visitors who need to trust the site before they book.", built: "Service pages, provider profiles, booking CTAs above the fold and a mobile-first build tuned with WP Rocket.", image: withBasePath("/work-images/fastdocnow.webp"), tags: ["WordPress", "Elementor Pro", "WP Rocket"], href: "/portfolio/fastdocnow" },
 ];
 
 function moveCardGlow(event: React.PointerEvent<HTMLElement>) {
@@ -58,7 +58,9 @@ export function HomeProjectsStack() {
 
     if (!section || !pin || !cards.length) return;
 
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 901px)", () => {
       const segment = 1.25;
 
       gsap.set(cards, {
@@ -127,9 +129,9 @@ export function HomeProjectsStack() {
 
       timeline.to({}, { duration: 0.6 });
       ScrollTrigger.refresh();
-    }, section);
+    });
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   React.useEffect(() => {
@@ -220,8 +222,9 @@ export function HomeProjectsStack() {
           <div className="eyebrow">Selected work</div>
           <h2>Projects built to be edited, not just launched</h2>
           <p>
-            Business, travel, healthcare and B2B websites on WordPress and
-            Elementor Pro — scroll through a few recent builds.
+            Travel, healthcare, B2B and service businesses in the UAE, UK and
+            USA. Each card shows the problem the client came with and what was
+            built to solve it.
           </p>
         </div>
 
@@ -249,7 +252,8 @@ export function HomeProjectsStack() {
                 <div>
                   <div className="projects-stack-kicker">{project.kicker}</div>
                   <h3 id={`card-${project.id}-title`} className="projects-stack-title">{project.name}</h3>
-                  <p className="projects-stack-desc">{project.desc}</p>
+                  <p className="projects-stack-desc"><strong>Problem:</strong> {project.problem}</p>
+                  <p className="projects-stack-desc"><strong>Built:</strong> {project.built}</p>
                   <div className="projects-stack-tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
                 </div>
               </div>
@@ -262,6 +266,11 @@ export function HomeProjectsStack() {
               </div>
             </article>
           ))}
+        </div>
+        <div className="projects-stack-hint" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
+          Swipe to see more projects
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
         </div>
       </div>
     </section>

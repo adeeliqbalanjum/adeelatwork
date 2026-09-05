@@ -76,42 +76,6 @@ const tools: Tool[] = [
       "I use JavaScript for calculators, booking flows, interactive counters, conditional form behavior, AJAX-style interfaces, and polished front-end interactions.",
   },
   {
-    id: "gsap",
-    name: "GSAP",
-    short: "Gs",
-    category: "Motion",
-    title: "GSAP for premium scroll and motion experiences",
-    description:
-      "GSAP is useful for smooth scroll-triggered reveals, pinned sections, parallax, timeline animations, and high-end motion effects that make a site feel premium.",
-  },
-  {
-    id: "react",
-    name: "React",
-    short: "React",
-    category: "UI systems",
-    title: "React for modern interactive components",
-    description:
-      "React helps me prototype advanced UI sections, icon selectors, animated state changes, dashboards, and interaction patterns that can later guide custom WordPress builds.",
-  },
-  {
-    id: "next",
-    name: "Next.js",
-    short: "N",
-    category: "Modern web",
-    title: "Next.js for fast portfolio and modern frontend work",
-    description:
-      "Next.js gives me a fast modern environment for interactive portfolio sections, static pages, routing, and component-based frontend experiences.",
-  },
-  {
-    id: "tailwind",
-    name: "Tailwind CSS",
-    short: "Tw",
-    category: "Styling",
-    title: "Tailwind and custom CSS for clean responsive systems",
-    description:
-      "I use utility-first styling and custom CSS to create responsive layouts, glass cards, premium spacing, mobile behavior, and consistent design systems.",
-  },
-  {
     id: "figma",
     name: "Figma",
     short: "Fi",
