@@ -35,12 +35,15 @@ export const metadata: Metadata = {
   description: 'I build editable WordPress, Elementor Pro and WooCommerce websites with custom functionality, performance optimization, QA, and maintenance for clients in UAE, UK, USA and Pakistan.',
   keywords: ['WordPress Developer', 'Elementor Pro Developer', 'WooCommerce Developer', 'Custom WordPress Plugin', 'Website Speed Optimization', 'Figma to WordPress'],
   openGraph: {
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Muhammad Adeel Iqbal, WordPress and WooCommerce developer' }],
     title: 'Muhammad Adeel Iqbal — WordPress Developer',
     description: 'WordPress, Elementor Pro, WooCommerce, custom features, performance optimization and maintenance.',
     type: 'website',
     url: 'https://adeeliqbalanjum.github.io/adeelatwork',
   },
   twitter: {
+    card: 'summary_large_image',
+    images: ['/og-image.jpg'],
     card: 'summary_large_image',
     title: 'Muhammad Adeel Iqbal — WordPress Developer',
     description: 'Editable, fast, client-ready WordPress websites and WooCommerce builds.',
