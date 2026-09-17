@@ -27,7 +27,7 @@ const experience = [
   {
     role: "WordPress Developer (Remote)",
     company: "Rozi Academy",
-    period: "Dec 2024 – Apr 2026",
+    period: "Dec 2024 – Present",
     points: [
       "Developed and maintained WordPress websites with Elementor Pro, WooCommerce, ACF, CPT, PHP, HTML, CSS and JavaScript.",
       "Built custom features: booking functionality, admin approval workflows, automated email notifications and dynamic content sections.",
