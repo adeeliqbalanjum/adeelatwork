@@ -493,8 +493,21 @@
   }
 
   .home-hero-b-title {
-    font-size: clamp(2.7rem, 12.5vw, 4.8rem);
-    letter-spacing: -.075em;
+    font-size: clamp(2.2rem, 10.2vw, 4.2rem);
+    letter-spacing: -.06em;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  .home-hero-b-inner {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .home-hero-b-actions {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .home-hero-b-subline {
@@ -515,4 +528,16 @@
     height: 288px;
     border-width: 7px;
   }
+}
+
+
+/* Mobile overflow guard: the showcase track is wider than the viewport, so the
+   inner flex item must be allowed to shrink and clip it. */
+.home-hero-b { overflow-x: hidden; }
+.home-hero-b-inner { min-width: 0; max-width: 100%; overflow: hidden; }
+.home-hero-b-showcase { max-width: 100%; overflow: hidden; }
+@media (max-width: 780px) {
+  .home-hero-b-title { font-size: clamp(2rem, 9.6vw, 3.6rem); padding: 0 6px; }
+  .home-hero-b-subline { max-width: 100%; padding: 0 10px; }
+  .home-hero-b-actions { flex-wrap: wrap; justify-content: center; gap: 10px; }
 }

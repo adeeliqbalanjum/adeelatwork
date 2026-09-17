@@ -9,7 +9,7 @@ import { InnerFooterCta } from "../components/InnerFooterCta";
 
 const ALL = "All" as const;
 type Filter = typeof ALL | Industry;
-const FILTERS: Filter[] = [ALL, "Tourism", "Healthcare", "Tech", "Business", "Services", "Education", "Legal", "Finance", "Wellness"];
+const FILTERS: Filter[] = [ALL, "Tourism", "Healthcare", "Tech", "Business", "Services", "Education", "Legal", "Finance", "Wellness", "Automotive"];
 
 /* Counted from the data, not claimed */
 const industries = new Set(projects.map((p) => p.industry)).size;
@@ -28,7 +28,7 @@ const earliest = Math.min(...projects.map((p) => Number(p.year)));
 const WORDPRESS_SINCE = 2023; // first WordPress role (Nuovo Studios, Apr 2023)
 const latest = Math.max(...projects.map((p) => Number(p.year)));
 
-const FEATURED = ["desert-safari-dubai", "fastdocnow"];
+const FEATURED = ["desert-safari-dubai", "rockbusto-fleet"];
 
 function stackTags(stack: string[]) {
   return stack.filter((s) => s !== "WordPress").slice(0, 2);
@@ -49,7 +49,7 @@ export default function PortfolioPage() {
             <span className="pf-muted">{projects.length} websites.</span> Built for real businesses, editable after launch.
           </h1>
           <p className="pf-lead">
-            WordPress and WooCommerce builds for tourism, healthcare, B2B and service businesses across the UAE, UK, USA, Japan and Pakistan — each with a case study covering the problem, what was built and the stack.
+            WordPress and WooCommerce builds for tourism, healthcare, automotive, B2B and service businesses across the UAE, UK, USA, Japan and Pakistan — each with a case study covering the problem, what was built, the stack, and real screenshots of the live site.
           </p>
           <div className="pf-actions">
             <Link href="/#contact" className="pf-btn pf-btn-dark">Start a project</Link>
@@ -91,19 +91,10 @@ export default function PortfolioPage() {
                       </div>
                       <div className="pf-tags"><span className="pf-tag">{p.industry}</span><span className="pf-tag">{p.location}</span>{stackTags(p.stack).map((t) => <span className="pf-tag" key={t}>{t}</span>)}</div>
                     </div>
-                    {p.slug === "desert-safari-dubai" ? (
-                      <div className="pf-feature-media pf-safari">
-                        <div className="pf-safari-widget" aria-hidden="true">
-                          <strong>Safari Booking</strong>
-                          <div className="pf-safari-tabs"><span className="is-on">Private</span><span>Shared</span><span>Add-ons</span></div>
-                          <div className="pf-safari-row"><span>4 guests · Private</span><b>AED 1,180</b></div>
-                          <div className="pf-safari-total"><span>Total incl. add-ons</span><b>AED 1,320</b></div>
-                        </div>
-                      </div>
-                    ) : img ? (
+                    {img ? (
                       <div className="pf-feature-media"><img src={img} alt={`${p.name} website`} loading="lazy" decoding="async" /></div>
                     ) : (
-                      <div className="pf-feature-media pf-ph"><span className="pf-mono">{monogram(p.name)}</span><span>Live site · screenshot to be added</span></div>
+                      <div className="pf-feature-media pf-ph"><span className="pf-mono">{monogram(p.name)}</span><span>Screenshot pending · site unreachable at capture</span></div>
                     )}
                   </Link>
                 );
@@ -119,7 +110,7 @@ export default function PortfolioPage() {
                   {img ? (
                     <div className="pf-card-media"><img src={img} alt={`${p.name} website`} loading="lazy" decoding="async" /></div>
                   ) : (
-                    <div className="pf-card-media pf-ph"><span className="pf-mono">{monogram(p.name)}</span><span>Live site · screenshot to be added</span></div>
+                    <div className="pf-card-media pf-ph"><span className="pf-mono">{monogram(p.name)}</span><span>Screenshot pending · site unreachable at capture</span></div>
                   )}
                   <div className="pf-card-body">
                     <div className="pf-tags"><span className="pf-tag pf-tag-dark">{p.industry}</span><span className="pf-tag">{p.location}</span><span className="pf-tag">{p.year}</span></div>

@@ -33,6 +33,11 @@ const stackNotes: Record<string, string> = {
   WooCommerce: "Products, checkout, payments and order flows.",
   "Advanced Custom Fields": "Structured content fields so editors update data, not layouts.",
   "Custom PHP Plugin": "Business logic that no off-the-shelf plugin handled, written as a maintainable plugin.",
+  "Custom Post Types": "A dedicated content type (vehicles, practitioners) so records are structured data, not pages.",
+  Leaflet: "Open-source interactive map plotting records from their stored coordinates.",
+  "LiteSpeed Cache": "Server-level page caching, critical CSS and image optimisation.",
+  "Jetpack Boost": "Deferred scripts and critical CSS for better Core Web Vitals.",
+  "Calendly Integration": "Direct appointment booking from the site.",
   "WP Rocket": "Caching and asset optimisation for faster loads on image-heavy pages.",
   "Yoast SEO": "Metadata, sitemaps and on-page SEO structure.",
   "Yoast SEO Local": "Local-search metadata and location structure.",
@@ -55,7 +60,8 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   const prev = projects[(index - 1 + projects.length) % projects.length];
   const next = projects[(index + 1) % projects.length];
   const images = projectImages(p.slug);
-  const heroImage = images.shot ?? images.mockup;
+  const heroImage = images.mockup ?? images.shot;
+  const galleryCount = [images.shot, images.mobile, images.inner, images.extra].filter(Boolean).length;
   const nextImage = projectImages(next.slug);
   const quote = quotes[p.slug];
   const editable = p.stack.some((s) => /Elementor|Advanced Custom Fields/.test(s));
@@ -75,19 +81,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               <Link href={`/portfolio/${next.slug}`} className="pf-btn pf-btn-ghost">Next project →</Link>
             </div>
           </div>
-          {isSafari ? (
-            <div className="cs2-hero-media pf-safari">
-              <div className="pf-safari-widget cs2-safari-widget" aria-hidden="true">
-                <strong>Safari Booking</strong>
-                <div className="pf-safari-tabs"><span className="is-on">Private</span><span>Shared</span><span>Add-ons</span></div>
-                <div className="pf-safari-row"><span>Date · 14 Oct</span><b>Evening</b></div>
-                <div className="pf-safari-row"><span>4 guests · Private</span><b>AED 1,180</b></div>
-                <div className="pf-safari-row"><span>Dune bashing + BBQ</span><b>AED 140</b></div>
-                <div className="pf-safari-total"><span>Total</span><b>AED 1,320</b></div>
-                <span className="pf-safari-cta">Pay with Telr → pending admin approval</span>
-              </div>
-            </div>
-          ) : heroImage ? (
+          {heroImage ? (
             <div className="cs2-hero-media"><img src={heroImage} alt={`${p.name} website`} decoding="async" /></div>
           ) : (
             <div className="cs2-hero-media pf-ph"><span className="pf-mono">{monogram(p.name)}</span><span>Live site · screenshot to be added</span></div>
@@ -165,27 +159,22 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       </section>
 
       {/* Visual evidence */}
+      {galleryCount > 0 && (
       <section className="cs2-section">
         <div className="pf-container cs2-block">
           <div className="cs2-head cs2-head-split">
             <div><div className="eyebrow">Visual evidence</div><h2 className="pf-h2">The site, as shipped.</h2></div>
-            <p className="pf-small cs2-head-note">Real screenshots of the live site — captured from the site, never generated.</p>
+            <p className="pf-small cs2-head-note">Real screenshots of the live site at desktop and phone width, plus an inner page — captured from the site, never generated.</p>
           </div>
-          <div className="cs2-gallery">
-            {images.shot ? (
-              <div className="cs2-shot cs2-shot-wide"><img src={images.shot} alt={`${p.name} homepage`} loading="lazy" decoding="async" /><span className="cs2-shot-cap">Homepage · {hostOf(p.url)}</span></div>
-            ) : (
-              <div className="cs2-shot cs2-shot-wide pf-ph"><span className="pf-mono">Homepage screenshot</span><span>to be captured from {hostOf(p.url)}</span></div>
-            )}
-            {images.mockup ? (
-              <div className="cs2-shot"><img src={images.mockup} alt={`${p.name} on laptop and phone`} loading="lazy" decoding="async" /><span className="cs2-shot-cap">Desktop &amp; mobile</span></div>
-            ) : (
-              <div className="cs2-shot pf-ph"><span className="pf-mono">Mobile view</span><span>screenshot to be added</span></div>
-            )}
-            <div className="cs2-shot pf-ph"><span className="pf-mono">Inner page</span><span>screenshot to be added</span></div>
+          <div className={`cs2-gallery cs2-gallery-${galleryCount}`}>
+            {images.shot && <div className="cs2-shot cs2-shot-wide"><img src={images.shot} alt={`${p.name} homepage`} loading="lazy" decoding="async" /><span className="cs2-shot-cap">Homepage · {hostOf(p.url)}</span></div>}
+            {images.mobile && <div className="cs2-shot cs2-shot-mobile"><img src={images.mobile} alt={`${p.name} on a phone`} loading="lazy" decoding="async" /><span className="cs2-shot-cap">Mobile · 430px</span></div>}
+            {images.inner && <div className="cs2-shot"><img src={images.inner} alt={`${p.name} inner page`} loading="lazy" decoding="async" /><span className="cs2-shot-cap">{images.innerCaption}</span></div>}
+            {images.extra && <div className="cs2-shot"><img src={images.extra} alt={`${p.name} detail`} loading="lazy" decoding="async" /><span className="cs2-shot-cap">{images.extraCaption}</span></div>}
           </div>
         </div>
       </section>
+      )}
 
       {/* Outcome */}
       <section className="cs2-section">
@@ -193,8 +182,8 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           <div className="cs2-outcome">
             <div className="cs2-outcome-copy">
               <div className="eyebrow">Outcome</div>
-              <h2 className="pf-h2 cs2-h2">{isSafari ? "Bookings moved from WhatsApp threads to a self-serve flow the operator approves in one click." : `${p.name} is live at ${hostOf(p.url)}${editable ? ", with pages the client edits without a developer." : "."}`}</h2>
-              <p className="pf-small">Verified metrics (traffic, bookings, conversion) appear here only when the client supplies a report — nothing is estimated.</p>
+              <h2 className="pf-h2 cs2-h2">{isSafari ? "Bookings moved from WhatsApp threads to a self-serve flow the operator approves in one click." : p.slug === "rockbusto-fleet" ? "Stock changes are a data edit, not a page rebuild: add a vehicle, and the grid, filters, pricing and quote buttons update themselves." : p.slug === "biodynamic-breathwork" ? "173 practitioners on one map, editable by the team, and a site that scored 98 / 92 on PageSpeed at hand-over." : `${p.name} is live at ${hostOf(p.url)}${editable ? ", with pages the client edits without a developer." : "."}`}</h2>
+              <p className="pf-small">{p.slug === "biodynamic-breathwork" ? "PageSpeed figures are the before/after readings taken during the work. Traffic or conversion metrics appear only when the client supplies a report." : "Verified metrics (traffic, bookings, conversion) appear here only when the client supplies a report — nothing is estimated."}</p>
             </div>
             <div className="cs2-outcome-side">
               {isSafari ? (
@@ -222,7 +211,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           </Link>
           <Link href={`/portfolio/${next.slug}`} className="cs2-nav-card cs2-nav-card-dark">
             <div><span className="pf-kicker">Next project →</span><span className="cs2-nav-title">{next.name}</span><span className="pf-small">{next.industry} · {next.location}</span></div>
-            {(nextImage.mockup ?? nextImage.shot) ? <img src={nextImage.mockup ?? nextImage.shot} alt="" loading="lazy" decoding="async" /> : <span className="cs2-nav-mono">{monogram(next.name)}</span>}
+            {(nextImage.card ?? nextImage.mockup ?? nextImage.shot) ? <img src={nextImage.card ?? nextImage.mockup ?? nextImage.shot} alt="" loading="lazy" decoding="async" /> : <span className="cs2-nav-mono">{monogram(next.name)}</span>}
           </Link>
         </div>
       </section>

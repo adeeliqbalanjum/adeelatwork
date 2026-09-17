@@ -9,12 +9,30 @@ import { withBasePath } from "../site-config";
 
 const cases = [
   {
+    code: "CS 772",
+    title: "Vehicle inventory website with custom theme, plugin and filters",
+    client: "RockBusto Fleet",
+    services: "ACF + CPT inventory, filterable grid, quote requests",
+    tone: "gold",
+    image: withBasePath("/work-images/mockups/rockbusto-fleet-card.jpg"),
+    href: "/portfolio/rockbusto-fleet",
+  },
+  {
+    code: "CS 760",
+    title: "Tour booking site with a custom booking form and reviews widget",
+    client: "Desert Safari Dubai",
+    services: "WooCommerce booking, custom PHP widget, Elementor Pro",
+    tone: "gold",
+    image: withBasePath("/work-images/mockups/desert-safari-dubai-card.jpg"),
+    href: "/portfolio/desert-safari-dubai",
+  },
+  {
     code: "CS 695",
     title: "Hardware solutions website for MSP & IT providers",
     client: "Griffin IT",
     services: "Screen design, WordPress programming, responsive build",
     tone: "blue",
-    image: withBasePath("/work-images/griffin-it.webp"),
+    image: withBasePath("/work-images/mockups/griffin-it-card.jpg"),
     href: "/portfolio/griffin-it",
   },
   {
@@ -23,7 +41,7 @@ const cases = [
     client: "Kay Kay Travels",
     services: "Travel website, responsive UI, service-led structure",
     tone: "green",
-    image: withBasePath("/work-images/kay-kay.webp"),
+    image: withBasePath("/work-images/mockups/kk-travels-and-tours-card.jpg"),
     href: "/portfolio/kk-travels-and-tours",
   },
   {
@@ -32,7 +50,7 @@ const cases = [
     client: "Book My Holidays",
     services: "Travel landing page, form UI, responsive design",
     tone: "blue",
-    image: withBasePath("/work-images/book-my-holidays.webp"),
+    image: withBasePath("/work-images/mockups/bookmyholidays-uk-card.jpg"),
     href: "/portfolio/bookmyholidays-uk",
   },
   {
@@ -41,7 +59,7 @@ const cases = [
     client: "Griffin Resources",
     services: "Business website, brand UI, mobile layout",
     tone: "purple",
-    image: withBasePath("/work-images/griffin-resources.webp"),
+    image: withBasePath("/work-images/mockups/griffin-resources-card.jpg"),
     href: "/portfolio/griffin-resources",
   },
   {
@@ -50,7 +68,7 @@ const cases = [
     client: "ATDI",
     services: "Smart tech website, modern UI, conversion sections",
     tone: "gold",
-    image: withBasePath("/work-images/atdi.webp"),
+    image: withBasePath("/work-images/mockups/artisan-technologies-card.jpg"),
     href: "/portfolio/artisan-technologies",
   },
   {
@@ -59,7 +77,7 @@ const cases = [
     client: "FastDocNow",
     services: "Healthcare WordPress, search UX, mobile responsive",
     tone: "blue",
-    image: withBasePath("/work-images/fastdocnow.webp"),
+    image: withBasePath("/work-images/mockups/fastdocnow-card.jpg"),
     href: "/portfolio/fastdocnow",
   },
 ];

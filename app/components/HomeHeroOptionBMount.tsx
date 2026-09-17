@@ -8,12 +8,13 @@ import { cvUrl, siteConfig, withBasePath } from "../site-config";
 const portraitDataUrl = "https://avatars.githubusercontent.com/u/178131381?v=4";
 
 const cards = [
-  { title: "Desert Safari Booking", desc: "Private/shared tour pricing, add-ons, AED totals and booking emails.", image: "", badge: "AED", accent: "#ff7a18" },
-  { title: "Griffin IT", desc: "Hardware solutions website for MSP & IT providers.", image: withBasePath("/work-images/griffin-it.webp"), badge: "GI", accent: "#0ea5e9" },
-  { title: "Kay Kay Travels", desc: "International travels and tours website rebuild.", image: withBasePath("/work-images/kay-kay.webp"), badge: "KKT", accent: "#22c55e" },
-  { title: "Book My Holidays", desc: "Holiday booking website for travel enquiries.", image: withBasePath("/work-images/book-my-holidays.webp"), badge: "BMH", accent: "#38bdf8" },
-  { title: "FastDocNow", desc: "Healthcare WordPress website with mobile-first user flow.", image: withBasePath("/work-images/fastdocnow.webp"), badge: "FDN", accent: "#2563eb" },
-  { title: "Griffin Resources", desc: "Business website with a premium brand feel.", image: withBasePath("/work-images/griffin-resources.webp"), badge: "GR", accent: "#a855f7" },
+  { title: "Desert Safari Dubai", desc: "Tour booking site with a custom booking form and reviews widget.", image: withBasePath("/work-images/mockups/desert-safari-dubai-card.jpg"), badge: "DS", accent: "#ff7a18" },
+  { title: "RockBusto Fleet", desc: "Vehicle inventory with a custom theme, plugin and filterable grid.", image: withBasePath("/work-images/mockups/rockbusto-fleet-card.jpg"), badge: "RB", accent: "#f59e0b" },
+  { title: "Griffin IT", desc: "Hardware solutions website for MSP & IT providers.", image: withBasePath("/work-images/mockups/griffin-it-card.jpg"), badge: "GI", accent: "#0ea5e9" },
+  { title: "Kay Kay Travels", desc: "International travels and tours website rebuild.", image: withBasePath("/work-images/mockups/kk-travels-and-tours-card.jpg"), badge: "KKT", accent: "#22c55e" },
+  { title: "Book My Holidays", desc: "Holiday booking website for travel enquiries.", image: withBasePath("/work-images/mockups/bookmyholidays-uk-card.jpg"), badge: "BMH", accent: "#38bdf8" },
+  { title: "FastDocNow", desc: "Healthcare WordPress website with mobile-first user flow.", image: withBasePath("/work-images/mockups/fastdocnow-card.jpg"), badge: "FDN", accent: "#2563eb" },
+  { title: "Griffin Resources", desc: "Business website with a premium brand feel.", image: withBasePath("/work-images/mockups/griffin-resources-card.jpg"), badge: "GR", accent: "#a855f7" },
   { title: "Build Stack", desc: "WordPress, Elementor Pro, WooCommerce, ACF, PHP, GSAP.", image: "", badge: "WP", accent: "#070707" },
 ];
 

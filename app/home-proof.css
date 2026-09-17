@@ -1,0 +1,27 @@
+/* Home — "Custom functionality" proof section */
+.rd-proof { padding-top: 96px; }
+.rd-proof-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 44px; }
+a.rd-proof-card { display: flex; flex-direction: column; overflow: hidden; color: inherit; text-decoration: none; transition: transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s cubic-bezier(.2,.7,.2,1); }
+a.rd-proof-card:hover { transform: translateY(-4px); box-shadow: 0 34px 90px rgba(0,0,0,.10); color: inherit; }
+.rd-proof-media { height: 240px; overflow: hidden; background: #0f0f10; border-bottom: 1px solid var(--rd-line); }
+.rd-proof-media img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+a.rd-proof-card:hover .rd-proof-media img { transform: scale(1.04); }
+.rd-proof-body { padding: 22px 24px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.rd-proof-body h3 { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -.03em; line-height: 1.15; }
+.rd-proof-body p { margin: 0; font-size: 14px; line-height: 1.55; color: rgba(7,7,7,.62); }
+.rd-proof-more { margin-top: auto; padding-top: 8px; font-size: 13px; font-weight: 800; }
+@media (max-width: 980px) { .rd-proof-grid { grid-template-columns: 1fr; } .rd-proof-media { height: 220px; } }
+
+/* Case study gallery — adapt to how many real captures exist */
+.cs2-gallery-1 { grid-template-columns: 1fr; grid-template-rows: 420px; }
+.cs2-gallery-2 { grid-template-columns: 2fr 1fr; grid-template-rows: 360px; }
+.cs2-gallery-3 { grid-template-columns: 2fr 1fr; grid-template-rows: 300px 300px; }
+.cs2-gallery-4 { grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 300px 300px; }
+.cs2-gallery-4 .cs2-shot-wide { grid-row: span 2; }
+.cs2-gallery-4 .cs2-shot-mobile { grid-row: span 2; }
+.cs2-shot-mobile img { object-position: top; }
+@media (max-width: 760px) {
+  .cs2-gallery-1, .cs2-gallery-2, .cs2-gallery-3, .cs2-gallery-4 { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-rows: 240px; }
+  .cs2-gallery-4 .cs2-shot-wide, .cs2-gallery-4 .cs2-shot-mobile { grid-row: auto; }
+  .cs2-shot-mobile { grid-auto-rows: 320px; height: 320px; }
+}

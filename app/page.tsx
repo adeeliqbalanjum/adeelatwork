@@ -54,6 +54,33 @@ const services = [
   },
 ];
 
+const proof = [
+  {
+    kicker: "Desert Safari Dubai · WooCommerce",
+    title: "Booking form with group pricing and add-ons",
+    text: "Adults and children, price tiers by group size, an add-on table with live totals — all inside the WooCommerce product page.",
+    image: withBasePath("/work-images/inner/desert-safari-dubai.jpg"),
+    alt: "Desert Safari Dubai tour page with the booking form",
+    href: "/portfolio/desert-safari-dubai",
+  },
+  {
+    kicker: "RockBusto Fleet · ACF + CPT",
+    title: "Filterable vehicle inventory with two price lists",
+    text: "Every vehicle is a structured record. The grid, filters, government and business pricing and quote buttons all render from the same fields.",
+    image: withBasePath("/work-images/inner/rockbusto-fleet.jpg"),
+    alt: "RockBusto Fleet inventory grid with filters",
+    href: "/portfolio/rockbusto-fleet",
+  },
+  {
+    kicker: "Desert Safari Dubai · Custom PHP widget",
+    title: "Reviews widget in the style of Judge.me",
+    text: "Star summary, sorting, a write-a-review flow and admin-side moderation, built as an Elementor widget instead of a third-party embed.",
+    image: withBasePath("/work-images/inner/desert-safari-dubai-reviews.jpg"),
+    alt: "Custom reviews widget on the Desert Safari Dubai site",
+    href: "/portfolio/desert-safari-dubai",
+  },
+];
+
 const workflow = [
   ["01", "Scope", "We agree the goal, audience, pages, functionality, content and launch requirements up front — so nothing surprises you mid-build."],
   ["02", "Build", "Editable Elementor Pro sections, responsive layouts, forms, CTAs and any custom features, built so your team can update them after launch."],
@@ -170,6 +197,32 @@ export default function Home() {
 
       {/* v6 build stack — HomeBuildStackMount inserts after this slot */}
       <div id="stack-slot" />
+
+      {/* Proof — real inner pages showing custom functionality */}
+      <section className="rd-section rd-proof flow-section" id="proof">
+        <div className="rd-container">
+          <div className="rd-head scroll-reveal">
+            <div>
+              <div className="rd-kicker">Custom functionality</div>
+              <h2 className="rd-h2">Not just pages. Booking flows, inventories, widgets.</h2>
+            </div>
+            <p className="rd-lead rd-lead-sm">Three real screens from live client sites, captured as shipped. Each one is logic that no off-the-shelf plugin handled cleanly.</p>
+          </div>
+          <div className="rd-proof-grid">
+            {proof.map((item) => (
+              <Link href={item.href} className="rd-card rd-proof-card scroll-reveal" key={item.title}>
+                <div className="rd-proof-media"><img src={item.image} alt={item.alt} loading="lazy" decoding="async" /></div>
+                <div className="rd-proof-body">
+                  <span className="rd-kicker">{item.kicker}</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                  <span className="rd-proof-more">Open case study →</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Redesign — Process */}
       <section className="rd-section rd-process flow-section" id="workflow">

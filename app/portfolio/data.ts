@@ -1,6 +1,6 @@
 import { MockupType } from "../components/ProjectMockup";
 
-export type Industry = "Healthcare" | "Tourism" | "Tech" | "Business" | "Services" | "Education" | "Legal" | "Finance" | "Wellness";
+export type Industry = "Healthcare" | "Tourism" | "Tech" | "Business" | "Services" | "Education" | "Legal" | "Finance" | "Wellness" | "Automotive";
 
 export interface Project {
   slug: string;
@@ -286,9 +286,38 @@ export const projects: Project[] = [
     stack: ["WordPress","Elementor Pro","WP Rocket","Advanced Custom Fields","Calendly Integration","WPForms"],
     body: "Financial services websites have a specific credibility challenge — visitors are about to trust someone with their life savings. For Seva Wealth, the values-driven philosophy needed to feel genuine rather than marketed. I built the site so the Seva story leads and the financial credentials follow.",
   },
+  {
+    slug: "rockbusto-fleet",
+    name: "RockBusto Fleet",
+    tagline: "Vehicle inventory website with a custom theme, plugin and filterable grid",
+    url: "https://rockbustofleet.com",
+    industry: "Automotive", location: "USA", year: "2026",
+    mockupType: "corporate",
+    mockupBg: "linear-gradient(135deg,#111827 0%,#374151 55%,#f59e0b 100%)",
+    mockupAccent: "#f59e0b",
+    challenge: "RockBusto sells municipal, fleet and commercial vehicles — pickups, cargo vans, box trucks, EV chassis and step vans — with different pricing for government buyers and businesses. A page-per-vehicle site would have been impossible for the dealer to keep current. They needed structured inventory the team could update from the WordPress admin, with buyers able to filter by body type and fuel and request a quote from any vehicle.",
+    solution: ["Vehicles as a custom post type with structured ACF fields per model: body type, fuel, cab, upfit, government price and business price","Filterable inventory grid (All, Box Truck, Cargo Van, EV Chassis, Pickup & Chassis, Step Van, SUV, EV) rendered from the post type, not hand-built","Reusable vehicle detail and category templates so every new unit gets the same layout automatically","Custom child theme and a companion plugin (rockbusto-core) holding the inventory logic, so it survives theme updates","Hero slider driven by the inventory data with per-vehicle View details and Request quote actions","Quote-request flow and fleet-order enquiry forms with the vehicle pre-filled","Electric line-up section (Harbinger platform) and incentives content for government and fleet buyers","Responsive layouts for desktop, tablet and mobile"],
+    stack: ["WordPress","Elementor Pro","Advanced Custom Fields","Custom Post Types","Custom PHP Plugin","WPForms"],
+    body: "The dealer needed to add or edit a vehicle in a minute, not ask a developer. I built the inventory as data — a post type with fields — and let the theme and plugin render the grid, cards and detail pages from it. Filters, pricing labels and quote buttons all read from the same fields, so the site stays consistent as stock changes.",
+  },
+  {
+    slug: "biodynamic-breathwork",
+    name: "Biodynamic Breathwork",
+    tagline: "Practitioner directory with an interactive map, plus performance work, for an international training organisation",
+    url: "https://biodynamicbreath.com",
+    industry: "Wellness", location: "International", year: "2025",
+    mockupType: "wellness",
+    mockupBg: "linear-gradient(135deg,#0f766e 0%,#14b8a6 55%,#99f6e4 100%)",
+    mockupAccent: "#14b8a6",
+    challenge: "The organisation trains and certifies breathwork practitioners worldwide and needed a way to publish and maintain around 173 practitioner profiles — photo, bio, city and coordinates — on their WordPress site, show them on a map visitors could explore, and bring poor PageSpeed scores up without rebuilding the site.",
+    solution: ["Team Members system built with Advanced Custom Fields and a custom post type: photo, role, city, country and geographic coordinates per profile","Bulk population of roughly 173 practitioner profiles into the new structure","Interactive Leaflet map plotting every profile from its stored coordinates, with a directory listing alongside","Elementor Pro templates on a Hello child theme for the directory, profile and programme pages","Redirect clean-up and removal of broken legacy URLs","Performance pass with LiteSpeed Cache and Jetpack Boost: caching rules, critical CSS, image optimisation and script deferral","PageSpeed moved from roughly 83 (desktop) / 39 (mobile) to 98 / 92 at the time of hand-over","Ongoing development and maintenance on the live site"],
+    stack: ["WordPress","Elementor Pro","Advanced Custom Fields","Custom Post Types","Leaflet","LiteSpeed Cache","Jetpack Boost"],
+    body: "A directory of this size only works if it is data first. Each practitioner became a structured record, the map and listing read from those records, and editors add a person without touching a layout. The performance work came second and was measured before and after so the numbers could be trusted. The client has since moved the site to another platform, so the graphic here summarises the build rather than showing today's site.",
+  },
 ];
 
 export const industryColour: Record<Industry, string> = {
+  Automotive: "#f59e0b",
   Healthcare: "#0ea5e9",
   Tourism:    "#ff7a18",
   Tech:       "#a855f7",
