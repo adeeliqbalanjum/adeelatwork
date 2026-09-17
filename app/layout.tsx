@@ -44,7 +44,6 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     images: ['/og-image.jpg'],
-    card: 'summary_large_image',
     title: 'Muhammad Adeel Iqbal — WordPress Developer',
     description: 'Editable, fast, client-ready WordPress websites and WooCommerce builds.',
   },
