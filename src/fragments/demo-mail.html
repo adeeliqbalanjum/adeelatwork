@@ -1,0 +1,36 @@
+  <div class="repair-pin" data-demo="mail" data-len="2300">
+    <div>
+      <div class="bw glass">
+        <div class="bw-bar"><i></i><i></i><i></i><div class="bw-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>yourbusiness.com/contact</div><div class="bw-state ok">Delivering</div></div>
+        <div class="bw-page mailp">
+          <div class="shop-nav"><b>Your business</b><span>Services</span><span>About</span><span class="cart">Contact</span></div>
+          <div class="mail-grid">
+            <div class="mform"><p class="h4">Send an enquiry</p>
+              <div class="fld"><label>Name</label><div>Sarah Khan</div></div>
+              <div class="fld"><label>Message</label><div class="tall">We need payroll for 12 staff from next month. Can you quote?</div></div>
+              <button class="shop-btn mbtn" type="button" tabindex="-1"><span class="t">Send message</span></button>
+              <div class="shop-ok msent">Thanks. Your message has been sent.</div>
+            </div>
+            <div class="inbox"><p class="h4">Your inbox</p>
+              <div class="irow new"><i></i><div><b>New enquiry from Sarah Khan</b><span>just now</span></div></div>
+              <div class="irow"><i></i><div><b>Hosting renewal reminder</b><span>2 days ago</span></div></div>
+              <div class="irow"><i></i><div><b>Last enquiry from the website</b><span>12 days ago</span></div></div>
+              <div class="dns" data-flag="sender not verified"><span class="ok">SMTP sender</span><span class="ok">SPF record</span><span class="ok">DKIM key</span></div>
+              <div class="void">Dropped by Gmail. The sender could not be verified.</div>
+            </div>
+          </div>
+          <span class="env"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+          <div class="scan"></div>
+        </div>
+        <div class="bw-cap">An example email repair. Scroll and follow the envelope.</div>
+      </div>
+    </div>
+    <div>
+      <ol class="notes">
+        <li class="note glass ink"><b>Found</b>The form says sent, and it is lying. The site mails through the server with no authentication, so Gmail and Outlook quietly drop it.</li>
+        <li class="note glass ink"><b>Found</b>No SPF or DKIM record on the domain, and nothing logs what was sent. Enquiries have been vanishing for days.</li>
+        <li class="note done glass ink"><b>Fixed</b>Mail now goes out through SMTP with a verified sender, SPF and DKIM are in place, and an email log is installed.</li>
+        <li class="note done glass ink"><b>Tested</b>Test enquiries sent to Gmail and Outlook, and both landed in the inbox. From now on you can see every email the site sends.</li>
+      </ol>
+    </div>
+  </div>

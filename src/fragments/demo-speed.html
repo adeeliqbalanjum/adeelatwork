@@ -1,0 +1,35 @@
+  <div class="repair-pin" data-demo="speed">
+    <div>
+      <div class="bw glass">
+        <div class="bw-bar"><i></i><i></i><i></i><div class="bw-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>yoursite.com, mobile speed report</div><div class="bw-state ok">Fast</div></div>
+        <div class="bw-page psi">
+          <div class="psi-top">
+            <div class="gauge" data-flag="fails Core Web Vitals"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="g-bg" cx="60" cy="60" r="52"/><circle class="g-arc" cx="60" cy="60" r="52" pathLength="100"/></svg><b class="g-n">92</b><span>Mobile performance</span><span class="psi-pass">Core Web Vitals passed</span></div>
+            <div class="vitals">
+              <div class="vital" data-v="lcp"><div class="v-h"><b>LCP</b><span>how soon the main content shows</span><em>1.9 s</em></div><div class="v-bar"><i style="--x:22%"></i></div></div>
+              <div class="vital" data-v="inp"><div class="v-h"><b>INP</b><span>how fast a tap responds</span><em>140 ms</em></div><div class="v-bar"><i style="--x:18%"></i></div></div>
+              <div class="vital" data-v="cls"><div class="v-h"><b>CLS</b><span>how much the page jumps around</span><em>0.04</em></div><div class="v-bar"><i style="--x:10%"></i></div></div>
+            </div>
+          </div>
+          <div class="wf">
+            <div class="wf-h"><b>What a phone has to download</b><span><em class="wf-mb">1.1 MB</em>, <em class="wf-req">41</em> requests</span></div>
+            <div class="wf-row" data-flag="2.4 MB before anything shows"><span class="sw"><span class="was">hero-banner.jpg</span><span class="now">hero-banner.webp, sized</span></span><div class="wf-bar"><i data-w="92,7" style="width:7%"></i></div><em class="sw"><span class="was">2.4 MB</span><span class="now">180 KB</span></em></div>
+            <div class="wf-row" data-end="gone"><span class="sw"><span class="was">slider.min.js</span><span class="now">slider.min.js, removed here</span></span><div class="wf-bar"><i data-w="25,0" style="width:0%"></i></div><em class="sw"><span class="was">640 KB</span><span class="now">0 KB</span></em></div>
+            <div class="wf-row" data-end="late"><span class="sw"><span class="was">chat-widget.js</span><span class="now">chat-widget.js, after first tap</span></span><div class="wf-bar"><i data-w="16,16" style="width:16%;margin-left:78%;background:#A3A9A3"></i></div><em class="sw"><span class="was">410 KB</span><span class="now">later</span></em></div>
+            <div class="wf-row"><span class="sw"><span class="was">6 font files</span><span class="now">2 font files, preloaded</span></span><div class="wf-bar"><i data-w="15,2" style="width:2%"></i></div><em class="sw"><span class="was">380 KB</span><span class="now">48 KB</span></em></div>
+            <div class="wf-row"><span class="sw"><span class="was">style.css, 84% unused</span><span class="now">style.css, trimmed</span></span><div class="wf-bar"><i data-w="12,3" style="width:3%"></i></div><em class="sw"><span class="was">320 KB</span><span class="now">62 KB</span></em></div>
+          </div>
+          <div class="scan"></div>
+        </div>
+        <div class="bw-cap">An example speed pass. The score is a real one: <a href="{{base}}/portfolio/biodynamic-breathwork/">Biodynamic Breathwork</a> went from 39 to 92 on mobile.</div>
+      </div>
+    </div>
+    <div>
+      <ol class="notes">
+        <li class="note glass ink"><b>Found</b>The banner image is 2.4 MB and it is the first thing a phone has to download. That alone sinks the LCP score.</li>
+        <li class="note glass ink"><b>Found</b>A slider script and a chat widget load on every page, including the pages that never use them.</li>
+        <li class="note done glass ink"><b>Fixed</b>Images resized and served as WebP, scripts removed or delayed until needed, caching rules set, and space reserved so nothing jumps.</li>
+        <li class="note done glass ink"><b>Tested</b>Measured again on a throttled phone connection, not on my laptop. You get the before and after numbers in writing.</li>
+      </ol>
+    </div>
+  </div>

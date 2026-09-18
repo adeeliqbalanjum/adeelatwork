@@ -222,6 +222,9 @@
     try { sessionStorage.removeItem('nav'); } catch (e) {}
     gsap.to(curtain, { yPercent: -100, duration: .85, ease: 'expo.inOut', onComplete: () => { root.classList.remove('from-nav'); gsap.set(curtain, { visibility: 'hidden' }); } });
     gsap.delayedCall(.3, intro);
+  } else if (root.classList.contains('first')) {
+    gsap.delayedCall(Math.max(0, 1.55 - performance.now() / 1000), intro);   // the first visit loader is still up
+    setTimeout(() => root.classList.remove('first'), 2600);
   } else intro();
 
   /* page transitions */
@@ -243,14 +246,36 @@
   });
 
   /* the repair demos: each builds a paused timeline, scoped to its own pin */
-  const scanAndNotes = (tl, q, page, at) => {
-    const notes = q('.note');
+  // callouts: anything marked data-flag gets a pin that pops as the scan line reaches it, turns green at the fix, then leaves
+  const flags = (tl, q, page, scanAt, fixAt) => q('[data-flag]').forEach((el, i) => {
+    const f = document.createElement('span'); f.className = 'flag'; f.textContent = el.dataset.flag; page.appendChild(f);
+    // never on top of a label: inside the top right corner of a big block, above the right end of a thin one, underneath a small one
+    const place = () => {
+      const a = el.getBoundingClientRect(), b = page.getBoundingClientRect(), w = f.offsetWidth, x = a.left - b.left, y = a.top - b.top;
+      const pos = el.dataset.flagPos === 'below' ? [x + a.width - w - 10, y + a.height - 9] : a.width < 90 ? [x, y + a.height + 5] : a.height < 40 ? [x + a.width - w, y - 20] : [x + a.width - w - 10, y + 9];
+      f.style.left = Math.max(6, Math.min(b.width - w - 6, pos[0])) + 'px'; f.style.top = Math.max(4, Math.min(b.height - 30, pos[1])) + 'px';
+      return y / (b.height || 1);
+    };
+    const rel = Math.max(0, Math.min(1, place()));
+    addEventListener('load', place);
+    tl.fromTo(f, { autoAlpha: 0, scale: .4 }, { autoAlpha: 1, scale: 1, duration: .24, ease: 'back.out(2.4)' }, scanAt + .1 + rel)
+      .to(f, { backgroundColor: '#16915A', duration: .25 }, fixAt + i * .12)
+      .to(f, { autoAlpha: 0, y: -10, duration: .3 }, fixAt + .6 + i * .12);
+  });
+  const scanAndNotes = (tl, q, page, at, o) => {
+    o = o || {}; const s = o.scanAt || 0, notes = q('.note'), scan = q('.scan');
     gsap.set(notes, { autoAlpha: 0, y: 34 });
-    tl.to(q('.scan'), { opacity: 1, duration: .15 })
-      .fromTo(q('.scan'), { y: -120 }, { y: () => page.offsetHeight, duration: 1.1, ease: 'none' }, '<')
-      .to(q('.scan'), { opacity: 0, duration: .15 }, '>-.15');
+    tl.to(scan, { opacity: 1, duration: .15 }, s)
+      .fromTo(scan, { y: -120 }, { y: () => page.offsetHeight, duration: 1.1, ease: 'none' }, s)
+      .to(scan, { opacity: 0, duration: .15 }, s + .95);
     notes.forEach((n, i) => tl.to(n, { autoAlpha: 1, y: 0, duration: .5 }, at[i]));
+    if (o.fixAt) flags(tl, q, page, s, o.fixAt);
   };
+  // a pointer that lives inside the demo and does the clicking
+  const pointer = page => { const c = document.createElement('span'); c.className = 'fcur'; c.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8-6.4 1.7L9.5 19z"/></svg>'; page.appendChild(c); gsap.set(c, { autoAlpha: 0, x: 30, y: 30 }); return c; };
+  const spot = (page, el, fx, fy) => { const a = el.getBoundingClientRect(), b = page.getBoundingClientRect(); return [a.left - b.left + a.width * (fx == null ? .5 : fx), a.top - b.top + a.height * (fy == null ? .6 : fy)]; };
+  const go = (tl, c, page, el, t, d, fx, fy) => tl.to(c, { autoAlpha: 1, duration: .15 }, t).to(c, { x: () => spot(page, el, fx, fy)[0], y: () => spot(page, el, fx, fy)[1], duration: d || .55, ease: 'power2.inOut' }, t);
+  const click = (tl, c, t) => tl.to(c, { scale: .74, duration: .09, yoyo: true, repeat: 1 }, t);
   const badge = (el, steps) => t => { const s = steps.find(x => t < x[0]); if (el.textContent !== s[1]) { el.textContent = s[1]; el.classList.toggle('mid', s[2] === 'mid'); el.classList.toggle('ok', s[2] === 'ok'); } };
 
   const demos = {
@@ -265,7 +290,7 @@
       gsap.set(q('.site-toast'), { autoAlpha: 0, y: 16 });
       gsap.set(bits, { autoAlpha: 0, y: 22 });
       const tl = gsap.timeline({ paused: true, defaults: { ease: 'power2.inOut' }, onUpdate() { const t = this.time(), fixed = t >= 2.75; state(t); if (plug.classList.contains('ok') !== fixed) { plug.classList.toggle('ok', fixed); plug.textContent = fixed ? fixedT : 'Booking Widget 3.2.0'; } } });
-      scanAndNotes(tl, q, page, [.45, 1.6, 2.6, 3.9]);
+      scanAndNotes(tl, q, page, [.45, 1.6, 2.6, 3.9], { fixAt: 3.3 });
       tl.to(q('.dlog'), { yPercent: 0, duration: .5, ease: 'power3.out' }, 1)
         .to(q('.dlog p'), { autoAlpha: 1, x: 0, duration: .25, stagger: .16 }, 1.3)
         .fromTo(q('.dlog .hit'), { scale: 1 }, { scale: 1.06, duration: .18, yoyo: true, repeat: 3, transformOrigin: '0 50%' }, 1.9)
@@ -299,7 +324,7 @@
       gsap.set(q('.psi-pass'), { autoAlpha: 0, scale: .8 });
       gsap.set(rows, { backgroundColor: cold });
       const tl = gsap.timeline({ paused: true, defaults: { ease: 'power2.inOut' }, onUpdate() { render(); state(this.time()); } });
-      scanAndNotes(tl, q, page, [.45, 1.3, 2.5, 3.8]);
+      scanAndNotes(tl, q, page, [.45, 1.3, 2.5, 3.8], { fixAt: 2.4 });
       tl.to(rows[0], { backgroundColor: hot, duration: .3 }, .5)
         .to([rows[1], rows[2]], { backgroundColor: hot, duration: .3, stagger: .12 }, 1.2)
         .to(o, { score: 92, lcp: 1.9, inp: 140, cls: .04, mb: 1.1, req: 41, x1: 22, x2: 18, x3: 10, duration: 1.4, ease: 'power1.inOut' }, 2.2)
@@ -314,46 +339,121 @@
       render(); state(0);
       return tl;
     },
+    mobile(pin, q) {
+      const page = q('.bw-page')[0], cards = q('.m-cards>div'), wrap = q('.m-cards')[0], phone = q('.ph2')[0], ruler = q('.ruler-t')[0];
+      const state = badge(q('.bw-state')[0], [[2.3, 'Broken on phones'], [3.4, 'Adjusting', 'mid'], [1e9, 'Fits every screen', 'ok']]);
+      const widths = [[3.75, '390 px'], [4.15, '360 px'], [4.6, '430 px'], [1e9, '390 px']];
+      gsap.set(q('.m-h'), { scale: 1.6, transformOrigin: '0 50%' });
+      gsap.set(q('.m-img svg'), { scaleX: 1.55, transformOrigin: '0 50%' });
+      gsap.set(wrap, { height: 44 });
+      gsap.set(cards, { width: 134, x: i => i * 142, y: i => -i * 52 });
+      gsap.set(q('.m-btn'), { x: 150 });
+      gsap.set(q('.m-scroll'), { autoAlpha: 1 });
+      const tl = gsap.timeline({ paused: true, defaults: { ease: 'power2.inOut' }, onUpdate() { const t = this.time(), w = widths.find(x => t < x[0])[1]; state(t); if (ruler.textContent !== w) ruler.textContent = w; } });
+      scanAndNotes(tl, q, page, [.45, 1.3, 2.5, 3.9], { fixAt: 2.3 });
+      tl.to(q('.m-body'), { x: -58, duration: .4, yoyo: true, repeat: 1, ease: 'power1.inOut' }, 1.25)   // the sideways slide, shown
+        .to(q('.m-h'), { scale: 1, duration: .7, ease: 'back.out(1.5)' }, 2.3)
+        .to(q('.m-img svg'), { scaleX: 1, duration: .7 }, 2.35)
+        .to(wrap, { height: 148, duration: .75 }, 2.45)
+        .to(cards, { width: '100%', x: 0, y: 0, duration: .8, stagger: .07, ease: 'back.out(1.3)' }, 2.45)
+        .to(q('.m-btn'), { x: 0, duration: .6, ease: 'back.out(1.6)' }, 2.75)
+        .to(q('.m-scroll'), { autoAlpha: 0, y: 10, duration: .3 }, 2.6)
+        .to(phone, { width: 250, duration: .4 }, 3.75).to(phone, { width: 298, duration: .45 }, 4.15).to(phone, { width: 270, duration: .4 }, 4.6)   // proved on real widths
+        .to({}, { duration: .5 });
+      state(0);
+      return tl;
+    },
+    mail(pin, q) {
+      const page = q('.bw-page')[0], btn = q('.mbtn')[0], sent = q('.msent')[0], env = q('.env')[0], vd = q('.void')[0], row = q('.irow.new')[0], chips = q('.dns span'), inboxTop = q('.inbox .h4')[0];
+      const state = badge(q('.bw-state')[0], [[1.45, 'Looks fine', 'ok'], [3.45, 'Losing enquiries'], [5, 'Fixing', 'mid'], [1e9, 'Delivering', 'ok']]);
+      const c = pointer(page);
+      gsap.set(sent, { autoAlpha: 0, y: 8 }); gsap.set(env, { autoAlpha: 0 }); gsap.set(vd, { autoAlpha: 0, y: 12 });
+      gsap.set(row, { autoAlpha: 0, height: 0, paddingTop: 0, paddingBottom: 0, marginBottom: 0 });
+      const tl = gsap.timeline({ paused: true, defaults: { ease: 'power2.inOut' }, onUpdate() { const t = this.time(); state(t); chips.forEach((s, i) => s.classList.toggle('ok', t >= 3.5 + i * .22)); } });
+      const fly = (t, target, d) => tl.set(env, { x: () => spot(page, btn, .5, 0)[0] - 15, y: () => spot(page, btn, .5, 0)[1] - 26, scale: .5, rotation: -8 }, t)
+        .to(env, { autoAlpha: 1, scale: 1, duration: .15 }, t)
+        .to(env, { x: () => spot(page, target, .5, .5)[0] - 15, rotation: 10, duration: d, ease: 'power1.inOut' }, t + .05)
+        .to(env, { y: () => spot(page, target, .5, .5)[1] - 15, duration: d, ease: 'back.in(1.6)' }, t + .05)
+        .to(env, { autoAlpha: 0, scale: .4, duration: .15 }, t + d - .05);
+      go(tl, c, page, btn, .15, .5); click(tl, c, .7);
+      tl.fromTo(btn, { scale: 1 }, { scale: .97, duration: .1, yoyo: true, repeat: 1 }, .7).to(sent, { autoAlpha: 1, y: 0, duration: .3 }, .8);
+      fly(.9, vd, .6);
+      tl.to(vd, { autoAlpha: 1, y: 0, duration: .3, ease: 'back.out(2)' }, 1.45).fromTo(vd, { x: 0 }, { x: 5, duration: .06, yoyo: true, repeat: 5 }, 1.5);
+      scanAndNotes(tl, q, page, [2, 2.8, 3.6, 5.1], { scanAt: 1.7, fixAt: 3.5 });
+      tl.to(vd, { autoAlpha: 0, y: -8, duration: .4 }, 4.1);
+      click(tl, c, 4.45);
+      tl.fromTo(btn, { scale: 1 }, { scale: .97, duration: .1, yoyo: true, repeat: 1 }, 4.45);
+      fly(4.55, inboxTop, .6);
+      tl.to(row, { autoAlpha: 1, height: 54, paddingTop: 9, paddingBottom: 9, marginBottom: 8, duration: .45, ease: 'back.out(1.4)' }, 5.1)
+        .to(c, { autoAlpha: 0, duration: .3 }, 5.2)
+        .to({}, { duration: .6 });
+      state(0); chips.forEach(s => s.classList.remove('ok'));
+      return tl;
+    },
+    fields(pin, q) {
+      const page = q('.bw-page')[0], tangle = q('.tangle')[0], rows = q('.afields>*'), pv = q('.pv')[0], prices = q('.pz'), upd = q('.upd')[0], field = q('.price-in')[0], caret = q('.caret')[0];
+      const state = badge(q('.bw-state')[0], [[2.3, 'Developer needed'], [4.5, 'Restructuring', 'mid'], [1e9, 'Team can edit', 'ok']]);
+      const typed = [[3.6, '$129'], [3.72, '$1'], [3.84, '$14'], [1e9, '$149']];
+      const c = pointer(page);
+      gsap.set(tangle, { autoAlpha: 1 }); gsap.set(rows, { autoAlpha: 0, y: 14 });
+      const paint = t => { const v = typed.find(x => t < x[0])[1], live = t >= 4.5 ? '$149' : '$129'; if (pv.textContent !== v) pv.textContent = v; prices.forEach(p => { if (p.textContent !== live) p.textContent = live; }); caret.style.opacity = t > 3.45 && t < 4.3 ? 1 : 0; field.classList.toggle('focus', t > 3.45 && t < 4.3); };
+      const tl = gsap.timeline({ paused: true, defaults: { ease: 'power2.inOut' }, onUpdate() { const t = this.time(); state(t); paint(t); } });
+      scanAndNotes(tl, q, page, [.45, 1.3, 2.5, 4.6], { fixAt: 2.3 });
+      tl.to(tangle, { autoAlpha: 0, scale: .96, duration: .5 }, 2.3)
+        .to(rows, { autoAlpha: 1, y: 0, duration: .4, stagger: .09, ease: 'power3.out' }, 2.55);
+      go(tl, c, page, field, 3, .45, .6, .55); click(tl, c, 3.45);
+      go(tl, c, page, upd, 3.95, .42); click(tl, c, 4.4);
+      tl.fromTo(upd, { scale: 1 }, { scale: .92, duration: .1, yoyo: true, repeat: 1 }, 4.4)
+        .fromTo(prices, { backgroundColor: 'rgba(34,165,101,0)', scale: 1 }, { backgroundColor: 'rgba(34,165,101,.3)', scale: 1.18, duration: .22, yoyo: true, repeat: 1, stagger: .09 }, 4.5)
+        .to(c, { autoAlpha: 0, duration: .3 }, 5)
+        .to({}, { duration: .6 });
+      state(0); paint(0);
+      return tl;
+    },
   };
-  const pin =$('.repair-pin[data-demo="checkout"]');
+  const pin = $('.repair-pin[data-demo="checkout"]');
   if (pin) {
-    const page = $('.bw-page', pin), notes = $$('.note', pin), scan = $('.scan', pin);
-    gsap.set('.shop-sum', lite ? { rotation: 2.5, y: 26 } : { rotation: 3.5, x: 52, y: 84 });
-    gsap.set('.fld-two', { x: lite ? -8 : -22, rotation: -1.6 });
-    gsap.set('.fld-two .fld:last-child', { y: lite ? 12 : 22 });
-    gsap.set('.shop-nav span', { y: i => [7, -5, 11, -8][i % 4] });
-    gsap.set('.shop-ok', { display: 'none', opacity: 0 });
+    const cq = gsap.utils.selector(pin);   // scoped: the demos page reuses these class names in other sequences
+    const page = $('.bw-page', pin), notes = $$('.note', pin), scan = $('.scan', pin), buy = $('.shop-btn', pin);
+    gsap.set(cq('.shop-sum'), lite ? { rotation: 2.5, y: 26 } : { rotation: 3.5, x: 52, y: 84 });
+    gsap.set(cq('.fld-two'), { x: lite ? -8 : -22, rotation: -1.6 });
+    gsap.set(cq('.fld-two .fld:last-child'), { y: lite ? 12 : 22 });
+    gsap.set(cq('.shop-nav span'), { y: i => [7, -5, 11, -8][i % 4] });
+    gsap.set(cq('.shop-ok'), { display: 'none', opacity: 0 });
     gsap.set(notes, { autoAlpha: 0, y: 34 });
     demo.set(0);
+    const c = pointer(page);
     const tl = gsap.timeline({ paused: true, defaults: { ease: 'power2.inOut' }, onUpdate() { demo.set(this.progress()); } });
     tl.to(scan, { opacity: 1, duration: .15 })
       .fromTo(scan, { y: -120 }, { y: () => page.offsetHeight, duration: 1.1, ease: 'none' }, '<')
       .to(scan, { opacity: 0, duration: .15 }, '>-.15')
       .to(notes[0], { autoAlpha: 1, y: 0, duration: .5 }, .45)
-      .to('.cache', { scale: 1.3, duration: .25, yoyo: true, repeat: 3, transformOrigin: '100% 50%' }, 1.2)
+      .to(cq('.cache'), { scale: 1.3, duration: .25, yoyo: true, repeat: 3, transformOrigin: '100% 50%' }, 1.2)
       .to(notes[1], { autoAlpha: 1, y: 0, duration: .5 }, 1.3)
-      .to('.shop-sum', { rotation: 0, x: 0, y: 0, duration: .9, ease: 'back.out(1.4)' }, 2.2)
-      .to('.fld-two,.fld-two .fld:last-child,.shop-nav span', { x: 0, y: 0, rotation: 0, duration: .8, ease: 'back.out(1.6)' }, 2.3)
-      .to('.thumb .brk', { opacity: 0, duration: .4 }, 2.5)
-      .to('.shop-alert', { height: 0, paddingTop: 0, paddingBottom: 0, marginTop: 0, opacity: 0, duration: .6 }, 2.5)
-      .to('.cache', { opacity: 0, scale: .6, duration: .4 }, 2.6)
+      .to(cq('.shop-sum'), { rotation: 0, x: 0, y: 0, duration: .9, ease: 'back.out(1.4)' }, 2.2)
+      .to(cq('.fld-two,.fld-two .fld:last-child,.shop-nav span'), { x: 0, y: 0, rotation: 0, duration: .8, ease: 'back.out(1.6)' }, 2.3)
+      .to(cq('.thumb .brk'), { opacity: 0, duration: .4 }, 2.5)
+      .to(cq('.shop-alert'), { height: 0, paddingTop: 0, paddingBottom: 0, marginTop: 0, opacity: 0, duration: .6 }, 2.5)
+      .to(cq('.cache'), { opacity: 0, scale: .6, duration: .4 }, 2.6)
       .to(notes[2], { autoAlpha: 1, y: 0, duration: .5 }, 2.5)
-      .set('.shop-ok', { display: 'block' }, 3.7)
-      .to('.shop-ok', { opacity: 1, duration: .4 }, 3.7)
-      .fromTo('.shop-btn', { scale: 1 }, { scale: .97, duration: .12, yoyo: true, repeat: 1 }, 3.55)
-      .to(notes[3], { autoAlpha: 1, y: 0, duration: .5 }, 3.7)
-      .to({}, { duration: .5 });
-    if (lite) seen([$('.bw')], () => tl.timeScale(.5).play(), '0px 0px -35% 0px');
+      .set(cq('.shop-ok'), { display: 'block' }, 3.7)
+      .to(cq('.shop-ok'), { opacity: 1, duration: .4 }, 3.7)
+      .fromTo(buy, { scale: 1 }, { scale: .97, duration: .12, yoyo: true, repeat: 1 }, 3.55)
+      .to(notes[3], { autoAlpha: 1, y: 0, duration: .5 }, 3.7);
+    flags(tl, cq, page, 0, 2.3);
+    go(tl, c, page, buy, 3.05, .45); click(tl, c, 3.52);   // the test order, placed by hand
+    tl.to(c, { autoAlpha: 0, duration: .3 }, 4.05).to({}, { duration: .4 });
+    if (lite) seen([$('.bw', pin)], () => tl.timeScale(.5).play(), '0px 0px -35% 0px');
     else {
       ST.create({ trigger: pin, start: 'top 104px', end: '+=2000', pin: true, scrub: .8, animation: tl, anticipatePin: 1 });
-      gsap.to('.scrollhint', { opacity: 0, scrollTrigger: { trigger: pin, start: 'top 104px', end: '+=200', scrub: true } });
+      gsap.to(cq('.scrollhint'), { opacity: 0, scrollTrigger: { trigger: pin, start: 'top 104px', end: '+=200', scrub: true } });
     }
   }
   $$('.repair-pin[data-demo]').forEach(pin => {
     const make = demos[pin.dataset.demo]; if (!make) return;
     const tl = make(pin, gsap.utils.selector(pin));
     if (lite) seen([$('.bw', pin)], () => tl.timeScale(.5).play(), '0px 0px -35% 0px');
-    else ST.create({ trigger: pin, start: 'top 104px', end: '+=1800', pin: true, scrub: .8, animation: tl, anticipatePin: 1 });
+    else ST.create({ trigger: pin, start: 'top 104px', end: '+=' + (pin.dataset.len || 1800), pin: true, scrub: .8, animation: tl, anticipatePin: 1 });
   });
 
   /* counters */

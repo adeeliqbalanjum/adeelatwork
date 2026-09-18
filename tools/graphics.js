@@ -113,6 +113,7 @@ async function og() {
   const items = [
     ['home', 'Your site should be taking orders, not throwing errors.', 'WordPress and WooCommerce developer', card('rockbusto-fleet')],
     ['portfolio', C.order.length + ' client projects, and what each one fixed.', 'Work', card('desert-safari-dubai')],
+    ['demos', 'Watch six WordPress problems get found and fixed.', 'Live demos', card('desert-safari-dubai')],
     ['cv', 'Muhammad Adeel Iqbal', 'CV, WordPress and WooCommerce developer', card('al-emirates-tours')],
     ['contact', 'Tell me what is going on. I will tell you what it needs.', 'Free first look, fixed quote', card('fastdocnow')],
   ].concat(C.services.map(s => ['service-' + s.slug, s.h1, s.nav === 'Partner' ? 'For agencies' : s.nav === 'Fix' ? 'WooCommerce and WordPress fixes' : 'Website builds', s.image]))

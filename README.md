@@ -33,7 +33,7 @@ node tools/graphics.js all # re-render project mockups and share images (needs C
 | `backup-forest-look/` | A snapshot of the stylesheet, mockups and share images from before the 18 September restyle |
 | `build.js` | The generator: pages, images, schema, sitemap, robots, manifest |
 
-28 pages: home, portfolio index, 21 case studies, 3 service landing pages, CV, contact (plus 404).
+29 pages: home, the demos page, portfolio index, 21 case studies, 3 service landing pages, CV, contact (plus 404).
 
 ## Decisions made as CTO, and why
 
@@ -47,8 +47,8 @@ node tools/graphics.js all # re-render project mockups and share images (needs C
    **Hover states were measured, not eyeballed** (18 September): every button, contact route, card and link, forced into its hover state on six page types, in light and dark, across all five palettes. Lowest text to fill contrast on hover is 12.8 to 1. The one real bug found: `.btn.line` set its own text colour after the shared hover rule, so its text stayed dark while the fill turned dark.
 8. **Icons and images** where they speed up understanding: the three doors, each symptom, services, process steps, contact routes, the cause table on the fix page, tool logos, and real project screens on service and case pages.
 9. **Graphics are rendered in code** from the same tokens (share images, the two missing project covers, the favicon) rather than drawn by hand in Figma, so they never drift from the site and can be regenerated in one command.
-10. **Three scroll sequences, spread down the homepage**, not stacked at the top: the checkout repair under the hero, a site down trace after the symptoms list, and a speed pass after the case studies. Each is a `.repair-pin` with a `data-demo` name and its own timeline in `src/app.js` (`demos.crash`, `demos.speed`). The markup holds the fixed state, and the script sets the broken state, so reduced motion and no script both show a sensible result. All three are labelled as examples. The only real number in them is the 39 to 92 score.
-11. **No preloader.** It looked good and delayed the first paint. The headline reveal stays on desktop.
+10. **Six scroll sequences, one source.** Each lives once in `src/fragments/demo-<name>.html` and is pulled in with `{{demo:name}}`. The homepage shows three (checkout, site down, speed). `/demos/` shows all six, adding broken mobile layout, enquiry emails that never arrive, and content the team cannot edit, with a jump index at the top (`DEMOS` list and `demosPage()` in `build.js`). Every sequence is a `.repair-pin` with a `data-demo` name and a timeline of the same name in `src/app.js`; `data-len` sets how much scrolling it takes. Shared parts: `scanAndNotes` (scan line and the four notes), `flags` (any element with `data-flag` gets a callout pin that pops as the scan reaches it, turns green at the fix and leaves), and `pointer`/`go`/`click` (an on screen cursor that does the clicking). The markup holds the fixed state and the script sets the broken state, so reduced motion and no script both show a sensible result. All are labelled as examples. The only real number in them is the 39 to 92 score. To add a seventh: write the fragment, add a timeline, add a line to `DEMOS`.
+11. **A first visit loader, built so it cannot slow the page.** An earlier preloader was removed because it delayed the first paint. This one (`.loader`) is different in three ways: it plays once per visit, not on every page (`aw-seen` in sessionStorage, decided in the inline head script before first paint); it is pure CSS keyframes, so it never waits for a script and the real page loads and paints underneath it; and it is 1.5 seconds, then lifts. It says Broken, a scan line passes, Scanning, then Fixed, which is the site's whole idea in one beat. Reduced motion, `?static` and no script visitors never see it. The headline reveal waits for the curtain (`app.js`, where `intro` is called).
 
 ## Type scale
 

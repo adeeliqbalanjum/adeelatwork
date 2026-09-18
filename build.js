@@ -47,7 +47,7 @@ const videoFrame = v => '<div class="vt-frame"><video src="' + BASE + '/video/' 
 
 // counts come from the data, so a claim on the page can never drift from what is actually on the site
 const COUNT = { all: projects.length, live: projects.filter(p => !p.offline).length };
-const fill = h => h.replace(/\{\{base\}\}/g, BASE).replace(/\{\{n:(all|live)\}\}/g, (m, k) => COUNT[k]).replace(/\{\{video:([a-z0-9-]+)\}\}/g, (m, slug) => videoFrame(projects.find(p => p.slug === slug).video)).replace(/\{\{icon:([a-z0-9-]+)\}\}/g, (m, n) => icon(n)).replace(/\{\{stack\}\}/g, stackStrip)
+const fill = h => h.replace(/\{\{demo:([a-z]+)\}\}/g, (m, n) => read('src/fragments/demo-' + n + '.html')).replace(/\{\{base\}\}/g, BASE).replace(/\{\{n:(all|live)\}\}/g, (m, k) => COUNT[k]).replace(/\{\{video:([a-z0-9-]+)\}\}/g, (m, slug) => videoFrame(projects.find(p => p.slug === slug).video)).replace(/\{\{icon:([a-z0-9-]+)\}\}/g, (m, n) => icon(n)).replace(/\{\{stack\}\}/g, stackStrip)
   .replace(/\{\{pic:([^|}]+)\|([^}]*)\}\}/g, (m, rel, alt) => rel === 'adeel' ? pic(rel, alt, { sizes: '(max-width:860px) 90vw, 420px' }) : pic(rel, alt));
 
 /* ---------- background motif: WordPress and the tools around it, one repeating SVG tile ---------- */
@@ -61,7 +61,7 @@ const sun = '<svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentCol
 const avatar = () => '<img src="' + BASE + '/img/adeel-face-' + manifest['adeel-face'].widths[0] + '.webp" width="36" height="36" alt="">';
 const nav = (key, waText) => `<header class="nav"><div class="wrap"><div class="nav-in glass">
   <a class="brand" href="${BASE}/">${avatar()}${S.brand}</a>
-  <nav class="nav-links" aria-label="Main">${[['work', 'Work', '/portfolio/'], ['services', 'Services', '/#services'], ['about', 'About', '/#about'], ['cv', 'CV', '/cv/'], ['contact', 'Contact', '/contact/']].map(([k, t, u]) => '<a' + (k === key ? ' class="on" aria-current="page"' : '') + ' href="' + BASE + u + '">' + t + '</a>').join('')}</nav>
+  <nav class="nav-links" aria-label="Main">${[['work', 'Work', '/portfolio/'], ['demos', 'Demos', '/demos/'], ['services', 'Services', '/#services'], ['about', 'About', '/#about'], ['cv', 'CV', '/cv/'], ['contact', 'Contact', '/contact/']].map(([k, t, u]) => '<a' + (k === key ? ' class="on" aria-current="page"' : '') + ' href="' + BASE + u + '">' + t + '</a>').join('')}</nav>
   <div class="nav-right"><span class="open"><i class="pulse"></i>Taking new projects</span><button class="mode" aria-label="Switch between light and dark">${sun}</button><a class="btn sm" href="${wa(waText)}" target="_blank" rel="noopener" data-magnet>WhatsApp<span class="me">&nbsp;me</span></a></div>
 </div></div></header>`;
 
@@ -76,7 +76,7 @@ const closing = o => `<section class="final"><div class="orbs local"><i></i><i><
 
 const footer = () => `<footer class="site"><div class="wrap foot">
   <div><a class="brand" href="${BASE}/">${avatar()}${S.brand}</a><p>WordPress and WooCommerce developer in Lahore. I fix what is broken and build sites your team can run.</p></div>
-  <div><h2>Work</h2><a href="${BASE}/portfolio/">All ${COUNT.all} projects</a>${projects.slice(0, 3).map(p => '<a href="' + BASE + '/portfolio/' + p.slug + '/">' + esc(p.name) + '</a>').join('')}</div>
+  <div><h2>Work</h2><a href="${BASE}/portfolio/">All ${COUNT.all} projects</a><a href="${BASE}/demos/">Watch six repairs</a>${projects.slice(0, 3).map(p => '<a href="' + BASE + '/portfolio/' + p.slug + '/">' + esc(p.name) + '</a>').join('')}</div>
   <div><h2>Services</h2>${C.services.map(s => '<a href="' + BASE + '/services/' + s.slug + '/">' + (s.nav === 'Fix' ? 'WooCommerce and WordPress fixes' : s.nav === 'Build' ? 'Website builds' : 'White label for agencies') + '</a>').join('')}</div>
   <div><h2>Contact</h2><a href="${wa('Hi Adeel, I found your site. ')}" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:${S.email}">Email</a><a href="${S.linkedin}" target="_blank" rel="noopener">LinkedIn</a><a href="${S.github}" target="_blank" rel="noopener">GitHub</a><a href="${BASE}/cv/">CV</a></div>
 </div><div class="wrap"><span>© 2026 ${S.name}. It is <span class="clock">00:00</span> in Lahore.</span><span>Built by hand, no page builder.</span></div></footer>`;
@@ -91,7 +91,7 @@ const stylePicker = () => `<div class="style"><button class="style-btn glass" ty
 
 const waBar = waText => `<div class="wa-bar glass"><a class="btn" href="${wa(waText)}" target="_blank" rel="noopener">${icon('message-circle')}WhatsApp Adeel</a><a class="btn line" href="mailto:${S.email}" aria-label="Email Adeel">${icon('mail')}</a></div>`;
 
-const HEAD_JS = "(function(d){var m,q=location.search;try{m=localStorage.getItem('aw-mode')}catch(e){}var f=/[?&]mode=(light|dark)/.exec(q);d.dataset.mode=f?f[1]:m||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');['palette','font','bg'].forEach(function(k){var v=(new RegExp('[?&]'+k+'=([a-z]+)').exec(q)||[])[1];try{v=v||localStorage.getItem('aw-'+k)}catch(e){}if(v)d.dataset[k]=v});if(!d.dataset.bg||d.dataset.bg=='prism')d.dataset.bg='soft';var cp=/^custom:(\\d+)$/.exec(d.dataset.palette||'');if(cp){try{var P=JSON.parse(localStorage.getItem('aw-custom'))[+cp[1]];['c1','c1raw','c2','c2ink','c3'].forEach(function(k){d.style.setProperty('--'+k,P[k])});d.dataset.palette='custom';d.dataset.cp=cp[1]}catch(e){d.dataset.palette='forest'}}if(/[?&]static/.test(q))return;d.classList.add('anim');try{if(sessionStorage.getItem('nav'))d.classList.add('from-nav')}catch(e){}})(document.documentElement)";
+const HEAD_JS = "(function(d){var m,q=location.search;try{m=localStorage.getItem('aw-mode')}catch(e){}var f=/[?&]mode=(light|dark)/.exec(q);d.dataset.mode=f?f[1]:m||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');['palette','font','bg'].forEach(function(k){var v=(new RegExp('[?&]'+k+'=([a-z]+)').exec(q)||[])[1];try{v=v||localStorage.getItem('aw-'+k)}catch(e){}if(v)d.dataset[k]=v});if(!d.dataset.bg||d.dataset.bg=='prism')d.dataset.bg='soft';var cp=/^custom:(\\d+)$/.exec(d.dataset.palette||'');if(cp){try{var P=JSON.parse(localStorage.getItem('aw-custom'))[+cp[1]];['c1','c1raw','c2','c2ink','c3'].forEach(function(k){d.style.setProperty('--'+k,P[k])});d.dataset.palette='custom';d.dataset.cp=cp[1]}catch(e){d.dataset.palette='forest'}}if(/[?&]static/.test(q))return;d.classList.add('anim');try{if(!sessionStorage.getItem('aw-seen')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('first');sessionStorage.setItem('aw-seen','1')}}catch(e){}try{if(sessionStorage.getItem('nav'))d.classList.add('from-nav')}catch(e){}})(document.documentElement)";
 
 const person = { '@type': 'Person', '@id': S.url + '/#adeel', name: S.name, alternateName: S.short, jobTitle: 'WordPress and WooCommerce Developer', url: S.url + '/', email: 'mailto:' + S.email, telephone: S.phone, address: { '@type': 'PostalAddress', addressLocality: 'Lahore', addressCountry: 'PK' }, sameAs: [S.linkedin, S.github], knowsAbout: ['WordPress', 'WooCommerce', 'Elementor Pro', 'PHP', 'Advanced Custom Fields', 'Custom Post Types', 'Core Web Vitals'] };
 const faqSchema = qa => ({ '@type': 'FAQPage', mainEntity: qa.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) });
@@ -118,6 +118,7 @@ function page(o) {
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="orbs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><span class="follow"></span><span class="glassy"><b></b></span><span class="motif"></span></div>
+<div class="loader" aria-hidden="true"><div class="loader-in"><b>${S.brand}</b><span class="loader-state"><i>Broken</i><i>Scanning</i><i>Fixed</i></span><span class="loader-bar"><u></u></span></div><span class="loader-scan"></span></div>
 <div class="curtain" aria-hidden="true"></div><div class="cur" aria-hidden="true"></div>${o.peek ? '<div class="peek" aria-hidden="true"><img src="' + imgUrl('mockups/rockbusto-fleet-card', 960) + '" alt=""></div>' : ''}
 ${nav(o.nav, o.wa)}
 <main id="main">
@@ -225,6 +226,28 @@ ${s.need ? `<section class="band tight"><div class="wrap faq"><div class="faq-si
   });
 }
 
+// the demos page: every scroll sequence in one place. Each entry: id, fragment name, icon, short label, heading, lede
+const DEMOS = [
+  ['checkout', 'credit-card', 'Checkout failing', 'Checkout spins and the order never arrives.', 'The most expensive fault a store can have, because every minute of it is a sale that did not happen.'],
+  ['crash', 'refresh-cw', 'Site down after an update', 'The whole site went down overnight. Here is how that gets traced.', 'The error screen tells your visitors nothing, on purpose. The real message is written somewhere else, and that is where I look first.'],
+  ['speed', 'gauge', 'Slow site', 'Slow is a bug too. This is what a speed pass looks like.', 'Google scores your site on a mid range phone with a weak connection, because that is what many of your visitors are holding. So that is where I measure.'],
+  ['mobile', 'smartphone', 'Broken on phones', 'Fine on your laptop. Falling apart on a phone.', 'A good share of your visitors are holding a phone. If the page slides sideways or the button hangs off the edge, they leave before they read a word.'],
+  ['mail', 'mail', 'Enquiries not arriving', 'The form says sent. Nothing ever arrives.', 'The quietest fault there is. Nobody complains, because the people who wrote to you think you ignored them.'],
+  ['fields', 'pencil-ruler', 'Cannot edit your own site', 'You should not need a developer to change a price.', 'Content belongs in fields your team fills in, not typed into a design that only a developer dares to open.'],
+];
+function demosPage() {
+  page({
+    path: '/demos/', nav: 'demos', og: 'demos', priority: '0.8', wa: 'Hi Adeel, I watched the demos on your site. Mine looks like this: ',
+    title: 'Watch six WordPress problems get found and fixed | Adeel Iqbal',
+    desc: 'Six scroll through examples of the WordPress and WooCommerce repairs I am asked for most: failing checkout, a site down after an update, slow pages, broken mobile layouts, enquiry emails that never arrive, and content your team cannot edit.',
+    closing: { mega: 'Seen yours?', h: 'Send me the URL and what is going wrong.' },
+    schema: [crumbSchema([['Home', '/'], ['Demos', '/demos/']])],
+    body: `<section class="page-top"><div class="wrap"><h1 class="display" data-intro>Watch six problems get found and fixed.</h1><p class="lede" data-intro-fade>These are the jobs I am asked to do most. Each one is an example, drawn the way the real repair goes: what you see, what is actually wrong, what I change, and how I prove it works. Scroll slowly.</p>
+<nav class="demo-index" data-intro-fade aria-label="Jump to a demo">${DEMOS.map(([id, ic, label], i) => '<a class="chip" href="#d-' + id + '">' + icon(ic) + label + '</a>').join('')}</nav></div></section>
+${DEMOS.map(([id, ic, label, h, lede], i) => '<section class="repair later' + (i ? ' pad' : '') + '" id="d-' + id + '"><div class="wrap"><div class="head"><h2 class="display" data-split>' + esc(h) + '</h2><p class="lede">' + esc(lede) + '</p></div>\n{{demo:' + id + '}}</div></section>').join('\n')}`,
+  });
+}
+
 function cv() {
   const c = C.cv;
   page({
@@ -269,7 +292,7 @@ function notFound() {
   const t = Date.now();
   fs.mkdirSync(DIST, { recursive: true });
   await images();
-  home(); work(); projects.forEach(caseStudy); C.services.forEach(service); cv(); contact(); notFound();
+  home(); work(); demosPage(); projects.forEach(caseStudy); C.services.forEach(service); cv(); contact(); notFound();
   out('style.css', read('src/style.css').split('__MOTIF__').join(motifTile()).replace(/\/\*[\s\S]*?\*\//g, '').replace(/\n\s*/g, '').replace(/;}/g, '}')); out('app.js', read('src/app.js'));
   for (const f of fs.readdirSync(path.join(ROOT, 'src/fonts'))) fs.copyFileSync(path.join(ROOT, 'src/fonts', f), (fs.mkdirSync(path.join(DIST, 'fonts'), { recursive: true }), path.join(DIST, 'fonts', f)));
   for (const f of fs.readdirSync(path.join(ROOT, 'src/vendor'))) fs.copyFileSync(path.join(ROOT, 'src/vendor', f), (fs.mkdirSync(path.join(DIST, 'vendor'), { recursive: true }), path.join(DIST, 'vendor', f)));
