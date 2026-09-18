@@ -59,11 +59,22 @@ const motifTile = () => { const T = 600; const g = MOTIF.map(([f, x, y, s, r]) =
 /* ---------- shared partials ---------- */
 const sun = '<svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg>';
 const avatar = () => '<img src="' + BASE + '/img/adeel-face-' + manifest['adeel-face'].widths[0] + '.webp" width="36" height="36" alt="">';
+// the phone menu: every destination, what is behind it, and the two ways to reach Adeel
+const MENU = () => [['home', 'Home', '/', 'Back to the start'], ['work', 'Work', '/portfolio/', COUNT.all + ' client projects, ' + COUNT.live + ' live to open'], ['demos', 'Demos', '/demos/', 'Watch six problems get found and fixed'], ['services', 'Services', '/#services', 'Fix it, build it, or borrow me'], ['about', 'About', '/#about', 'Who you will be talking to'], ['cv', 'CV', '/cv/', 'Experience, skills and education'], ['contact', 'Contact', '/contact/', 'Free first look, fixed quote']];
+const navBtn = (label, extra) => '<button class="navbtn' + (extra || '') + '" type="button" aria-label="' + label + '" aria-controls="menu"' + (extra ? '' : ' aria-expanded="false"') + '><i></i><i></i></button>';
+const menu = (key, waText) => `<div class="menu" id="menu" inert>
+  <div class="menu-top"><a class="brand" href="${BASE}/">${avatar()}${S.brand}</a>${navBtn('Close the menu', ' x')}</div>
+  <nav class="menu-links" aria-label="Menu">${MENU().map(([k, t, u, hint], i) => '<a' + (k === key ? ' class="on" aria-current="page"' : '') + ' href="' + BASE + u + '" style="--i:' + i + '"><span class="ml-t">' + t + '</span><span class="ml-h">' + esc(hint) + '</span>' + icon('arrow-up-right') + '</a>').join('')}</nav>
+  <div class="menu-foot" style="--i:${MENU().length}"><div class="menu-cta"><a class="btn gold" href="${wa(waText)}" target="_blank" rel="noopener">${icon('message-circle')}WhatsApp me</a><a class="btn ghost" href="mailto:${S.email}" aria-label="Email Adeel">${icon('mail')}Email</a></div>
+    <p><i class="pulse"></i>Taking new projects. It is <span class="clock">00:00</span> in Lahore.</p></div>
+</div>`;
+
 const nav = (key, waText) => `<header class="nav"><div class="wrap"><div class="nav-in glass">
   <a class="brand" href="${BASE}/">${avatar()}${S.brand}</a>
   <nav class="nav-links" aria-label="Main">${[['work', 'Work', '/portfolio/'], ['demos', 'Demos', '/demos/'], ['services', 'Services', '/#services'], ['about', 'About', '/#about'], ['cv', 'CV', '/cv/'], ['contact', 'Contact', '/contact/']].map(([k, t, u]) => '<a' + (k === key ? ' class="on" aria-current="page"' : '') + ' href="' + BASE + u + '">' + t + '</a>').join('')}</nav>
-  <div class="nav-right"><span class="open"><i class="pulse"></i>Taking new projects</span><button class="mode" aria-label="Switch between light and dark">${sun}</button><a class="btn sm" href="${wa(waText)}" target="_blank" rel="noopener" data-magnet>WhatsApp<span class="me">&nbsp;me</span></a></div>
-</div></div></header>`;
+  <div class="nav-right"><span class="open"><i class="pulse"></i>Taking new projects</span><button class="mode" aria-label="Switch between light and dark">${sun}</button><a class="btn sm" href="${wa(waText)}" target="_blank" rel="noopener" data-magnet>WhatsApp<span class="me">&nbsp;me</span></a>${navBtn('Open the menu')}</div>
+</div></div></header>
+${menu(key, waText)}`;
 
 const closing = o => `<section class="final"><div class="orbs local"><i></i><i></i><i></i><i></i><i></i></div><div class="wrap">
   <div class="mega">${o.mega}</div>

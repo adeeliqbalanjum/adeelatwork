@@ -121,6 +121,22 @@
     draw(); mark();
   }
 
+  /* the phone menu. The animation is CSS; this only opens, closes, and keeps the keyboard and screen readers in the right place */
+  const menuEl = $('.menu'), menuOpen = $('.nav .navbtn');
+  if (menuEl && menuOpen) {
+    const menuClose = $('.navbtn', menuEl);
+    const setMenu = (v, refocus) => {
+      menuEl.classList.toggle('is-open', v); menuEl.inert = !v; root.classList.toggle('menu-open', v);
+      menuOpen.setAttribute('aria-expanded', v);
+      if (v) setTimeout(() => menuClose.focus({ preventScroll: true }), 80); else if (refocus) menuOpen.focus({ preventScroll: true });
+    };
+    menuOpen.addEventListener('click', () => setMenu(true));
+    menuClose.addEventListener('click', () => setMenu(false, true));
+    addEventListener('keydown', e => { if (e.key === 'Escape' && menuEl.classList.contains('is-open')) setMenu(false, true); });
+    $$('a', menuEl).forEach(l => l.addEventListener('click', () => setMenu(false)));
+    matchMedia('(min-width:861px)').addEventListener('change', e => { if (e.matches) setMenu(false); });
+  }
+
   /* light and dark */
   const modeBtn = $('.mode');
   const setMode = v => { root.dataset.mode = v; try { localStorage.setItem('aw-mode', v); } catch (e) {} if (modeBtn) modeBtn.setAttribute('aria-pressed', v === 'dark'); };
@@ -235,6 +251,7 @@
     e.preventDefault(); try { sessionStorage.setItem('nav', 1); } catch (er) {}
     gsap.set(curtain, { visibility: 'visible', yPercent: 100 });
     gsap.to(curtain, { yPercent: 0, duration: lite ? .45 : .7, ease: 'expo.inOut', onComplete: () => location.href = a.href });
+    setTimeout(() => { location.href = a.href; }, 1300);   // safety net: a throttled or paused animation must never leave a link dead
   }));
   addEventListener('pageshow', e => { if (e.persisted) gsap.set(curtain, { visibility: 'hidden' }); });
 
