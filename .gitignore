@@ -1,3 +1,6 @@
 node_modules/
-.next/
-out/
+dist/
+reports/
+pages.json
+src/style.v3.css
+backup-forest-look/
