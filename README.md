@@ -2,7 +2,7 @@
 
 Portfolio of Muhammad Adeel Iqbal, WordPress and WooCommerce developer. A static site with no framework: `node build.js` turns content, data and templates into `dist/`.
 
-Status on 18 September 2026: built and tested locally. **Not deployed.** The live site at adeeliqbalanjum.github.io/adeelatwork still runs the old Next.js version.
+Status: **live** at adeeliqbalanjum.github.io/adeelatwork since 18 September 2026 (commit `42ba5b5`, GitHub Actions run 307). The previous Next.js site is kept on the branch `backup-before-v4-static`.
 
 ## Run it
 
@@ -79,7 +79,7 @@ Home on mobile: LCP 2.2s, total blocking time 10ms, layout shift 0. Home on desk
 
 Also checked: 1,298 internal links and image references, 0 broken. Desktop Chrome: all page types, light and dark, no console errors.
 
-## Deploy (when you say go)
+## Deploy
 
 The repo `adeeliqbalanjum/adeelatwork` deploys from `main` through GitHub Actions. Deploying means replacing the repo contents with this folder (minus `node_modules`, `dist`, `reports`) including the new `.github/workflows/deploy.yml`, and pushing to `main`. The old site stays in git history and on the existing backup branches, so rollback is one revert.
 

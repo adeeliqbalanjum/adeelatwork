@@ -44,9 +44,9 @@ exports.lines = {
   '7sky-consultant': 'A study abroad consultancy with country pages and a counselling enquiry route.',
 };
 
-// per project corrections and extras
+// per project corrections and extras. `result` shows as its own chapter on the case study: add one only when the outcome is true and the client would agree with it.
 exports.overrides = {
-  'rockbusto-fleet': { h1: 'A vehicle dealer that updates its own inventory in a minute.', flow: true },
+  'rockbusto-fleet': { h1: 'A vehicle dealer that updates its own inventory in a minute.', flow: true, result: 'The team adds or edits a vehicle from the WordPress admin. No layout work, no developer.' },
   'desert-safari-dubai': {
     h1: 'From bookings over WhatsApp to a tour you can book and pay for yourself.',
     tagline: 'Online tour booking with group pricing and a custom reviews widget',
@@ -54,10 +54,11 @@ exports.overrides = {
     solution: ['Tour pages on WooCommerce with a booking form for date, tour type and group size', 'Group pricing that lowers the price per person as the group grows', 'An admin approval step: new bookings wait as pending until the team confirms or rejects them', 'Automatic emails to the customer and the team at each stage', 'A custom reviews widget built for Elementor, with its own admin screen for moderating reviews', 'A WhatsApp field on the booking form, because that is how UAE customers prefer to talk', 'Mobile first tour pages built in Elementor Pro'],
     stack: ['WordPress', 'WooCommerce', 'Custom PHP', 'Elementor Pro', 'SMTP Email'],
     body: 'The client was losing bookings because customers had to WhatsApp for pricing, wait for a manual reply, then pay separately. The new flow turned this into a self serve experience: choose a tour, pick a date, set the group size, book online, and get a confirmation once the team approves.',
+    result: 'Pick a tour, a date and a group size, then book online. The owner manages reviews without a third party app.',
     extraShot: ['inner/desert-safari-dubai-reviews', 'The custom reviews widget'],
     video: { file: 'desert-safari-testimonial.mp4', poster: 'testimonial-desert-safari', len: '0:34', who: 'the owner of Desert Safari Dubai' },
   },
-  'biodynamic-breathwork': { h1: '173 practitioners on a map, and a mobile score that went from 39 to 92.', offline: 'The client has since moved this site to another platform, so there is no live link. The graphic above summarises the build.' },
+  'biodynamic-breathwork': { h1: '173 practitioners on a map, and a mobile score that went from 39 to 92.', result: 'Editors add a person without touching a layout. PageSpeed moved from 83 and 39 to 98 and 92 at hand over.', offline: 'The client has since moved this site to another platform, so there is no live link. The graphic above summarises the build.' },
   '7sky-consultant': { offline: 'This site was offline when I last checked, so there is no live link or screenshot yet.' },
 };
 

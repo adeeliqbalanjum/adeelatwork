@@ -45,7 +45,9 @@ const pic = (rel, alt, o = {}) => { const m = manifest[rel]; if (!m) throw new E
 // client video: poster only until play is pressed, so it costs nothing at page load
 const videoFrame = v => '<div class="vt-frame"><video src="' + BASE + '/video/' + v.file + '" poster="' + imgUrl(v.poster, 960) + '" preload="none" playsinline width="576" height="1024"></video><button class="vt-play" type="button" aria-label="Play the video message from ' + esc(v.who) + '"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></button><span class="vt-len">' + v.len + '</span></div>';
 
-const fill = h => h.replace(/\{\{base\}\}/g, BASE).replace(/\{\{video:([a-z0-9-]+)\}\}/g, (m, slug) => videoFrame(projects.find(p => p.slug === slug).video)).replace(/\{\{icon:([a-z0-9-]+)\}\}/g, (m, n) => icon(n)).replace(/\{\{stack\}\}/g, stackStrip)
+// counts come from the data, so a claim on the page can never drift from what is actually on the site
+const COUNT = { all: projects.length, live: projects.filter(p => !p.offline).length };
+const fill = h => h.replace(/\{\{base\}\}/g, BASE).replace(/\{\{n:(all|live)\}\}/g, (m, k) => COUNT[k]).replace(/\{\{video:([a-z0-9-]+)\}\}/g, (m, slug) => videoFrame(projects.find(p => p.slug === slug).video)).replace(/\{\{icon:([a-z0-9-]+)\}\}/g, (m, n) => icon(n)).replace(/\{\{stack\}\}/g, stackStrip)
   .replace(/\{\{pic:([^|}]+)\|([^}]*)\}\}/g, (m, rel, alt) => rel === 'adeel' ? pic(rel, alt, { sizes: '(max-width:860px) 90vw, 420px' }) : pic(rel, alt));
 
 /* ---------- background motif: WordPress and the tools around it, one repeating SVG tile ---------- */
@@ -74,7 +76,7 @@ const closing = o => `<section class="final"><div class="orbs local"><i></i><i><
 
 const footer = () => `<footer class="site"><div class="wrap foot">
   <div><a class="brand" href="${BASE}/">${avatar()}${S.brand}</a><p>WordPress and WooCommerce developer in Lahore. I fix what is broken and build sites your team can run.</p></div>
-  <div><h2>Work</h2><a href="${BASE}/portfolio/">All 21 projects</a>${projects.slice(0, 3).map(p => '<a href="' + BASE + '/portfolio/' + p.slug + '/">' + esc(p.name) + '</a>').join('')}</div>
+  <div><h2>Work</h2><a href="${BASE}/portfolio/">All ${COUNT.all} projects</a>${projects.slice(0, 3).map(p => '<a href="' + BASE + '/portfolio/' + p.slug + '/">' + esc(p.name) + '</a>').join('')}</div>
   <div><h2>Services</h2>${C.services.map(s => '<a href="' + BASE + '/services/' + s.slug + '/">' + (s.nav === 'Fix' ? 'WooCommerce and WordPress fixes' : s.nav === 'Build' ? 'Website builds' : 'White label for agencies') + '</a>').join('')}</div>
   <div><h2>Contact</h2><a href="${wa('Hi Adeel, I found your site. ')}" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:${S.email}">Email</a><a href="${S.linkedin}" target="_blank" rel="noopener">LinkedIn</a><a href="${S.github}" target="_blank" rel="noopener">GitHub</a><a href="${BASE}/cv/">CV</a></div>
 </div><div class="wrap"><span>© 2026 ${S.name}. It is <span class="clock">00:00</span> in Lahore.</span><span>Built by hand, no page builder.</span></div></footer>`;
@@ -139,7 +141,7 @@ function home() {
   page({
     path: '/', nav: 'home', og: 'home', priority: '1.0', wa: 'Hi Adeel, I found your site. My website is: ',
     title: 'WordPress and WooCommerce developer who fixes what is broken | Adeel Iqbal',
-    desc: 'Checkout failing, a site that broke after an update, or a build your team can edit. I find the real cause, fix it properly and test it. 21 live client sites across 5 countries. Free first look.',
+    desc: 'Checkout failing, a site that broke after an update, or a build your team can edit. I find the real cause, fix it properly and test it. ' + COUNT.all + ' client projects across 5 countries, ' + COUNT.live + ' of them live to open. Free first look.',
     body, schema: [{ '@type': 'ProfessionalService', '@id': S.url + '/#service', name: 'Adeel Iqbal, WordPress and WooCommerce development', url: S.url + '/', image: S.url + '/og/home.jpg', founder: { '@id': S.url + '/#adeel' }, areaServed: ['AE', 'GB', 'US', 'PK'], priceRange: '$45 to $600+', address: person.address, telephone: S.phone }, faqSchema(qa)],
   });
 }
@@ -150,7 +152,7 @@ function work() {
   const rows = projects.map(p => { const card = 'mockups/' + p.slug + '-card', cover = has(card) ? card : 'mockups/' + p.slug; return '<a class="wrow" href="' + BASE + '/portfolio/' + p.slug + '/" data-tags="' + p.tags + '" data-img="' + imgUrl(cover, 960) + '"><h2>' + esc(p.name) + '</h2><p>' + esc(p.line) + '</p><span class="meta">' + esc(p.industry + ', ' + p.location + ', ' + p.year) + '</span><span class="th">' + pic(cover, '', { sizes: '120px' }) + '</span></a>'; }).join('\n');
   page({
     path: '/portfolio/', nav: 'work', og: 'portfolio', priority: '0.9', peek: true, wa: 'Hi Adeel, I looked through your work. Here is what I need: ',
-    title: 'WordPress and WooCommerce portfolio: 21 live client projects | Adeel Iqbal',
+    title: 'WordPress and WooCommerce portfolio: ' + COUNT.all + ' client projects | Adeel Iqbal',
     desc: 'Booking flows, vehicle inventories, practitioner directories, telehealth and business sites. Every project says what the client was stuck on and what I built.',
     closing: { mega: 'Not on the list?', h: 'Tell me what you are trying to do.' },
     schema: [{ '@type': 'ItemList', itemListElement: projects.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: S.url + '/portfolio/' + p.slug + '/', name: p.name })) }, crumbSchema([['Home', '/'], ['Work', '/portfolio/']])],
@@ -185,10 +187,11 @@ function caseStudy(p, i) {
 <section class="chapter"><b>The problem</b><div><p class="say" style="margin-top:0">${esc(say)}</p>${rest ? '<p>' + esc(rest) + '</p>' : ''}</div></section>
 ${p.flow ? '<section class="chapter"><b>The idea</b><div><h2 class="display" data-split>Treat inventory as data. Let the site draw itself from it.</h2><p>One vehicle becomes one record with fields. Everything a buyer sees reads from that record, so there is only ever one place to change anything.</p>' + read('src/fragments/flow-rockbusto.html') + '</div></section>' : ''}
 <section class="chapter"><b>What I built</b><div><h2 class="display" data-split>${p.solution.length} pieces, one system.</h2><ul class="built glass">${p.solution.map(s => '<li>' + icon('check') + '<span>' + esc(s) + '</span></li>').join('')}</ul></div></section>
+<section class="chapter"><b>Built with</b><div><div class="tags" style="margin-top:0">${p.stack.map(s => '<span>' + (LOGO_FOR[s] ? logo(LOGO_FOR[s]) : '') + esc(s) + '</span>').join('')}</div></div></section>
 ${gallery}
 ${p.video ? '<section class="chapter"><b>From the client</b><div><figure class="vt glass">' + videoFrame(p.video) + '<figcaption><h2 class="display">A message from ' + esc(p.video.who) + '.</h2><p>' + esc(p.video.len.replace(/^0:/, '')) + ' seconds, recorded on a phone, not in a studio.</p></figcaption></figure></div></section>' : ''}
+${p.result ? '<section class="chapter"><b>The result</b><div><p class="say" style="margin-top:0">' + esc(p.result) + '</p></div></section>' : ''}
 <section class="chapter"><b>How I approached it</b><div><p style="margin-top:0">${esc(p.body)}</p>${p.offline ? '<p class="offline">' + esc(p.offline) + '</p>' : ''}
-  <div class="tags">${p.stack.map(s => '<span>' + (LOGO_FOR[s] ? logo(LOGO_FOR[s]) : '') + esc(s) + '</span>').join('')}</div>
   <div class="cta-row" style="margin-top:40px"><a class="btn" href="${wa(waText)}" target="_blank" rel="noopener" data-magnet>{{icon:message-circle}}I need something like this</a>${online ? '<a class="btn line" href="' + p.url + '" target="_blank" rel="noopener">Open the live site{{icon:arrow-up-right}}</a>' : ''}</div></div></section>
 </div>
 <a class="nextcs" href="${BASE}/portfolio/${next.slug}/" data-cursor="Next"><div class="orbs local"><i></i><i></i><i></i><i></i><i></i></div><div class="wrap"><div><p style="color:var(--on-deep);font-weight:600;margin-bottom:16px">Next case study</p><h2 class="display">${esc(next.name)}</h2><p class="lede" style="color:var(--on-deep);margin-top:18px">${esc(next.line)}</p></div>${pic(has('mockups/' + next.slug + '-card') ? 'mockups/' + next.slug + '-card' : 'mockups/' + next.slug, '', { sizes: '440px' })}</div></a>`,
