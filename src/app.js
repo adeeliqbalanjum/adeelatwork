@@ -63,7 +63,7 @@
   const styleBtn = $('.style-btn'), stylePanel = $('.style-panel');
   if (styleBtn) {
     const store = { get(k, d) { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem(k, typeof v === 'string' ? v : JSON.stringify(v)); } catch (e) {} } };
-    const row = $('.sw-row', stylePanel), add = $('.sw.add', stylePanel), cp = $('.cp', stylePanel), note = $('.cp-note', cp), del = $('.cp-del', cp);
+    const row = $('.sw-row', stylePanel), add = $('.swatch.add', stylePanel), cp = $('.cp', stylePanel), note = $('.cp-note', cp), del = $('.cp-del', cp);
     const inp = n => cp.querySelector('[name=' + n + ']');
     let customs = store.get('aw-custom', []), editing = -1;
 
@@ -76,13 +76,13 @@
     const apply = p => { ['c1', 'c1raw', 'c2', 'c2ink', 'c3'].forEach(k => root.style.setProperty('--' + k, p[k])); root.dataset.palette = 'custom'; };
 
     const draw = () => {
-      $$('.sw[data-custom]', row).forEach(x => x.remove());
-      customs.forEach((p, i) => { const s = document.createElement('button'); s.type = 'button'; s.className = 'sw'; s.dataset.custom = i; s.style.setProperty('--a', p.c1); s.style.setProperty('--b', p.c2); s.title = s.ariaLabel = 'Your palette ' + (i + 1); row.insertBefore(s, add); });
+      $$('.swatch[data-custom]', row).forEach(x => x.remove());
+      customs.forEach((p, i) => { const s = document.createElement('button'); s.type = 'button'; s.className = 'swatch'; s.dataset.custom = i; s.style.setProperty('--a', p.c1); s.style.setProperty('--b', p.c2); s.title = s.ariaLabel = 'Your palette ' + (i + 1); row.insertBefore(s, add); });
     };
     const mark = () => {
       const pal = root.dataset.palette || 'forest', font = root.dataset.font || 'satoshi';
-      $$('.sw[data-palette]', row).forEach(x => x.setAttribute('aria-pressed', x.dataset.palette === pal));
-      $$('.sw[data-custom]', row).forEach(x => x.setAttribute('aria-pressed', pal === 'custom' && x.dataset.custom === root.dataset.cp));
+      $$('.swatch[data-palette]', row).forEach(x => x.setAttribute('aria-pressed', x.dataset.palette === pal));
+      $$('.swatch[data-custom]', row).forEach(x => x.setAttribute('aria-pressed', pal === 'custom' && x.dataset.custom === root.dataset.cp));
       $$('[data-font]', stylePanel).forEach(x => x.setAttribute('aria-pressed', x.dataset.font === font));
       $$('.ty[data-bg]', stylePanel).forEach(x => x.setAttribute('aria-pressed', x.dataset.bg === (root.dataset.bg || 'soft')));
     };
@@ -111,7 +111,7 @@
       root.dataset.palette = 'forest'; delete root.dataset.cp; draw(); mark(); editor(false);
     });
     stylePanel.addEventListener('click', e => {
-      const x = e.target.closest('.sw[data-palette],.sw[data-custom],.ty[data-font],.ty[data-bg]'); if (!x) return;
+      const x = e.target.closest('.swatch[data-palette],.swatch[data-custom],.ty[data-font],.ty[data-bg]'); if (!x) return;
       if (x.dataset.bg) { root.dataset.bg = x.dataset.bg; store.set('aw-bg', x.dataset.bg); mark(); return; }
       if (x.dataset.font) { root.dataset.font = x.dataset.font; store.set('aw-font', x.dataset.font); refreshSoon(); }
       else if (x.dataset.palette) { root.dataset.palette = x.dataset.palette; delete root.dataset.cp; store.set('aw-palette', x.dataset.palette); editor(false); }
@@ -265,7 +265,7 @@
   /* the repair demos: each builds a paused timeline, scoped to its own pin */
   // callouts: anything marked data-flag gets a pin that pops as the scan line reaches it, turns green at the fix, then leaves
   const flags = (tl, q, page, scanAt, fixAt) => q('[data-flag]').forEach((el, i) => {
-    const f = document.createElement('span'); f.className = 'flag'; f.textContent = el.dataset.flag; page.appendChild(f);
+    const f = document.createElement('span'); f.className = 'flag' + (el.dataset.flagTone ? ' ' + el.dataset.flagTone : ''); f.textContent = el.dataset.flag; page.appendChild(f);
     // never on top of a label: inside the top right corner of a big block, above the right end of a thin one, underneath a small one
     const place = () => {
       const a = el.getBoundingClientRect(), b = page.getBoundingClientRect(), w = f.offsetWidth, x = a.left - b.left, y = a.top - b.top;
@@ -425,6 +425,26 @@
         .to(c, { autoAlpha: 0, duration: .3 }, 5)
         .to({}, { duration: .6 });
       state(0); paint(0);
+      return tl;
+    },
+    figma(pin, q) {   // a build, not a repair: measure the design, wipe to the built page, then prove it at three widths
+      const page = q('.bw-page')[0], stage = q('.fig-stage')[0], frame = q('.fig-frame')[0], split = q('.fig-split')[0], wlabel = q('.fig-w')[0], match = q('.fig-match')[0];
+      const state = badge(q('.bw-state')[0], [[2, 'Figma file', 'mid'], [3.35, 'Building', 'mid'], [1e9, 'Live in WordPress', 'ok']]);
+      const widths = lite ? [[1e9, '390']] : [[3.75, '1440'], [4.25, '768'], [4.75, '390'], [1e9, '1440']];
+      const c = pointer(page);
+      gsap.set(stage, { '--p': '0%' }); gsap.set(split, { autoAlpha: 1 }); gsap.set(match, { autoAlpha: 0, scale: .7 });
+      const tl = gsap.timeline({ paused: true, defaults: { ease: 'power2.inOut' }, onUpdate() { const t = this.time(), w = widths.find(x => t < x[0])[1]; state(t); if (wlabel.textContent !== w) wlabel.textContent = w; } });
+      scanAndNotes(tl, q, page, [.45, 1.4, 2.5, 3.9], { fixAt: 2.15 });
+      const edge = f => () => { const a = frame.getBoundingClientRect(), b = page.getBoundingClientRect(); return a.left - b.left + a.width * f; }, mid = () => { const a = frame.getBoundingClientRect(), b = page.getBoundingClientRect(); return a.top - b.top + a.height / 2 + 4; };
+      tl.to(c, { autoAlpha: 1, duration: .15 }, 1.35).to(c, { x: edge(0), y: mid, duration: .5 }, 1.35);
+      click(tl, c, 1.9);
+      tl.to(stage, { '--p': '100%', duration: 1.25, ease: 'power1.inOut' }, 2)           // the handle is dragged across and the real page appears under the design
+        .to(c, { x: edge(1), duration: 1.25, ease: 'power1.inOut' }, 2)
+        .to([split, c], { autoAlpha: 0, duration: .25 }, 3.3)
+        .to(match, { autoAlpha: 1, scale: 1, duration: .4, ease: 'back.out(2)' }, 3.4);
+      if (!lite) tl.to(frame, { width: '62%', duration: .42 }, 3.75).to(frame, { width: '38%', duration: .42 }, 4.25).to(frame, { width: '100%', duration: .45 }, 4.75);
+      tl.to({}, { duration: lite ? .9 : .6 });
+      state(0);
       return tl;
     },
   };
