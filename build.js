@@ -150,12 +150,27 @@ const STAMP = Date.now().toString(36);
 function home() {
   const body = read('src/fragments/home.html');
   const qa = [...body.matchAll(/<button class="qa-head">([^<]+)<i class="plus"><\/i><\/button><div class="fold"><div><p>([^<]+)<\/p>/g)].map(m => [m[1], m[2]]);
-  page({
-    path: '/', nav: 'home', og: 'home', priority: '1.0', wa: 'Hi Adeel, I found your site. My website is: ',
+  const o = {
+    nav: 'home', og: 'home', wa: 'Hi Adeel, I found your site. My website is: ',
     title: 'WordPress and WooCommerce developer who fixes what is broken | Adeel Iqbal',
     desc: 'Checkout failing, a site that broke after an update, or a build your team can edit. I find the real cause, fix it properly and test it. ' + COUNT.all + ' client projects across 5 countries, ' + COUNT.live + ' of them live to open. Free first look.',
     body, schema: [{ '@type': 'ProfessionalService', '@id': S.url + '/#service', name: 'Adeel Iqbal, WordPress and WooCommerce development', url: S.url + '/', image: S.url + '/og/home.jpg', founder: { '@id': S.url + '/#adeel' }, areaServed: ['AE', 'GB', 'US', 'PK'], priceRange: '$45 to $600+', address: person.address, telephone: S.phone }, faqSchema(qa)],
-  });
+  };
+  // The homepage is the glass design, rendered by tools/glass-preview.js. The previous homepage stays at /classic/ (noindex) as a rollback.
+  const cover = slug => imgUrl(has('mockups/' + slug + '-card') ? 'mockups/' + slug + '-card' : 'mockups/' + slug, 960);
+  const canonical = S.url + '/', og = S.url + '/og/home.jpg';
+  const head = `<title>${esc(o.title)}</title>
+<meta name="description" content="${esc(o.desc)}">
+<link rel="canonical" href="${canonical}">
+<meta property="og:type" content="website"><meta property="og:site_name" content="${S.short}"><meta property="og:title" content="${esc(o.title)}"><meta property="og:description" content="${esc(o.desc)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${og}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#56637A">
+<link rel="icon" href="${BASE}/favicon.svg" type="image/svg+xml"><link rel="manifest" href="${BASE}/site.webmanifest">
+<link rel="preload" href="${BASE}/fonts/anton-400.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="${BASE}/fonts/hanken-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="${cover(projects[0].slug)}">
+<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': [person].concat(o.schema) })}</script>`;
+  out('index.html', require('./tools/glass-preview').render({ base: BASE, fonts: BASE + '/fonts', img: cover, wa: wa(o.wa), qa, head }));
+  pages.push({ path: '/', priority: '1.0' });
+  page(Object.assign({}, o, { path: '/classic/', noindex: true }));
 }
 
 function work() {
