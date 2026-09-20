@@ -1,0 +1,67 @@
+/* Glass look. A pure theme layer: this file is appended to style.css by build.js (LOOK=classic leaves it out).
+   It changes backgrounds, cards, type and colour only. No content or section order is touched.
+   The Style panel keeps working: palettes colour the buttons, numerals and highlights, the four type sets still apply
+   (plus "Glass"), light and dark each have their own treatment, and a Background row picks the sky. */
+@font-face{font-family:'Anton';src:url('__BASE__/fonts/anton-400.woff2') format('woff2');font-weight:400;font-display:swap}
+
+html{--tall:'Anton','Impact',sans-serif;--wide:'Unbounded','Arial Black',sans-serif;--r-xl:40px;--r-l:30px;--r-m:20px;--orb-o:0;--motif-o:0;--veil:transparent;--dune-o:1;
+  --sky:radial-gradient(90% 55% at 78% 62%,rgba(255,196,140,.85),transparent 60%),radial-gradient(70% 40% at 20% 30%,rgba(120,138,160,.9),transparent 70%),linear-gradient(180deg,#56637a 0%,#8a8f9c 28%,#d2a98a 55%,#c79a78 64%,#8c6a55 78%,#4a3a32 100%)}
+
+/* ---- dark: white text on a dimmed sky ---- */
+html[data-mode="dark"]{
+  --bg:#2B3038; --text:#fff; --soft:rgba(255,255,255,.86); --rule:rgba(255,255,255,.28); --brand-text:var(--brand-lite); --btn-bg:var(--brand-lite); --btn-ink:#151517;
+  --glass-a:rgba(255,255,255,.26); --glass-b:rgba(255,255,255,.08); --glass-line:rgba(255,255,255,.4); --glass-hi:rgba(255,255,255,.5); --glass-shadow:rgba(20,14,12,.55);
+  --gl:rgba(255,255,255,.16); --gl2:rgba(255,255,255,.02); --rib:rgba(20,20,25,.12); --quiet:rgba(255,255,255,.42); --field:rgba(255,255,255,.34);
+  --sky-veil:rgba(20,18,28,.42); --num:var(--accent); --smoke-a:rgba(24,23,28,.66); --smoke-b:rgba(24,23,28,.48)}
+/* ---- light: ink text on a washed sky ---- */
+html[data-mode="light"]{
+  --bg:#ECE7DF; --text:#151517; --soft:rgba(21,21,23,.8); --rule:rgba(21,21,23,.16); --brand-text:var(--brand); --btn-bg:var(--brand); --btn-ink:#fff;
+  --glass-a:rgba(255,255,255,.72); --glass-b:rgba(255,255,255,.42); --glass-line:rgba(255,255,255,.9); --glass-hi:rgba(255,255,255,.95); --glass-shadow:rgba(60,40,30,.28);
+  --gl:rgba(255,255,255,.3); --gl2:rgba(255,255,255,.05); --rib:rgba(40,30,25,.07); --quiet:rgba(21,21,23,.38); --field:rgba(21,21,23,.2);
+  --sky-veil:rgba(255,252,247,.62); --num:var(--brand); --smoke-a:rgba(24,23,28,.82); --smoke-b:rgba(24,23,28,.7)}
+
+/* ---- backgrounds (Style panel, Background row) ---- */
+html[data-sky="dawn"]{--sky:radial-gradient(80% 50% at 70% 70%,rgba(255,214,170,.9),transparent 62%),linear-gradient(180deg,#7f8fb0 0%,#b9a3bd 36%,#efc3a4 66%,#c79a86 84%,#6d5a58 100%)}
+html[data-sky="night"]{--sky:radial-gradient(34% 26% at 78% 22%,rgba(220,228,255,.5),transparent 70%),radial-gradient(90% 50% at 30% 90%,rgba(90,70,120,.55),transparent 70%),linear-gradient(180deg,#0c1222 0%,#1b2540 45%,#352f4d 78%,#17131c 100%)}
+html[data-sky="ocean"]{--sky:radial-gradient(80% 50% at 75% 30%,rgba(190,235,240,.75),transparent 62%),linear-gradient(180deg,#1f3b57 0%,#3f7c99 46%,#9fd3d6 74%,#2f5566 100%);--dune-o:0}
+html[data-sky="brand"]{--sky:radial-gradient(70% 55% at 12% 10%,var(--o1),transparent 62%),radial-gradient(60% 50% at 90% 85%,var(--o2),transparent 60%),radial-gradient(50% 45% at 60% 40%,var(--o3),transparent 65%),linear-gradient(160deg,var(--deep),var(--brand));--dune-o:0}
+html[data-sky="own"]{--sky:linear-gradient(var(--sky-own,#2B3038),var(--sky-own,#2B3038));--dune-o:0}
+.orbs{background:linear-gradient(var(--sky-veil),var(--sky-veil)),var(--sky)}
+.orbs i,.orbs .follow,.orbs .glassy,.orbs .motif{display:none}
+.orbs:before{content:"";position:absolute;left:0;right:0;bottom:0;height:58%;opacity:var(--dune-o);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 600' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='b'%3E%3CfeGaussianBlur stdDeviation='6'/%3E%3C/filter%3E%3C/defs%3E%3Cg filter='url(%23b)' fill='%23201a1c'%3E%3Cpath d='M0 330C220 250 420 300 640 340s420-90 640-60 240 60 320 50v270H0z' opacity='.28'/%3E%3Cpath d='M0 430c260-70 420 10 700 20s520-110 900-40v190H0z' opacity='.5'/%3E%3C/g%3E%3C/svg%3E") center bottom/100% 100% no-repeat}
+html[data-mode="light"] .orbs:before{opacity:calc(var(--dune-o)*.35)}
+.orbs:after{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.2;mix-blend-mode:soft-light}
+.orbs.local{display:none}
+.bg-only-desktop{display:none!important}
+
+/* ---- glass ---- */
+.glass{-webkit-backdrop-filter:blur(26px) saturate(1.25);backdrop-filter:blur(26px) saturate(1.25);box-shadow:inset 0 1px 0 var(--glass-hi),0 30px 80px -30px var(--glass-shadow)}
+
+/* ---- the Glass type set (default in this look); the other four keep their own faces ---- */
+html[data-font="glass"]{--f-d:'Hanken Grotesk','Helvetica Neue',Arial,sans-serif;--f-b:'Hanken Grotesk','Helvetica Neue',Arial,sans-serif;--d-w:300;--d-t:.004em;--d-s:1;--d-str:100%;--b-t:0em;--d-t3:0em;--err-gap:.08em}
+html[data-font="glass"] .display{text-transform:uppercase;font-weight:300;letter-spacing:.004em;line-height:1.04}
+html[data-font="glass"] .svc-head .display{font-size:clamp(30px,3.1vw,46px);letter-spacing:.01em}
+html[data-font="glass"] .fig b,html[data-font="glass"] .n{font-family:var(--tall);font-weight:400;letter-spacing:0}
+html[data-font="glass"] .case-where,html[data-font="glass"] .meta,html[data-font="glass"] .crumbs{font-family:var(--wide);font-weight:800;font-size:9px;letter-spacing:.06em;text-transform:uppercase;line-height:1.6}
+.fig b,.fig b span{color:var(--num)}
+
+/* ---- buttons: pills in the palette colour, white for the quiet ones ---- */
+.btn.line{background:#fff;color:#151517;border-color:transparent}
+
+/* ---- dark sections become smoked glass; they keep white text in both modes ---- */
+.band.deep,.final,footer.site,.nextcs{--text:#fff;--soft:rgba(255,255,255,.84);--rule:rgba(255,255,255,.22);--brand-text:var(--brand-lite);--num:var(--accent);
+  background:linear-gradient(140deg,var(--smoke-a),var(--smoke-b));-webkit-backdrop-filter:blur(26px) saturate(1.2);backdrop-filter:blur(26px) saturate(1.2)}
+.final{border-top:1px solid rgba(255,255,255,.22)} footer.site{border-top:1px solid rgba(255,255,255,.18)}
+html[data-mode="dark"] .nav-in{background:linear-gradient(140deg,rgba(38,42,52,.5),rgba(38,42,52,.32))}
+html[data-mode="dark"] .menu{background:linear-gradient(160deg,rgba(34,38,50,.95),rgba(60,48,44,.96))}
+html[data-mode="dark"] .lede,html[data-mode="dark"] .band p{text-shadow:0 1px 14px rgba(20,16,22,.3)}
+html[data-mode="dark"] .hero .display,html[data-mode="dark"] .hero h1{--red:#FF6A6A}
+
+/* ---- Style panel: background row ---- */
+.sky-row{flex-wrap:wrap}
+.ty.own{display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.ty.own input{width:22px;height:22px;padding:0;border:0;border-radius:50%;background:none;cursor:pointer}
+html[data-sky="own"] .ty.own{outline:2px solid var(--brand-text);outline-offset:2px}
+.sky-row .ty{font-size:14px;padding-left:10px;padding-right:10px;white-space:nowrap}
+.ty-row .ty[data-font="unbounded"]{font-size:14px}
+.style-panel{max-height:calc(100vh - 110px);overflow-y:auto;overscroll-behavior:contain}

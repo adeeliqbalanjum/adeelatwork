@@ -85,6 +85,7 @@
       $$('.swatch[data-custom]', row).forEach(x => x.setAttribute('aria-pressed', pal === 'custom' && x.dataset.custom === root.dataset.cp));
       $$('[data-font]', stylePanel).forEach(x => x.setAttribute('aria-pressed', x.dataset.font === font));
       $$('.ty[data-bg]', stylePanel).forEach(x => x.setAttribute('aria-pressed', x.dataset.bg === (root.dataset.bg || 'soft')));
+      $$('.ty[data-sky]', stylePanel).forEach(x => x.setAttribute('aria-pressed', x.dataset.sky === (root.dataset.sky || 'dusk')));
     };
     const editor = (on, i) => {
       cp.hidden = !on; add.setAttribute('aria-expanded', on && i < 0); editing = on ? i : -1; del.hidden = !(on && i >= 0); note.textContent = '';
@@ -111,13 +112,16 @@
       root.dataset.palette = 'forest'; delete root.dataset.cp; draw(); mark(); editor(false);
     });
     stylePanel.addEventListener('click', e => {
-      const x = e.target.closest('.swatch[data-palette],.swatch[data-custom],.ty[data-font],.ty[data-bg]'); if (!x) return;
+      const x = e.target.closest('.swatch[data-palette],.swatch[data-custom],.ty[data-font],.ty[data-bg],.ty[data-sky]'); if (!x) return;
+      if (x.dataset.sky) { root.dataset.sky = x.dataset.sky; store.set('aw-sky', x.dataset.sky); mark(); return; }   // background choice, only present in the glass look
       if (x.dataset.bg) { root.dataset.bg = x.dataset.bg; store.set('aw-bg', x.dataset.bg); mark(); return; }
       if (x.dataset.font) { root.dataset.font = x.dataset.font; store.set('aw-font', x.dataset.font); refreshSoon(); }
       else if (x.dataset.palette) { root.dataset.palette = x.dataset.palette; delete root.dataset.cp; store.set('aw-palette', x.dataset.palette); editor(false); }
       else { const i = +x.dataset.custom; apply(customs[i]); root.dataset.cp = String(i); store.set('aw-palette', 'custom:' + i); editor(true, i); }
       mark();
     });
+    const ownSky = $('input[name=sky]', stylePanel);   // own background colour, glass look only
+    if (ownSky) ownSky.addEventListener('input', () => { root.style.setProperty('--sky-own', ownSky.value); root.dataset.sky = 'own'; store.set('aw-sky', 'own'); store.set('aw-skyown', ownSky.value); mark(); });
     draw(); mark();
   }
 

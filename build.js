@@ -5,6 +5,7 @@ const C = require('./content');
 const ROOT = __dirname, DIST = path.join(ROOT, 'dist'), ASSETS = path.join(ROOT, 'assets');
 const BASE = process.env.BASE !== undefined ? process.env.BASE : '/adeelatwork';
 const S = C.site;
+const GLASS = process.env.LOOK !== 'classic';   // the glass look (src/glass-theme.css) and its extra Style panel options. LOOK=classic builds the earlier forest look.
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const read = f => fs.readFileSync(path.join(ROOT, f), 'utf8');
 const out = (rel, data) => { const f = path.join(DIST, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, data); };
@@ -94,11 +95,14 @@ const footer = () => `<footer class="site"><div class="wrap foot">
 
 const PALETTES = [['forest', 'Forest and gold', '#1D5A3A', '#F2B705'], ['lime', 'Emerald and lemon', '#0A6B48', '#FFD60A'], ['mono', 'Black and gold', '#141414', '#F2B705'], ['kashi', 'Lapis blue', '#2140E0', '#B4C4FF'], ['plum', 'Plum and saffron', '#4A1B5E', '#FFB020']];
 const TYPESETS = [['satoshi', 'Satoshi', "'Satoshi'", 900, '100%'], ['anybody', 'Anybody', "'Anybody'", 900, '85%'], ['bricolage', 'Bricolage', "'Bricolage Grotesque'", 800, '85%'], ['unbounded', 'Unbounded', "'Unbounded'", 800, '100%']];
+if (GLASS) TYPESETS.unshift(['glass', 'Glass', "'Hanken Grotesk'", 300, '100%']);
+const SKIES = [['dusk', 'Dusk'], ['dawn', 'Dawn'], ['night', 'Night'], ['ocean', 'Ocean'], ['brand', 'Brand colours']];
+const skyRow = () => GLASS ? '<p>Background</p><div class="ty-row sky-row">' + SKIES.map(([k, n]) => '<button class="ty" type="button" data-sky="' + k + '">' + n + '</button>').join('') + '<label class="ty own">Own colour<input type="color" name="sky" value="#2B3038" aria-label="Pick your own background colour"></label></div>' : '';
 const stylePicker = () => `<div class="style"><button class="style-btn glass" type="button" aria-expanded="false" aria-controls="style-panel"><i></i><span>Style</span></button>
 <div class="style-panel glass" id="style-panel" hidden><p>Colours</p><div class="sw-row">${PALETTES.map(([k, n, a, c]) => '<button class="swatch" type="button" data-palette="' + k + '" style="--a:' + a + ';--b:' + c + '" aria-label="' + n + '" title="' + n + '"></button>').join('')}<button class="swatch add" type="button" aria-label="Add your own palette" title="Add your own palette" aria-expanded="false" aria-controls="cp">+</button></div>
 <div class="cp" id="cp" hidden><div class="cp-row"><label>Main<input type="color" name="a" value="#1D5A3A"></label><label>Accent<input type="color" name="b" value="#F2B705"></label><label>Third ball<input type="color" name="c" value="#7FD8C2"></label></div><div class="cp-act"><button class="cp-save" type="button">Save palette</button><button class="cp-del" type="button" hidden>Remove</button></div><p class="cp-note" aria-live="polite"></p></div>
 <p class="bg-only-desktop">Glass</p><div class="bg-row bg-only-desktop">${[['soft', 'Soft'], ['fluted', 'Fluted'], ['frosted', 'Frosted']].map(([k, n]) => '<button class="ty" type="button" data-bg="' + k + '">' + n + '</button>').join('')}</div>
-<p>Typography</p><div class="ty-row">${TYPESETS.map(([k, n, fam, w, st]) => '<button class="ty" type="button" data-font="' + k + '" style="font-family:' + fam + ',sans-serif;font-weight:' + w + ';font-stretch:' + st + '">' + n + '</button>').join('')}</div></div></div>`;
+${skyRow()}<p>Typography</p><div class="ty-row">${TYPESETS.map(([k, n, fam, w, st]) => '<button class="ty" type="button" data-font="' + k + '" style="font-family:' + fam + ',sans-serif;font-weight:' + w + ';font-stretch:' + st + '">' + n + '</button>').join('')}</div></div></div>`;
 
 const waBar = waText => `<div class="wa-bar glass"><a class="btn" href="${wa(waText)}" target="_blank" rel="noopener">${icon('message-circle')}WhatsApp Adeel</a><a class="btn line" href="mailto:${S.email}" aria-label="Email Adeel">${icon('mail')}</a></div>`;
 
@@ -121,7 +125,7 @@ function page(o) {
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F7F5EF" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#08140F" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="${BASE}/favicon.svg" type="image/svg+xml"><link rel="manifest" href="${BASE}/site.webmanifest">
-<script>${HEAD_JS}</script>
+<script>${HEAD_JS}</script>${GLASS ? "<script>(function(d){var q=location.search,g=function(k){try{return localStorage.getItem(k)}catch(e){}};if(!d.dataset.font)d.dataset.font='glass';var s=(/[?&]sky=([a-z]+)/.exec(q)||[])[1]||g('aw-sky')||'dusk';d.dataset.sky=s;var o=g('aw-skyown');if(o&&/^#[0-9a-f]{6}$/i.test(o))d.style.setProperty('--sky-own',o)})(document.documentElement)</script>" : ''}
 <link rel="preload" href="${BASE}/fonts/satoshi-900.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="${BASE}/fonts/satoshi-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${BASE}/style.css?v=${STAMP}">
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': [person].concat(o.schema || []) })}</script>
@@ -307,7 +311,9 @@ function notFound() {
   fs.mkdirSync(DIST, { recursive: true });
   await images();
   home(); work(); demosPage(); projects.forEach(caseStudy); C.services.forEach(service); cv(); contact(); notFound();
-  out('style.css', read('src/style.css').split('__MOTIF__').join(motifTile()).replace(/\/\*[\s\S]*?\*\//g, '').replace(/\n\s*/g, '').replace(/;}/g, '}')); out('app.js', read('src/app.js'));
+  // The glass look is a theme layer: src/glass-theme.css is appended to the normal stylesheet. Same HTML, same content, different visuals.
+  const LOOK = GLASS && fs.existsSync(path.join(ROOT, 'src/glass-theme.css')) ? read('src/glass-theme.css').split('__BASE__').join(BASE) : '';
+  out('style.css', (read('src/style.css').split('__MOTIF__').join(motifTile()) + LOOK).replace(/\/\*[\s\S]*?\*\//g, '').replace(/\n\s*/g, '').replace(/;}/g, '}')); out('app.js', read('src/app.js'));
   for (const f of fs.readdirSync(path.join(ROOT, 'src/fonts'))) fs.copyFileSync(path.join(ROOT, 'src/fonts', f), (fs.mkdirSync(path.join(DIST, 'fonts'), { recursive: true }), path.join(DIST, 'fonts', f)));
   for (const f of fs.readdirSync(path.join(ROOT, 'src/vendor'))) fs.copyFileSync(path.join(ROOT, 'src/vendor', f), (fs.mkdirSync(path.join(DIST, 'vendor'), { recursive: true }), path.join(DIST, 'vendor', f)));
   if (fs.existsSync(path.join(ASSETS, 'video'))) for (const f of fs.readdirSync(path.join(ASSETS, 'video'))) fs.copyFileSync(path.join(ASSETS, 'video', f), (fs.mkdirSync(path.join(DIST, 'video'), { recursive: true }), path.join(DIST, 'video', f)));
