@@ -80,12 +80,12 @@
       customs.forEach((p, i) => { const s = document.createElement('button'); s.type = 'button'; s.className = 'swatch'; s.dataset.custom = i; s.style.setProperty('--a', p.c1); s.style.setProperty('--b', p.c2); s.title = s.ariaLabel = 'Your palette ' + (i + 1); row.insertBefore(s, add); });
     };
     const mark = () => {
-      const pal = root.dataset.palette || 'forest', font = root.dataset.font || 'satoshi';
+      const pal = root.dataset.palette || 'orchid', font = root.dataset.font || 'satoshi';
       $$('.swatch[data-palette]', row).forEach(x => x.setAttribute('aria-pressed', x.dataset.palette === pal));
       $$('.swatch[data-custom]', row).forEach(x => x.setAttribute('aria-pressed', pal === 'custom' && x.dataset.custom === root.dataset.cp));
       $$('[data-font]', stylePanel).forEach(x => x.setAttribute('aria-pressed', x.dataset.font === font));
       $$('.ty[data-bg]', stylePanel).forEach(x => x.setAttribute('aria-pressed', x.dataset.bg === (root.dataset.bg || 'soft')));
-      $$('.ty[data-sky]', stylePanel).forEach(x => x.setAttribute('aria-pressed', x.dataset.sky === (root.dataset.sky || 'dusk')));
+      $$('.ty[data-sky]', stylePanel).forEach(x => x.setAttribute('aria-pressed', x.dataset.sky === (root.dataset.sky || 'brand')));
     };
     const editor = (on, i) => {
       cp.hidden = !on; add.setAttribute('aria-expanded', on && i < 0); editing = on ? i : -1; del.hidden = !(on && i >= 0); note.textContent = '';
@@ -108,8 +108,8 @@
       apply(p); draw(); mark(); editor(true, editing); note.textContent = 'Saved on this device.';
     });
     del.addEventListener('click', () => {
-      customs.splice(editing, 1); store.set('aw-custom', customs); store.set('aw-palette', 'forest');
-      root.dataset.palette = 'forest'; delete root.dataset.cp; draw(); mark(); editor(false);
+      customs.splice(editing, 1); store.set('aw-custom', customs); store.set('aw-palette', 'orchid');
+      root.dataset.palette = 'orchid'; delete root.dataset.cp; draw(); mark(); editor(false);
     });
     stylePanel.addEventListener('click', e => {
       const x = e.target.closest('.swatch[data-palette],.swatch[data-custom],.ty[data-font],.ty[data-bg],.ty[data-sky]'); if (!x) return;

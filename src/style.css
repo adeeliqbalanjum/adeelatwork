@@ -11,7 +11,13 @@
 /* ---------- 1. palettes (what the brand is) ---------- */
 /* Each palette: brand, its light tint, the accent, the dark band, the dark mode ground, the paper, and the three balls behind the glass.
    --warn is the amber "found" status inside the demos. The visitor can switch palette with the Style control (data-palette on <html>). */
-:root,[data-palette="forest"]{
+/* the brand palette (owner's choice, 2026-09-21): orchid main, lime accent, amber third. Same derivation as a custom palette. */
+:root,[data-palette="orchid"]{
+  --brand:#B241AF; --brand-lite:#F8A3F6; --accent:#75FF42; --accent-ink:#111; --warn:#75FF42;
+  --deep:#4B1B4A; --night:#220F21; --paper:#F8F2F3;
+  --o1:#F358EE; --o2:#75FF42; --o3:#D78109;
+}
+[data-palette="forest"]{
   --brand:#1D5A3A; --brand-lite:#74D6A4; --accent:#F2B705; --accent-ink:#111; --warn:#F2B705;
   --deep:#0F2E20; --night:#08140F; --paper:#F7F5EF;
   --o1:#2FA36B; --o2:#F2B705; --o3:#7FD8C2;
