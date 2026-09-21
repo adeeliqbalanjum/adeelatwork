@@ -15,7 +15,7 @@ const page = (kicker, title, body) => `<!doctype html><meta charset="utf-8"><sty
 *{box-sizing:border-box;margin:0}html,body{width:1200px;height:1200px;overflow:hidden}
 body{font-family:'Satoshi',sans-serif;background:#44194A;color:#fff;position:relative}
 .g{position:absolute;border-radius:50%;filter:blur(110px)}
-.pat{position:absolute;inset:0;background:${lattice};-webkit-mask-image:linear-gradient(160deg,#000,transparent 65%)}
+.pat{display:none;position:absolute;inset:0;background:${lattice};-webkit-mask-image:linear-gradient(160deg,#000,transparent 65%)}
 .top{position:absolute;left:70px;right:70px;top:62px;display:flex;align-items:center;justify-content:space-between;font-weight:900;font-size:30px;letter-spacing:-.03em}
 .top div{display:flex;align-items:center;gap:16px} .top img{width:60px;height:60px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.7)}
 .top span{font-size:21px;font-weight:700;letter-spacing:0;background:#75FF42;color:#111;border-radius:99px;padding:10px 20px}

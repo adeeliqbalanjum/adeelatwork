@@ -15,10 +15,10 @@ const src = rel => fileUrl(IMG(rel));
 /* Forest and gold, the site's default palette. Quiet grounds so the client's own site is the colour in the picture. */
 const K = { ink: '#111411', lapis: '#B241AF', deep: '#44194A', tint: '#F8A3F6', gold: '#75FF42', chalk: '#ECEAE1' };
 const BACKDROPS = [
-  { bg: K.chalk, line: K.lapis, o: .17, glow: 'rgba(255,255,255,.9)' },
-  { bg: K.deep, line: '#F8A3F6', o: .18, glow: 'rgba(243,88,238,.55)' },
-  { bg: K.lapis, line: '#FFFFFF', o: .13, glow: 'rgba(248,163,246,.5)' },
-  { bg: K.gold, line: K.ink, o: .11, glow: 'rgba(255,240,190,.8)' },
+  { bg: K.chalk, line: K.lapis, o: .17, glow: 'rgba(255,255,255,.9)', g2: 'rgba(243,88,238,.20)', g3: 'rgba(117,255,66,.20)' },
+  { bg: K.deep, line: '#F8A3F6', o: .18, glow: 'rgba(243,88,238,.55)', g2: 'rgba(215,129,9,.40)', g3: 'rgba(117,255,66,.38)' },
+  { bg: K.lapis, line: '#FFFFFF', o: .13, glow: 'rgba(248,163,246,.5)', g2: 'rgba(215,129,9,.36)', g3: 'rgba(117,255,66,.30)' },
+  { bg: '#2A0F2E', line: '#F8A3F6', o: .14, glow: 'rgba(117,255,66,.42)', g2: 'rgba(243,88,238,.34)', g3: 'rgba(215,129,9,.36)' },
 ];
 // the eight point star (khatam) lattice: two squares, one turned 45 degrees, joined edge to edge
 const lattice = (line, o, size) => `url('data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='${size || 132}' height='${size || 132}' viewBox='0 0 100 100' fill='none' stroke='${line}' stroke-width='1.5' opacity='${o}'><rect x='25' y='25' width='50' height='50'/><rect x='25' y='25' width='50' height='50' transform='rotate(45 50 50)'/><path d='M50 0v14.6M50 85.4V100M0 50h14.6M85.4 50H100'/></svg>`).replace(/'/g, '%27')}')`;
@@ -35,7 +35,7 @@ async function shoot(html, w, h, outFile, quality) {
 
 const CSS = `*{box-sizing:border-box;margin:0}html,body{overflow:hidden}body{font-family:'Satoshi',sans-serif;color:${K.ink};position:relative}
 .d{font-family:'Satoshi',sans-serif;font-weight:900;letter-spacing:-.05em;line-height:.98}
-.pat{position:absolute;inset:0;-webkit-mask-image:radial-gradient(ellipse 75% 70% at 50% 50%,transparent 30%,#000 100%)}
+.pat{display:none;position:absolute;inset:0;-webkit-mask-image:radial-gradient(ellipse 75% 70% at 50% 50%,transparent 30%,#000 100%)}
 .glow{position:absolute;border-radius:50%;filter:blur(90px)}
 .bw{position:absolute;border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 60px 110px -50px rgba(34,15,33,.75),0 0 0 1px rgba(17,20,17,.10)}
 .bar{height:44px;background:#F2F3EF;display:flex;align-items:center;gap:8px;padding:0 18px;border-bottom:1px solid rgba(17,20,17,.08)}
@@ -50,6 +50,7 @@ const CSS = `*{box-sizing:border-box;margin:0}html,body{overflow:hidden}body{fon
 
 const stage = (w, h, b, inner) => `<!doctype html><meta charset="utf-8">${FONT}<style>${CSS}html,body{width:${w}px;height:${h}px}body{background:${b.bg}}</style><body>
 <i class="glow" style="width:${w * .6}px;height:${w * .6}px;left:${-w * .15}px;top:${-w * .28}px;background:${b.glow}"></i>
+${b.g2 ? `<i class="glow" style="width:${w * .46}px;height:${w * .46}px;left:${w * .38}px;top:${h * .12}px;background:${b.g2}"></i><i class="glow" style="width:${w * .5}px;height:${w * .5}px;right:${-w * .14}px;bottom:${-w * .22}px;background:${b.g3}"></i>` : ''}
 <div class="pat" style="background:${lattice(b.line, b.o)}"></div>${inner}`;
 const browser = (rel, domain, x, y, w, imgH) => `<div class="bw" style="left:${x}px;top:${y}px;width:${w}px"><div class="bar"><i></i><i></i><i></i><span>${domain}</span></div><img src="${src(rel)}" style="height:${imgH}px"></div>`;
 const phone = (rel, x, y, w, h) => `<div class="ph" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px"><img src="${src(rel)}"></div>`;

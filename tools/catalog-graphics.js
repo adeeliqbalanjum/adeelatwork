@@ -14,7 +14,7 @@ const page = (tag, title, points, body) => `<!doctype html><meta charset="utf-8"
 *{box-sizing:border-box;margin:0}html,body{width:1600px;height:1200px;overflow:hidden}
 body{font-family:'Satoshi',sans-serif;background:#44194A;color:#fff;position:relative}
 .g{position:absolute;border-radius:50%;filter:blur(130px)}
-.pat{position:absolute;inset:0;background:${lattice};-webkit-mask-image:linear-gradient(160deg,#000,transparent 60%)}
+.pat{display:none;position:absolute;inset:0;background:${lattice};-webkit-mask-image:linear-gradient(160deg,#000,transparent 60%)}
 .tag{position:absolute;left:90px;top:84px;font-size:30px;font-weight:700;background:#75FF42;color:#111;border-radius:99px;padding:13px 28px}
 h1{position:absolute;left:90px;right:90px;top:180px;font-weight:900;font-size:112px;line-height:.98;letter-spacing:-.05em}
 ul{position:absolute;left:90px;right:90px;top:440px;display:flex;gap:16px;list-style:none;padding:0}

@@ -69,3 +69,9 @@ html[data-sky="own"] .ty.own{outline:2px solid var(--brand-text);outline-offset:
 /* ---- main buttons use the accent (lime in the brand palette), dark text, in both modes ---- */
 html[data-mode="dark"],html[data-mode="light"]{--btn-bg:var(--accent);--btn-ink:var(--accent-ink)}
 .final .form{--btn-bg:var(--accent);--btn-ink:var(--accent-ink)}
+
+/* ---- the process line and its dots use the accent too (a touch deeper in light mode so the thin line stays visible) ---- */
+html[data-mode="dark"]{--proc:var(--accent)} html[data-mode="light"]{--proc:color-mix(in srgb,var(--accent) 80%,#0B6B2A)}
+.proc-line i{background:var(--proc)}
+.step.on:before{background:var(--proc);box-shadow:inset 0 0 0 3px var(--proc),0 0 0 6px color-mix(in srgb,var(--proc) 26%,transparent)}
+.step.on{border-color:var(--proc)}
