@@ -65,3 +65,7 @@ html[data-sky="own"] .ty.own{outline:2px solid var(--brand-text);outline-offset:
 .sky-row .ty{font-size:14px;padding-left:10px;padding-right:10px;white-space:nowrap}
 .ty-row .ty[data-font="unbounded"]{font-size:14px}
 .style-panel{max-height:calc(100vh - 110px);overflow-y:auto;overscroll-behavior:contain}
+
+/* ---- main buttons use the accent (lime in the brand palette), dark text, in both modes ---- */
+html[data-mode="dark"],html[data-mode="light"]{--btn-bg:var(--accent);--btn-ink:var(--accent-ink)}
+.final .form{--btn-bg:var(--accent);--btn-ink:var(--accent-ink)}
