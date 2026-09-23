@@ -48,7 +48,7 @@ const videoFrame = v => '<div class="vt-frame"><video src="' + BASE + '/video/' 
 
 // counts come from the data, so a claim on the page can never drift from what is actually on the site
 const COUNT = { all: projects.length, live: projects.filter(p => !p.offline).length };
-const fill = h => h.replace(/\{\{demo:([a-z]+)\}\}/g, (m, n) => read('src/fragments/demo-' + n + '.html')).replace(/\{\{base\}\}/g, BASE).replace(/\{\{n:(all|live)\}\}/g, (m, k) => COUNT[k]).replace(/\{\{video:([a-z0-9-]+)\}\}/g, (m, slug) => videoFrame(projects.find(p => p.slug === slug).video)).replace(/\{\{icon:([a-z0-9-]+)\}\}/g, (m, n) => icon(n)).replace(/\{\{stack\}\}/g, stackStrip)
+const fill = h => h.replace(/\{\{demo:([a-z]+)\}\}/g, (m, n) => '<p class="demo-tag"><span>Example</span>An interactive scenario from my demos, not a client project.</p>' + read('src/fragments/demo-' + n + '.html')).replace(/\{\{base\}\}/g, BASE).replace(/\{\{n:(all|live)\}\}/g, (m, k) => COUNT[k]).replace(/\{\{video:([a-z0-9-]+)\}\}/g, (m, slug) => videoFrame(projects.find(p => p.slug === slug).video)).replace(/\{\{icon:([a-z0-9-]+)\}\}/g, (m, n) => icon(n)).replace(/\{\{stack\}\}/g, stackStrip)
   .replace(/\{\{pic:([^|}]+)\|([^}]*)\}\}/g, (m, rel, alt) => rel === 'adeel' ? pic(rel, alt, { sizes: '(max-width:860px) 90vw, 420px' }) : pic(rel, alt));
 
 /* ---------- background motif: WordPress and the tools around it, one repeating SVG tile ---------- */

@@ -957,3 +957,9 @@ h3.display,.site-h,.shop-grid .h4,.shop-nav b,.brand{letter-spacing:var(--d-t3)}
 .f-img img{object-position:50% 22%;transform:scale(1.7);transform-origin:50% 30%}
 @container (max-width:460px){.f-nav span{display:none} .f-h{font-size:24px}}
 @media (max-width:860px){.fig-match{top:5px;right:10px;bottom:auto;padding:5px 10px;font-size:12px;box-shadow:none}}
+
+/* audit 2026-09-23: role line above the hero headline, and an Example tag on every scroll demo */
+.hero-id{font-size:15px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.88;margin:0 0 22px}
+.demo-tag{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:15px;margin:0 0 14px;opacity:.92}
+.demo-tag span{background:var(--accent);color:var(--accent-ink,#111);font-weight:800;border-radius:99px;padding:4px 12px;font-size:12.5px;text-transform:uppercase;letter-spacing:.07em}
+@media (max-width:700px){.hero-id{font-size:12.5px;margin-bottom:16px}}
