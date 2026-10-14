@@ -12,7 +12,7 @@ window.__errs = []; addEventListener('error', function (e) { window.__errs.push(
   /* ---------- preloader: once per session, 1.6 s, never waits on the network ---------- */
   function runPreloader() {
     if (!pre) return Promise.resolve();
-    if (!g || reduced || lighthouse || ss.get('aw-seen') || fromNav || /[?&]nopre/.test(location.search)) { pre.hidden = true; return Promise.resolve(); }
+    if (!g || reduced || lighthouse || ss.get('aw-seen') || fromNav || document.visibilityState === 'hidden' || /[?&]nopre/.test(location.search)) { pre.hidden = true; return Promise.resolve(); }
     ss.set('aw-seen', '1');
     document.documentElement.classList.add('pre-on');
     var outline = $('.pre-outline rect', pre), blocks = $$('.pre-blk', pre), bar = $('.pre-bar', pre), scan = $('.pre-scan', pre), gauge = $('.pre-gauge', pre), arc = $('.arc', gauge), num = $('b', gauge), live = $('.pre-live', pre), inner = $('.pre-in', pre), top = $('.pre-top', pre), bot = $('.pre-bot', pre), mark = $('.pre-mark', pre);
@@ -38,15 +38,15 @@ window.__errs = []; addEventListener('error', function (e) { window.__errs.push(
       .to(pre, { backgroundColor: 'rgba(10,10,10,0)', duration: 0.3 }, 1.5)
       .set(pre, { display: 'none' }, 2.0);
     var done = new Promise(function (res) { tl.eventCallback('onComplete', function () { document.documentElement.classList.remove('pre-on'); res(); }); });
-    var cap = setTimeout(function () { if (tl.progress() < 0.75) tl.seek(1.45); }, 1700);
-    done.then(function () { clearTimeout(cap); pre.remove(); });
+    var cap = setTimeout(function () { if (tl.progress() < 0.75) tl.seek(1.45); }, 1700); var hard = setTimeout(function () { tl.kill(); pre.style.display = 'none'; document.documentElement.classList.remove('pre-on'); }, 2600); document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') { tl.progress(1); } });
+    done.then(function () { clearTimeout(cap); clearTimeout(hard); pre.remove(); });
     return done;
   }
   window.AWPreloader = runPreloader();
 
   /* ---------- page transition: internal links only ---------- */
   if (curtain && g && !reduced) {
-    if (fromNav) { g.set(curtain, { yPercent: 0 }); g.set($('.mark', curtain), { opacity: 1 }); g.to(curtain, { yPercent: -100, duration: 0.45, ease: 'power3.inOut', delay: 0.05 }); }
+    if (fromNav) { curtain.style.display = 'flex'; g.set(curtain, { y: 0, yPercent: 0 }); g.set($('.mark', curtain), { opacity: 1 }); g.to(curtain, { y: 0, yPercent: -100, duration: 0.45, ease: 'power3.inOut', delay: 0.05, onComplete: function () { curtain.style.display = 'none'; } }); setTimeout(function () { curtain.style.display = 'none'; }, 900); } else { g.set(curtain, { y: 0, yPercent: 100 }); }
     document.addEventListener('click', function (e) {
       var a = e.target.closest('a[href]'); if (!a) return;
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || a.target === '_blank' || a.hasAttribute('download')) return;
@@ -54,11 +54,13 @@ window.__errs = []; addEventListener('error', function (e) { window.__errs.push(
       if (url.origin !== location.origin) return;
       if (url.pathname === location.pathname && url.hash) return;
       if (/\.(pdf|jpg|png|mp4|zip)$/i.test(url.pathname)) return;
-      e.preventDefault(); ss.set('aw-nav', '1');
-      g.set(curtain, { yPercent: 100 }); g.set($('.mark', curtain), { opacity: 0 });
-      g.timeline().to(curtain, { yPercent: 0, duration: 0.32, ease: 'power3.in' }).to($('.mark', curtain), { opacity: 1, duration: 0.15 }, 0.2).add(function () { location.href = url.href; }, 0.42);
+      e.preventDefault(); ss.set('aw-nav', '1'); var gone = false, go = function () { if (gone) return; gone = true; location.href = url.href; };
+      if (document.visibilityState === 'hidden') return go();
+      curtain.style.display = 'flex'; g.set(curtain, { y: 0, yPercent: 100 }); g.set($('.mark', curtain), { opacity: 0 });
+      g.timeline().to(curtain, { y: 0, yPercent: 0, duration: 0.32, ease: 'power3.in' }).to($('.mark', curtain), { opacity: 1, duration: 0.15 }, 0.2).add(go, 0.42);
+      setTimeout(go, 700);
     }, true);
-    addEventListener('pageshow', function (e) { if (e.persisted) g.set(curtain, { yPercent: 100 }); });
+    addEventListener('pageshow', function (e) { if (e.persisted) { g.set(curtain, { y: 0, yPercent: 100 }); curtain.style.display = 'none'; } });
   }
 
   /* ---------- submit animation ---------- */

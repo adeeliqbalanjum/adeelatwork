@@ -7,7 +7,7 @@
 .pre-in{position:relative;z-index:2;display:flex;align-items:center;gap:56px;transform-origin:center}
 .pre-mark{position:absolute;top:-96px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px}
 .pre-mark .mark{width:52px;height:52px;border-radius:16px;background:#fff;color:var(--ink);font-size:26px}
-.pre-mark .mark i{background:var(--blue)}
+.pre-mark .mark i{background:var(--blue);border-color:var(--dark)}
 .pre-live{opacity:0;display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;background:var(--dark3);font-size:11px;font-weight:600}
 .pre-live i{width:6px;height:6px;border-radius:50%;background:var(--green)}
 .pre-browser{position:relative;width:min(440px,78vw);aspect-ratio:440/270;border-radius:14px;background:#161616;padding:16px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
@@ -26,9 +26,10 @@
 @media (max-width:700px){.pre-in{flex-direction:column;gap:40px}.pre-gauge{width:100px;height:100px}}
 
 /* page transition */
-.curtain{position:fixed;inset:0;z-index:190;background:var(--dark);transform:translateY(100%);display:flex;align-items:center;justify-content:center;pointer-events:none}
+.curtain{position:fixed;inset:0;z-index:190;background:var(--dark);display:flex;align-items:center;justify-content:center;pointer-events:none}
 .curtain .mark{width:52px;height:52px;border-radius:16px;background:#fff;color:var(--ink);font-size:26px;opacity:0}
-.curtain .mark i{background:var(--blue)}
+.curtain .mark i{background:var(--blue);border-color:var(--dark)}
+.curtain{display:none}
 
 /* submit animation (any .btn.primary inside a form with data-submit) */
 .btn.is-busy{position:relative;overflow:hidden;pointer-events:none}
