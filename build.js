@@ -124,7 +124,7 @@ function page(o) {
 <meta property="og:type" content="${o.ogType || 'website'}"><meta property="og:site_name" content="${S.short}"><meta property="og:title" content="${esc(o.ogTitle || o.title)}"><meta property="og:description" content="${esc(o.desc)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${og}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#4B1B4A">
-<link rel="icon" href="${BASE}/favicon.svg" type="image/svg+xml"><link rel="manifest" href="${BASE}/site.webmanifest">
+<link rel="icon" href="${BASE}/favicon-32.png" sizes="32x32" type="image/png"><link rel="icon" href="${BASE}/favicon-64.png" sizes="64x64" type="image/png"><link rel="apple-touch-icon" href="${BASE}/apple-touch-icon.png"><link rel="manifest" href="${BASE}/site.webmanifest">
 <script>${HEAD_JS}</script>${GLASS ? "<script>(function(d){var q=location.search,g=function(k){try{return localStorage.getItem(k)}catch(e){}};if(!d.dataset.font)d.dataset.font='glass';var s=(/[?&]sky=([a-z]+)/.exec(q)||[])[1]||g('aw-sky')||'brand';if(!g('aw-mode')&&!/[?&]mode=/.test(q))d.dataset.mode='dark';d.dataset.sky=s;var o=g('aw-skyown');if(o&&/^#[0-9a-f]{6}$/i.test(o))d.style.setProperty('--sky-own',o)})(document.documentElement)</script>" : ''}
 <link rel="preload" href="${BASE}/fonts/satoshi-900.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="${BASE}/fonts/satoshi-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${BASE}/style.css?v=${STAMP}">
@@ -183,7 +183,7 @@ function homeV4(V4) {
 <meta property="og:type" content="website"><meta property="og:site_name" content="${S.short}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${S.url}/og/home.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F5F5F2">
-<link rel="icon" href="${BASE}/favicon.svg" type="image/svg+xml"><link rel="manifest" href="${BASE}/site.webmanifest">
+<link rel="icon" href="${BASE}/favicon-32.png" sizes="32x32" type="image/png"><link rel="icon" href="${BASE}/favicon-64.png" sizes="64x64" type="image/png"><link rel="apple-touch-icon" href="${BASE}/apple-touch-icon.png"><link rel="manifest" href="${BASE}/site.webmanifest">
 <link rel="preload" href="${BASE}/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="${BASE}/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${BASE}/v4.css?v=${STAMP}"><link rel="stylesheet" href="${BASE}/shell.css?v=${STAMP}">
 <script>if(matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.remove('motion')</script>
@@ -354,12 +354,12 @@ function notFound() {
   out('pages.css', read('src/v4/pages.css')); out('pages.js', read('src/v4/pages.js')); out('shell.css', read('src/v4/shell.css')); out('shell.js', read('src/v4/shell.js')); out('demos.css', read('src/v4/demos.css')); out('demos.js', read('src/v4/demos.js'));
   // The glass look is a theme layer: src/glass-theme.css is appended to the normal stylesheet. Same HTML, same content, different visuals.
   const LOOK = GLASS && fs.existsSync(path.join(ROOT, 'src/glass-theme.css')) ? read('src/glass-theme.css').split('__BASE__').join(BASE) : '';
-  out('style.css', (read('src/style.css').split('__MOTIF__').join(motifTile()) + LOOK).replace(/\/\*[\s\S]*?\*\//g, '').replace(/\n\s*/g, '').replace(/;}/g, '}')); out('app.js', read('src/app.js'));
-  for (const f of fs.readdirSync(path.join(ROOT, 'src/fonts'))) fs.copyFileSync(path.join(ROOT, 'src/fonts', f), (fs.mkdirSync(path.join(DIST, 'fonts'), { recursive: true }), path.join(DIST, 'fonts', f)));
+  // the old style.css / app.js (glass and classic looks) are no longer shipped: every page is V4 now; the sources stay for the archive
+  for (const f of fs.readdirSync(path.join(ROOT, 'src/fonts')).filter(f => /^(inter-var|instrument-serif-italic).woff2$/.test(f))) fs.copyFileSync(path.join(ROOT, 'src/fonts', f), (fs.mkdirSync(path.join(DIST, 'fonts'), { recursive: true }), path.join(DIST, 'fonts', f)));
   for (const f of fs.readdirSync(path.join(ROOT, 'src/vendor'))) fs.copyFileSync(path.join(ROOT, 'src/vendor', f), (fs.mkdirSync(path.join(DIST, 'vendor'), { recursive: true }), path.join(DIST, 'vendor', f)));
   if (fs.existsSync(path.join(ASSETS, 'video'))) for (const f of fs.readdirSync(path.join(ASSETS, 'video'))) fs.copyFileSync(path.join(ASSETS, 'video', f), (fs.mkdirSync(path.join(DIST, 'video'), { recursive: true }), path.join(DIST, 'video', f)));
-  out('favicon.svg', read('assets/favicon.svg'));
-  out('site.webmanifest', JSON.stringify({ name: S.short + ', WordPress developer', short_name: S.brand, start_url: BASE + '/', display: 'browser', background_color: '#F7F5EF', theme_color: '#B241AF', icons: [{ src: BASE + '/favicon.svg', sizes: 'any', type: 'image/svg+xml' }] }));
+  for (const f of fs.readdirSync(path.join(ASSETS, 'app'))) fs.copyFileSync(path.join(ASSETS, 'app', f), (fs.mkdirSync(DIST, { recursive: true }), path.join(DIST, f)));   // V4 app icons: the head photo, rounded
+  out('site.webmanifest', JSON.stringify({ name: S.short + ', WordPress developer', short_name: S.brand, start_url: BASE + '/', display: 'browser', background_color: '#F5F5F2', theme_color: '#0A0A0A', icons: [{ src: BASE + '/icon-192.png', sizes: '192x192', type: 'image/png' }, { src: BASE + '/icon-512.png', sizes: '512x512', type: 'image/png' }] }));
   out('robots.txt', 'User-agent: *\nAllow: /\n\nSitemap: ' + S.url + '/sitemap.xml\n');
   out('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + pages.map(p => '  <url><loc>' + S.url + p.path + '</loc><lastmod>' + new Date().toISOString().slice(0, 10) + '</lastmod><priority>' + p.priority + '</priority></url>').join('\n') + '\n</urlset>\n');
   out('.nojekyll', '');

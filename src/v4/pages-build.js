@@ -57,7 +57,7 @@ const tile = (glyph, cls = '') => `<span class="tile ${cls}">${glyph}</span>`;
 <meta property="og:type" content="${o.ogType || 'website'}"><meta property="og:site_name" content="${S.short}"><meta property="og:title" content="${esc(o.title)}"><meta property="og:description" content="${esc(o.desc)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${og}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F5F5F2">
-<link rel="icon" href="${BASE}/favicon.svg" type="image/svg+xml"><link rel="manifest" href="${BASE}/site.webmanifest">
+<link rel="icon" href="${BASE}/favicon-32.png" sizes="32x32" type="image/png"><link rel="icon" href="${BASE}/favicon-64.png" sizes="64x64" type="image/png"><link rel="apple-touch-icon" href="${BASE}/apple-touch-icon.png"><link rel="manifest" href="${BASE}/site.webmanifest">
 <link rel="preload" href="${BASE}/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="${BASE}/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${BASE}/v4.css?v=${STAMP}"><link rel="stylesheet" href="${BASE}/pages.css?v=${STAMP}"><link rel="stylesheet" href="${BASE}/shell.css?v=${STAMP}">${(o.assets || []).filter(a => fs.existsSync(path.join(ROOT, 'src/v4', a + '.css'))).map(a => `<link rel="stylesheet" href="${BASE}/${a}.css?v=${STAMP}">`).join('')}
 <script>if(matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.remove('motion')</script>
