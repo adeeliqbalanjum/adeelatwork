@@ -1,7 +1,7 @@
 // V4 inner pages: Work, Case (21), Services, Service (3), Contact, 404. Called from build.js with its helpers.
 // Design source: Figma page "13 — Website V4" (Portfolio V4 / Work, Case, Services, Contact) + the Loading, Form submit and Notes boards.
 module.exports = function (H) {
-  const { fs, path, ROOT, BASE, STAMP, S, C, esc, read, out, wa, has, pic, imgUrl, projects, COUNT, person, faqSchema, crumbSchema, pages } = H;
+  const { fs, path, ROOT, BASE, STAMP, S, C, esc, read, out, wa, has, pic, imgUrl, projects, COUNT, person, faqSchema, crumbSchema, pages, fill, icon, logo } = H;
   const img = (rel, w) => imgUrl(rel, w);
   const shot = p => has('shots/' + p.slug) ? 'shots/' + p.slug : has('mockups/' + p.slug) ? 'mockups/' + p.slug : 'mockups/' + p.slug + '-card';
   const cover = p => has('mockups/' + p.slug + '-card') ? 'mockups/' + p.slug + '-card' : shot(p);
@@ -59,7 +59,7 @@ const tile = (glyph, cls = '') => `<span class="tile ${cls}">${glyph}</span>`;
 <meta name="theme-color" content="#F5F5F2">
 <link rel="icon" href="${BASE}/favicon.svg" type="image/svg+xml"><link rel="manifest" href="${BASE}/site.webmanifest">
 <link rel="preload" href="${BASE}/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="${BASE}/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="${BASE}/v4.css?v=${STAMP}"><link rel="stylesheet" href="${BASE}/pages.css?v=${STAMP}"><link rel="stylesheet" href="${BASE}/shell.css?v=${STAMP}">
+<link rel="stylesheet" href="${BASE}/v4.css?v=${STAMP}"><link rel="stylesheet" href="${BASE}/pages.css?v=${STAMP}"><link rel="stylesheet" href="${BASE}/shell.css?v=${STAMP}">${(o.assets || []).filter(a => fs.existsSync(path.join(ROOT, 'src/v4', a + '.css'))).map(a => `<link rel="stylesheet" href="${BASE}/${a}.css?v=${STAMP}">`).join('')}
 <script>if(matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.remove('motion')</script>
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': [person].concat(o.schema || []) })}</script>
 </head>
@@ -74,7 +74,7 @@ ${closing(o.closing)}
 ${sticky()}
 <div class="lightbox" id="lightbox" hidden><button class="lb-close" type="button" aria-label="Close the video">×</button><div class="lb-in"><video id="lbvideo" src="${BASE}/video/desert-safari-testimonial.mp4" poster="${img('testimonial-desert-safari', 960)}" controls playsinline width="576" height="1024"></video></div></div>
 <script src="${BASE}/vendor/lenis.min.js" defer></script><script src="${BASE}/vendor/motion.min.js" defer></script><script src="${BASE}/vendor/gsap.min.js" defer></script><script src="${BASE}/vendor/ScrollTrigger.min.js" defer></script><script src="${BASE}/vendor/Flip.min.js" defer></script>
-<script src="${BASE}/shell.js?v=${STAMP}" defer></script><script src="${BASE}/v4.js?v=${STAMP}" defer></script><script src="${BASE}/pages.js?v=${STAMP}" defer></script>
+<script src="${BASE}/shell.js?v=${STAMP}" defer></script><script src="${BASE}/v4.js?v=${STAMP}" defer></script><script src="${BASE}/pages.js?v=${STAMP}" defer></script>${(o.assets || []).filter(a => fs.existsSync(path.join(ROOT, 'src/v4', a + '.js'))).map(a => `<script src="${BASE}/${a}.js?v=${STAMP}" defer></script>`).join('')}
 </body></html>`;
     out(path.join(o.path, o.file || 'index.html'), html);
     if (!o.noindex) pages.push({ path: o.path, priority: o.priority || '0.6' });
@@ -205,5 +205,57 @@ ${rel.length ? `<section class="sec" style="padding-top:0"><div class="wrap">${h
   function notFound() {
     v4Page({ path: '/', file: '404.html', page: '404', active: '', og: 'home', noindex: true, title: 'Page not found | Muhammad Adeel', desc: 'That page is not here.', body: `<section class="ph"><div class="wrap"><div class="ph-copy"><p class="eyebrow left"><i></i>404</p><h1>That page <span class="grey">is not here.</span></h1><p class="lede">The link may be old. The work and the contact page are still where they should be.</p><div class="ctas"><a class="btn dark" href="${BASE}/portfolio/">See the work <i>→</i></a><a class="btn ghost" href="${BASE}/">Back to the homepage</a></div></div></div></section>` });
   }
-  return { work, caseStudy, services, service, contact, notFound, shell, v4Page };
+  /* ================= DEMOS ================= */
+  const DEMOS = [
+    ['checkout', 'credit-card', 'Checkout failing', 'Checkout spins and the order <span class="grey">never arrives.</span>', 'The most expensive fault a store can have, because every minute of it is a sale that did not happen.'],
+    ['crash', 'refresh-cw', 'Site down after an update', 'The whole site went down overnight. <span class="grey">Here is how that gets traced.</span>', 'The error screen tells your visitors nothing, on purpose. The real message is written somewhere else, and that is where I look first.'],
+    ['speed', 'gauge', 'Slow site', 'Slow is a bug too. <span class="grey">This is what a speed pass looks like.</span>', 'Google scores your site on a mid range phone with a weak connection, because that is what many of your visitors are holding. So that is where I measure.'],
+    ['mobile', 'smartphone', 'Broken on phones', 'Fine on your laptop. <span class="grey">Falling apart on a phone.</span>', 'A good share of your visitors are holding a phone. If the page slides sideways or the button hangs off the edge, they leave before they read a word.'],
+    ['mail', 'mail', 'Enquiries not arriving', 'The form says sent. <span class="grey">Nothing ever arrives.</span>', 'The quietest fault there is. Nobody complains, because the people who wrote to you think you ignored them.'],
+    ['fields', 'pencil-ruler', 'Cannot edit your own site', 'You should not need a developer <span class="grey">to change a price.</span>', 'Content belongs in fields your team fills in, not typed into a design that only a developer dares to open.'],
+    ['figma', 'layers', 'Figma or PSD to WordPress', 'From a design file <span class="grey">to a WordPress site your team can edit.</span>', 'Designs arrive as Figma, PSD or XD. I measure the file first, build it in Elementor Pro to match, then prove it at every screen size.', 'build'],
+  ];
+  const NUM = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+  // the old scenario fragments, with the handful of class names that clash with V4 styles prefixed
+  const demoFragment = id => fill(read('src/fragments/demo-' + id + '.html'))
+    .replace(/class="repair-pin( flip)?"/g, 'class="dpin$1"')
+    .replace(/ data-intro-fade/g, '').replace(/ glass ink"/g, '"').replace(/ glass"/g, '"')
+    .replace(/class="notes"/g, 'class="dnotes"').replace(/class="note( done)?"/g, 'class="dnote$1"')
+    .replace(/class="fld-two"/g, 'class="dfld-two"').replace(/class="fld"/g, 'class="dfld"')
+    .replace(/class="gauge"/g, 'class="dgauge"').replace(/class="live"/g, 'class="dlive"').replace(/class="pulse"/g, 'class="dpulse"')
+    .replace(/class="bw-page stage"/g, 'class="bw-page dstage-m"').replace(/class="burger"/g, 'class="dburger"');
+  function demos() {
+    const REPAIRS = DEMOS.filter(d => d[5] !== 'build').length, BUILDS = DEMOS.length - REPAIRS;
+    const body = `<section class="ph"><i class="glow" aria-hidden="true" style="left:55%"></i>
+  <div class="wrap" style="grid-template-columns:1fr"><div class="ph-copy"><p class="eyebrow left"><i></i>Demos · ${DEMOS.length} scenarios</p><h1 style="max-width:14em">Watch ${NUM[REPAIRS]} problems get fixed, <span class="grey">and ${NUM[BUILDS]} design get built.</span></h1><p class="lede">These are the jobs I am asked to do most. Each one is an example, drawn the way the real repair goes: what you see, what is actually wrong, what I change, and how I prove it works. Scroll slowly.</p>
+  <nav class="dindex" aria-label="Jump to a demo">${DEMOS.map(([id, ic, label, h, lede, kind]) => `<a class="chip${kind === 'build' ? ' build' : ''}" href="#d-${id}">${icon(ic)}${label}</a>`).join('')}</nav></div></div></section>
+${DEMOS.map(([id, ic, label, h, lede, kind], i) => `<section class="demo${i ? '' : ' first'}" id="d-${id}"><div class="wrap"><div class="dhead" data-reveal><p class="eyebrow left"><i></i>${String(i + 1).padStart(2, '0')} · ${kind === 'build' ? 'Build' : 'Repair'} · ${esc(label)}</p><h2>${h}</h2><p class="lede">${esc(lede)}</p></div>
+<p class="dtag"><span>Example</span>An interactive scenario drawn for this page, not a client project.</p>
+${demoFragment(id)}</div></section>`).join('\n')}`;
+    v4Page({ path: '/demos/', page: 'demos', active: 'Work', og: 'demos', priority: '0.8', assets: ['demos'], title: 'Watch WordPress problems get fixed, and a design get built | Muhammad Adeel', desc: 'Scroll through examples of the WordPress and WooCommerce work I am asked for most: failing checkout, a site down after an update, slow pages, broken mobile layouts, enquiry emails that never arrive, content your team cannot edit, and a Figma or PSD design built into a working site.', body, schema: [crumbSchema([['Home', '/'], ['Demos', '/demos/']])], closing: { title: 'Seen yours <span class="grey">in one of these?</span>', sub: 'Send me the URL and what is going wrong. First look is free and usually the same day.' } });
+  }
+
+  /* ================= CV ================= */
+  function cv() {
+    const c = C.cv, rel = projects.slice(0, 3);
+    const body = `<section class="ph cvph"><i class="glow" aria-hidden="true" style="left:60%"></i>
+  <div class="wrap"><div class="ph-copy"><p class="eyebrow left"><i></i>CV</p><h1>${esc(S.name)}. <span class="grey">WordPress and WooCommerce developer.</span></h1><p class="lede">${esc(c.profile)}</p>
+  <div class="ctas"><a class="btn dark" href="mailto:${S.email}">Email me <i>→</i></a><a class="btn ghost" href="${wa('Hi Adeel, I read your CV. I would like to talk about: ')}" target="_blank" rel="noopener">${brand('whatsapp')} WhatsApp</a><button class="btn ghost" type="button" onclick="print()">${icon('file-text')} Print or save as PDF</button></div></div>
+  <aside class="cvcard" data-reveal><div class="who"><img src="${img('adeel-head', 160)}" width="72" height="72" alt="Muhammad Adeel Iqbal"><span><b>${esc(S.name)}</b><small>Lahore, Pakistan · remote, worldwide</small></span></div>
+    <span class="avail"><i></i>Taking new projects</span>
+    <div class="cvfacts"><div><b>${COUNT.all}</b><span>client projects, ${COUNT.live} live</span></div><div><b>5</b><span>countries: UAE, UK, USA, Japan, Pakistan</span></div><div><b>2023<em>+</em></b><span>agency work at Nuovo Studios and Rozi Academy</span></div><div><b><em>$</em>150</b><span>fixes start here, sites $300 to $500</span></div></div></aside></div></section>
+<div class="wrap cvgrid">
+  <aside class="cvside">
+    <div class="cvbox" data-reveal><h2>Contact</h2><a class="ln" href="mailto:${S.email}">${icon('mail')}<span>${S.email}</span></a><a class="ln" href="https://wa.me/${S.wa}" target="_blank" rel="noopener">${brand('whatsapp')}<span>${esc(S.phone)}</span></a><a class="ln" href="${S.linkedin}" target="_blank" rel="noopener">${brand('linkedin')}<span>/in/adeelatwork</span></a><a class="ln" href="${S.github}" target="_blank" rel="noopener">${icon('github')}<span>adeeliqbalanjum</span></a><span class="ln plain">${icon('map-pin')}<span>Lahore, Pakistan. Remote, worldwide</span></span></div>
+    <div class="cvbox" data-reveal><h2>Core skills</h2><div class="skills">${c.skills.map(([l, n]) => `<span class="chip">${l ? logo(l) : ''}${esc(n)}</span>`).join('')}</div><h2>Supporting</h2><div class="skills">${c.support.map(n => `<span class="chip soft">${esc(n)}</span>`).join('')}</div></div>
+    <div class="cvbox cvedu" data-reveal><h2>Education</h2><b>${esc(c.education[0])}</b><span>${esc(c.education[1])}</span></div>
+  </aside>
+  <div class="jobs">${c.jobs.map((j, i) => `<article class="job${i === 0 ? ' now' : ''}" data-reveal><header><div><h3>${esc(j.role)}</h3><p class="co">${esc(j.co)}</p></div><span class="when">${esc(j.when)}</span></header><ul>${j.points.map(x => `<li>${icon('check')}<span>${esc(x)}</span></li>`).join('')}</ul></article>`).join('')}</div>
+</div>
+<section class="cvwork"><div class="wrap">${head2('Selected work', 'Three of the ' + COUNT.all + ' projects', 'The case studies carry the numbers behind this CV.', { left: true })}
+<div class="rel">${rel.map(p => `<article class="wcard" style="${stage(p.slug)}"><a class="stage" href="${BASE}/portfolio/${p.slug}/"><i class="dring light" style="left:180px;top:-60px;width:260px;height:260px"></i><span class="sticker">${esc(p.industry)}</span><span class="ob">↗</span>${browser(shot(p), p.name, host(p.url) || p.name, { sizes: '320px' })}</a><div class="meta"><h3><a href="${BASE}/portfolio/${p.slug}/">${esc(p.name)}</a></h3><span>${esc(p.year)}</span></div><p>${esc(p.line)}</p><a class="lk" href="${BASE}/portfolio/${p.slug}/">Case study <i>→</i></a></article>`).join('')}</div></div></section>`;
+    v4Page({ path: '/cv/', page: 'cv', active: '', og: 'cv', priority: '0.7', assets: ['demos'], title: 'CV: Muhammad Adeel Iqbal, WordPress and WooCommerce developer', desc: 'WordPress developer in Lahore, working remotely. Elementor Pro, WooCommerce, PHP, ACF and custom post types. Agency experience at Nuovo Studios and Rozi Academy, plus direct clients in five countries.', body, schema: [{ '@type': 'ProfilePage', mainEntity: { '@id': S.url + '/#adeel' } }, crumbSchema([['Home', '/'], ['CV', '/cv/']])], closing: { title: 'Hiring, or <span class="grey">have a project?</span>', sub: 'Either way, tell me what you need. The URL or the brief is enough to start.' } });
+  }
+
+  return { work, caseStudy, services, service, contact, notFound, shell, v4Page, demos, cv };
 };

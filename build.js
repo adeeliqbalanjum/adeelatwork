@@ -349,9 +349,9 @@ function notFound() {
   const t = Date.now();
   fs.mkdirSync(DIST, { recursive: true });
   await images();
-  const V4 = require('./src/v4/pages-build.js')({ fs, path, ROOT, BASE, STAMP, S, C, esc, read, out, wa, has, pic, imgUrl, projects, COUNT, person, faqSchema, crumbSchema, pages });
-  homeV4(V4); V4.work(); demosPage(); projects.forEach(V4.caseStudy); C.services.forEach(V4.service); cv(); V4.contact(); V4.services(); V4.notFound();
-  out('pages.css', read('src/v4/pages.css')); out('pages.js', read('src/v4/pages.js')); out('shell.css', read('src/v4/shell.css')); out('shell.js', read('src/v4/shell.js'));
+  const V4 = require('./src/v4/pages-build.js')({ fs, path, ROOT, BASE, STAMP, S, C, esc, read, out, wa, has, pic, imgUrl, projects, COUNT, person, faqSchema, crumbSchema, pages, fill, icon, logo });
+  homeV4(V4); V4.work(); V4.demos(); projects.forEach(V4.caseStudy); C.services.forEach(V4.service); V4.cv(); V4.contact(); V4.services(); V4.notFound();
+  out('pages.css', read('src/v4/pages.css')); out('pages.js', read('src/v4/pages.js')); out('shell.css', read('src/v4/shell.css')); out('shell.js', read('src/v4/shell.js')); out('demos.css', read('src/v4/demos.css')); out('demos.js', read('src/v4/demos.js'));
   // The glass look is a theme layer: src/glass-theme.css is appended to the normal stylesheet. Same HTML, same content, different visuals.
   const LOOK = GLASS && fs.existsSync(path.join(ROOT, 'src/glass-theme.css')) ? read('src/glass-theme.css').split('__BASE__').join(BASE) : '';
   out('style.css', (read('src/style.css').split('__MOTIF__').join(motifTile()) + LOOK).replace(/\/\*[\s\S]*?\*\//g, '').replace(/\n\s*/g, '').replace(/;}/g, '}')); out('app.js', read('src/app.js'));
