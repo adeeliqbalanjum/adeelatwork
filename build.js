@@ -162,6 +162,45 @@ function home() {
   });
 }
 
+/* ---------- V4 home (14 Oct 2026): the Figma page "13 — Website V4" as its own document, Motion + Lenis, no glass theme ---------- */
+function homeV4() {
+  let body = read('src/v4/index.html');
+  body = fill(body)
+    .replace(/\{\{img:([^|}]+)\|(\d+)\}\}/g, (m, rel, w) => imgUrl(rel, +w))
+    .replace(/\{\{wa:([^}]*)\}\}/g, (m, t) => wa(t))
+    .replace(/\{\{wa-number\}\}/g, S.wa);
+  body = body.replace('<form class="urlform"', '<form class="urlform" data-wa="' + S.wa + '"');
+  const qa = [...body.matchAll(/<button class="q"[^>]*>([^<]+)<i><\/i><\/button><div class="a"><p>([^<]+)<\/p>/g)].map(m => [m[1], m[2]]);
+  const title = 'WordPress and WooCommerce developer for businesses and agencies | Muhammad Adeel';
+  const desc = 'WordPress sites that bring in business and stay fixed. Builds your team can edit, WooCommerce fixes tested with a real order, white-label work for agencies. ' + COUNT.all + ' client projects across 5 countries, ' + COUNT.live + ' live. Free first look.';
+  const canonical = S.url + '/';
+  const schema = { '@context': 'https://schema.org', '@graph': [person, { '@type': 'ProfessionalService', '@id': S.url + '/#service', name: 'Muhammad Adeel, WordPress and WooCommerce development', url: canonical, image: S.url + '/og/home.jpg', founder: { '@id': S.url + '/#adeel' }, areaServed: ['AE', 'GB', 'US', 'JP', 'PK'], priceRange: '$45 to $600+', address: person.address, telephone: S.phone }, faqSchema(qa)] };
+  const html = `<!doctype html>
+<html lang="en" class="motion"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(desc)}">
+<link rel="canonical" href="${canonical}">
+<meta property="og:type" content="website"><meta property="og:site_name" content="${S.short}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${S.url}/og/home.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F5F5F2">
+<link rel="icon" href="${BASE}/favicon.svg" type="image/svg+xml"><link rel="manifest" href="${BASE}/site.webmanifest">
+<link rel="preload" href="${BASE}/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="${BASE}/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="${BASE}/v4.css?v=${STAMP}">
+<script>if(matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.remove('motion')</script>
+<script type="application/ld+json">${JSON.stringify(schema)}</script>
+</head>
+<body>
+${body}
+<script src="${BASE}/vendor/lenis.min.js" defer></script>
+<script src="${BASE}/vendor/motion.min.js" defer></script>
+<script src="${BASE}/v4.js?v=${STAMP}" defer></script>
+</body></html>`;
+  out('index.html', html);
+  out('v4.css', read('src/v4/v4.css'));
+  out('v4.js', read('src/v4/v4.js'));
+  pages.push({ path: '/', priority: '1.0' });
+}
+
 function work() {
   const chips = [['all', 'Everything'], ['booking', 'Bookings and checkout'], ['data', 'Inventories and directories'], ['business', 'A business site that brings enquiries'], ['health', 'Healthcare'], ['travel', 'Travel'], ['speed', 'Speed work']];
   const count = f => f === 'all' ? projects.length : projects.filter(p => p.tags.split(' ').includes(f)).length;
@@ -310,7 +349,7 @@ function notFound() {
   const t = Date.now();
   fs.mkdirSync(DIST, { recursive: true });
   await images();
-  home(); work(); demosPage(); projects.forEach(caseStudy); C.services.forEach(service); cv(); contact(); notFound();
+  homeV4(); work(); demosPage(); projects.forEach(caseStudy); C.services.forEach(service); cv(); contact(); notFound();
   // The glass look is a theme layer: src/glass-theme.css is appended to the normal stylesheet. Same HTML, same content, different visuals.
   const LOOK = GLASS && fs.existsSync(path.join(ROOT, 'src/glass-theme.css')) ? read('src/glass-theme.css').split('__BASE__').join(BASE) : '';
   out('style.css', (read('src/style.css').split('__MOTIF__').join(motifTile()) + LOOK).replace(/\/\*[\s\S]*?\*\//g, '').replace(/\n\s*/g, '').replace(/;}/g, '}')); out('app.js', read('src/app.js'));
