@@ -174,7 +174,7 @@ function homeV4() {
   const title = 'WordPress and WooCommerce developer for businesses and agencies | Muhammad Adeel';
   const desc = 'WordPress sites that bring in business and stay fixed. Builds your team can edit, WooCommerce fixes tested with a real order, white-label work for agencies. ' + COUNT.all + ' client projects across 5 countries, ' + COUNT.live + ' live. Free first look.';
   const canonical = S.url + '/';
-  const schema = { '@context': 'https://schema.org', '@graph': [person, { '@type': 'ProfessionalService', '@id': S.url + '/#service', name: 'Muhammad Adeel, WordPress and WooCommerce development', url: canonical, image: S.url + '/og/home.jpg', founder: { '@id': S.url + '/#adeel' }, areaServed: ['AE', 'GB', 'US', 'JP', 'PK'], priceRange: '$45 to $600+', address: person.address, telephone: S.phone }, faqSchema(qa)] };
+  const schema = { '@context': 'https://schema.org', '@graph': [person, { '@type': 'ProfessionalService', '@id': S.url + '/#service', name: 'Muhammad Adeel, WordPress and WooCommerce development', url: canonical, image: S.url + '/og/home.jpg', founder: { '@id': S.url + '/#adeel' }, areaServed: ['AE', 'GB', 'US', 'JP', 'PK'], priceRange: '$150 to $2,500+', address: person.address, telephone: S.phone }, faqSchema(qa)] };
   const html = `<!doctype html>
 <html lang="en" class="motion"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title>

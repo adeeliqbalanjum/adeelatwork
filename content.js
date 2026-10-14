@@ -62,7 +62,7 @@ exports.overrides = {
   '7sky-consultant': { offline: 'This site was offline when I last checked, so there is no live link or screenshot yet.' },
 };
 
-const priceFix = 'Most single fixes land between $45 and $140, depending on how deep the cause goes. You get a fixed quote before any work starts, and the first look is free.';
+const priceFix = 'Most single fixes land between $150 and $300, depending on how deep the cause goes. You get a fixed quote before any work starts, and the first look is free.';
 const access = 'Usually just a WordPress admin login. Hosting access only when the problem is on the server side. Change the password when we are done.';
 
 exports.services = [
@@ -126,7 +126,7 @@ exports.services = [
     need: ['A design file, or two or three sites you like and why', 'Your page list, even a rough one', 'Logo, brand colours and any photos you have', 'The text, or notes I can shape into sections', 'Access to your hosting, or tell me and I will work on staging first'],
     related: ['rockbusto-fleet', 'al-emirates-tours', 'artisan-technologies'],
     faq: [
-      ['What does a site cost?', 'Business sites start around $300 and go up with the number of pages and any custom features such as booking, inventory or a store. You get a fixed quote once I have seen the design and the page list.'],
+      ['What does a site cost?', 'A five-page business site is a fixed $300 to $500. Stores, booking flows and inventories are quoted per feature and usually land between $800 and $2,500. You get a fixed quote once I have seen the design and the page list, before any work starts.'],
       ['How long does a build take?', 'The business sites in my portfolio took three to six weeks from content to launch. A store or a custom feature adds time, and I tell you how much before we start.'],
       ['Do I need to buy plugin licences?', 'Premium plugins such as Elementor Pro, WP Rocket or Gravity Forms need a licence in your name. If you would rather not, I use free alternatives and tell you what you give up.'],
       ['Can my team edit the site afterwards?', 'That is the point. Content goes into fields and templates, and you get a short handover showing where everything lives.'],
