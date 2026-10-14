@@ -42,6 +42,7 @@ hr{border:0;border-top:1px solid var(--line);margin:0}
 .tag i{width:7px;height:7px;border-radius:50%;background:currentColor}
 .tag.blue{color:var(--blue)}.tag.amber{color:var(--amber)}.tag.violet{color:var(--violet)}.tag.red{color:var(--red)}.tag.green{color:var(--green)}.tag.fill{background:var(--blue);color:#fff}
 .tile{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:14px;background:var(--ground);font-size:20px;font-style:normal;flex:none}
+.bm{width:1em;height:1em;display:inline-block;vertical-align:-.12em;flex:none}.tile .bm{width:24px;height:24px}.chip .bm{width:14px;height:14px;margin-right:6px;vertical-align:-2px}.foot .bm{width:14px;height:14px;margin-right:7px;vertical-align:-2px}.who small .bm{width:12px;height:12px;margin-right:5px;vertical-align:-1px}
 .tile.blue{color:var(--blue)}.tile.amber{color:var(--amber)}.tile.violet{color:var(--violet)}.tile.xs{width:32px;height:32px;border-radius:9px;background:#EEEBF8;font-size:15px}
 .checks{display:flex;flex-direction:column;gap:10px}.checks li{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500}
 .checks li::before{content:'✓';width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;background:var(--blue);flex:none}
