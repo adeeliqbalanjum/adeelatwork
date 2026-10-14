@@ -163,13 +163,13 @@ function home() {
 }
 
 /* ---------- V4 home (14 Oct 2026): the Figma page "13 — Website V4" as its own document, Motion + Lenis, no glass theme ---------- */
-function homeV4() {
+function homeV4(V4) {
   let body = read('src/v4/index.html');
   body = fill(body)
     .replace(/\{\{img:([^|}]+)\|(\d+)\}\}/g, (m, rel, w) => imgUrl(rel, +w))
     .replace(/\{\{wa:([^}]*)\}\}/g, (m, t) => wa(t))
     .replace(/\{\{wa-number\}\}/g, S.wa);
-  body = body.replace('<form class="urlform"', '<form class="urlform" data-wa="' + S.wa + '"');
+  body = body.replace('<form class="urlform form-wrap"', '<form class="urlform form-wrap" data-wa="' + S.wa + '"').replace('{{shell}}', V4.shell());
   const qa = [...body.matchAll(/<button class="q"[^>]*>([^<]+)<i><\/i><\/button><div class="a"><p>([^<]+)<\/p>/g)].map(m => [m[1], m[2]]);
   const title = 'WordPress and WooCommerce developer for businesses and agencies | Muhammad Adeel';
   const desc = 'WordPress sites that bring in business and stay fixed. Builds your team can edit, WooCommerce fixes tested with a real order, white-label work for agencies. ' + COUNT.all + ' client projects across 5 countries, ' + COUNT.live + ' live. Free first look.';
@@ -185,14 +185,14 @@ function homeV4() {
 <meta name="theme-color" content="#F5F5F2">
 <link rel="icon" href="${BASE}/favicon.svg" type="image/svg+xml"><link rel="manifest" href="${BASE}/site.webmanifest">
 <link rel="preload" href="${BASE}/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="${BASE}/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="${BASE}/v4.css?v=${STAMP}">
+<link rel="stylesheet" href="${BASE}/v4.css?v=${STAMP}"><link rel="stylesheet" href="${BASE}/shell.css?v=${STAMP}">
 <script>if(matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.remove('motion')</script>
 <script type="application/ld+json">${JSON.stringify(schema)}</script>
 </head>
 <body>
 ${body}
 <script src="${BASE}/vendor/lenis.min.js" defer></script>
-<script src="${BASE}/vendor/motion.min.js" defer></script>
+<script src="${BASE}/vendor/motion.min.js" defer></script><script src="${BASE}/vendor/gsap.min.js" defer></script><script src="${BASE}/shell.js?v=${STAMP}" defer></script>
 <script src="${BASE}/v4.js?v=${STAMP}" defer></script>
 </body></html>`;
   out('index.html', html);
@@ -349,7 +349,9 @@ function notFound() {
   const t = Date.now();
   fs.mkdirSync(DIST, { recursive: true });
   await images();
-  homeV4(); work(); demosPage(); projects.forEach(caseStudy); C.services.forEach(service); cv(); contact(); notFound();
+  const V4 = require('./src/v4/pages-build.js')({ fs, path, ROOT, BASE, STAMP, S, C, esc, read, out, wa, has, pic, imgUrl, projects, COUNT, person, faqSchema, crumbSchema, pages });
+  homeV4(V4); V4.work(); demosPage(); projects.forEach(V4.caseStudy); C.services.forEach(V4.service); cv(); V4.contact(); V4.services(); V4.notFound();
+  out('pages.css', read('src/v4/pages.css')); out('pages.js', read('src/v4/pages.js')); out('shell.css', read('src/v4/shell.css')); out('shell.js', read('src/v4/shell.js'));
   // The glass look is a theme layer: src/glass-theme.css is appended to the normal stylesheet. Same HTML, same content, different visuals.
   const LOOK = GLASS && fs.existsSync(path.join(ROOT, 'src/glass-theme.css')) ? read('src/glass-theme.css').split('__BASE__').join(BASE) : '';
   out('style.css', (read('src/style.css').split('__MOTIF__').join(motifTile()) + LOOK).replace(/\/\*[\s\S]*?\*\//g, '').replace(/\n\s*/g, '').replace(/;}/g, '}')); out('app.js', read('src/app.js'));

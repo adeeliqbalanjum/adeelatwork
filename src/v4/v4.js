@@ -16,7 +16,7 @@
   /* ---------- Lenis smooth scroll (desktop only) ---------- */
   var lenis = null;
   if (on && !mobile && window.Lenis) {
-    lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+    lenis = new Lenis({ lerp: 0.1, smoothWheel: true }); window.AWLenis = lenis;
     (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(0);
     $$('a[href^="#"]').forEach(function (a) { a.addEventListener('click', function (e) { var id = a.getAttribute('href').slice(1); var t = id && document.getElementById(id); if (t) { e.preventDefault(); lenis.scrollTo(t, { offset: -80, duration: 1.2 }); closeMenu(); } }); });
   }
@@ -39,10 +39,10 @@
     pill.classList.add('is-on');
     animate(pill, { x: r.left - p.left - 6, width: r.width }, on ? SPRING : { duration: 0 });
   }
-  var secIds = links.map(function (l) { return l.getAttribute('href').slice(1); });
+  var secIds = links.map(function (l) { var h = l.getAttribute('href'); return h.charAt(0) === '#' ? h.slice(1) : ''; });
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { var i = secIds.indexOf(e.target.id); if (i > -1) movePill(links[i]); } }); }, { rootMargin: '-40% 0px -50% 0px' });
-    secIds.forEach(function (id) { var s = document.getElementById(id); if (s) io.observe(s); });
+    secIds.forEach(function (id) { var s = id && document.getElementById(id); if (s) io.observe(s); });
   }
   links.forEach(function (l) { l.addEventListener('click', function () { movePill(l); }); });
 
@@ -223,13 +223,14 @@
   if (form) form.addEventListener('submit', function (e) {
     e.preventDefault(); var url = ($('#url').value || '').trim();
     var msg = 'Hi Adeel, please take a free first look at my site: ' + (url || '(I will send the URL)');
-    window.open('https://wa.me/' + form.getAttribute('data-wa') + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
-    form.classList.add('done'); var b = $('.btn', form); b.innerHTML = 'Sent'; animate(b, { scale: [0.96, 1] }, SPRING);
+    var wa = 'https://wa.me/' + form.getAttribute('data-wa') + '?text=' + encodeURIComponent(msg);
+    if (window.AWSubmit) { window.AWSubmit(form, wa, { field: $('#url'), validate: function () { return url && !/^(https?:\/\/)?[\w.-]+\.[a-z]{2,}/i.test(url) ? 'Add the full address, like https://yoursite.com' : null; } }); return; }
+    window.open(wa, '_blank', 'noopener'); form.classList.add('done'); var b = $('.btn', form); b.innerHTML = 'Sent';
   });
 
   /* ---------- 18 Sticky CTA: after the hero, hidden over the final CTA ---------- */
-  var sticky = $('#sticky'), hero = $('.hero'), contact = $('#contact');
-  function stickyCheck() { if (!sticky) return; var past = hero.getBoundingClientRect().bottom < 0, atEnd = contact.getBoundingClientRect().top < window.innerHeight * 0.7; sticky.classList.toggle('show', past && !atEnd); }
+  var sticky = $('#sticky'), hero = $('.hero') || $('.ph'), contact = $('#contact');
+  function stickyCheck() { if (!sticky || !hero || !contact) return; var past = hero.getBoundingClientRect().bottom < 0, atEnd = contact.getBoundingClientRect().top < window.innerHeight * 0.7; sticky.classList.toggle('is-up', past && !atEnd); }
   stickyCheck();
 
   /* resize: the pinned showcase height depends on the track width */
